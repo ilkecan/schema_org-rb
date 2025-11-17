@@ -1,0 +1,9 @@
+module SchemaOrg
+  # <%= url %>
+<% unless comment.nil? -%>
+  #
+  # <%= comment %>
+<% end -%>
+  class <%= class_name %> < <%= superclass_name %>
+  end
+end

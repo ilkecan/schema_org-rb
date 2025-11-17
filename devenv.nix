@@ -21,6 +21,7 @@ in
   };
 
   packages = with pkgs; [
+    just
     libyaml.dev # psych gem
   ];
 
