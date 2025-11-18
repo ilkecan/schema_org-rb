@@ -1,0 +1,7 @@
+module SchemaOrg
+  # https://schema.org/PropertyValueSpecification
+  #
+  # A Property value specification.
+  class PropertyValueSpecification < Intangible
+  end
+end
