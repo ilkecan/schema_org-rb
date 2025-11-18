@@ -5,6 +5,6 @@ namespace :codegen do
 
     parser = SchemaOrg::Codegen::Parser.new
     generator = SchemaOrg::Codegen::Generator.new
-    parser.classes.each { generator.render_class it }
+    parser.classes.each { generator.generate_class it }
   end
 end
