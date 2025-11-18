@@ -4,6 +4,10 @@ module SchemaOrg
   #
   # <%= comment %>
 <% end -%>
+<% if superclass_name -%>
   class <%= class_name %> < <%= superclass_name %>
+<% else -%>
+  class <%= class_name %>
+<% end -%>
   end
 end
