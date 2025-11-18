@@ -11,11 +11,9 @@ module SchemaOrg
 
           @@prefixes = prefixes.freeze
 
-          %w[
-            comment
-            label
-            type
-          ].each { option it }
+          option :comment, proc(&:to_s)
+          option :label, proc(&:to_sym)
+          option :type, proc(&:to_sym)
 
           # owl:equivalentClass
           # owl:equivalentProperty
@@ -50,18 +48,22 @@ module SchemaOrg
             def parse_item(x)
               case x
               when RDF::Literal
-                x.value.to_sym
+                x.value
               when RDF::URI
                 qname = x.qname(prefixes: @@prefixes)
                 qname.nil? ? x.to_s : qname[1]
               when RDF::Vocabulary::Term
-                x.label.value.to_sym
+                x.label.value
               end
             end
           end
 
           def class_name
             label
+          end
+
+          def comment_lines
+            comment.strip.split "\n"
           end
 
           def superclass_name

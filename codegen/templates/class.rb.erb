@@ -1,8 +1,14 @@
 module SchemaOrg
   # <%= url %>
-<% unless comment.nil? -%>
+<% unless comment_lines.empty? -%>
   #
-  # <%= comment %>
+<% comment_lines.each do -%>
+<% if it.empty? -%>
+  #
+<% else -%>
+  # <%= it %>
+<% end -%>
+<% end -%>
 <% end -%>
 <% if superclass_name -%>
   class <%= class_name %> < <%= superclass_name %>
