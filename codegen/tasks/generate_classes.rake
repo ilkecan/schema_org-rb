@@ -1,7 +1,7 @@
 namespace :codegen do
   desc 'Generate classes from the schema.ttl'
   task :classes do
-    require './codegen/lib/schema_org/codegen'
+    require './codegen/lib/schema_org'
 
     parser = SchemaOrg::Codegen::Parser.new
     generator = SchemaOrg::Codegen::Generator.new
