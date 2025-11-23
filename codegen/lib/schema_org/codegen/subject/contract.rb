@@ -2,7 +2,7 @@ require 'dry-validation'
 
 module SchemaOrg
   module Codegen
-    module Subject
+    class Subject
       class Contract < Dry::Validation::Contract
         schema do
           required(:comment).value(:array, size?: 1)

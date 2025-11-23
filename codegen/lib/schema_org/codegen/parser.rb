@@ -23,8 +23,10 @@ module SchemaOrg
       def subjects
         @subjects ||= begin
           statements # force enumeration to populate `reader.prefixes`
-          klass = Subject.with prefixes
-          statements.map { klass.from_statements it }
+          Subject.configure do
+            it.prefixes = prefixes.freeze
+          end
+          statements.map { Subject.from_statements it }
         end
       end
 

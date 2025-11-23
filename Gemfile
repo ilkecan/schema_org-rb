@@ -5,6 +5,7 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in schema_org.gemspec
 gemspec
 
+gem "dry-configurable", "~> 1.3.0"
 gem "dry-inflector", "~> 1.2.0"
 gem "dry-initializer", "~> 3.2.0"
 gem "dry-types", "~> 1.8.3"
