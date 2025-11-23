@@ -5,9 +5,13 @@ module SchemaOrg
     class Subject
       class Contract < Dry::Validation::Contract
         schema do
-          required(:comment).value(:array, size?: 1)
-          required(:label).value(:array, size?: 1)
-          required(:type).value(:array, min_size?: 1)
+          Attributes.each do
+            send(it[:optional] ? :optional : :required, it[:name]).value(
+              :array,
+              min_size?: it[:count].min,
+              max_size?: it[:count].max,
+            )
+          end
         end
       end
     end
