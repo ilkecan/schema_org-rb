@@ -1,28 +1,49 @@
+require 'dry-initializer'
 require 'tilt'
 
 module SchemaOrg
   module Codegen
     class Generator
-      def class_template
-        @class_template ||= Tilt::ERBTemplate.new('./codegen/templates/class.rb.erb', trim: '-')
+      extend Dry::Initializer
+
+      Template = Types::Coercible::Symbol.enum(*%i[class type])
+
+      option :subject
+
+      @templates = {}
+
+      def self.template(name)
+        @templates[name] ||= Tilt::ERBTemplate.new("./codegen/templates/#{name}.rb.erb", trim: '-')
       end
 
-      def lib_root
+      def self.lib_root
         @lib_root ||= Pathname.new('./lib/schema_org')
       end
 
-      def generate_class(subject)
-        file = output_file subject
-        output = class_template.render subject
+      def generate(type)
+        file = output_file type
+        output = render type
         file.write output
       end
 
-      def render_class(subject)
-        class_template.render(subject)
+      private
+
+      def filename
+        @filename ||= "#{INFLECTOR.underscore subject.name}.rb"
       end
 
-      def output_file(subject)
-        lib_root.join "#{INFLECTOR.underscore subject.label}.rb"
+      def output_file(type)
+        xs = case type
+        when Template[:class]
+          [ filename ]
+        when Template[:type]
+          [ 'types', filename ]
+        end
+        self.class.lib_root.join(*xs)
+      end
+
+      def render(type)
+        self.class.template(type).render(subject)
       end
     end
   end

@@ -7,6 +7,8 @@ gemspec
 
 gem "dry-inflector", "~> 1.2.0"
 gem "dry-initializer", "~> 3.2.0"
+gem "dry-types", "~> 1.8.3"
+gem "dry-validation", "~> 1.11.1"
 gem "httparty", "~> 0.23.2"
 gem "irb", "~> 1.15.3"
 gem "minitest", "~> 5.16"

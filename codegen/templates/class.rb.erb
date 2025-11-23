@@ -10,10 +10,7 @@ module SchemaOrg
 <% end -%>
 <% end -%>
 <% end -%>
-<% if superclass_name -%>
-  class <%= class_name %> < <%= superclass_name %>
-<% else -%>
-  class <%= class_name %>
-<% end -%>
+  class <%= name %>
+    include Types::<%= name %>
   end
 end

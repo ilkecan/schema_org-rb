@@ -24,16 +24,16 @@ module SchemaOrg
         @subjects ||= begin
           statements # force enumeration to populate `reader.prefixes`
           klass = Subject.with prefixes
-          statements.map { klass.from_statements it }.group_by { it.type }
+          statements.map { klass.from_statements it }
         end
       end
 
       def classes
-        subjects[:Class]
+        subjects.filter { it.type.include? :Class }
       end
 
       def properties
-        subjects[:Property]
+        subjects.filter { it.type.include? :Property }
       end
     end
   end

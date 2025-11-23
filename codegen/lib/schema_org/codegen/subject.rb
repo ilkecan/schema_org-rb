@@ -1,8 +1,17 @@
 require 'dry-initializer'
+require 'dry-validation'
 
 module SchemaOrg
   module Codegen
     module Subject
+      class Contract < Dry::Validation::Contract
+        schema do
+          required(:comment).value(:array, size?: 1)
+          required(:label).value(:array, size?: 1)
+          required(:type).value(:array, min_size?: 1)
+        end
+      end
+
       module_function
 
       def with(prefixes)
@@ -11,9 +20,11 @@ module SchemaOrg
 
           @@prefixes = prefixes.freeze
 
-          option :comment, proc(&:to_s)
-          option :label, proc(&:to_sym)
-          option :type, proc(&:to_sym)
+          option :statements
+
+          option :comment, proc { it.first.to_s }
+          option :label, proc { it.first.to_sym }
+          option :type, proc { it.map(&:to_sym) }
 
           # owl:equivalentClass
           # owl:equivalentProperty
@@ -31,43 +42,46 @@ module SchemaOrg
             supersededBy
           ].each { option INFLECTOR.underscore(it), optional: true }
 
-          def self.from_statements(xs)
-            args = parse_statements(xs)
-            new(**args)
-          end
+          def self.from_statements(statements)
+            args = parse_statements(statements)
+            result = Contract.new.call(args)
 
-          class << self
-            private
-
-            def parse_statements(xs)
-              xs.map do
-                [INFLECTOR.underscore(parse_item(it.predicate).to_s).to_sym, parse_item(it.object)]
-              end.to_h
+            if result.failure?
+              raise SchemaOrg::Codegen::ValidationError, "Invalid subject: #{result.errors.to_h}"
             end
 
-            def parse_item(x)
-              case x
-              when RDF::Literal
-                x.value
-              when RDF::URI
-                qname = x.qname(prefixes: @@prefixes)
-                qname.nil? ? x.to_s : qname[1]
-              when RDF::Vocabulary::Term
-                x.label.value
-              end
+            new(**args, statements:)
+          end
+
+          private_class_method def self.parse_statements(xs)
+            xs.each_with_object(Hash.new { |h, k| h[k] = [] }) do |x, xs|
+              key = INFLECTOR.underscore(parse_item(x.predicate).to_s).to_sym
+              xs[key] << parse_item(x.object)
             end
           end
 
-          def class_name
-            label
+          private_class_method def self.parse_item(x)
+            case x
+            when RDF::Literal
+              x.value
+            when RDF::URI
+              qname = x.qname(prefixes: @@prefixes)
+              qname.nil? ? x.to_s : qname[1]
+            when RDF::Vocabulary::Term
+              x.label.value
+            end
           end
 
           def comment_lines
             comment.strip.split "\n"
           end
 
-          def superclass_name
-            sub_class_of
+          def name
+            label
+          end
+
+          def parents
+            sub_class_of.to_a
           end
 
           def url

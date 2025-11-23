@@ -1,0 +1,9 @@
+module SchemaOrg
+  module Types
+    module <%= name %>
+<% parents.each do -%>
+      include <%= it %>
+<% end -%>
+    end
+  end
+end
