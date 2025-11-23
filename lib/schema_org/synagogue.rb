@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Synagogue
   #
   # A synagogue.
-  class Synagogue < PlaceOfWorship
+  class Synagogue
+    include Types::Synagogue
   end
 end

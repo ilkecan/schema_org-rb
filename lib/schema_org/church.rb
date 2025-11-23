@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Church
   #
   # A church.
-  class Church < PlaceOfWorship
+  class Church
+    include Types::Church
   end
 end

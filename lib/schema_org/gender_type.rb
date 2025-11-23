@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/GenderType
   #
   # An enumeration of genders.
-  class GenderType < Enumeration
+  class GenderType
+    include Types::GenderType
   end
 end

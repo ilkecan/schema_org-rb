@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/MusicVideoObject
   #
   # A music video file.
-  class MusicVideoObject < MediaObject
+  class MusicVideoObject
+    include Types::MusicVideoObject
   end
 end

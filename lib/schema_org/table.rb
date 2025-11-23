@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Table
   #
   # A table on a Web page.
-  class Table < WebPageElement
+  class Table
+    include Types::Table
   end
 end

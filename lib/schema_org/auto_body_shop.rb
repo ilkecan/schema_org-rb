@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/AutoBodyShop
   #
   # Auto body shop.
-  class AutoBodyShop < AutomotiveBusiness
+  class AutoBodyShop
+    include Types::AutoBodyShop
   end
 end

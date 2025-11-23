@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/AutomatedTeller
   #
   # ATM/cash machine.
-  class AutomatedTeller < FinancialService
+  class AutomatedTeller
+    include Types::AutomatedTeller
   end
 end

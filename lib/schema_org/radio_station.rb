@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/RadioStation
   #
   # A radio station.
-  class RadioStation < LocalBusiness
+  class RadioStation
+    include Types::RadioStation
   end
 end

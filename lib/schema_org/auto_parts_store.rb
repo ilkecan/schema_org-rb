@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/AutoPartsStore
   #
   # An auto parts store.
-  class AutoPartsStore < Store
+  class AutoPartsStore
+    include Types::AutoPartsStore
   end
 end

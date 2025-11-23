@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/EatAction
   #
   # The act of swallowing solid objects.
-  class EatAction < ConsumeAction
+  class EatAction
+    include Types::EatAction
   end
 end

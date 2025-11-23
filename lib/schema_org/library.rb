@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Library
   #
   # A library.
-  class Library < LocalBusiness
+  class Library
+    include Types::Library
   end
 end

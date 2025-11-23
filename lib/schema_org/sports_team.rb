@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/SportsTeam
   #
   # Organization: Sports team.
-  class SportsTeam < SportsOrganization
+  class SportsTeam
+    include Types::SportsTeam
   end
 end

@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Courthouse
   #
   # A courthouse.
-  class Courthouse < GovernmentBuilding
+  class Courthouse
+    include Types::Courthouse
   end
 end

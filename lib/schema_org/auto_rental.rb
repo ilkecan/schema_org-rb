@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/AutoRental
   #
   # A car rental business.
-  class AutoRental < AutomotiveBusiness
+  class AutoRental
+    include Types::AutoRental
   end
 end

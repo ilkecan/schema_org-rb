@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/VideoGameSeries
   #
   # A video game series.
-  class VideoGameSeries < CreativeWorkSeries
+  class VideoGameSeries
+    include Types::VideoGameSeries
   end
 end

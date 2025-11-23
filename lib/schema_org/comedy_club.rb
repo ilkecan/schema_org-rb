@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/ComedyClub
   #
   # A comedy club.
-  class ComedyClub < EntertainmentBusiness
+  class ComedyClub
+    include Types::ComedyClub
   end
 end

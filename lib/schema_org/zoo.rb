@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Zoo
   #
   # A zoo.
-  class Zoo < CivicStructure
+  class Zoo
+    include Types::Zoo
   end
 end

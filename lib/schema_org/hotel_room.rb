@@ -4,6 +4,7 @@ module SchemaOrg
   # A hotel room is a single room in a hotel.
   # <br /><br />
   # See also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.
-  class HotelRoom < Room
+  class HotelRoom
+    include Types::HotelRoom
   end
 end

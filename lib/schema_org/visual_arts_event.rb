@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/VisualArtsEvent
   #
   # Event type: Visual arts event.
-  class VisualArtsEvent < Event
+  class VisualArtsEvent
+    include Types::VisualArtsEvent
   end
 end

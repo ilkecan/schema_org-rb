@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/MusicEvent
   #
   # Event type: Music event.
-  class MusicEvent < Event
+  class MusicEvent
+    include Types::MusicEvent
   end
 end

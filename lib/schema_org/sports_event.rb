@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/SportsEvent
   #
   # Event type: Sports event.
-  class SportsEvent < Event
+  class SportsEvent
+    include Types::SportsEvent
   end
 end

@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Embassy
   #
   # An embassy.
-  class Embassy < GovernmentBuilding
+  class Embassy
+    include Types::Embassy
   end
 end

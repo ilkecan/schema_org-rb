@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/AutoWash
   #
   # A car wash business.
-  class AutoWash < AutomotiveBusiness
+  class AutoWash
+    include Types::AutoWash
   end
 end

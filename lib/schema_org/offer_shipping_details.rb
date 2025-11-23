@@ -13,6 +13,7 @@ module SchemaOrg
   #
   # E.g. Cheaper and slower: $5 in 5-7 days
   # or Fast and expensive: $15 in 1-2 days.
-  class OfferShippingDetails < StructuredValue
+  class OfferShippingDetails
+    include Types::OfferShippingDetails
   end
 end

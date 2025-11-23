@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/UserLikes
   #
   # UserInteraction and its subtypes is an old way of talking about users interacting with pages. It is generally better to use [[Action]]-based vocabulary, alongside types such as [[Comment]].
-  class UserLikes < UserInteraction
+  class UserLikes
+    include Types::UserLikes
   end
 end

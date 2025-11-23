@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/ChildCare
   #
   # A Childcare center.
-  class ChildCare < LocalBusiness
+  class ChildCare
+    include Types::ChildCare
   end
 end

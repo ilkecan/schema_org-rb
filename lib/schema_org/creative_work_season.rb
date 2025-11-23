@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/CreativeWorkSeason
   #
   # A media season, e.g. TV, radio, video game etc.
-  class CreativeWorkSeason < CreativeWork
+  class CreativeWorkSeason
+    include Types::CreativeWorkSeason
   end
 end

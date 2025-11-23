@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Restaurant
   #
   # A restaurant.
-  class Restaurant < FoodEstablishment
+  class Restaurant
+    include Types::Restaurant
   end
 end

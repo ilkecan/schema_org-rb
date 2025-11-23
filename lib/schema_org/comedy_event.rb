@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/ComedyEvent
   #
   # Event type: Comedy event.
-  class ComedyEvent < Event
+  class ComedyEvent
+    include Types::ComedyEvent
   end
 end

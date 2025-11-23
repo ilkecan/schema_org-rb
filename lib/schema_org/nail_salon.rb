@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/NailSalon
   #
   # A nail salon.
-  class NailSalon < HealthAndBeautyBusiness
+  class NailSalon
+    include Types::NailSalon
   end
 end

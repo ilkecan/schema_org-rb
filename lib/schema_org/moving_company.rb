@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/MovingCompany
   #
   # A moving company.
-  class MovingCompany < HomeAndConstructionBusiness
+  class MovingCompany
+    include Types::MovingCompany
   end
 end

@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Researcher
   #
   # Researchers.
-  class Researcher < Audience
+  class Researcher
+    include Types::Researcher
   end
 end

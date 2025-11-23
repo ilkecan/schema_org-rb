@@ -3,5 +3,6 @@ module SchemaOrg
   #
   # The most generic type of item.
   class Thing
+    include Types::Thing
   end
 end

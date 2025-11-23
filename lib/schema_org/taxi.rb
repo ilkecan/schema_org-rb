@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Taxi
   #
   # A taxi.
-  class Taxi < Service
+  class Taxi
+    include Types::Taxi
   end
 end

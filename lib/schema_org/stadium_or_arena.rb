@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/StadiumOrArena
   #
   # A stadium.
-  class StadiumOrArena < SportsActivityLocation
+  class StadiumOrArena
+    include Types::StadiumOrArena
   end
 end

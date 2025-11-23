@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/SoftwareApplication
   #
   # A software application.
-  class SoftwareApplication < CreativeWork
+  class SoftwareApplication
+    include Types::SoftwareApplication
   end
 end

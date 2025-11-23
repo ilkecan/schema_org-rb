@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/MovieTheater
   #
   # A movie theater.
-  class MovieTheater < EntertainmentBusiness
+  class MovieTheater
+    include Types::MovieTheater
   end
 end

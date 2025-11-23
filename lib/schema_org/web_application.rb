@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/WebApplication
   #
   # Web applications.
-  class WebApplication < SoftwareApplication
+  class WebApplication
+    include Types::WebApplication
   end
 end

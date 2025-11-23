@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/RealEstateAgent
   #
   # A real-estate agent.
-  class RealEstateAgent < LocalBusiness
+  class RealEstateAgent
+    include Types::RealEstateAgent
   end
 end

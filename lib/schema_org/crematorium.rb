@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Crematorium
   #
   # A crematorium.
-  class Crematorium < CivicStructure
+  class Crematorium
+    include Types::Crematorium
   end
 end

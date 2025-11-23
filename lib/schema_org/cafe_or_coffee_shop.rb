@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/CafeOrCoffeeShop
   #
   # A cafe or coffee shop.
-  class CafeOrCoffeeShop < FoodEstablishment
+  class CafeOrCoffeeShop
+    include Types::CafeOrCoffeeShop
   end
 end

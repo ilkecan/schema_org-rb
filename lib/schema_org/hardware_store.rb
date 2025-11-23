@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/HardwareStore
   #
   # A hardware store.
-  class HardwareStore < Store
+  class HardwareStore
+    include Types::HardwareStore
   end
 end

@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/OutletStore
   #
   # An outlet store.
-  class OutletStore < Store
+  class OutletStore
+    include Types::OutletStore
   end
 end

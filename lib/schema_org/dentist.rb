@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Dentist
   #
   # A dentist.
-  class Dentist < MedicalOrganization
+  class Dentist
+    include Types::Dentist
   end
 end

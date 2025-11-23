@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Bridge
   #
   # A bridge.
-  class Bridge < CivicStructure
+  class Bridge
+    include Types::Bridge
   end
 end

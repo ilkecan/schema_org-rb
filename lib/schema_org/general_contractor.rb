@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/GeneralContractor
   #
   # A general contractor.
-  class GeneralContractor < HomeAndConstructionBusiness
+  class GeneralContractor
+    include Types::GeneralContractor
   end
 end

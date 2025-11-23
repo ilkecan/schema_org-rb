@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/SeaBodyOfWater
   #
   # A sea (for example, the Caspian sea).
-  class SeaBodyOfWater < BodyOfWater
+  class SeaBodyOfWater
+    include Types::SeaBodyOfWater
   end
 end

@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/CityHall
   #
   # A city hall.
-  class CityHall < GovernmentBuilding
+  class CityHall
+    include Types::CityHall
   end
 end

@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Winery
   #
   # A winery.
-  class Winery < FoodEstablishment
+  class Winery
+    include Types::Winery
   end
 end

@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/SubwayStation
   #
   # A subway station.
-  class SubwayStation < CivicStructure
+  class SubwayStation
+    include Types::SubwayStation
   end
 end

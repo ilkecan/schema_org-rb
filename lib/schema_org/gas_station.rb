@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/GasStation
   #
   # A gas station.
-  class GasStation < AutomotiveBusiness
+  class GasStation
+    include Types::GasStation
   end
 end

@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Float
   #
   # Data type: Floating number.
-  class Float < Number
+  class Float
+    include Types::Float
   end
 end

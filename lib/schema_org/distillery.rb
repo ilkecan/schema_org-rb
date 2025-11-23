@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Distillery
   #
   # A distillery.
-  class Distillery < FoodEstablishment
+  class Distillery
+    include Types::Distillery
   end
 end

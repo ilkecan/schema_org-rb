@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/HighSchool
   #
   # A high school.
-  class HighSchool < EducationalOrganization
+  class HighSchool
+    include Types::HighSchool
   end
 end

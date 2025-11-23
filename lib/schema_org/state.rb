@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/State
   #
   # A state or province of a country.
-  class State < AdministrativeArea
+  class State
+    include Types::State
   end
 end

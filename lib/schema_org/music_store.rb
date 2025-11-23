@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/MusicStore
   #
   # A music store.
-  class MusicStore < Store
+  class MusicStore
+    include Types::MusicStore
   end
 end

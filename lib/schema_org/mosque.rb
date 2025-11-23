@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Mosque
   #
   # A mosque.
-  class Mosque < PlaceOfWorship
+  class Mosque
+    include Types::Mosque
   end
 end

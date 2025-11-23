@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/SportsClub
   #
   # A sports club.
-  class SportsClub < SportsActivityLocation
+  class SportsClub
+    include Types::SportsClub
   end
 end

@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/PetStore
   #
   # A pet store.
-  class PetStore < Store
+  class PetStore
+    include Types::PetStore
   end
 end

@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Cemetery
   #
   # A graveyard.
-  class Cemetery < CivicStructure
+  class Cemetery
+    include Types::Cemetery
   end
 end

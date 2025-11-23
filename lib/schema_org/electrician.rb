@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Electrician
   #
   # An electrician.
-  class Electrician < HomeAndConstructionBusiness
+  class Electrician
+    include Types::Electrician
   end
 end

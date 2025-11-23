@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/EmploymentAgency
   #
   # An employment agency.
-  class EmploymentAgency < LocalBusiness
+  class EmploymentAgency
+    include Types::EmploymentAgency
   end
 end

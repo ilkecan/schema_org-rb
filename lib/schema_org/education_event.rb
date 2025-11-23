@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/EducationEvent
   #
   # Event type: Education event.
-  class EducationEvent < Event
+  class EducationEvent
+    include Types::EducationEvent
   end
 end

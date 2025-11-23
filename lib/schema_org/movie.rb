@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Movie
   #
   # A movie.
-  class Movie < CreativeWork
+  class Movie
+    include Types::Movie
   end
 end

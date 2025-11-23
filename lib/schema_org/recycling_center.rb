@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/RecyclingCenter
   #
   # A recycling center.
-  class RecyclingCenter < LocalBusiness
+  class RecyclingCenter
+    include Types::RecyclingCenter
   end
 end

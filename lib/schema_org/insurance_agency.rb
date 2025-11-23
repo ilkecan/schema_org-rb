@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/InsuranceAgency
   #
   # An Insurance agency.
-  class InsuranceAgency < FinancialService
+  class InsuranceAgency
+    include Types::InsuranceAgency
   end
 end

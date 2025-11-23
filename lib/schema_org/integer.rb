@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Integer
   #
   # Data type: Integer.
-  class Integer < Number
+  class Integer
+    include Types::Integer
   end
 end

@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Pond
   #
   # A pond.
-  class Pond < BodyOfWater
+  class Pond
+    include Types::Pond
   end
 end

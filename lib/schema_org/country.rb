@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Country
   #
   # A country.
-  class Country < AdministrativeArea
+  class Country
+    include Types::Country
   end
 end

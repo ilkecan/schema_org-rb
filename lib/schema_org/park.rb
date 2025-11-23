@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/Park
   #
   # A park.
-  class Park < CivicStructure
+  class Park
+    include Types::Park
   end
 end

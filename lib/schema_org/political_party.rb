@@ -2,6 +2,7 @@ module SchemaOrg
   # https://schema.org/PoliticalParty
   #
   # Organization: Political Party.
-  class PoliticalParty < Organization
+  class PoliticalParty
+    include Types::PoliticalParty
   end
 end
