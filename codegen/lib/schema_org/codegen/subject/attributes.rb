@@ -1,8 +1,16 @@
 module SchemaOrg
   module Codegen
     class Subject
-      module Attributes
-        private_class_method def self.attributes
+      class Attributes
+        include Import[:inflector]
+
+        def each(&block)
+          attributes.each(&block)
+        end
+
+        private
+
+        def attributes
           @attributes ||= begin
             many = ::Float::INFINITY
             # NOTE: examples to many "objects":
@@ -29,17 +37,11 @@ module SchemaOrg
               { name: :type, type: proc { it.map(&:to_sym) }, count: 1..2 },
             ].map do
               it.merge!(
-                name: INFLECTOR.underscore(it[:name]).to_sym,
+                name: inflector.underscore(it[:name]).to_sym,
                 optional: it[:count].include?(0),
               )
             end
           end
-        end
-
-        module_function
-
-        def each(&block)
-          attributes.each(&block)
         end
       end
     end

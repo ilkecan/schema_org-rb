@@ -6,6 +6,8 @@ module SchemaOrg
     class Generator
       extend Dry::Initializer
 
+      include Import[:inflector]
+
       Template = Types::Coercible::Symbol.enum(*%i[class type])
 
       option :subject
@@ -29,7 +31,7 @@ module SchemaOrg
       private
 
       def filename
-        @filename ||= "#{INFLECTOR.underscore subject.name}.rb"
+        @filename ||= "#{inflector.underscore subject.name}.rb"
       end
 
       def output_file(type)

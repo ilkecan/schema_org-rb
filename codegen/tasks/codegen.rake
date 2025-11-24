@@ -1,8 +1,9 @@
 desc 'Generate Ruby files from the schema.ttl'
 task :codegen do
-  require './codegen/lib/schema_org'
+  require "./codegen/system/container"
+  require "./codegen/system/import"
 
-  parser = SchemaOrg::Codegen::Parser.new
+  parser = App['parser']
   parser.classes.each do
     generator = SchemaOrg::Codegen::Generator.new(subject: it)
     generator.generate :type

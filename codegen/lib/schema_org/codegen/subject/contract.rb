@@ -5,7 +5,7 @@ module SchemaOrg
     class Subject
       class Contract < Dry::Validation::Contract
         schema do
-          Attributes.each do
+          App['subject.attributes'].each do
             send(it[:optional] ? :optional : :required, it[:name]).value(
               :array,
               min_size?: it[:count].min,
