@@ -1,15 +1,15 @@
-require 'dry-initializer'
+require 'dry-struct'
 
 module SchemaOrg
   module Codegen
-    class Subject
-      extend Dry::Initializer
+    class Subject < Dry::Struct
+      schema schema.strict
 
-      option :prefixes
-      option :statements
+      attribute :prefixes, Types::Strict::Hash
+      attribute :statements, Types::Coercible::Array
 
       App['subject.attributes'].each do
-        option it[:name], it[:type], optional: it[:optional]
+        send(it[:optional] ? :attribute? : :attribute, it[:name], it[:type])
       end
 
       def comment_lines

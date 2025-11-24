@@ -6,18 +6,28 @@ module SchemaOrg
       class Factory
         extend Dry::Initializer
 
-        include Import[:inflector]
+        include Import['subject.attributes', :inflector]
 
         option :prefixes, proc(&:freeze)
 
         def build(statements)
           args = parse_statements statements
-          args = validate(args)
+          args = validate args
+          normalize args
           Subject.new(**args, prefixes:, statements:)
         end
 
         def contract
           @contract ||= Contract.new
+        end
+
+        def normalize(args)
+          args.each do |k, v|
+            fn = attributes[k][:normalizer]
+            next if fn.nil?
+
+            args[k] = fn.call v
+          end
         end
 
         def parse_statements(xs)

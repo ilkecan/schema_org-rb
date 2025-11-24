@@ -8,8 +8,8 @@ module SchemaOrg
           App['subject.attributes'].each do
             send(it[:optional] ? :optional : :required, it[:name]).value(
               :array,
-              min_size?: it[:count].min,
-              max_size?: it[:count].max,
+              max_size?: it[:max],
+              min_size?: it[:min],
             )
           end
         end
