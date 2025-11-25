@@ -1,7 +1,7 @@
 require "dry/system"
 
 class App < Dry::System::Container
-  use :zeitwerk
+  use :zeitwerk, eager_load: true
 
   configure do |config|
     config.root = Pathname('./codegen')

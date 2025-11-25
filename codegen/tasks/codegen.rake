@@ -1,7 +1,6 @@
 desc 'Generate Ruby files from the schema.ttl'
 task :codegen do
-  require "./codegen/system/container"
-  require "./codegen/system/import"
+  require "./codegen/system/boot"
 
   parser = App['parser']
   parser.classes.each do
