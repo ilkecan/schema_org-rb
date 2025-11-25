@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ShippingDeliveryTime
-      include StructuredValue
-    end
+  # https://schema.org/ShippingDeliveryTime
+  #
+  # ShippingDeliveryTime provides various pieces of information about delivery times for shipping.
+  class ShippingDeliveryTime
+    include Mixins::ShippingDeliveryTime
   end
 end

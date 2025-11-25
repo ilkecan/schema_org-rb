@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module HighSchool
-      include EducationalOrganization
-    end
+  # https://schema.org/HighSchool
+  #
+  # A high school.
+  class HighSchool
+    include Mixins::HighSchool
   end
 end

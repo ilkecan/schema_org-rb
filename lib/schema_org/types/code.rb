@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Code
-      include CreativeWork
-    end
+  # https://schema.org/Code
+  #
+  # Computer programming source code. Example: Full (compile ready) solutions, code snippet samples, scripts, templates.
+  class Code
+    include Mixins::Code
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module PropertyValueSpecification
-      include Intangible
-    end
+  # https://schema.org/PropertyValueSpecification
+  #
+  # A Property value specification.
+  class PropertyValueSpecification
+    include Mixins::PropertyValueSpecification
   end
 end

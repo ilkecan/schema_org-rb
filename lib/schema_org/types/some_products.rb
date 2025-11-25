@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SomeProducts
-      include Product
-    end
+  # https://schema.org/SomeProducts
+  #
+  # A placeholder for multiple similar products of the same kind.
+  class SomeProducts
+    include Mixins::SomeProducts
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module WriteAction
-      include CreateAction
-    end
+  # https://schema.org/WriteAction
+  #
+  # The act of authoring written creative content.
+  class WriteAction
+    include Mixins::WriteAction
   end
 end

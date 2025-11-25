@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module FoodEvent
-      include Event
-    end
+  # https://schema.org/FoodEvent
+  #
+  # Event type: Food event.
+  class FoodEvent
+    include Mixins::FoodEvent
   end
 end

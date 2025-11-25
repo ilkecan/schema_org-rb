@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module FilmAction
-      include CreateAction
-    end
+  # https://schema.org/FilmAction
+  #
+  # The act of capturing sound and moving images on film, video, or digitally.
+  class FilmAction
+    include Mixins::FilmAction
   end
 end

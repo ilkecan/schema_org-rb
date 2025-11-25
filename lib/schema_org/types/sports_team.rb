@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SportsTeam
-      include SportsOrganization
-    end
+  # https://schema.org/SportsTeam
+  #
+  # Organization: Sports team.
+  class SportsTeam
+    include Mixins::SportsTeam
   end
 end

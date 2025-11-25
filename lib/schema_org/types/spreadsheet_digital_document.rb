@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SpreadsheetDigitalDocument
-      include DigitalDocument
-    end
+  # https://schema.org/SpreadsheetDigitalDocument
+  #
+  # A spreadsheet file.
+  class SpreadsheetDigitalDocument
+    include Mixins::SpreadsheetDigitalDocument
   end
 end

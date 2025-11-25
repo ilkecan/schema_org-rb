@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module CollegeOrUniversity
-      include EducationalOrganization
-    end
+  # https://schema.org/CollegeOrUniversity
+  #
+  # A college, university, or other third-level educational institution.
+  class CollegeOrUniversity
+    include Mixins::CollegeOrUniversity
   end
 end

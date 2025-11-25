@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module OfficeEquipmentStore
-      include Store
-    end
+  # https://schema.org/OfficeEquipmentStore
+  #
+  # An office equipment store.
+  class OfficeEquipmentStore
+    include Mixins::OfficeEquipmentStore
   end
 end

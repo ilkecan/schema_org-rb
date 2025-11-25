@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module PetStore
-      include Store
-    end
+  # https://schema.org/PetStore
+  #
+  # A pet store.
+  class PetStore
+    include Mixins::PetStore
   end
 end

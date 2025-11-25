@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module MensClothingStore
-      include Store
-    end
+  # https://schema.org/MensClothingStore
+  #
+  # A men's clothing store.
+  class MensClothingStore
+    include Mixins::MensClothingStore
   end
 end

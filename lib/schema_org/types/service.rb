@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Service
-      include Intangible
-    end
+  # https://schema.org/Service
+  #
+  # A service provided by an organization, e.g. delivery service, print services, etc.
+  class Service
+    include Mixins::Service
   end
 end

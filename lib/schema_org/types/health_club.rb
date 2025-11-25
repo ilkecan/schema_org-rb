@@ -1,8 +1,8 @@
 module SchemaOrg
-  module Types
-    module HealthClub
-      include HealthAndBeautyBusiness
-      include SportsActivityLocation
-    end
+  # https://schema.org/HealthClub
+  #
+  # A health club.
+  class HealthClub
+    include Mixins::HealthClub
   end
 end

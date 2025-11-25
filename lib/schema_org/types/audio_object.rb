@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AudioObject
-      include MediaObject
-    end
+  # https://schema.org/AudioObject
+  #
+  # An audio file.
+  class AudioObject
+    include Mixins::AudioObject
   end
 end

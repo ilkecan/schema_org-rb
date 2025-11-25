@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module City
-      include AdministrativeArea
-    end
+  # https://schema.org/City
+  #
+  # A city or town.
+  class City
+    include Mixins::City
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AutoRepair
-      include AutomotiveBusiness
-    end
+  # https://schema.org/AutoRepair
+  #
+  # Car repair business.
+  class AutoRepair
+    include Mixins::AutoRepair
   end
 end

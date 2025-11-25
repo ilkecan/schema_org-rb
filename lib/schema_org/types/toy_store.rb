@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ToyStore
-      include Store
-    end
+  # https://schema.org/ToyStore
+  #
+  # A toy store.
+  class ToyStore
+    include Mixins::ToyStore
   end
 end

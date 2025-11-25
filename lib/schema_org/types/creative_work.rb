@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module CreativeWork
-      include Thing
-    end
+  # https://schema.org/CreativeWork
+  #
+  # The most generic kind of creative work, including books, movies, photographs, software programs, etc.
+  class CreativeWork
+    include Mixins::CreativeWork
   end
 end

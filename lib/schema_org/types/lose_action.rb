@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module LoseAction
-      include AchieveAction
-    end
+  # https://schema.org/LoseAction
+  #
+  # The act of being defeated in a competitive activity.
+  class LoseAction
+    include Mixins::LoseAction
   end
 end

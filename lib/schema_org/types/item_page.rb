@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ItemPage
-      include WebPage
-    end
+  # https://schema.org/ItemPage
+  #
+  # A page devoted to a single item, such as a particular product or hotel.
+  class ItemPage
+    include Mixins::ItemPage
   end
 end

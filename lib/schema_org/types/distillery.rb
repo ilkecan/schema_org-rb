@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Distillery
-      include FoodEstablishment
-    end
+  # https://schema.org/Distillery
+  #
+  # A distillery.
+  class Distillery
+    include Mixins::Distillery
   end
 end

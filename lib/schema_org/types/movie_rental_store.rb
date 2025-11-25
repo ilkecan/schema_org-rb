@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module MovieRentalStore
-      include Store
-    end
+  # https://schema.org/MovieRentalStore
+  #
+  # A movie rental store.
+  class MovieRentalStore
+    include Mixins::MovieRentalStore
   end
 end

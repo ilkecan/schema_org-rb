@@ -1,8 +1,8 @@
 module SchemaOrg
-  module Types
-    module FireStation
-      include CivicStructure
-      include EmergencyService
-    end
+  # https://schema.org/FireStation
+  #
+  # A fire station. With firemen.
+  class FireStation
+    include Mixins::FireStation
   end
 end

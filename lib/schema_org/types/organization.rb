@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Organization
-      include Thing
-    end
+  # https://schema.org/Organization
+  #
+  # An organization such as a school, NGO, corporation, club, etc.
+  class Organization
+    include Mixins::Organization
   end
 end

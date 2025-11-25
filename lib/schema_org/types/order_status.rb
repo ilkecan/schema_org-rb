@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module OrderStatus
-      include StatusEnumeration
-    end
+  # https://schema.org/OrderStatus
+  #
+  # Enumerated status values for Order.
+  class OrderStatus
+    include Mixins::OrderStatus
   end
 end

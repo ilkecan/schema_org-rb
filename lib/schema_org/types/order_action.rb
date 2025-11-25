@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module OrderAction
-      include TradeAction
-    end
+  # https://schema.org/OrderAction
+  #
+  # An agent orders an object/product/service to be delivered/sent.
+  class OrderAction
+    include Mixins::OrderAction
   end
 end

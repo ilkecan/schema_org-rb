@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Preschool
-      include EducationalOrganization
-    end
+  # https://schema.org/Preschool
+  #
+  # A preschool.
+  class Preschool
+    include Mixins::Preschool
   end
 end

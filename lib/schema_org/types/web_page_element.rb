@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module WebPageElement
-      include CreativeWork
-    end
+  # https://schema.org/WebPageElement
+  #
+  # A web page element, like a table or an image.
+  class WebPageElement
+    include Mixins::WebPageElement
   end
 end

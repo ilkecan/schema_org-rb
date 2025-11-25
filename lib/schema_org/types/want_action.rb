@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module WantAction
-      include ReactAction
-    end
+  # https://schema.org/WantAction
+  #
+  # The act of expressing a desire about the object. An agent wants an object.
+  class WantAction
+    include Mixins::WantAction
   end
 end

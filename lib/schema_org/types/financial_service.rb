@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module FinancialService
-      include LocalBusiness
-    end
+  # https://schema.org/FinancialService
+  #
+  # Financial services business.
+  class FinancialService
+    include Mixins::FinancialService
   end
 end

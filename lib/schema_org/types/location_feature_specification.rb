@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module LocationFeatureSpecification
-      include PropertyValue
-    end
+  # https://schema.org/LocationFeatureSpecification
+  #
+  # Specifies a location feature by providing a structured value representing a feature of an accommodation as a property-value pair of varying degrees of formality.
+  class LocationFeatureSpecification
+    include Mixins::LocationFeatureSpecification
   end
 end

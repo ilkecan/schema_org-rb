@@ -1,8 +1,8 @@
 module SchemaOrg
-  module Types
-    module SkiResort
-      include Resort
-      include SportsActivityLocation
-    end
+  # https://schema.org/SkiResort
+  #
+  # A ski resort.
+  class SkiResort
+    include Mixins::SkiResort
   end
 end

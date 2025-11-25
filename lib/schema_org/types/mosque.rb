@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Mosque
-      include PlaceOfWorship
-    end
+  # https://schema.org/Mosque
+  #
+  # A mosque.
+  class Mosque
+    include Mixins::Mosque
   end
 end

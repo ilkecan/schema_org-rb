@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Movie
-      include CreativeWork
-    end
+  # https://schema.org/Movie
+  #
+  # A movie.
+  class Movie
+    include Mixins::Movie
   end
 end

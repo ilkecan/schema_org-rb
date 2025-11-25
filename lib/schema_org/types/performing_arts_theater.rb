@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module PerformingArtsTheater
-      include CivicStructure
-    end
+  # https://schema.org/PerformingArtsTheater
+  #
+  # A theater or other performing art center.
+  class PerformingArtsTheater
+    include Mixins::PerformingArtsTheater
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ReservationPackage
-      include Reservation
-    end
+  # https://schema.org/ReservationPackage
+  #
+  # A group of multiple reservations with common values for all sub-reservations.
+  class ReservationPackage
+    include Mixins::ReservationPackage
   end
 end

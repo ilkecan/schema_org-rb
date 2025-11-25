@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Season
-      include CreativeWork
-    end
+  # https://schema.org/Season
+  #
+  # A media season, e.g. TV, radio, video game etc.
+  class Season
+    include Mixins::Season
   end
 end

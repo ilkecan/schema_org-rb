@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module LandmarksOrHistoricalBuildings
-      include Place
-    end
+  # https://schema.org/LandmarksOrHistoricalBuildings
+  #
+  # An historical landmark or building.
+  class LandmarksOrHistoricalBuildings
+    include Mixins::LandmarksOrHistoricalBuildings
   end
 end

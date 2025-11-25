@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module FastFoodRestaurant
-      include FoodEstablishment
-    end
+  # https://schema.org/FastFoodRestaurant
+  #
+  # A fast-food restaurant.
+  class FastFoodRestaurant
+    include Mixins::FastFoodRestaurant
   end
 end

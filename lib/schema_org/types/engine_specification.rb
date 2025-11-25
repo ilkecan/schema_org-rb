@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module EngineSpecification
-      include StructuredValue
-    end
+  # https://schema.org/EngineSpecification
+  #
+  # Information about the engine of the vehicle. A vehicle can have multiple engines represented by multiple engine specification entities.
+  class EngineSpecification
+    include Mixins::EngineSpecification
   end
 end

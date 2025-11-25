@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ResumeAction
-      include ControlAction
-    end
+  # https://schema.org/ResumeAction
+  #
+  # The act of resuming a device or application which was formerly paused (e.g. resume music playback or resume a timer).
+  class ResumeAction
+    include Mixins::ResumeAction
   end
 end

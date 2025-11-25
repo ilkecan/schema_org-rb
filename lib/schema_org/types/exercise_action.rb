@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ExerciseAction
-      include PlayAction
-    end
+  # https://schema.org/ExerciseAction
+  #
+  # The act of participating in exertive activity for the purposes of improving health and fitness.
+  class ExerciseAction
+    include Mixins::ExerciseAction
   end
 end

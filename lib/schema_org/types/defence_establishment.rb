@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DefenceEstablishment
-      include GovernmentBuilding
-    end
+  # https://schema.org/DefenceEstablishment
+  #
+  # A defence establishment, such as an army or navy base.
+  class DefenceEstablishment
+    include Mixins::DefenceEstablishment
   end
 end

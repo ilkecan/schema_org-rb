@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Float
-      include Number
-    end
+  # https://schema.org/Float
+  #
+  # Data type: Floating number.
+  class Float
+    include Mixins::Float
   end
 end

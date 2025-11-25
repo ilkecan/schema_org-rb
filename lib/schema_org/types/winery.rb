@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Winery
-      include FoodEstablishment
-    end
+  # https://schema.org/Winery
+  #
+  # A winery.
+  class Winery
+    include Mixins::Winery
   end
 end

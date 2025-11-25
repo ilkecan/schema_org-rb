@@ -1,8 +1,8 @@
 module SchemaOrg
-  module Types
-    module PoliceStation
-      include CivicStructure
-      include EmergencyService
-    end
+  # https://schema.org/PoliceStation
+  #
+  # A police station.
+  class PoliceStation
+    include Mixins::PoliceStation
   end
 end

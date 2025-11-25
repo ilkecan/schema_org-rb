@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AMRadioChannel
-      include RadioChannel
-    end
+  # https://schema.org/AMRadioChannel
+  #
+  # A radio channel that uses AM.
+  class AMRadioChannel
+    include Mixins::AMRadioChannel
   end
 end

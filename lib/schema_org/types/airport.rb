@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Airport
-      include CivicStructure
-    end
+  # https://schema.org/Airport
+  #
+  # An airport.
+  class Airport
+    include Mixins::Airport
   end
 end

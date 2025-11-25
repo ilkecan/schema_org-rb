@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module OrganizeAction
-      include Action
-    end
+  # https://schema.org/OrganizeAction
+  #
+  # The act of manipulating/administering/supervising/controlling one or more objects.
+  class OrganizeAction
+    include Mixins::OrganizeAction
   end
 end

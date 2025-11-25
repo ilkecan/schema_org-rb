@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module RoofingContractor
-      include HomeAndConstructionBusiness
-    end
+  # https://schema.org/RoofingContractor
+  #
+  # A roofing contractor.
+  class RoofingContractor
+    include Mixins::RoofingContractor
   end
 end

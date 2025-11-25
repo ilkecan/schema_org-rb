@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BeautySalon
-      include HealthAndBeautyBusiness
-    end
+  # https://schema.org/BeautySalon
+  #
+  # Beauty salon.
+  class BeautySalon
+    include Mixins::BeautySalon
   end
 end

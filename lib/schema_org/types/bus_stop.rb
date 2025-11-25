@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BusStop
-      include CivicStructure
-    end
+  # https://schema.org/BusStop
+  #
+  # A bus stop.
+  class BusStop
+    include Mixins::BusStop
   end
 end

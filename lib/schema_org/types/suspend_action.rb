@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SuspendAction
-      include ControlAction
-    end
+  # https://schema.org/SuspendAction
+  #
+  # The act of momentarily pausing a device or application (e.g. pause music playback or pause a timer).
+  class SuspendAction
+    include Mixins::SuspendAction
   end
 end

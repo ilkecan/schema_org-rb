@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Pharmacy
-      include MedicalOrganization
-    end
+  # https://schema.org/Pharmacy
+  #
+  # A pharmacy or drugstore.
+  class Pharmacy
+    include Mixins::Pharmacy
   end
 end

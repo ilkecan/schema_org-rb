@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module TireShop
-      include Store
-    end
+  # https://schema.org/TireShop
+  #
+  # A tire shop.
+  class TireShop
+    include Mixins::TireShop
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ConvenienceStore
-      include Store
-    end
+  # https://schema.org/ConvenienceStore
+  #
+  # A convenience store.
+  class ConvenienceStore
+    include Mixins::ConvenienceStore
   end
 end

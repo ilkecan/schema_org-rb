@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module EatAction
-      include ConsumeAction
-    end
+  # https://schema.org/EatAction
+  #
+  # The act of swallowing solid objects.
+  class EatAction
+    include Mixins::EatAction
   end
 end

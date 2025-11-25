@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Locksmith
-      include HomeAndConstructionBusiness
-    end
+  # https://schema.org/Locksmith
+  #
+  # A locksmith.
+  class Locksmith
+    include Mixins::Locksmith
   end
 end

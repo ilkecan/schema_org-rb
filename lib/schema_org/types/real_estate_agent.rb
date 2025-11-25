@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module RealEstateAgent
-      include LocalBusiness
-    end
+  # https://schema.org/RealEstateAgent
+  #
+  # A real-estate agent.
+  class RealEstateAgent
+    include Mixins::RealEstateAgent
   end
 end

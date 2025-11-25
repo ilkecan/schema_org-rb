@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module OutletStore
-      include Store
-    end
+  # https://schema.org/OutletStore
+  #
+  # An outlet store.
+  class OutletStore
+    include Mixins::OutletStore
   end
 end

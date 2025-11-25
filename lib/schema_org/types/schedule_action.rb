@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ScheduleAction
-      include PlanAction
-    end
+  # https://schema.org/ScheduleAction
+  #
+  # Scheduling future actions, events, or tasks.\n\nRelated actions:\n\n* [[ReserveAction]]: Unlike ReserveAction, ScheduleAction allocates future actions (e.g. an event, a task, etc) towards a time slot / spatial allocation.
+  class ScheduleAction
+    include Mixins::ScheduleAction
   end
 end

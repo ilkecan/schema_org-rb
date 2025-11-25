@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Reservoir
-      include BodyOfWater
-    end
+  # https://schema.org/Reservoir
+  #
+  # A reservoir of water, typically an artificially created lake, like the Lake Kariba reservoir.
+  class Reservoir
+    include Mixins::Reservoir
   end
 end

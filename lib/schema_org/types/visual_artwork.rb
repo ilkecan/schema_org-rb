@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module VisualArtwork
-      include CreativeWork
-    end
+  # https://schema.org/VisualArtwork
+  #
+  # A work of art that is primarily visual in character.
+  class VisualArtwork
+    include Mixins::VisualArtwork
   end
 end

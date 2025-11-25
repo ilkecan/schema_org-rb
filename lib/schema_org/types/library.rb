@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Library
-      include LocalBusiness
-    end
+  # https://schema.org/Library
+  #
+  # A library.
+  class Library
+    include Mixins::Library
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Electrician
-      include HomeAndConstructionBusiness
-    end
+  # https://schema.org/Electrician
+  #
+  # An electrician.
+  class Electrician
+    include Mixins::Electrician
   end
 end

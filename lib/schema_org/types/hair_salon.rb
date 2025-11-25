@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module HairSalon
-      include HealthAndBeautyBusiness
-    end
+  # https://schema.org/HairSalon
+  #
+  # A hair salon.
+  class HairSalon
+    include Mixins::HairSalon
   end
 end

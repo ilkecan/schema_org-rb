@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DataFeedItem
-      include Intangible
-    end
+  # https://schema.org/DataFeedItem
+  #
+  # A single item within a larger data feed.
+  class DataFeedItem
+    include Mixins::DataFeedItem
   end
 end

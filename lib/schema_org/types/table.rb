@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Table
-      include WebPageElement
-    end
+  # https://schema.org/Table
+  #
+  # A table on a Web page.
+  class Table
+    include Mixins::Table
   end
 end

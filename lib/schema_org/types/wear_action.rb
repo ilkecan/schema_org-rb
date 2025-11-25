@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module WearAction
-      include UseAction
-    end
+  # https://schema.org/WearAction
+  #
+  # The act of dressing oneself in clothing.
+  class WearAction
+    include Mixins::WearAction
   end
 end

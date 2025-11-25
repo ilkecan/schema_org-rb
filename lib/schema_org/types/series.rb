@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Series
-      include Intangible
-    end
+  # https://schema.org/Series
+  #
+  # A Series in schema.org is a group of related items, typically but not necessarily of the same kind. See also [[CreativeWorkSeries]], [[EventSeries]].
+  class Series
+    include Mixins::Series
   end
 end

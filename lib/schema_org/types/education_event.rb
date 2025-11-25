@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module EducationEvent
-      include Event
-    end
+  # https://schema.org/EducationEvent
+  #
+  # Event type: Education event.
+  class EducationEvent
+    include Mixins::EducationEvent
   end
 end

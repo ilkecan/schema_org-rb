@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module QuantitativeValueDistribution
-      include StructuredValue
-    end
+  # https://schema.org/QuantitativeValueDistribution
+  #
+  # A statistical distribution of values.
+  class QuantitativeValueDistribution
+    include Mixins::QuantitativeValueDistribution
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ClaimReview
-      include Review
-    end
+  # https://schema.org/ClaimReview
+  #
+  # A fact-checking review of claims made (or reported) in some creative work (referenced via itemReviewed).
+  class ClaimReview
+    include Mixins::ClaimReview
   end
 end

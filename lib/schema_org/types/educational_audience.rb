@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module EducationalAudience
-      include Audience
-    end
+  # https://schema.org/EducationalAudience
+  #
+  # An EducationalAudience.
+  class EducationalAudience
+    include Mixins::EducationalAudience
   end
 end

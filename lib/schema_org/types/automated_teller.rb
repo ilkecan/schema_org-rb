@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AutomatedTeller
-      include FinancialService
-    end
+  # https://schema.org/AutomatedTeller
+  #
+  # ATM/cash machine.
+  class AutomatedTeller
+    include Mixins::AutomatedTeller
   end
 end

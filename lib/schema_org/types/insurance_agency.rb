@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module InsuranceAgency
-      include FinancialService
-    end
+  # https://schema.org/InsuranceAgency
+  #
+  # An Insurance agency.
+  class InsuranceAgency
+    include Mixins::InsuranceAgency
   end
 end

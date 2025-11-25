@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module VacationRental
-      include LodgingBusiness
-    end
+  # https://schema.org/VacationRental
+  #
+  # A kind of lodging business that focuses on renting single properties for limited time.
+  class VacationRental
+    include Mixins::VacationRental
   end
 end

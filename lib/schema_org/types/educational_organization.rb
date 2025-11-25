@@ -1,8 +1,8 @@
 module SchemaOrg
-  module Types
-    module EducationalOrganization
-      include CivicStructure
-      include Organization
-    end
+  # https://schema.org/EducationalOrganization
+  #
+  # An educational organization.
+  class EducationalOrganization
+    include Mixins::EducationalOrganization
   end
 end

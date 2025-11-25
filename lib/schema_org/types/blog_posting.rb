@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BlogPosting
-      include SocialMediaPosting
-    end
+  # https://schema.org/BlogPosting
+  #
+  # A blog post.
+  class BlogPosting
+    include Mixins::BlogPosting
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SportsClub
-      include SportsActivityLocation
-    end
+  # https://schema.org/SportsClub
+  #
+  # A sports club.
+  class SportsClub
+    include Mixins::SportsClub
   end
 end

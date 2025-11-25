@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DeliveryEvent
-      include Event
-    end
+  # https://schema.org/DeliveryEvent
+  #
+  # An event involving the delivery of an item.
+  class DeliveryEvent
+    include Mixins::DeliveryEvent
   end
 end

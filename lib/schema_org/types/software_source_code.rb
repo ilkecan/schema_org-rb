@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SoftwareSourceCode
-      include CreativeWork
-    end
+  # https://schema.org/SoftwareSourceCode
+  #
+  # Computer programming source code. Example: Full (compile ready) solutions, code snippet samples, scripts, templates.
+  class SoftwareSourceCode
+    include Mixins::SoftwareSourceCode
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module MotorcycleRepair
-      include AutomotiveBusiness
-    end
+  # https://schema.org/MotorcycleRepair
+  #
+  # A motorcycle repair shop.
+  class MotorcycleRepair
+    include Mixins::MotorcycleRepair
   end
 end

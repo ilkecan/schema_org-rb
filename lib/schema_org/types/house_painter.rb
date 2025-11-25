@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module HousePainter
-      include HomeAndConstructionBusiness
-    end
+  # https://schema.org/HousePainter
+  #
+  # A house painting service.
+  class HousePainter
+    include Mixins::HousePainter
   end
 end

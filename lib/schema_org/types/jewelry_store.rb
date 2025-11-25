@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module JewelryStore
-      include Store
-    end
+  # https://schema.org/JewelryStore
+  #
+  # A jewelry store.
+  class JewelryStore
+    include Mixins::JewelryStore
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module TennisComplex
-      include SportsActivityLocation
-    end
+  # https://schema.org/TennisComplex
+  #
+  # A tennis complex.
+  class TennisComplex
+    include Mixins::TennisComplex
   end
 end

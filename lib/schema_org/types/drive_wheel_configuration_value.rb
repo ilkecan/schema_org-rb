@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DriveWheelConfigurationValue
-      include QualitativeValue
-    end
+  # https://schema.org/DriveWheelConfigurationValue
+  #
+  # A value indicating which roadwheels will receive torque.
+  class DriveWheelConfigurationValue
+    include Mixins::DriveWheelConfigurationValue
   end
 end

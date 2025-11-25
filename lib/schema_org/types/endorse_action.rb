@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module EndorseAction
-      include ReactAction
-    end
+  # https://schema.org/EndorseAction
+  #
+  # An agent approves/certifies/likes/supports/sanctions an object.
+  class EndorseAction
+    include Mixins::EndorseAction
   end
 end

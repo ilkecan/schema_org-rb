@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ChooseAction
-      include AssessAction
-    end
+  # https://schema.org/ChooseAction
+  #
+  # The act of expressing a preference from a set of options or a large or unbounded set of choices/options.
+  class ChooseAction
+    include Mixins::ChooseAction
   end
 end

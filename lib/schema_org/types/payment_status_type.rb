@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module PaymentStatusType
-      include StatusEnumeration
-    end
+  # https://schema.org/PaymentStatusType
+  #
+  # A specific payment status. For example, PaymentDue, PaymentComplete, etc.
+  class PaymentStatusType
+    include Mixins::PaymentStatusType
   end
 end

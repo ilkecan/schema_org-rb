@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DataDownload
-      include MediaObject
-    end
+  # https://schema.org/DataDownload
+  #
+  # All or part of a [[Dataset]] in downloadable form.
+  class DataDownload
+    include Mixins::DataDownload
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DiscussionForumPosting
-      include SocialMediaPosting
-    end
+  # https://schema.org/DiscussionForumPosting
+  #
+  # A posting to a discussion forum.
+  class DiscussionForumPosting
+    include Mixins::DiscussionForumPosting
   end
 end

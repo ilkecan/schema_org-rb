@@ -1,8 +1,8 @@
 module SchemaOrg
-  module Types
-    module TVSeries
-      include CreativeWork
-      include CreativeWorkSeries
-    end
+  # https://schema.org/TVSeries
+  #
+  # CreativeWorkSeries dedicated to TV broadcast and associated online delivery.
+  class TVSeries
+    include Mixins::TVSeries
   end
 end

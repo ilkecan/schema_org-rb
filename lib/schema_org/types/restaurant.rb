@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Restaurant
-      include FoodEstablishment
-    end
+  # https://schema.org/Restaurant
+  #
+  # A restaurant.
+  class Restaurant
+    include Mixins::Restaurant
   end
 end

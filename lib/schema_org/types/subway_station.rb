@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SubwayStation
-      include CivicStructure
-    end
+  # https://schema.org/SubwayStation
+  #
+  # A subway station.
+  class SubwayStation
+    include Mixins::SubwayStation
   end
 end

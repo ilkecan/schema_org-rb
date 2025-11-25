@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AggregateRating
-      include Rating
-    end
+  # https://schema.org/AggregateRating
+  #
+  # The average rating based on multiple ratings or reviews.
+  class AggregateRating
+    include Mixins::AggregateRating
   end
 end

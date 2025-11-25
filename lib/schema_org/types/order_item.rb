@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module OrderItem
-      include Intangible
-    end
+  # https://schema.org/OrderItem
+  #
+  # An order item is a line of an order. It includes the quantity and shipping details of a bought offer.
+  class OrderItem
+    include Mixins::OrderItem
   end
 end

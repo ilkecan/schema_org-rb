@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module MapCategoryType
-      include Enumeration
-    end
+  # https://schema.org/MapCategoryType
+  #
+  # An enumeration of several kinds of Map.
+  class MapCategoryType
+    include Mixins::MapCategoryType
   end
 end

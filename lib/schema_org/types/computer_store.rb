@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ComputerStore
-      include Store
-    end
+  # https://schema.org/ComputerStore
+  #
+  # A computer store.
+  class ComputerStore
+    include Mixins::ComputerStore
   end
 end

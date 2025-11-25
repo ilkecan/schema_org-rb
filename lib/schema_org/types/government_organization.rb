@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module GovernmentOrganization
-      include Organization
-    end
+  # https://schema.org/GovernmentOrganization
+  #
+  # A governmental organization or agency.
+  class GovernmentOrganization
+    include Mixins::GovernmentOrganization
   end
 end

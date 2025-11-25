@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module UserPlusOnes
-      include UserInteraction
-    end
+  # https://schema.org/UserPlusOnes
+  #
+  # UserInteraction and its subtypes is an old way of talking about users interacting with pages. It is generally better to use [[Action]]-based vocabulary, alongside types such as [[Comment]].
+  class UserPlusOnes
+    include Mixins::UserPlusOnes
   end
 end

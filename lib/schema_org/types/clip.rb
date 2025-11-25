@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Clip
-      include CreativeWork
-    end
+  # https://schema.org/Clip
+  #
+  # A short TV or radio program or a segment/part of a program.
+  class Clip
+    include Mixins::Clip
   end
 end

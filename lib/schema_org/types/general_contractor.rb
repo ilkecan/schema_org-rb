@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module GeneralContractor
-      include HomeAndConstructionBusiness
-    end
+  # https://schema.org/GeneralContractor
+  #
+  # A general contractor.
+  class GeneralContractor
+    include Mixins::GeneralContractor
   end
 end

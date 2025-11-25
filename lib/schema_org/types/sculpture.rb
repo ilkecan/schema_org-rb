@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Sculpture
-      include CreativeWork
-    end
+  # https://schema.org/Sculpture
+  #
+  # A piece of sculpture.
+  class Sculpture
+    include Mixins::Sculpture
   end
 end

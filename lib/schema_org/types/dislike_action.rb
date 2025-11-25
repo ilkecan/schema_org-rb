@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DislikeAction
-      include ReactAction
-    end
+  # https://schema.org/DislikeAction
+  #
+  # The act of expressing a negative sentiment about the object. An agent dislikes an object (a proposition, topic or theme) with participants.
+  class DislikeAction
+    include Mixins::DislikeAction
   end
 end

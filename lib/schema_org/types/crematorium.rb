@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Crematorium
-      include CivicStructure
-    end
+  # https://schema.org/Crematorium
+  #
+  # A crematorium.
+  class Crematorium
+    include Mixins::Crematorium
   end
 end

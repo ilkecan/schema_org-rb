@@ -1,8 +1,8 @@
 module SchemaOrg
-  module Types
-    module MovieTheater
-      include CivicStructure
-      include EntertainmentBusiness
-    end
+  # https://schema.org/MovieTheater
+  #
+  # A movie theater.
+  class MovieTheater
+    include Mixins::MovieTheater
   end
 end

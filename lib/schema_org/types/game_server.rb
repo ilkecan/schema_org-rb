@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module GameServer
-      include Intangible
-    end
+  # https://schema.org/GameServer
+  #
+  # Server that provides game interaction in a multiplayer game.
+  class GameServer
+    include Mixins::GameServer
   end
 end

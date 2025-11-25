@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module EmergencyService
-      include LocalBusiness
-    end
+  # https://schema.org/EmergencyService
+  #
+  # An emergency service, such as a fire station or ER.
+  class EmergencyService
+    include Mixins::EmergencyService
   end
 end

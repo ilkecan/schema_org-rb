@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module PublicSwimmingPool
-      include SportsActivityLocation
-    end
+  # https://schema.org/PublicSwimmingPool
+  #
+  # A public swimming pool.
+  class PublicSwimmingPool
+    include Mixins::PublicSwimmingPool
   end
 end

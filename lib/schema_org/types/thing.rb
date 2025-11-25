@@ -1,6 +1,8 @@
 module SchemaOrg
-  module Types
-    module Thing
-    end
+  # https://schema.org/Thing
+  #
+  # The most generic type of item.
+  class Thing
+    include Mixins::Thing
   end
 end

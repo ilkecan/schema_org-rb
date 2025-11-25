@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SoftwareApplication
-      include CreativeWork
-    end
+  # https://schema.org/SoftwareApplication
+  #
+  # A software application.
+  class SoftwareApplication
+    include Mixins::SoftwareApplication
   end
 end

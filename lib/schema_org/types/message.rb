@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Message
-      include CreativeWork
-    end
+  # https://schema.org/Message
+  #
+  # A single message from a sender to one or more organizations or people.
+  class Message
+    include Mixins::Message
   end
 end

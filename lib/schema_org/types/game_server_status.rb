@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module GameServerStatus
-      include StatusEnumeration
-    end
+  # https://schema.org/GameServerStatus
+  #
+  # Status of a game server.
+  class GameServerStatus
+    include Mixins::GameServerStatus
   end
 end

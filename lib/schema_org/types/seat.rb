@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Seat
-      include Intangible
-    end
+  # https://schema.org/Seat
+  #
+  # Used to describe a seat, such as a reserved seat in an event reservation.
+  class Seat
+    include Mixins::Seat
   end
 end

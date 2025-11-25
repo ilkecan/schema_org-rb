@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Brewery
-      include FoodEstablishment
-    end
+  # https://schema.org/Brewery
+  #
+  # Brewery.
+  class Brewery
+    include Mixins::Brewery
   end
 end

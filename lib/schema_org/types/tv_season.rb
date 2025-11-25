@@ -1,8 +1,8 @@
 module SchemaOrg
-  module Types
-    module TVSeason
-      include CreativeWork
-      include CreativeWorkSeason
-    end
+  # https://schema.org/TVSeason
+  #
+  # Season dedicated to TV broadcast and associated online delivery.
+  class TVSeason
+    include Mixins::TVSeason
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module TheaterEvent
-      include Event
-    end
+  # https://schema.org/TheaterEvent
+  #
+  # Event type: Theater performance.
+  class TheaterEvent
+    include Mixins::TheaterEvent
   end
 end

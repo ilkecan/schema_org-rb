@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Embassy
-      include GovernmentBuilding
-    end
+  # https://schema.org/Embassy
+  #
+  # An embassy.
+  class Embassy
+    include Mixins::Embassy
   end
 end

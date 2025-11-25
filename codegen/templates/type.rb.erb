@@ -1,9 +1,16 @@
 module SchemaOrg
-  module Types
-    module <%= name %>
-<% parents.each do -%>
-      include <%= it %>
+  # <%= url %>
+<% unless comment_lines.empty? -%>
+  #
+<% comment_lines.each do -%>
+<% if it.empty? -%>
+  #
+<% else -%>
+  # <%= it %>
 <% end -%>
-    end
+<% end -%>
+<% end -%>
+  class <%= name %>
+    include Mixins::<%= name %>
   end
 end

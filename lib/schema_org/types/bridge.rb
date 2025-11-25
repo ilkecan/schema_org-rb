@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Bridge
-      include CivicStructure
-    end
+  # https://schema.org/Bridge
+  #
+  # A bridge.
+  class Bridge
+    include Mixins::Bridge
   end
 end

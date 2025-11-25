@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BowlingAlley
-      include SportsActivityLocation
-    end
+  # https://schema.org/BowlingAlley
+  #
+  # A bowling alley.
+  class BowlingAlley
+    include Mixins::BowlingAlley
   end
 end

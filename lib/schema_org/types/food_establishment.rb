@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module FoodEstablishment
-      include LocalBusiness
-    end
+  # https://schema.org/FoodEstablishment
+  #
+  # A food-related business.
+  class FoodEstablishment
+    include Mixins::FoodEstablishment
   end
 end

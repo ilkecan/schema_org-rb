@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module CheckoutPage
-      include WebPage
-    end
+  # https://schema.org/CheckoutPage
+  #
+  # Web page type: Checkout page.
+  class CheckoutPage
+    include Mixins::CheckoutPage
   end
 end

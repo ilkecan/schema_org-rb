@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module UnitPriceSpecification
-      include PriceSpecification
-    end
+  # https://schema.org/UnitPriceSpecification
+  #
+  # The price asked for a given offer by the respective organization or person.
+  class UnitPriceSpecification
+    include Mixins::UnitPriceSpecification
   end
 end

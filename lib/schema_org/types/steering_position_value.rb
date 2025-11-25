@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SteeringPositionValue
-      include QualitativeValue
-    end
+  # https://schema.org/SteeringPositionValue
+  #
+  # A value indicating a steering position.
+  class SteeringPositionValue
+    include Mixins::SteeringPositionValue
   end
 end

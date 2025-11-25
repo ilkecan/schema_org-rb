@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Painting
-      include CreativeWork
-    end
+  # https://schema.org/Painting
+  #
+  # A painting.
+  class Painting
+    include Mixins::Painting
   end
 end

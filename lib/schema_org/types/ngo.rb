@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module NGO
-      include Organization
-    end
+  # https://schema.org/NGO
+  #
+  # Organization: Non-governmental Organization.
+  class NGO
+    include Mixins::NGO
   end
 end

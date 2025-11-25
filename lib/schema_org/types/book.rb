@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Book
-      include CreativeWork
-    end
+  # https://schema.org/Book
+  #
+  # A book.
+  class Book
+    include Mixins::Book
   end
 end

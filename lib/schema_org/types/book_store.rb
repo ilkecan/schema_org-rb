@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BookStore
-      include Store
-    end
+  # https://schema.org/BookStore
+  #
+  # A bookstore.
+  class BookStore
+    include Mixins::BookStore
   end
 end

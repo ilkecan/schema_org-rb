@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Festival
-      include Event
-    end
+  # https://schema.org/Festival
+  #
+  # Event type: Festival.
+  class Festival
+    include Mixins::Festival
   end
 end

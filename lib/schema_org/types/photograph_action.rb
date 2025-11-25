@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module PhotographAction
-      include CreateAction
-    end
+  # https://schema.org/PhotographAction
+  #
+  # The act of capturing still images of objects using a camera.
+  class PhotographAction
+    include Mixins::PhotographAction
   end
 end

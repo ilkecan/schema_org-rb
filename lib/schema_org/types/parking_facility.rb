@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ParkingFacility
-      include CivicStructure
-    end
+  # https://schema.org/ParkingFacility
+  #
+  # A parking lot or other parking facility.
+  class ParkingFacility
+    include Mixins::ParkingFacility
   end
 end

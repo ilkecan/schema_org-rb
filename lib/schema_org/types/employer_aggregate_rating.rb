@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module EmployerAggregateRating
-      include AggregateRating
-    end
+  # https://schema.org/EmployerAggregateRating
+  #
+  # An aggregate rating of an Organization related to its role as an employer.
+  class EmployerAggregateRating
+    include Mixins::EmployerAggregateRating
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module InstallAction
-      include ConsumeAction
-    end
+  # https://schema.org/InstallAction
+  #
+  # The act of installing an application.
+  class InstallAction
+    include Mixins::InstallAction
   end
 end

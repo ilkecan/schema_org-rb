@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Game
-      include CreativeWork
-    end
+  # https://schema.org/Game
+  #
+  # The Game type represents things which are games. These are typically rule-governed recreational activities, e.g. role-playing games in which players assume the role of characters in a fictional setting.
+  class Game
+    include Mixins::Game
   end
 end

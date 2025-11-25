@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BusinessEvent
-      include Event
-    end
+  # https://schema.org/BusinessEvent
+  #
+  # Event type: Business event.
+  class BusinessEvent
+    include Mixins::BusinessEvent
   end
 end

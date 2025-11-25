@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module InternetCafe
-      include LocalBusiness
-    end
+  # https://schema.org/InternetCafe
+  #
+  # An internet cafe.
+  class InternetCafe
+    include Mixins::InternetCafe
   end
 end

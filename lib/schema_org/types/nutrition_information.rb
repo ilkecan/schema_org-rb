@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module NutritionInformation
-      include StructuredValue
-    end
+  # https://schema.org/NutritionInformation
+  #
+  # Nutritional information about the recipe.
+  class NutritionInformation
+    include Mixins::NutritionInformation
   end
 end

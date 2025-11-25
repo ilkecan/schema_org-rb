@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Answer
-      include Comment
-    end
+  # https://schema.org/Answer
+  #
+  # An answer offered to a question; perhaps correct, perhaps opinionated or wrong.
+  class Answer
+    include Mixins::Answer
   end
 end

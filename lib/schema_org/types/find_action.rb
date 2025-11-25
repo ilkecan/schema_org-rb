@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module FindAction
-      include Action
-    end
+  # https://schema.org/FindAction
+  #
+  # The act of finding an object.\n\nRelated actions:\n\n* [[SearchAction]]: FindAction is generally lead by a SearchAction, but not necessarily.
+  class FindAction
+    include Mixins::FindAction
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module HobbyShop
-      include Store
-    end
+  # https://schema.org/HobbyShop
+  #
+  # A store that sells materials useful or necessary for various hobbies.
+  class HobbyShop
+    include Mixins::HobbyShop
   end
 end

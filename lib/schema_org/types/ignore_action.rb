@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module IgnoreAction
-      include AssessAction
-    end
+  # https://schema.org/IgnoreAction
+  #
+  # The act of intentionally disregarding the object. An agent ignores an object.
+  class IgnoreAction
+    include Mixins::IgnoreAction
   end
 end

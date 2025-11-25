@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module GroceryStore
-      include Store
-    end
+  # https://schema.org/GroceryStore
+  #
+  # A grocery store.
+  class GroceryStore
+    include Mixins::GroceryStore
   end
 end

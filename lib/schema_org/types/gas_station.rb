@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module GasStation
-      include AutomotiveBusiness
-    end
+  # https://schema.org/GasStation
+  #
+  # A gas station.
+  class GasStation
+    include Mixins::GasStation
   end
 end

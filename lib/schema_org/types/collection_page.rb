@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module CollectionPage
-      include WebPage
-    end
+  # https://schema.org/CollectionPage
+  #
+  # Web page type: Collection page.
+  class CollectionPage
+    include Mixins::CollectionPage
   end
 end

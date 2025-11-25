@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module WPSideBar
-      include WebPageElement
-    end
+  # https://schema.org/WPSideBar
+  #
+  # A sidebar section of the page.
+  class WPSideBar
+    include Mixins::WPSideBar
   end
 end

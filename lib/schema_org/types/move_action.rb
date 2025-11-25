@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module MoveAction
-      include Action
-    end
+  # https://schema.org/MoveAction
+  #
+  # The act of an agent relocating to a place.\n\nRelated actions:\n\n* [[TransferAction]]: Unlike TransferAction, the subject of the move is a living Person or Organization rather than an inanimate object.
+  class MoveAction
+    include Mixins::MoveAction
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Researcher
-      include Audience
-    end
+  # https://schema.org/Researcher
+  #
+  # Researchers.
+  class Researcher
+    include Mixins::Researcher
   end
 end

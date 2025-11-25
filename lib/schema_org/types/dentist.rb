@@ -1,8 +1,8 @@
 module SchemaOrg
-  module Types
-    module Dentist
-      include LocalBusiness
-      include MedicalOrganization
-    end
+  # https://schema.org/Dentist
+  #
+  # A dentist.
+  class Dentist
+    include Mixins::Dentist
   end
 end

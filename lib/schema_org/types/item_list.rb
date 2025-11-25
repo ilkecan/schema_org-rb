@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ItemList
-      include Intangible
-    end
+  # https://schema.org/ItemList
+  #
+  # A list of items of any sort&#x2014;for example, Top 10 Movies About Weathermen, or Top 100 Party Songs. Not to be confused with HTML lists, which are often used only for formatting.
+  class ItemList
+    include Mixins::ItemList
   end
 end

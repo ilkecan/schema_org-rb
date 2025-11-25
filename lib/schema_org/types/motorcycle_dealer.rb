@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module MotorcycleDealer
-      include AutomotiveBusiness
-    end
+  # https://schema.org/MotorcycleDealer
+  #
+  # A motorcycle dealer.
+  class MotorcycleDealer
+    include Mixins::MotorcycleDealer
   end
 end

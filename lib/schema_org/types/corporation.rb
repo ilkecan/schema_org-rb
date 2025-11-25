@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Corporation
-      include Organization
-    end
+  # https://schema.org/Corporation
+  #
+  # Organization: A business corporation.
+  class Corporation
+    include Mixins::Corporation
   end
 end

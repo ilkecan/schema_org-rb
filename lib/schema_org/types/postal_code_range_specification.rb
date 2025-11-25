@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module PostalCodeRangeSpecification
-      include StructuredValue
-    end
+  # https://schema.org/PostalCodeRangeSpecification
+  #
+  # Indicates a range of postal codes, usually defined as the set of valid codes between [[postalCodeBegin]] and [[postalCodeEnd]], inclusively.
+  class PostalCodeRangeSpecification
+    include Mixins::PostalCodeRangeSpecification
   end
 end

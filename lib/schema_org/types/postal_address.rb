@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module PostalAddress
-      include ContactPoint
-    end
+  # https://schema.org/PostalAddress
+  #
+  # The mailing address.
+  class PostalAddress
+    include Mixins::PostalAddress
   end
 end

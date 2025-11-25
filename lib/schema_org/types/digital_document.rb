@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DigitalDocument
-      include CreativeWork
-    end
+  # https://schema.org/DigitalDocument
+  #
+  # An electronic file or document.
+  class DigitalDocument
+    include Mixins::DigitalDocument
   end
 end

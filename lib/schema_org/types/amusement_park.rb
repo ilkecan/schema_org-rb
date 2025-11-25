@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AmusementPark
-      include EntertainmentBusiness
-    end
+  # https://schema.org/AmusementPark
+  #
+  # An amusement park.
+  class AmusementPark
+    include Mixins::AmusementPark
   end
 end

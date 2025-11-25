@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module EntertainmentBusiness
-      include LocalBusiness
-    end
+  # https://schema.org/EntertainmentBusiness
+  #
+  # A business providing entertainment.
+  class EntertainmentBusiness
+    include Mixins::EntertainmentBusiness
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AnimalShelter
-      include LocalBusiness
-    end
+  # https://schema.org/AnimalShelter
+  #
+  # Animal shelter.
+  class AnimalShelter
+    include Mixins::AnimalShelter
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AutoWash
-      include AutomotiveBusiness
-    end
+  # https://schema.org/AutoWash
+  #
+  # A car wash business.
+  class AutoWash
+    include Mixins::AutoWash
   end
 end

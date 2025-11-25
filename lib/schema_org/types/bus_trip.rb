@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BusTrip
-      include Trip
-    end
+  # https://schema.org/BusTrip
+  #
+  # A trip on a commercial bus line.
+  class BusTrip
+    include Mixins::BusTrip
   end
 end

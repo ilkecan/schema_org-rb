@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DigitalDocumentPermissionType
-      include Enumeration
-    end
+  # https://schema.org/DigitalDocumentPermissionType
+  #
+  # A type of permission which can be granted for accessing a digital document.
+  class DigitalDocumentPermissionType
+    include Mixins::DigitalDocumentPermissionType
   end
 end

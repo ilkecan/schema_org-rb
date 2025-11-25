@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module RecyclingCenter
-      include LocalBusiness
-    end
+  # https://schema.org/RecyclingCenter
+  #
+  # A recycling center.
+  class RecyclingCenter
+    include Mixins::RecyclingCenter
   end
 end

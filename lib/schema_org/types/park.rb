@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Park
-      include CivicStructure
-    end
+  # https://schema.org/Park
+  #
+  # A park.
+  class Park
+    include Mixins::Park
   end
 end

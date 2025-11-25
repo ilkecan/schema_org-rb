@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ReservationStatusType
-      include StatusEnumeration
-    end
+  # https://schema.org/ReservationStatusType
+  #
+  # Enumerated status values for Reservation.
+  class ReservationStatusType
+    include Mixins::ReservationStatusType
   end
 end

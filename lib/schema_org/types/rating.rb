@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Rating
-      include Intangible
-    end
+  # https://schema.org/Rating
+  #
+  # A rating is an evaluation on a numeric scale, such as 1 to 5 stars.
+  class Rating
+    include Mixins::Rating
   end
 end

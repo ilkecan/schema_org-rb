@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BodyOfWater
-      include Landform
-    end
+  # https://schema.org/BodyOfWater
+  #
+  # A body of water, such as a sea, ocean, or lake.
+  class BodyOfWater
+    include Mixins::BodyOfWater
   end
 end

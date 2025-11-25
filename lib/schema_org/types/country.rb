@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Country
-      include AdministrativeArea
-    end
+  # https://schema.org/Country
+  #
+  # A country.
+  class Country
+    include Mixins::Country
   end
 end

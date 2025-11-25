@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module CafeOrCoffeeShop
-      include FoodEstablishment
-    end
+  # https://schema.org/CafeOrCoffeeShop
+  #
+  # A cafe or coffee shop.
+  class CafeOrCoffeeShop
+    include Mixins::CafeOrCoffeeShop
   end
 end

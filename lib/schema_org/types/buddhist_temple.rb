@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BuddhistTemple
-      include PlaceOfWorship
-    end
+  # https://schema.org/BuddhistTemple
+  #
+  # A Buddhist temple.
+  class BuddhistTemple
+    include Mixins::BuddhistTemple
   end
 end

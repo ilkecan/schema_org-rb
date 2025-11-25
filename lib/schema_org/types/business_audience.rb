@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BusinessAudience
-      include Audience
-    end
+  # https://schema.org/BusinessAudience
+  #
+  # A set of characteristics belonging to businesses, e.g. who compose an item's target audience.
+  class BusinessAudience
+    include Mixins::BusinessAudience
   end
 end

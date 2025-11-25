@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module GolfCourse
-      include SportsActivityLocation
-    end
+  # https://schema.org/GolfCourse
+  #
+  # A golf course.
+  class GolfCourse
+    include Mixins::GolfCourse
   end
 end

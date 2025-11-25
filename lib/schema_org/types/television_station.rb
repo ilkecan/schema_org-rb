@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module TelevisionStation
-      include LocalBusiness
-    end
+  # https://schema.org/TelevisionStation
+  #
+  # A television station.
+  class TelevisionStation
+    include Mixins::TelevisionStation
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DonateAction
-      include TransferAction
-    end
+  # https://schema.org/DonateAction
+  #
+  # The act of providing goods, services, or money without compensation, often for philanthropic reasons.
+  class DonateAction
+    include Mixins::DonateAction
   end
 end

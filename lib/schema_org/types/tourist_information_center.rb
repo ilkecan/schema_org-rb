@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module TouristInformationCenter
-      include LocalBusiness
-    end
+  # https://schema.org/TouristInformationCenter
+  #
+  # A tourist information center.
+  class TouristInformationCenter
+    include Mixins::TouristInformationCenter
   end
 end

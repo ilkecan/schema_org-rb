@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module MovieClip
-      include Clip
-    end
+  # https://schema.org/MovieClip
+  #
+  # A short segment/part of a movie.
+  class MovieClip
+    include Mixins::MovieClip
   end
 end

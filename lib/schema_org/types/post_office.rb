@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module PostOffice
-      include GovernmentOffice
-    end
+  # https://schema.org/PostOffice
+  #
+  # A post office.
+  class PostOffice
+    include Mixins::PostOffice
   end
 end

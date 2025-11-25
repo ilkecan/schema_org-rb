@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module RadioChannel
-      include BroadcastChannel
-    end
+  # https://schema.org/RadioChannel
+  #
+  # A unique instance of a radio BroadcastService on a CableOrSatelliteService lineup.
+  class RadioChannel
+    include Mixins::RadioChannel
   end
 end

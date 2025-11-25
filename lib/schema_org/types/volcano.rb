@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Volcano
-      include Landform
-    end
+  # https://schema.org/Volcano
+  #
+  # A volcano, like Fujisan.
+  class Volcano
+    include Mixins::Volcano
   end
 end

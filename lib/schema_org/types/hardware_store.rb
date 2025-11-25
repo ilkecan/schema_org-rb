@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module HardwareStore
-      include Store
-    end
+  # https://schema.org/HardwareStore
+  #
+  # A hardware store.
+  class HardwareStore
+    include Mixins::HardwareStore
   end
 end

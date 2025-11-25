@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module MusicStore
-      include Store
-    end
+  # https://schema.org/MusicStore
+  #
+  # A music store.
+  class MusicStore
+    include Mixins::MusicStore
   end
 end

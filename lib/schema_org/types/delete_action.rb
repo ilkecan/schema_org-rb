@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DeleteAction
-      include UpdateAction
-    end
+  # https://schema.org/DeleteAction
+  #
+  # The act of editing a recipient by removing one of its objects.
+  class DeleteAction
+    include Mixins::DeleteAction
   end
 end

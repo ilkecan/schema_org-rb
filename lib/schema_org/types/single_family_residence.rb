@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SingleFamilyResidence
-      include House
-    end
+  # https://schema.org/SingleFamilyResidence
+  #
+  # Residence type: Single-family home.
+  class SingleFamilyResidence
+    include Mixins::SingleFamilyResidence
   end
 end

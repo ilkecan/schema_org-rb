@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module TattooParlor
-      include HealthAndBeautyBusiness
-    end
+  # https://schema.org/TattooParlor
+  #
+  # A tattoo parlor.
+  class TattooParlor
+    include Mixins::TattooParlor
   end
 end

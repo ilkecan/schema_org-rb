@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Aquarium
-      include CivicStructure
-    end
+  # https://schema.org/Aquarium
+  #
+  # Aquarium.
+  class Aquarium
+    include Mixins::Aquarium
   end
 end

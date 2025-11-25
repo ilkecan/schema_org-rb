@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module LegislativeBuilding
-      include GovernmentBuilding
-    end
+  # https://schema.org/LegislativeBuilding
+  #
+  # A legislative building&#x2014;for example, the state capitol.
+  class LegislativeBuilding
+    include Mixins::LegislativeBuilding
   end
 end

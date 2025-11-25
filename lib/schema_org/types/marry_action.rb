@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module MarryAction
-      include InteractAction
-    end
+  # https://schema.org/MarryAction
+  #
+  # The act of marrying a person.
+  class MarryAction
+    include Mixins::MarryAction
   end
 end

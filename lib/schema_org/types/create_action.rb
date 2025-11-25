@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module CreateAction
-      include Action
-    end
+  # https://schema.org/CreateAction
+  #
+  # The act of deliberately creating/producing/generating/building a result out of the agent.
+  class CreateAction
+    include Mixins::CreateAction
   end
 end

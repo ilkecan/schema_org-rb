@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Place
-      include Thing
-    end
+  # https://schema.org/Place
+  #
+  # Entities that have a somewhat fixed, physical extension.
+  class Place
+    include Mixins::Place
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DryCleaningOrLaundry
-      include LocalBusiness
-    end
+  # https://schema.org/DryCleaningOrLaundry
+  #
+  # A dry-cleaning business.
+  class DryCleaningOrLaundry
+    include Mixins::DryCleaningOrLaundry
   end
 end

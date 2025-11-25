@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module LodgingBusiness
-      include LocalBusiness
-    end
+  # https://schema.org/LodgingBusiness
+  #
+  # A lodging business, such as a motel, hotel, or inn.
+  class LodgingBusiness
+    include Mixins::LodgingBusiness
   end
 end

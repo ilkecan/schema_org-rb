@@ -1,8 +1,8 @@
 module SchemaOrg
-  module Types
-    module DepositAccount
-      include BankAccount
-      include InvestmentOrDeposit
-    end
+  # https://schema.org/DepositAccount
+  #
+  # A type of Bank Account with a main purpose of depositing funds to gain interest or other benefits.
+  class DepositAccount
+    include Mixins::DepositAccount
   end
 end

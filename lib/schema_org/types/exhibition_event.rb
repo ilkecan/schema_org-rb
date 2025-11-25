@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ExhibitionEvent
-      include Event
-    end
+  # https://schema.org/ExhibitionEvent
+  #
+  # Event type: Exhibition event, e.g. at a museum, library, archive, tradeshow, ...
+  class ExhibitionEvent
+    include Mixins::ExhibitionEvent
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module HomeGoodsStore
-      include Store
-    end
+  # https://schema.org/HomeGoodsStore
+  #
+  # A home goods store.
+  class HomeGoodsStore
+    include Mixins::HomeGoodsStore
   end
 end

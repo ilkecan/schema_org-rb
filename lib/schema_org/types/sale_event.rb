@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SaleEvent
-      include Event
-    end
+  # https://schema.org/SaleEvent
+  #
+  # Event type: Sales event.
+  class SaleEvent
+    include Mixins::SaleEvent
   end
 end

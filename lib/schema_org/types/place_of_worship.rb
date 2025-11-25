@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module PlaceOfWorship
-      include CivicStructure
-    end
+  # https://schema.org/PlaceOfWorship
+  #
+  # Place of worship, such as a church, synagogue, or mosque.
+  class PlaceOfWorship
+    include Mixins::PlaceOfWorship
   end
 end

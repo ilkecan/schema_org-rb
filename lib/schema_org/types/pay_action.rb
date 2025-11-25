@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module PayAction
-      include TradeAction
-    end
+  # https://schema.org/PayAction
+  #
+  # An agent pays a price to a participant.
+  class PayAction
+    include Mixins::PayAction
   end
 end

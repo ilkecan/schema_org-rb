@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AutoBodyShop
-      include AutomotiveBusiness
-    end
+  # https://schema.org/AutoBodyShop
+  #
+  # Auto body shop.
+  class AutoBodyShop
+    include Mixins::AutoBodyShop
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module RadioSeries
-      include CreativeWorkSeries
-    end
+  # https://schema.org/RadioSeries
+  #
+  # CreativeWorkSeries dedicated to radio broadcast and associated online delivery.
+  class RadioSeries
+    include Mixins::RadioSeries
   end
 end

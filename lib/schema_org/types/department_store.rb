@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DepartmentStore
-      include Store
-    end
+  # https://schema.org/DepartmentStore
+  #
+  # A department store.
+  class DepartmentStore
+    include Mixins::DepartmentStore
   end
 end

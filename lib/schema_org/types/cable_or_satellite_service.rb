@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module CableOrSatelliteService
-      include Service
-    end
+  # https://schema.org/CableOrSatelliteService
+  #
+  # A service which provides access to media programming like TV or radio. Access may be via cable or satellite.
+  class CableOrSatelliteService
+    include Mixins::CableOrSatelliteService
   end
 end

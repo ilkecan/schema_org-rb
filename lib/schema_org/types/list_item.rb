@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ListItem
-      include Intangible
-    end
+  # https://schema.org/ListItem
+  #
+  # An list item, e.g. a step in a checklist or how-to description.
+  class ListItem
+    include Mixins::ListItem
   end
 end

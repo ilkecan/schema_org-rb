@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module GovernmentPermit
-      include Permit
-    end
+  # https://schema.org/GovernmentPermit
+  #
+  # A permit issued by a government agency.
+  class GovernmentPermit
+    include Mixins::GovernmentPermit
   end
 end

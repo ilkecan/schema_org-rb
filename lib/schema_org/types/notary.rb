@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Notary
-      include LegalService
-    end
+  # https://schema.org/Notary
+  #
+  # A notary.
+  class Notary
+    include Mixins::Notary
   end
 end

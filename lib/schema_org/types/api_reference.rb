@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module APIReference
-      include TechArticle
-    end
+  # https://schema.org/APIReference
+  #
+  # Reference documentation for application programming interfaces (APIs).
+  class APIReference
+    include Mixins::APIReference
   end
 end

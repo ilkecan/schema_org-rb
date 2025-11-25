@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ContactPage
-      include WebPage
-    end
+  # https://schema.org/ContactPage
+  #
+  # Web page type: Contact page.
+  class ContactPage
+    include Mixins::ContactPage
   end
 end

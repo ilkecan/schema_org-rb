@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Integer
-      include Number
-    end
+  # https://schema.org/Integer
+  #
+  # Data type: Integer.
+  class Integer
+    include Mixins::Integer
   end
 end

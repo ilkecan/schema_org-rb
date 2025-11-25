@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module WPHeader
-      include WebPageElement
-    end
+  # https://schema.org/WPHeader
+  #
+  # The header section of the page.
+  class WPHeader
+    include Mixins::WPHeader
   end
 end

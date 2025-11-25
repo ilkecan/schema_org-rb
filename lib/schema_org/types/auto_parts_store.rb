@@ -1,8 +1,8 @@
 module SchemaOrg
-  module Types
-    module AutoPartsStore
-      include AutomotiveBusiness
-      include Store
-    end
+  # https://schema.org/AutoPartsStore
+  #
+  # An auto parts store.
+  class AutoPartsStore
+    include Mixins::AutoPartsStore
   end
 end

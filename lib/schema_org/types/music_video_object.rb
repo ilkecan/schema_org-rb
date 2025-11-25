@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module MusicVideoObject
-      include MediaObject
-    end
+  # https://schema.org/MusicVideoObject
+  #
+  # A music video file.
+  class MusicVideoObject
+    include Mixins::MusicVideoObject
   end
 end

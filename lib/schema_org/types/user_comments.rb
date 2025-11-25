@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module UserComments
-      include UserInteraction
-    end
+  # https://schema.org/UserComments
+  #
+  # UserInteraction and its subtypes is an old way of talking about users interacting with pages. It is generally better to use [[Action]]-based vocabulary, alongside types such as [[Comment]].
+  class UserComments
+    include Mixins::UserComments
   end
 end

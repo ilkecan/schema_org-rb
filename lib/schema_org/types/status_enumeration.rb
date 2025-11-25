@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module StatusEnumeration
-      include Enumeration
-    end
+  # https://schema.org/StatusEnumeration
+  #
+  # Lists or enumerations dealing with status types.
+  class StatusEnumeration
+    include Mixins::StatusEnumeration
   end
 end

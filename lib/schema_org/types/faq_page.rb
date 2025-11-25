@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module FAQPage
-      include WebPage
-    end
+  # https://schema.org/FAQPage
+  #
+  # A [[FAQPage]] is a [[WebPage]] presenting one or more "[Frequently asked questions](https://en.wikipedia.org/wiki/FAQ)" (see also [[QAPage]]).
+  class FAQPage
+    include Mixins::FAQPage
   end
 end

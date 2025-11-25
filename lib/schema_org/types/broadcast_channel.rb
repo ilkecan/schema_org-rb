@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BroadcastChannel
-      include Intangible
-    end
+  # https://schema.org/BroadcastChannel
+  #
+  # A unique instance of a BroadcastService on a CableOrSatelliteService lineup.
+  class BroadcastChannel
+    include Mixins::BroadcastChannel
   end
 end

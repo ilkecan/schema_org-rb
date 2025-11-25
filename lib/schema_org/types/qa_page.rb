@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module QAPage
-      include WebPage
-    end
+  # https://schema.org/QAPage
+  #
+  # A QAPage is a WebPage focussed on a specific Question and its Answer(s), e.g. in a question answering site or documenting Frequently Asked Questions (FAQs).
+  class QAPage
+    include Mixins::QAPage
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Taxi
-      include Service
-    end
+  # https://schema.org/Taxi
+  #
+  # A taxi.
+  class Taxi
+    include Mixins::Taxi
   end
 end

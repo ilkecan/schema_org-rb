@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DiscoverAction
-      include FindAction
-    end
+  # https://schema.org/DiscoverAction
+  #
+  # The act of discovering/finding an object.
+  class DiscoverAction
+    include Mixins::DiscoverAction
   end
 end

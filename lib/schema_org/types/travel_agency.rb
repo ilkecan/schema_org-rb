@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module TravelAgency
-      include LocalBusiness
-    end
+  # https://schema.org/TravelAgency
+  #
+  # A travel agency.
+  class TravelAgency
+    include Mixins::TravelAgency
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ShoppingCenter
-      include LocalBusiness
-    end
+  # https://schema.org/ShoppingCenter
+  #
+  # A shopping center or mall.
+  class ShoppingCenter
+    include Mixins::ShoppingCenter
   end
 end

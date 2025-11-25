@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Person
-      include Thing
-    end
+  # https://schema.org/Person
+  #
+  # A person (alive, dead, undead, or fictional).
+  class Person
+    include Mixins::Person
   end
 end

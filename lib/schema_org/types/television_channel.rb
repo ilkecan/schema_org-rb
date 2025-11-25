@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module TelevisionChannel
-      include BroadcastChannel
-    end
+  # https://schema.org/TelevisionChannel
+  #
+  # A unique instance of a television BroadcastService on a CableOrSatelliteService lineup.
+  class TelevisionChannel
+    include Mixins::TelevisionChannel
   end
 end

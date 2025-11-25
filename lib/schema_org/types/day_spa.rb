@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DaySpa
-      include HealthAndBeautyBusiness
-    end
+  # https://schema.org/DaySpa
+  #
+  # A day spa.
+  class DaySpa
+    include Mixins::DaySpa
   end
 end

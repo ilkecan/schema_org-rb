@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Car
-      include Vehicle
-    end
+  # https://schema.org/Car
+  #
+  # A car is a wheeled, self-powered motor vehicle used for transportation.
+  class Car
+    include Mixins::Car
   end
 end

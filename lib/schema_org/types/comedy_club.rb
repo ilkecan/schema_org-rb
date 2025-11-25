@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ComedyClub
-      include EntertainmentBusiness
-    end
+  # https://schema.org/ComedyClub
+  #
+  # A comedy club.
+  class ComedyClub
+    include Mixins::ComedyClub
   end
 end

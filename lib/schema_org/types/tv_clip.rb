@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module TVClip
-      include Clip
-    end
+  # https://schema.org/TVClip
+  #
+  # A short TV program or a segment/part of a TV program.
+  class TVClip
+    include Mixins::TVClip
   end
 end

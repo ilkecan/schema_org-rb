@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module FoodService
-      include Service
-    end
+  # https://schema.org/FoodService
+  #
+  # A food service, like breakfast, lunch, or dinner.
+  class FoodService
+    include Mixins::FoodService
   end
 end

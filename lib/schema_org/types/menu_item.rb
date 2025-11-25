@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module MenuItem
-      include Intangible
-    end
+  # https://schema.org/MenuItem
+  #
+  # A food or drink item listed in a menu or menu section.
+  class MenuItem
+    include Mixins::MenuItem
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Courthouse
-      include GovernmentBuilding
-    end
+  # https://schema.org/Courthouse
+  #
+  # A courthouse.
+  class Courthouse
+    include Mixins::Courthouse
   end
 end

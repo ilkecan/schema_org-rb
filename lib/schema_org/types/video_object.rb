@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module VideoObject
-      include MediaObject
-    end
+  # https://schema.org/VideoObject
+  #
+  # A video file.
+  class VideoObject
+    include Mixins::VideoObject
   end
 end

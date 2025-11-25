@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ParentAudience
-      include PeopleAudience
-    end
+  # https://schema.org/ParentAudience
+  #
+  # A set of characteristics describing parents, who can be interested in viewing some content.
+  class ParentAudience
+    include Mixins::ParentAudience
   end
 end

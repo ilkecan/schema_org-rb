@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module TVEpisode
-      include Episode
-    end
+  # https://schema.org/TVEpisode
+  #
+  # A TV episode which can be part of a series or season.
+  class TVEpisode
+    include Mixins::TVEpisode
   end
 end

@@ -1,8 +1,8 @@
 module SchemaOrg
-  module Types
-    module StadiumOrArena
-      include CivicStructure
-      include SportsActivityLocation
-    end
+  # https://schema.org/StadiumOrArena
+  #
+  # A stadium.
+  class StadiumOrArena
+    include Mixins::StadiumOrArena
   end
 end

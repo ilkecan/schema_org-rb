@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ComedyEvent
-      include Event
-    end
+  # https://schema.org/ComedyEvent
+  #
+  # Event type: Comedy event.
+  class ComedyEvent
+    include Mixins::ComedyEvent
   end
 end

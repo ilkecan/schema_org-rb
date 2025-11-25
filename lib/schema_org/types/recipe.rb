@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Recipe
-      include HowTo
-    end
+  # https://schema.org/Recipe
+  #
+  # A recipe. For dietary restrictions covered by the recipe, a few common restrictions are enumerated via [[suitableForDiet]]. The [[keywords]] property can also be used to add more detail.
+  class Recipe
+    include Mixins::Recipe
   end
 end

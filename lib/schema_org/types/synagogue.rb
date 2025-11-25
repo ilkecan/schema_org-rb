@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Synagogue
-      include PlaceOfWorship
-    end
+  # https://schema.org/Synagogue
+  #
+  # A synagogue.
+  class Synagogue
+    include Mixins::Synagogue
   end
 end

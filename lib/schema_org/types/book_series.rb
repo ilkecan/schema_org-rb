@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BookSeries
-      include CreativeWorkSeries
-    end
+  # https://schema.org/BookSeries
+  #
+  # A series of books. Included books can be indicated with the hasPart property.
+  class BookSeries
+    include Mixins::BookSeries
   end
 end

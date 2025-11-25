@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AuthorizeAction
-      include AllocateAction
-    end
+  # https://schema.org/AuthorizeAction
+  #
+  # The act of granting permission to an object.
+  class AuthorizeAction
+    include Mixins::AuthorizeAction
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ReadAction
-      include ConsumeAction
-    end
+  # https://schema.org/ReadAction
+  #
+  # The act of consuming written content.
+  class ReadAction
+    include Mixins::ReadAction
   end
 end

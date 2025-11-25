@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Zoo
-      include CivicStructure
-    end
+  # https://schema.org/Zoo
+  #
+  # A zoo.
+  class Zoo
+    include Mixins::Zoo
   end
 end

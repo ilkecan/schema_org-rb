@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ImageObject
-      include MediaObject
-    end
+  # https://schema.org/ImageObject
+  #
+  # An image file.
+  class ImageObject
+    include Mixins::ImageObject
   end
 end

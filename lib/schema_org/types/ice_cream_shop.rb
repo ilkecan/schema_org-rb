@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module IceCreamShop
-      include FoodEstablishment
-    end
+  # https://schema.org/IceCreamShop
+  #
+  # An ice cream shop.
+  class IceCreamShop
+    include Mixins::IceCreamShop
   end
 end

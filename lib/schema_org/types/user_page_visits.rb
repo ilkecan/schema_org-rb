@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module UserPageVisits
-      include UserInteraction
-    end
+  # https://schema.org/UserPageVisits
+  #
+  # UserInteraction and its subtypes is an old way of talking about users interacting with pages. It is generally better to use [[Action]]-based vocabulary, alongside types such as [[Comment]].
+  class UserPageVisits
+    include Mixins::UserPageVisits
   end
 end

@@ -1,0 +1,9 @@
+module SchemaOrg
+  module Mixins
+    module <%= name %>
+<% parents.each do -%>
+      include <%= it %>
+<% end -%>
+    end
+  end
+end

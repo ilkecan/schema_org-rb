@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module PoliticalParty
-      include Organization
-    end
+  # https://schema.org/PoliticalParty
+  #
+  # Organization: Political Party.
+  class PoliticalParty
+    include Mixins::PoliticalParty
   end
 end

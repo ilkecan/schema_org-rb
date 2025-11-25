@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SelfStorage
-      include LocalBusiness
-    end
+  # https://schema.org/SelfStorage
+  #
+  # A self-storage facility.
+  class SelfStorage
+    include Mixins::SelfStorage
   end
 end

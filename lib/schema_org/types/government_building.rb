@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module GovernmentBuilding
-      include CivicStructure
-    end
+  # https://schema.org/GovernmentBuilding
+  #
+  # A government building.
+  class GovernmentBuilding
+    include Mixins::GovernmentBuilding
   end
 end

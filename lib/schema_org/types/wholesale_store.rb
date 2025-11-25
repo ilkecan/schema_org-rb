@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module WholesaleStore
-      include Store
-    end
+  # https://schema.org/WholesaleStore
+  #
+  # A wholesale store.
+  class WholesaleStore
+    include Mixins::WholesaleStore
   end
 end

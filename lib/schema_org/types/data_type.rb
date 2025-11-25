@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DataType
-      include Class
-    end
+  # https://schema.org/DataType
+  #
+  # The basic data types such as Integers, Strings, etc.
+  class DataType
+    include Mixins::DataType
   end
 end

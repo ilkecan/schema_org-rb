@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module EmailMessage
-      include Message
-    end
+  # https://schema.org/EmailMessage
+  #
+  # An email message.
+  class EmailMessage
+    include Mixins::EmailMessage
   end
 end

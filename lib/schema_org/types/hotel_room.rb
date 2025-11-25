@@ -1,7 +1,10 @@
 module SchemaOrg
-  module Types
-    module HotelRoom
-      include Room
-    end
+  # https://schema.org/HotelRoom
+  #
+  # A hotel room is a single room in a hotel.
+  # <br /><br />
+  # See also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.
+  class HotelRoom
+    include Mixins::HotelRoom
   end
 end

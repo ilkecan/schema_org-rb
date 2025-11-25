@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Order
-      include Intangible
-    end
+  # https://schema.org/Order
+  #
+  # An order is a confirmation of a transaction (a receipt), which can contain multiple line items, each represented by an Offer that has been accepted by the customer.
+  class Order
+    include Mixins::Order
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module FMRadioChannel
-      include RadioChannel
-    end
+  # https://schema.org/FMRadioChannel
+  #
+  # A radio channel that uses FM.
+  class FMRadioChannel
+    include Mixins::FMRadioChannel
   end
 end

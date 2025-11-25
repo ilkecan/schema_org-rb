@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module MusicComposition
-      include CreativeWork
-    end
+  # https://schema.org/MusicComposition
+  #
+  # A musical composition.
+  class MusicComposition
+    include Mixins::MusicComposition
   end
 end

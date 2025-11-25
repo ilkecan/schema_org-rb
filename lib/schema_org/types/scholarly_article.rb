@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ScholarlyArticle
-      include Article
-    end
+  # https://schema.org/ScholarlyArticle
+  #
+  # A scholarly article.
+  class ScholarlyArticle
+    include Mixins::ScholarlyArticle
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module GardenStore
-      include Store
-    end
+  # https://schema.org/GardenStore
+  #
+  # A garden store.
+  class GardenStore
+    include Mixins::GardenStore
   end
 end

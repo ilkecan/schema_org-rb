@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module MusicRecording
-      include CreativeWork
-    end
+  # https://schema.org/MusicRecording
+  #
+  # A music recording (track), usually a single song.
+  class MusicRecording
+    include Mixins::MusicRecording
   end
 end

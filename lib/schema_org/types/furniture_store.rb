@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module FurnitureStore
-      include Store
-    end
+  # https://schema.org/FurnitureStore
+  #
+  # A furniture store.
+  class FurnitureStore
+    include Mixins::FurnitureStore
   end
 end

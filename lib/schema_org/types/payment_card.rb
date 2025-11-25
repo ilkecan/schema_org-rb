@@ -1,8 +1,8 @@
 module SchemaOrg
-  module Types
-    module PaymentCard
-      include FinancialProduct
-      include PaymentMethod
-    end
+  # https://schema.org/PaymentCard
+  #
+  # A payment method using a credit, debit, store or other card to associate the payment with an account.
+  class PaymentCard
+    include Mixins::PaymentCard
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Store
-      include LocalBusiness
-    end
+  # https://schema.org/Store
+  #
+  # A retail good store.
+  class Store
+    include Mixins::Store
   end
 end

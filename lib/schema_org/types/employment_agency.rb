@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module EmploymentAgency
-      include LocalBusiness
-    end
+  # https://schema.org/EmploymentAgency
+  #
+  # An employment agency.
+  class EmploymentAgency
+    include Mixins::EmploymentAgency
   end
 end

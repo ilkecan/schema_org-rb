@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DataFeed
-      include Dataset
-    end
+  # https://schema.org/DataFeed
+  #
+  # A single feed providing structured information about one or more entities or topics.
+  class DataFeed
+    include Mixins::DataFeed
   end
 end

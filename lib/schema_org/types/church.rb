@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Church
-      include PlaceOfWorship
-    end
+  # https://schema.org/Church
+  #
+  # A church.
+  class Church
+    include Mixins::Church
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module WPAdBlock
-      include WebPageElement
-    end
+  # https://schema.org/WPAdBlock
+  #
+  # An advertising section of the page.
+  class WPAdBlock
+    include Mixins::WPAdBlock
   end
 end

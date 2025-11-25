@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AssessAction
-      include Action
-    end
+  # https://schema.org/AssessAction
+  #
+  # The act of forming one's opinion, reaction or sentiment.
+  class AssessAction
+    include Mixins::AssessAction
   end
 end

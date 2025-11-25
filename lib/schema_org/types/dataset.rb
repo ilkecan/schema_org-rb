@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Dataset
-      include CreativeWork
-    end
+  # https://schema.org/Dataset
+  #
+  # A body of structured information describing some topic(s) of interest.
+  class Dataset
+    include Mixins::Dataset
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module LiquorStore
-      include Store
-    end
+  # https://schema.org/LiquorStore
+  #
+  # A shop that sells alcoholic drinks such as wine, beer, whisky and other spirits.
+  class LiquorStore
+    include Mixins::LiquorStore
   end
 end

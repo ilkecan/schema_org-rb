@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module HealthAndBeautyBusiness
-      include LocalBusiness
-    end
+  # https://schema.org/HealthAndBeautyBusiness
+  #
+  # Health and beauty.
+  class HealthAndBeautyBusiness
+    include Mixins::HealthAndBeautyBusiness
   end
 end

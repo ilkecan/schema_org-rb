@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ElementarySchool
-      include EducationalOrganization
-    end
+  # https://schema.org/ElementarySchool
+  #
+  # An elementary school.
+  class ElementarySchool
+    include Mixins::ElementarySchool
   end
 end

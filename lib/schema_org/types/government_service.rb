@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module GovernmentService
-      include Service
-    end
+  # https://schema.org/GovernmentService
+  #
+  # A service provided by a government organization, e.g. food stamps, veterans benefits, etc.
+  class GovernmentService
+    include Mixins::GovernmentService
   end
 end

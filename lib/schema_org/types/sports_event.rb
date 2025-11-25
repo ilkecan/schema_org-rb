@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SportsEvent
-      include Event
-    end
+  # https://schema.org/SportsEvent
+  #
+  # Event type: Sports event.
+  class SportsEvent
+    include Mixins::SportsEvent
   end
 end

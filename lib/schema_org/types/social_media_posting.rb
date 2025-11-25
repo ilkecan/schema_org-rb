@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module SocialMediaPosting
-      include Article
-    end
+  # https://schema.org/SocialMediaPosting
+  #
+  # A post to a social media platform, including blog posts, tweets, Facebook posts, etc.
+  class SocialMediaPosting
+    include Mixins::SocialMediaPosting
   end
 end

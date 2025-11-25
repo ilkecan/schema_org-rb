@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module LakeBodyOfWater
-      include BodyOfWater
-    end
+  # https://schema.org/LakeBodyOfWater
+  #
+  # A lake (for example, Lake Pontrachain).
+  class LakeBodyOfWater
+    include Mixins::LakeBodyOfWater
   end
 end

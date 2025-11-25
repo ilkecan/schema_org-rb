@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module OceanBodyOfWater
-      include BodyOfWater
-    end
+  # https://schema.org/OceanBodyOfWater
+  #
+  # An ocean (for example, the Pacific).
+  class OceanBodyOfWater
+    include Mixins::OceanBodyOfWater
   end
 end

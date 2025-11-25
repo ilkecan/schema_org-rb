@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Distance
-      include Quantity
-    end
+  # https://schema.org/Distance
+  #
+  # Properties that take Distances as values are of the form '&lt;Number&gt; &lt;Length unit of measure&gt;'. E.g., '7 ft'.
+  class Distance
+    include Mixins::Distance
   end
 end

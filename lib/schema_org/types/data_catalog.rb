@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module DataCatalog
-      include CreativeWork
-    end
+  # https://schema.org/DataCatalog
+  #
+  # A collection of datasets.
+  class DataCatalog
+    include Mixins::DataCatalog
   end
 end

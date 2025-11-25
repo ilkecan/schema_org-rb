@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module NailSalon
-      include HealthAndBeautyBusiness
-    end
+  # https://schema.org/NailSalon
+  #
+  # A nail salon.
+  class NailSalon
+    include Mixins::NailSalon
   end
 end

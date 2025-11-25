@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ExerciseGym
-      include SportsActivityLocation
-    end
+  # https://schema.org/ExerciseGym
+  #
+  # A gym.
+  class ExerciseGym
+    include Mixins::ExerciseGym
   end
 end

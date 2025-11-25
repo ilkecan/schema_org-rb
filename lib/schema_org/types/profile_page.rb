@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ProfilePage
-      include WebPage
-    end
+  # https://schema.org/ProfilePage
+  #
+  # Web page type: Profile page.
+  class ProfilePage
+    include Mixins::ProfilePage
   end
 end

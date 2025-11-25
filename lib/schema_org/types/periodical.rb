@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Periodical
-      include CreativeWorkSeries
-    end
+  # https://schema.org/Periodical
+  #
+  # A publication in any medium issued in successive parts bearing numerical or chronological designations and intended to continue indefinitely, such as a magazine, scholarly journal, or newspaper.\n\nSee also [blog post](https://blog.schema.org/2014/09/02/schema-org-support-for-bibliographic-relationships-and-periodicals/).
+  class Periodical
+    include Mixins::Periodical
   end
 end

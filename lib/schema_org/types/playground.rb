@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Playground
-      include CivicStructure
-    end
+  # https://schema.org/Playground
+  #
+  # A playground.
+  class Playground
+    include Mixins::Playground
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module URL
-      include Text
-    end
+  # https://schema.org/URL
+  #
+  # Data type: URL.
+  class URL
+    include Mixins::URL
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ScreeningEvent
-      include Event
-    end
+  # https://schema.org/ScreeningEvent
+  #
+  # A screening of a movie or other video.
+  class ScreeningEvent
+    include Mixins::ScreeningEvent
   end
 end

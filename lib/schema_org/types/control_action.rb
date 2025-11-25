@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ControlAction
-      include Action
-    end
+  # https://schema.org/ControlAction
+  #
+  # An agent controls a device or application.
+  class ControlAction
+    include Mixins::ControlAction
   end
 end

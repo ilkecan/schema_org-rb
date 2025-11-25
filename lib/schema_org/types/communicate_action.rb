@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module CommunicateAction
-      include InteractAction
-    end
+  # https://schema.org/CommunicateAction
+  #
+  # The act of conveying information to another person via a communication medium (instrument) such as speech, email, or telephone conversation.
+  class CommunicateAction
+    include Mixins::CommunicateAction
   end
 end

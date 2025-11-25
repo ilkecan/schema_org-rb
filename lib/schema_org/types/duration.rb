@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Duration
-      include Quantity
-    end
+  # https://schema.org/Duration
+  #
+  # Quantity: Duration (use [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601)).
+  class Duration
+    include Mixins::Duration
   end
 end

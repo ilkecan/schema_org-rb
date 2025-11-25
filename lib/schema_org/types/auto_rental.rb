@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AutoRental
-      include AutomotiveBusiness
-    end
+  # https://schema.org/AutoRental
+  #
+  # A car rental business.
+  class AutoRental
+    include Mixins::AutoRental
   end
 end

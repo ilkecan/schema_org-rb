@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module NightClub
-      include EntertainmentBusiness
-    end
+  # https://schema.org/NightClub
+  #
+  # A nightclub or discotheque.
+  class NightClub
+    include Mixins::NightClub
   end
 end

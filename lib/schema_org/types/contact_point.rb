@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ContactPoint
-      include StructuredValue
-    end
+  # https://schema.org/ContactPoint
+  #
+  # A contact point&#x2014;for example, a Customer Complaints department.
+  class ContactPoint
+    include Mixins::ContactPoint
   end
 end

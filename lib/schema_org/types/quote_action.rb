@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module QuoteAction
-      include TradeAction
-    end
+  # https://schema.org/QuoteAction
+  #
+  # An agent quotes/estimates/appraises an object/product/service with a price at a location/store.
+  class QuoteAction
+    include Mixins::QuoteAction
   end
 end

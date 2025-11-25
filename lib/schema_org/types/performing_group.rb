@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module PerformingGroup
-      include Organization
-    end
+  # https://schema.org/PerformingGroup
+  #
+  # A performance group, such as a band, an orchestra, or a circus.
+  class PerformingGroup
+    include Mixins::PerformingGroup
   end
 end

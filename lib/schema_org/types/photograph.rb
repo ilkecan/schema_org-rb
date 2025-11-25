@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Photograph
-      include CreativeWork
-    end
+  # https://schema.org/Photograph
+  #
+  # A photograph.
+  class Photograph
+    include Mixins::Photograph
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module OfferItemCondition
-      include Enumeration
-    end
+  # https://schema.org/OfferItemCondition
+  #
+  # A list of possible conditions for the item.
+  class OfferItemCondition
+    include Mixins::OfferItemCondition
   end
 end

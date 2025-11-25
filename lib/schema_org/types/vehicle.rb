@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Vehicle
-      include Product
-    end
+  # https://schema.org/Vehicle
+  #
+  # A vehicle is a device that is designed or used to transport people or cargo over land, water, air, or through space.
+  class Vehicle
+    include Mixins::Vehicle
   end
 end

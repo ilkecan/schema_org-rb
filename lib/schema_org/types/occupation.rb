@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Occupation
-      include Intangible
-    end
+  # https://schema.org/Occupation
+  #
+  # A profession, may involve prolonged training and/or a formal qualification.
+  class Occupation
+    include Mixins::Occupation
   end
 end

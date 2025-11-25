@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Conversation
-      include CreativeWork
-    end
+  # https://schema.org/Conversation
+  #
+  # One or more messages between organizations or people on a particular topic. Individual messages can be linked to the conversation with isPartOf or hasPart properties.
+  class Conversation
+    include Mixins::Conversation
   end
 end

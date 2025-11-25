@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Florist
-      include Store
-    end
+  # https://schema.org/Florist
+  #
+  # A florist.
+  class Florist
+    include Mixins::Florist
   end
 end

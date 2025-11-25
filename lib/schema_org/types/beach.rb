@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Beach
-      include CivicStructure
-    end
+  # https://schema.org/Beach
+  #
+  # Beach.
+  class Beach
+    include Mixins::Beach
   end
 end

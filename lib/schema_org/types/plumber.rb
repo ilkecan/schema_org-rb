@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Plumber
-      include HomeAndConstructionBusiness
-    end
+  # https://schema.org/Plumber
+  #
+  # A plumbing service.
+  class Plumber
+    include Mixins::Plumber
   end
 end

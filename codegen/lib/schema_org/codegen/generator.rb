@@ -8,7 +8,7 @@ module SchemaOrg
 
       include Import[:inflector]
 
-      Template = Types::Coercible::Symbol.enum(*%i[class type])
+      Template = Types::Coercible::Symbol.enum(*%i[mixin type])
 
       option :subject
 
@@ -36,8 +36,8 @@ module SchemaOrg
 
       def output_file(type)
         xs = case type
-        when Template[:class]
-          [ filename ]
+        when Template[:mixin]
+          [ 'mixins', filename ]
         when Template[:type]
           [ 'types', filename ]
         end

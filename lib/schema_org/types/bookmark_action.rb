@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BookmarkAction
-      include OrganizeAction
-    end
+  # https://schema.org/BookmarkAction
+  #
+  # An agent bookmarks/flags/labels/tags/marks an object.
+  class BookmarkAction
+    include Mixins::BookmarkAction
   end
 end

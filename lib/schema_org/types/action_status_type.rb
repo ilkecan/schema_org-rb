@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ActionStatusType
-      include StatusEnumeration
-    end
+  # https://schema.org/ActionStatusType
+  #
+  # The status of an Action.
+  class ActionStatusType
+    include Mixins::ActionStatusType
   end
 end

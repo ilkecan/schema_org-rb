@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module OrganizationRole
-      include Role
-    end
+  # https://schema.org/OrganizationRole
+  #
+  # A subclass of Role used to describe roles within organizations.
+  class OrganizationRole
+    include Mixins::OrganizationRole
   end
 end

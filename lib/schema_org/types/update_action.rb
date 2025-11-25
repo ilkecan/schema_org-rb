@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module UpdateAction
-      include Action
-    end
+  # https://schema.org/UpdateAction
+  #
+  # The act of managing by changing/editing the state of the object.
+  class UpdateAction
+    include Mixins::UpdateAction
   end
 end

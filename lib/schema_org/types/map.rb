@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Map
-      include CreativeWork
-    end
+  # https://schema.org/Map
+  #
+  # A map.
+  class Map
+    include Mixins::Map
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module LoanOrCredit
-      include FinancialProduct
-    end
+  # https://schema.org/LoanOrCredit
+  #
+  # A financial product for the loaning of an amount of money, or line of credit, under agreed terms and charges.
+  class LoanOrCredit
+    include Mixins::LoanOrCredit
   end
 end

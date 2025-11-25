@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Cemetery
-      include CivicStructure
-    end
+  # https://schema.org/Cemetery
+  #
+  # A graveyard.
+  class Cemetery
+    include Mixins::Cemetery
   end
 end

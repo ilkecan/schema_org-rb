@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ProgramMembership
-      include Intangible
-    end
+  # https://schema.org/ProgramMembership
+  #
+  # Used to describe membership in a loyalty programs (e.g. "StarAliance"), traveler clubs (e.g. "AAA"), purchase clubs ("Safeway Club"), etc.
+  class ProgramMembership
+    include Mixins::ProgramMembership
   end
 end

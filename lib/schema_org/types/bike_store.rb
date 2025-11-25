@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module BikeStore
-      include Store
-    end
+  # https://schema.org/BikeStore
+  #
+  # A bike store.
+  class BikeStore
+    include Mixins::BikeStore
   end
 end

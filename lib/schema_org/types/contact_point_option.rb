@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ContactPointOption
-      include Enumeration
-    end
+  # https://schema.org/ContactPointOption
+  #
+  # Enumerated options related to a ContactPoint.
+  class ContactPointOption
+    include Mixins::ContactPointOption
   end
 end

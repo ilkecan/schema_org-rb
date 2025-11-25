@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AutoDealer
-      include AutomotiveBusiness
-    end
+  # https://schema.org/AutoDealer
+  #
+  # An car dealership.
+  class AutoDealer
+    include Mixins::AutoDealer
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module AppendAction
-      include InsertAction
-    end
+  # https://schema.org/AppendAction
+  #
+  # The act of inserting at the end if an ordered collection.
+  class AppendAction
+    include Mixins::AppendAction
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module RadioStation
-      include LocalBusiness
-    end
+  # https://schema.org/RadioStation
+  #
+  # A radio station.
+  class RadioStation
+    include Mixins::RadioStation
   end
 end

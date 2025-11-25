@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module UseAction
-      include ConsumeAction
-    end
+  # https://schema.org/UseAction
+  #
+  # The act of applying an object to its intended purpose.
+  class UseAction
+    include Mixins::UseAction
   end
 end

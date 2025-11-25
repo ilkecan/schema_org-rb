@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module Waterfall
-      include BodyOfWater
-    end
+  # https://schema.org/Waterfall
+  #
+  # A waterfall, like Niagara.
+  class Waterfall
+    include Mixins::Waterfall
   end
 end

@@ -1,7 +1,8 @@
 module SchemaOrg
-  module Types
-    module ElectronicsStore
-      include Store
-    end
+  # https://schema.org/ElectronicsStore
+  #
+  # An electronics store.
+  class ElectronicsStore
+    include Mixins::ElectronicsStore
   end
 end
