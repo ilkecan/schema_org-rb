@@ -13,6 +13,10 @@ module SchemaOrg
             )
           end
         end
+
+        rule(:type) do
+          key.failure('is ambigious') if value.count == 2 && value.first != :Class
+        end
       end
     end
   end

@@ -17,23 +17,27 @@ module SchemaOrg
       end
 
       def statements
-        @statements ||= reader.each_statement.group_by { it.subject }.values
+        @statements ||= reader.each_statement.group_by(&:subject).values
       end
 
       def subjects
         @subjects ||= begin
           statements # force enumeration to populate `reader.prefixes`
           factory = Subject::Factory.new(prefixes:)
-          statements.map { factory.build it }
+          statements.map { factory.build it }.group_by(&:type)
         end
       end
 
       def classes
-        subjects.filter { it.type.include? :Class }
+        subjects[:Class]
       end
 
       def properties
-        subjects.filter { it.type.include? :Property }
+        subjects[:Property]
+      end
+
+      def data_types
+        subjects[:DataType]
       end
     end
   end

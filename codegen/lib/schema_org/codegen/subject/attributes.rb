@@ -39,7 +39,7 @@ module SchemaOrg
               { name: :subClassOf, count: 0..many, type: Types::Coercible::Symbol },
               { name: :subPropertyOf, count: 0..1, type: Types::Coercible::Symbol },
               { name: :supersededBy, count: 0..1, type: Types::Coercible::Symbol },
-              { name: :type, count: 1..2, type: Types::Coercible::Symbol },   # TODO add a custom `normalizer` to unwrap count=2, which only happens with `:DataType`
+              { name: :type, count: 1..2, array: false, normalizer: proc(&:last), type: Types::Coercible::Symbol },
             ].map do
               it.merge!(
                 max: it[:count].max,
@@ -47,11 +47,9 @@ module SchemaOrg
                 name: inflector.underscore(it[:name]).to_sym,
                 optional: it[:count].include?(0),
               )
-              if it[:max] > 1
-                it[:type] = Types::Array.of it[:type]
-              else
-                it[:normalizer] ||= unwrap unless it[:max] > 1
-              end
+              it[:array] = it[:max] > 1 unless it.key?(:array)
+              it[:type] = Types::Array.of it[:type] if it[:array]
+              it[:normalizer] ||= unwrap unless it[:max] > 1
               it
             end
           end
