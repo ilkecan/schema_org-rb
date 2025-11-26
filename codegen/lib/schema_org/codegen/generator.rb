@@ -1,51 +1,47 @@
-require 'dry-initializer'
-require 'tilt'
-
 module SchemaOrg
   module Codegen
     class Generator
-      extend Dry::Initializer
+      Template = Types::Coercible::Symbol.enum(*%i[
+        mixin
+        schema_version
+        type
+      ])
 
-      include Import[:inflector]
-
-      Template = Types::Coercible::Symbol.enum(*%i[mixin type])
-
-      option :subject
-
-      @templates = {}
-
-      def self.template(name)
-        @templates[name] ||= Tilt::ERBTemplate.new("./codegen/templates/#{name}.rb.erb", trim: '-')
-      end
+      include Import[:inflector, :template_engine]
 
       def self.lib_root
         @lib_root ||= Pathname.new('./lib/schema_org')
       end
 
-      def generate(type)
-        file = output_file type
-        output = render type
+      def generate(data_model)
+        template_type = Template[template_name data_model]
+        output = template_engine.render template_type, data_model
+
+        file = output_file template_type, data_model
         file.write output
       end
 
       private
 
-      def filename
-        @filename ||= "#{inflector.underscore subject.name}.rb"
+      def output_file(template_type, data_model)
+        segments = case template_type
+          when Template[:mixin]
+            [ 'mixins', "#{inflector.underscore data_model.name}.rb" ]
+          when Template[:schema_version]
+            [ 'schema_version.rb' ]
+          when Template[:type]
+            [ 'types', "#{inflector.underscore data_model.name}.rb" ]
+          end
+        self.class.lib_root.join(*segments)
       end
 
-      def output_file(type)
-        xs = case type
-        when Template[:mixin]
-          [ 'mixins', filename ]
-        when Template[:type]
-          [ 'types', filename ]
-        end
-        self.class.lib_root.join(*xs)
+      def template_name(data_model)
+        cls = inflector.demodulize data_model.class.name
+        template_names[cls] ||= inflector.underscore cls
       end
 
-      def render(type)
-        self.class.template(type).render(subject)
+      def template_names
+        @template_names ||= {}
       end
     end
   end
