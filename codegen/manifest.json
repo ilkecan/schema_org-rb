@@ -1,4 +1,11 @@
 {
+  "./lib/schema_org/schema_version.rb": "46854f2f789e5ed5150533e71c370743",
+  "./lib/schema_org/data_types/boolean.rb": "7787e0d895ed75847c0f2235e02bebce",
+  "./lib/schema_org/data_types/date.rb": "980a3597f1a2fa4cf0569a9643fa6c2a",
+  "./lib/schema_org/data_types/date_time.rb": "3d96e327b7229b45b10f0f45ae1562f8",
+  "./lib/schema_org/data_types/number.rb": "a1df534c30608bf2c77846d23d7a5c51",
+  "./lib/schema_org/data_types/text.rb": "7b1c6be3ae875f531090dd0fef3cab11",
+  "./lib/schema_org/data_types/time.rb": "972fcc805e326112a250dbfed8234b42",
   "./lib/schema_org/mixins/am_radio_channel.rb": "f946b90512b7bce41d37896dd4746373",
   "./lib/schema_org/types/am_radio_channel.rb": "9b0104864499faeb4b0b05caae93df4e",
   "./lib/schema_org/mixins/api_reference.rb": "e696dfe869ce7de0e5f531dd096b4644",
@@ -1256,6 +1263,5 @@
   "./lib/schema_org/mixins/write_action.rb": "da9b90221a28a99e9fd136da7955e2f3",
   "./lib/schema_org/types/write_action.rb": "ed46c82fd11646a9b7f7cc95eb1de06c",
   "./lib/schema_org/mixins/zoo.rb": "43f97f521614ee9af21401c305355b50",
-  "./lib/schema_org/types/zoo.rb": "7b6266017f3d52d7a401a0011e730994",
-  "./lib/schema_org/schema_version.rb": "46854f2f789e5ed5150533e71c370743"
+  "./lib/schema_org/types/zoo.rb": "7b6266017f3d52d7a401a0011e730994"
 }

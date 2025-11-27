@@ -1,0 +1,15 @@
+module SchemaOrg
+  # <%= url %>
+<% unless comment_lines.empty? -%>
+  #
+<% comment_lines.each do -%>
+<% if it.empty? -%>
+  #
+<% else -%>
+  # <%= it %>
+<% end -%>
+<% end -%>
+<% end -%>
+  class <%= name %>
+  end
+end

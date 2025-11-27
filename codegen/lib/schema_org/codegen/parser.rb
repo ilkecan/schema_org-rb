@@ -8,12 +8,29 @@ module SchemaOrg
 
       option :schema_file, default: proc { './codegen/data/schema.ttl' }
 
+      def classes
+        subjects[:Class]
+      end
+
+      def data_types
+        subjects[:DataType]
+      end
+
+      def properties
+        subjects[:Property]
+      end
+
+      private
+
       def reader
         @reader ||= RDF::Turtle::Reader.open(schema_file)
       end
 
       def prefixes
-        reader.prefixes
+        @prefixes ||= begin
+          statements # force enumeration to populate `reader.prefixes`
+          reader.prefixes
+        end
       end
 
       def statements
@@ -22,22 +39,9 @@ module SchemaOrg
 
       def subjects
         @subjects ||= begin
-          statements # force enumeration to populate `reader.prefixes`
           factory = Subject::Factory.new(prefixes:)
           statements.map { factory.build it }.group_by(&:type)
         end
-      end
-
-      def classes
-        subjects[:Class]
-      end
-
-      def properties
-        subjects[:Property]
-      end
-
-      def data_types
-        subjects[:DataType]
       end
     end
   end

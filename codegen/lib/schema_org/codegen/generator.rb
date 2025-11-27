@@ -1,7 +1,10 @@
+require 'digest'
+
 module SchemaOrg
   module Codegen
     class Generator
       Template = Types::Coercible::Symbol.enum(*%i[
+        data_type
         mixin
         schema_version
         type
@@ -35,6 +38,8 @@ module SchemaOrg
 
       def output_file(template_type, data_model)
         segments = case template_type
+          when Template[:data_type]
+            [ 'data_types', "#{inflector.underscore data_model.name}.rb" ]
           when Template[:mixin]
             [ 'mixins', "#{inflector.underscore data_model.name}.rb" ]
           when Template[:schema_version]
