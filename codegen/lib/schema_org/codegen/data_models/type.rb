@@ -2,9 +2,9 @@ module SchemaOrg
   module Codegen
     module DataModels
       class Type < Base
+        attribute :comment_lines, Types::Array.of(Types::Coercible::String)
         attribute :name, Types::Coercible::Symbol
         attribute :url, Types::Coercible::String
-        attribute :comment_lines, Types::Array.of(Types::Coercible::String)
 
         def self.from_subject(subject)
           args = attribute_names.to_h { [it, subject.public_send(it)] }

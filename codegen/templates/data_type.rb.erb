@@ -10,6 +10,10 @@ module SchemaOrg
 <% end -%>
 <% end -%>
 <% end -%>
+<% if parent.nil? -%>
   class <%= name %>
+<% else -%>
+  class <%= name %> < <%= parent %>
+<% end -%>
   end
 end

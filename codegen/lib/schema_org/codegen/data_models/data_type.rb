@@ -2,12 +2,21 @@ module SchemaOrg
   module Codegen
     module DataModels
       class DataType < Base
-        attribute :name, Types::Coercible::Symbol
-        attribute :url, Types::Coercible::String
         attribute :comment_lines, Types::Array.of(Types::Coercible::String)
+        attribute :name, Types::Coercible::Symbol
+        attribute :parent, Types::Coercible::Symbol.optional
+        attribute :url, Types::Coercible::String
 
-        def self.from_subject(subject)
-          args = attribute_names.to_h { [it, subject.public_send(it)] }
+        def self.from_subject(subject, parent: :DataType)
+          args = attribute_names.to_h do
+            value =
+              if binding.local_variable_defined?(it)
+                binding.local_variable_get(it)
+              else
+                subject.public_send(it)
+              end
+            [it, value]
+          end
           new(**args)
         end
       end

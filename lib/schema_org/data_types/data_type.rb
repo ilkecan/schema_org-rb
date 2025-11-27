@@ -3,6 +3,5 @@ module SchemaOrg
   #
   # The basic data types such as Integers, Strings, etc.
   class DataType
-    include Mixins::DataType
   end
 end
