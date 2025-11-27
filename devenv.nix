@@ -7,8 +7,6 @@ let
 in
 
 {
-  dotenv.enable = true;
-
   env = {
     BUNDLE_CACHE_ALL = true;
     BUNDLE_IGNORE_FUNDING_REQUESTS = true;

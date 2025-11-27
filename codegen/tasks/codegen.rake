@@ -3,6 +3,7 @@ task :codegen do
   require "./codegen/system/boot"
 
   generator = App['generator']
+  manifest = App['manifest']
   parser = App['parser']
 
   parser.classes.each do
@@ -10,4 +11,7 @@ task :codegen do
     generator.generate SchemaOrg::Codegen::DataModels::Type.from_subject(it)
   end
   generator.generate SchemaOrg::Codegen::DataModels::SchemaVersion.current
+
+  manifest.stale_files.each { Pathname(it).delete }
+  manifest.save
 end

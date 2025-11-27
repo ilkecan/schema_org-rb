@@ -7,7 +7,7 @@ module SchemaOrg
         type
       ])
 
-      include Import[:inflector, :template_engine]
+      include Import[:inflector, :manifest, :template_engine, :writer]
 
       def self.lib_root
         @lib_root ||= Pathname.new('./lib/schema_org')
@@ -16,12 +16,22 @@ module SchemaOrg
       def generate(data_model)
         template_type = Template[template_name data_model]
         output = template_engine.render template_type, data_model
+        checksum = compute_checksum(output)
 
         file = output_file template_type, data_model
-        file.write output
+        key = file.to_s
+        manifest[key] = checksum
+
+        return if manifest[key] == checksum
+
+        writer.write file, output
       end
 
       private
+
+      def compute_checksum(content)
+        Digest::MD5.hexdigest content
+      end
 
       def output_file(template_type, data_model)
         segments = case template_type
