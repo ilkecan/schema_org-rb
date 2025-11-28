@@ -1,7 +1,7 @@
 module SchemaOrg
   module Codegen
     class Orchestrator
-      include Import[:generator, :manifest, :parser]
+      include Import[:generator, :manifest, :model_factory, :parser]
 
       def orchestrate
         generate_files
@@ -18,7 +18,7 @@ module SchemaOrg
       end
 
       def generate_schema_version
-        generator.generate SchemaOrg::Codegen::DataModels::SchemaVersion.current
+        generator.generate model_factory.schema_version
       end
 
       def generate_data_types
@@ -36,12 +36,12 @@ module SchemaOrg
       end
 
       def generate_data_type(subject, **kwargs)
-        gen SchemaOrg::Codegen::DataModels::DataType.from_subject(subject, **kwargs)
+        gen model_factory.data_type_from_subject(subject, **kwargs)
       end
 
       def generate_class(subject)
-        gen SchemaOrg::Codegen::DataModels::Mixin.from_subject(subject)
-        gen SchemaOrg::Codegen::DataModels::Type.from_subject(subject)
+        gen model_factory.mixin_from_subject(subject)
+        gen model_factory.type_from_subject(subject)
       end
 
       def gen(data_model)
