@@ -1,7 +1,16 @@
+require "active_support/concern"
+
 module SchemaOrg
   module Mixins
     module SingleFamilyResidence
+      extend ActiveSupport::Concern
+
       include House
+
+      included do
+        option :number_of_rooms # The number of rooms (excluding bathrooms and closets) of the accommodation or lodging business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.
+        option :occupancy # The allowed total occupancy for the accommodation in persons (including infants etc). For individual accommodations, this is not necessarily the legal maximum but defines the permitted usage as per the contractual agreement (e.g. a double room used by a single person). Typical unit code(s): C62 for person.
+      end
     end
   end
 end

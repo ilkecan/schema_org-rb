@@ -24,8 +24,16 @@ module SchemaOrg
         sub_class_of.to_a
       end
 
+      def types
+        range_includes.to_a
+      end
+
       def url
         "#{prefixes[nil]}#{label}"
+      end
+
+      def used_on
+        domain_includes.to_a
       end
     end
   end

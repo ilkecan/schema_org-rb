@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/AchieveAction
   #
   # The act of accomplishing something via previous efforts. It is an instantaneous action rather than an ongoing process.
-  class AchieveAction
+  class AchieveAction < Base
     include Mixins::AchieveAction
   end
 end

@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/Casino
   #
   # A casino.
-  class Casino
+  class Casino < Base
     include Mixins::Casino
   end
 end

@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/AutoPartsStore
   #
   # An auto parts store.
-  class AutoPartsStore
+  class AutoPartsStore < Base
     include Mixins::AutoPartsStore
   end
 end

@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/PerformAction
   #
   # The act of participating in performance arts.
-  class PerformAction
+  class PerformAction < Base
     include Mixins::PerformAction
   end
 end

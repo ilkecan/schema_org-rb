@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/QuantitativeValueDistribution
   #
   # A statistical distribution of values.
-  class QuantitativeValueDistribution
+  class QuantitativeValueDistribution < Base
     include Mixins::QuantitativeValueDistribution
   end
 end

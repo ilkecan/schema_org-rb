@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/MusicAlbumReleaseType
   #
   # The kind of release which this album is: single, EP or album.
-  class MusicAlbumReleaseType
+  class MusicAlbumReleaseType < Base
     include Mixins::MusicAlbumReleaseType
   end
 end

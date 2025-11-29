@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/VideoGameClip
   #
   # A short segment/part of a video game.
-  class VideoGameClip
+  class VideoGameClip < Base
     include Mixins::VideoGameClip
   end
 end

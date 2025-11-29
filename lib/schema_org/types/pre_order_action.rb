@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/PreOrderAction
   #
   # An agent orders a (not yet released) object/product/service to be delivered/sent.
-  class PreOrderAction
+  class PreOrderAction < Base
     include Mixins::PreOrderAction
   end
 end

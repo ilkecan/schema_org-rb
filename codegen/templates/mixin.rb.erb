@@ -1,8 +1,22 @@
+require "active_support/concern"
+
 module SchemaOrg
   module Mixins
     module <%= name %>
+      extend ActiveSupport::Concern
+
 <% parents.each do -%>
       include <%= it %>
+<% end -%>
+<% unless parents.empty? || properties.empty? -%>
+
+<% end -%>
+<% unless properties.empty? -%>
+      included do
+<% properties.each do -%>
+        option :<%= it.name %> # <%= it.comment_lines.join ' ' %>
+<% end -%>
+      end
 <% end -%>
     end
   end

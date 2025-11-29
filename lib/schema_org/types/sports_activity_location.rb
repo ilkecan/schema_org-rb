@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/SportsActivityLocation
   #
   # A sports location, such as a playing field.
-  class SportsActivityLocation
+  class SportsActivityLocation < Base
     include Mixins::SportsActivityLocation
   end
 end

@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/GatedResidenceCommunity
   #
   # Residence type: Gated community.
-  class GatedResidenceCommunity
+  class GatedResidenceCommunity < Base
     include Mixins::GatedResidenceCommunity
   end
 end

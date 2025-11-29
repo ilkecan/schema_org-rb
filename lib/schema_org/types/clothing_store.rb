@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/ClothingStore
   #
   # A clothing store.
-  class ClothingStore
+  class ClothingStore < Base
     include Mixins::ClothingStore
   end
 end

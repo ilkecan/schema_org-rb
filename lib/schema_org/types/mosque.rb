@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/Mosque
   #
   # A mosque.
-  class Mosque
+  class Mosque < Base
     include Mixins::Mosque
   end
 end

@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/StadiumOrArena
   #
   # A stadium.
-  class StadiumOrArena
+  class StadiumOrArena < Base
     include Mixins::StadiumOrArena
   end
 end

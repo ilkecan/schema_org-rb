@@ -1,6 +1,10 @@
+require "active_support/concern"
+
 module SchemaOrg
   module Mixins
     module ToyStore
+      extend ActiveSupport::Concern
+
       include Store
     end
   end

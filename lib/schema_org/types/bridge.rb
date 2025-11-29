@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/Bridge
   #
   # A bridge.
-  class Bridge
+  class Bridge < Base
     include Mixins::Bridge
   end
 end

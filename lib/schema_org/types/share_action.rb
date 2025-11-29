@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/ShareAction
   #
   # The act of distributing content to people for their amusement or edification.
-  class ShareAction
+  class ShareAction < Base
     include Mixins::ShareAction
   end
 end

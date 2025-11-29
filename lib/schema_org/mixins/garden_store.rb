@@ -1,6 +1,10 @@
+require "active_support/concern"
+
 module SchemaOrg
   module Mixins
     module GardenStore
+      extend ActiveSupport::Concern
+
       include Store
     end
   end

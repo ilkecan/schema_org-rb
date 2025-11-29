@@ -7,8 +7,5 @@ loader.inflector.inflect('schema_version' => 'SCHEMA_VERSION')
 loader.setup
 
 module SchemaOrg
-  module Types
-  end
-
-  private_constant :Types
+  private_constant :Base
 end

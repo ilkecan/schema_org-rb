@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/WebSite
   #
   # A WebSite is a set of related web pages and other items typically served from a single web domain and accessible via URLs.
-  class WebSite
+  class WebSite < Base
     include Mixins::WebSite
   end
 end

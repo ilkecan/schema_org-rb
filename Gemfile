@@ -5,6 +5,7 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in schema_org.gemspec
 gemspec
 
+gem "activesupport", "~> 8.1.1"
 gem "bootsnap", "~> 1.19.0", require: false
 gem "dry-configurable", "~> 1.3.0"
 gem "dry-inflector", "~> 1.2.0"

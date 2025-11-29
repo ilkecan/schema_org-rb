@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/OrderStatus
   #
   # Enumerated status values for Order.
-  class OrderStatus
+  class OrderStatus < Base
     include Mixins::OrderStatus
   end
 end

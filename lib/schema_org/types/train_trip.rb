@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/TrainTrip
   #
   # A trip on a commercial train line.
-  class TrainTrip
+  class TrainTrip < Base
     include Mixins::TrainTrip
   end
 end

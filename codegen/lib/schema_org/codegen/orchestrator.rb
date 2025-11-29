@@ -26,21 +26,31 @@ module SchemaOrg
       end
 
       def generate_classes
+        properties = aggregate_properties
         parser.classes.each do
           if it.label == :DataType
             generate_data_type it, parent: nil
           else
-            generate_class it
+            generate_class it, properties[it.label]
           end
         end
+      end
+
+      def aggregate_properties
+        properties = Hash.new { |h, k| h[k] = [] }
+        parser.properties.each do
+          property = model_factory.property_from_subject it
+          it.used_on.each { |type| properties[type] << property }
+        end
+        properties
       end
 
       def generate_data_type(subject, **kwargs)
         gen model_factory.data_type_from_subject(subject, **kwargs)
       end
 
-      def generate_class(subject)
-        gen model_factory.mixin_from_subject(subject)
+      def generate_class(subject, properties)
+        gen model_factory.mixin_from_subject(subject, properties)
         gen model_factory.type_from_subject(subject)
       end
 

@@ -4,7 +4,7 @@ module SchemaOrg
   # A NewsArticle is an article whose content reports news, or provides background context and supporting materials for understanding the news.
   #
   # A more detailed overview of [schema.org News markup](/docs/news.html) is also available.
-  class NewsArticle
+  class NewsArticle < Base
     include Mixins::NewsArticle
   end
 end

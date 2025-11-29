@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/AppendAction
   #
   # The act of inserting at the end if an ordered collection.
-  class AppendAction
+  class AppendAction < Base
     include Mixins::AppendAction
   end
 end

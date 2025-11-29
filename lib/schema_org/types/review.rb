@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/Review
   #
   # A review of an item - for example, of a restaurant, movie, or store.
-  class Review
+  class Review < Base
     include Mixins::Review
   end
 end

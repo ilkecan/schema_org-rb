@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/SportingGoodsStore
   #
   # A sporting goods store.
-  class SportingGoodsStore
+  class SportingGoodsStore < Base
     include Mixins::SportingGoodsStore
   end
 end

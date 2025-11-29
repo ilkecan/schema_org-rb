@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/Physician
   #
   # An individual physician or a physician's office considered as a [[MedicalOrganization]].
-  class Physician
+  class Physician < Base
     include Mixins::Physician
   end
 end

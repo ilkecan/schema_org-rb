@@ -7,7 +7,7 @@ module SchemaOrg
   #
   # An [[EndorsementRating]] may be part of a numeric scale or organized system, but this is not required: having an explicit type for indicating a positive,
   # endorsement rating is particularly useful in the absence of numeric scales as it helps consumers understand that the rating is broadly positive.
-  class EndorsementRating
+  class EndorsementRating < Base
     include Mixins::EndorsementRating
   end
 end

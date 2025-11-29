@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/NailSalon
   #
   # A nail salon.
-  class NailSalon
+  class NailSalon < Base
     include Mixins::NailSalon
   end
 end

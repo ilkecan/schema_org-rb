@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/ExerciseGym
   #
   # A gym.
-  class ExerciseGym
+  class ExerciseGym < Base
     include Mixins::ExerciseGym
   end
 end

@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/ProductModel
   #
   # A datasheet or vendor specification of a product (in the sense of a prototypical description).
-  class ProductModel
+  class ProductModel < Base
     include Mixins::ProductModel
   end
 end

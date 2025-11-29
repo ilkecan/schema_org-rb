@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/Park
   #
   # A park.
-  class Park
+  class Park < Base
     include Mixins::Park
   end
 end

@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/RadioSeries
   #
   # CreativeWorkSeries dedicated to radio broadcast and associated online delivery.
-  class RadioSeries
+  class RadioSeries < Base
     include Mixins::RadioSeries
   end
 end

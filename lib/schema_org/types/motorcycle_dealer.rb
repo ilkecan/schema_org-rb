@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/MotorcycleDealer
   #
   # A motorcycle dealer.
-  class MotorcycleDealer
+  class MotorcycleDealer < Base
     include Mixins::MotorcycleDealer
   end
 end

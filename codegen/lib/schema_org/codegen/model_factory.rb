@@ -12,10 +12,19 @@ module SchemaOrg
         )
       end
 
-      def mixin_from_subject(subject)
+      def mixin_from_subject(subject, properties)
         Models::Mixin.new(
           name: subject.name,
           parents: subject.parents,
+          properties:,
+        )
+      end
+
+      def property_from_subject(subject)
+        Models::Property.new(
+          comment_lines: subject.comment_lines,
+          name: inflector.underscore(subject.name),
+          types: subject.types,
         )
       end
 

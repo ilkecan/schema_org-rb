@@ -14,7 +14,7 @@ module SchemaOrg
   # PostalCode Set: { [94000-94585], [97000, 97999], [13000, 13599]}
   # { [12345, 12345], [78945, 78945], }
   # Region = state, canton, prefecture, autonomous community...
-  class DefinedRegion
+  class DefinedRegion < Base
     include Mixins::DefinedRegion
   end
 end

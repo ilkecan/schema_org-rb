@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/RadioStation
   #
   # A radio station.
-  class RadioStation
+  class RadioStation < Base
     include Mixins::RadioStation
   end
 end

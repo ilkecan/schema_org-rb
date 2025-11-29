@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/TextDigitalDocument
   #
   # A file composed primarily of text.
-  class TextDigitalDocument
+  class TextDigitalDocument < Base
     include Mixins::TextDigitalDocument
   end
 end

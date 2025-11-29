@@ -2,7 +2,7 @@ module SchemaOrg
   # https://schema.org/Airline
   #
   # An organization that provides flights for passengers.
-  class Airline
+  class Airline < Base
     include Mixins::Airline
   end
 end
