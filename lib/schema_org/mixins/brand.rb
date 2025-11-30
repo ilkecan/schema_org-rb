@@ -11,7 +11,7 @@ module SchemaOrg
         option :aggregate_rating # The overall rating, based on a collection of reviews or ratings, of the item.
         option :logo # An associated logo.
         option :slogan # A slogan or motto associated with the item.
-        option :review # A review of the item.
+        option :review # A review of the item. Supersedes `reviews`.
       end
     end
   end

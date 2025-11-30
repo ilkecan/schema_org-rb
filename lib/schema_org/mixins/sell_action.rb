@@ -9,7 +9,7 @@ module SchemaOrg
 
       included do
         option :buyer # A sub property of participant. The participant/person/organization that bought the object.
-        option :warranty_promise # The warranty promise(s) included in the offer.
+        option :warranty_promise # The warranty promise(s) included in the offer. Superseded by `warranty`.
       end
     end
   end

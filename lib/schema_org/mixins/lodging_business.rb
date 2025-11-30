@@ -15,7 +15,7 @@ module SchemaOrg
         option :number_of_rooms # The number of rooms (excluding bathrooms and closets) of the accommodation or lodging business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.
         option :pets_allowed # Indicates whether pets are allowed to enter the accommodation or lodging business. More detailed information can be put in a text value.
         option :star_rating # An official rating for a lodging business or food establishment, e.g. from national associations or standards bodies. Use the author property to indicate the rating organization, e.g. as an Organization with name such as (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).
-        option :audience # An intended audience, i.e. a group for whom something was created.
+        option :audience # An intended audience, i.e. a group for whom something was created. Supersedes `service_audience`.
       end
     end
   end

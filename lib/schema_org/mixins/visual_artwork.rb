@@ -13,10 +13,10 @@ module SchemaOrg
         option :artform # e.g. Painting, Drawing, Sculpture, Print, Photograph, Assemblage, Collage, etc.
         option :depth # The depth of the item.
         option :height # The height of the item.
-        option :surface # A material used as a surface in some artwork, e.g. Canvas, Paper, Wood, Board, etc.
+        option :surface # A material used as a surface in some artwork, e.g. Canvas, Paper, Wood, Board, etc. Superseded by `artwork_surface`.
         option :weight # The weight of the product or person.
         option :width # The width of the item.
-        option :artwork_surface # The supporting materials for the artwork, e.g. Canvas, Paper, Wood, Board, etc.
+        option :artwork_surface # The supporting materials for the artwork, e.g. Canvas, Paper, Wood, Board, etc. Supersedes `surface`.
       end
     end
   end

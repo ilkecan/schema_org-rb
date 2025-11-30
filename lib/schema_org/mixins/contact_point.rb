@@ -16,8 +16,8 @@ module SchemaOrg
         option :hours_available # The hours during which this service or contact is available.
         option :product_supported # The product or service this support contact point is related to (such as product support for a particular product line). This can be a specific product or product line (e.g. "iPhone") or a general category of products or services (e.g. "smartphones").
         option :telephone # The telephone number.
-        option :service_area # The geographic area where the service is provided.
-        option :area_served # The geographic area where a service or offered item is provided.
+        option :service_area # The geographic area where the service is provided. Supersedes `area`. Superseded by `area_served`.
+        option :area_served # The geographic area where a service or offered item is provided. Supersedes `service_area`.
       end
     end
   end

@@ -8,7 +8,7 @@ module SchemaOrg
       include Service
 
       included do
-        option :area # The area within which users can expect to reach the broadcast service.
+        option :area # The area within which users can expect to reach the broadcast service. Superseded by `service_area`.
         option :broadcast_affiliate_of # The media network(s) whose content is broadcast on this station.
         option :broadcast_display_name # The name displayed in the channel guide. For many US affiliates, it is the network name.
         option :broadcast_frequency # The frequency used for over-the-air broadcasts. Numeric values or simple ranges, e.g. 87-99. In addition a shortcut idiom is supported for frequencies of AM and FM radio channels, e.g. "87 FM".

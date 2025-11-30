@@ -11,13 +11,13 @@ module SchemaOrg
         option :additional_name # An additional name for a Person, can be used for a middle name.
         option :address # Physical address of the item.
         option :affiliation # An organization that this person is affiliated with. For example, a school/university, a club, or a team.
-        option :awards # Awards won by or for this item.
+        option :awards # Awards won by or for this item. Superseded by `award`.
         option :birth_date # Date of birth.
         option :birth_place # The place where the person was born.
         option :brand # The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
         option :children # A child of the person.
-        option :colleagues # A colleague of the person.
-        option :contact_points # A contact point for a person or organization.
+        option :colleagues # A colleague of the person. Superseded by `colleague`.
+        option :contact_points # A contact point for a person or organization. Superseded by `contact_point`.
         option :death_date # Date of death.
         option :death_place # The place where the person died.
         option :duns # The Dun & Bradstreet DUNS number for identifying an organization or business person.
@@ -43,12 +43,12 @@ module SchemaOrg
         option :nationality # Nationality of the person.
         option :net_worth # The total financial value of the person as calculated by subtracting the total value of liabilities from the total value of assets.
         option :owns # Products owned by the organization or person.
-        option :parents # A parents of the person.
+        option :parents # A parents of the person. Superseded by `parent`.
         option :performer_in # Event that this person is a performer or participant in.
         option :publishing_principles # The publishingPrinciples property indicates (typically via [[URL]]) a document describing the editorial principles of an [[Organization]] (or individual, e.g. a [[Person]] writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of the party primarily responsible for the creation of the [[CreativeWork]].  While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.
         option :related_to # The most generic familial relation.
         option :seeks # A pointer to products or services sought by the organization or person (demand).
-        option :siblings # A sibling of the person.
+        option :siblings # A sibling of the person. Superseded by `sibling`.
         option :skills # A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is either claimed by a person, an organization or desired or required to fulfill a role or to work in an occupation.
         option :spouse # The person's spouse.
         option :tax_id # The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.
@@ -58,12 +58,12 @@ module SchemaOrg
         option :work_location # A contact location for a person's place of work.
         option :works_for # Organizations that the person works for.
         option :alumni_of # An organization that the person is an alumni of.
-        option :award # An award won by or for this item.
-        option :colleague # A colleague of the person.
-        option :contact_point # A contact point for a person or organization.
+        option :award # An award won by or for this item. Supersedes `awards`.
+        option :colleague # A colleague of the person. Supersedes `colleagues`.
+        option :contact_point # A contact point for a person or organization. Supersedes `contact_points`.
         option :makes_offer # A pointer to products or services offered by the organization or person.
-        option :parent # A parent of this person.
-        option :sibling # A sibling of the person.
+        option :parent # A parent of this person. Supersedes `parents`.
+        option :sibling # A sibling of the person. Supersedes `siblings`.
         option :sponsor # A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.
         option :member_of # An Organization (or ProgramMembership) to which this Person or Organization belongs.
       end

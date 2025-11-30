@@ -1,5 +1,11 @@
 module SchemaOrg
   # <%= url %>
+<% unless supersession_lines.empty? -%>
+  #
+<% supersession_lines.each do -%>
+  # NOTE: <%= it %>
+<% end -%>
+<% end -%>
 <% unless comment_lines.empty? -%>
   #
 <% comment_lines.each do -%>

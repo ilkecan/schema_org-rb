@@ -37,9 +37,9 @@ module SchemaOrg
         option :valid_through # The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
         option :item_offered # An item being offered (or demanded). The transactional nature of the offer or demand is documented using [[businessFunction]], e.g. sell, lease etc. While several common expected types are listed explicitly in this definition, others can be used. Using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
         option :serial_number # The serial number or any alphanumeric identifier of a particular product. When attached to an offer, it is a shortcut for the serial number of the product included in the offer.
-        option :warranty # The warranty promise(s) included in the offer.
-        option :seller # An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.
-        option :area_served # The geographic area where a service or offered item is provided.
+        option :warranty # The warranty promise(s) included in the offer. Supersedes `warranty_promise`.
+        option :seller # An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider. Supersedes `vendor`.
+        option :area_served # The geographic area where a service or offered item is provided. Supersedes `service_area`.
       end
     end
   end

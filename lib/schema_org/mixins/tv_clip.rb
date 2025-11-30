@@ -8,7 +8,7 @@ module SchemaOrg
       include Clip
 
       included do
-        option :part_of_tv_series # The TV series to which this episode or season belongs.
+        option :part_of_tv_series # The TV series to which this episode or season belongs. Superseded by `part_of_series`.
       end
     end
   end

@@ -3,7 +3,7 @@ module SchemaOrg
     class ModelFactory
       include Import[:inflector]
 
-      def data_type_from_subject(subject, parent: :DataType)
+      def data_type_from_subject(subject, parent:)
         Models::DataType.new(
           comment_lines: subject.comment_lines,
           name: subject.name,
@@ -12,7 +12,7 @@ module SchemaOrg
         )
       end
 
-      def mixin_from_subject(subject, properties)
+      def mixin_from_subject(subject, properties:)
         Models::Mixin.new(
           name: subject.name,
           parents: subject.parents,
@@ -20,10 +20,13 @@ module SchemaOrg
         )
       end
 
-      def property_from_subject(subject)
+      def property_from_subject(subject, supersedes:)
+
         Models::Property.new(
           comment_lines: subject.comment_lines,
           name: inflector.underscore(subject.name),
+          superseded_by: subject.superseded_by.then { it.nil? ? nil : inflector.underscore(it) },
+          supersedes:,
           types: subject.types,
         )
       end
@@ -34,10 +37,12 @@ module SchemaOrg
         Models::SchemaVersion.new(schema_version:)
       end
 
-      def type_from_subject(subject)
+      def type_from_subject(subject, supersedes:)
         Models::Type.new(
           comment_lines: subject.comment_lines,
           name: subject.name,
+          superseded_by: subject.superseded_by,
+          supersedes:,
           url: subject.url,
         )
       end
