@@ -8,6 +8,16 @@ module SchemaOrg
         attribute :supersedes, Types::Coercible::Symbol.optional
         attribute :url, Types::Coercible::String
 
+        def self.from_subject(subject, supersedes:)
+          new(
+            comment_lines: subject.comment_lines,
+            name: subject.name,
+            superseded_by: subject.superseded_by,
+            supersedes:,
+            url: subject.url,
+          )
+        end
+
         def supersession_lines
           xs = []
           xs << "Supersedes `#{supersedes}`." unless supersedes.nil?

@@ -8,6 +8,16 @@ module SchemaOrg
         attribute :supersedes, Types::Coercible::Symbol.optional
         attribute :types, Types::Array.of(Types::Coercible::Symbol)
 
+        def self.from_subject(subject, supersedes:)
+          new(
+            comment_lines: subject.comment_lines,
+            name: subject.name.to_s.underscore.to_sym,
+            superseded_by: subject.superseded_by.try { it.to_s.underscore.to_sym },
+            supersedes:,
+            types: subject.types,
+          )
+        end
+
         def lines
           comment_lines + supersession_lines
         end

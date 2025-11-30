@@ -1,7 +1,7 @@
 module SchemaOrg
   module Codegen
     class Orchestrator
-      include Import[:generator, :manifest, :model_factory, :parser]
+      include Import[:generator, :manifest, :parser]
 
       def orchestrate
         generate_files
@@ -18,7 +18,7 @@ module SchemaOrg
       end
 
       def generate_schema_version
-        generator.generate model_factory.schema_version
+        generator.generate Models::SchemaVersion.current
       end
 
       def generate_data_types
@@ -41,7 +41,7 @@ module SchemaOrg
         properties = Hash.new { |h, k| h[k] = [] }
         supersedes = build_property_supersedes
         parser.properties.each do
-          property = model_factory.property_from_subject it, supersedes: supersedes[it.label]
+          property = Models::Property.from_subject it, supersedes: supersedes[it.label]
           it.used_on.each { |type| properties[type] << property }
         end
         properties
@@ -68,12 +68,12 @@ module SchemaOrg
       end
 
       def generate_data_type(subject, **kwargs)
-        gen model_factory.data_type_from_subject(subject, **kwargs)
+        gen Models::DataType.from_subject(subject, **kwargs)
       end
 
       def generate_class(subject, properties:, supersedes:)
-        gen model_factory.mixin_from_subject(subject, properties:)
-        gen model_factory.type_from_subject(subject, supersedes:)
+        gen Models::Mixin.from_subject(subject, properties:)
+        gen Models::Type.from_subject(subject, supersedes:)
       end
 
       def gen(data_model)
