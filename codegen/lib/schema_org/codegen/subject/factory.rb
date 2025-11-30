@@ -6,7 +6,7 @@ module SchemaOrg
       class Factory
         extend Dry::Initializer
 
-        include Import['subject.attributes', :inflector]
+        include Import['subject.attributes']
 
         option :prefixes, proc(&:freeze)
 
@@ -32,7 +32,7 @@ module SchemaOrg
 
         def parse_statements(xs)
           xs.each_with_object(Hash.new { |h, k| h[k] = [] }) do |x, xs|
-            key = inflector.underscore(parse_item(x.predicate).to_s).to_sym
+            key = parse_item(x.predicate).to_s.underscore.to_sym
             qualified = %i[equivalent_class].include? key
             xs[key] << parse_item(x.object, qualified:)
           end

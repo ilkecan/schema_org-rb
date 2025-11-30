@@ -10,7 +10,7 @@ module SchemaOrg
         type
       ])
 
-      include Import[:inflector, :manifest, :template_engine, :writer]
+      include Import[:manifest, :template_engine, :writer]
 
       def self.lib_root
         @lib_root ||= Pathname.new('./lib/schema_org')
@@ -39,20 +39,20 @@ module SchemaOrg
       def output_file(template_type, data_model)
         segments = case template_type
           when Template[:data_type]
-            [ 'data_types', "#{inflector.underscore data_model.name}.rb" ]
+            [ 'data_types', "#{data_model.name.to_s.underscore}.rb" ]
           when Template[:mixin]
-            [ 'mixins', "#{inflector.underscore data_model.name}.rb" ]
+            [ 'mixins', "#{data_model.name.to_s.underscore}.rb" ]
           when Template[:schema_version]
             [ 'schema_version.rb' ]
           when Template[:type]
-            [ 'types', "#{inflector.underscore data_model.name}.rb" ]
+            [ 'types', "#{data_model.name.to_s.underscore}.rb" ]
           end
         self.class.lib_root.join(*segments)
       end
 
       def template_name(data_model)
-        cls = inflector.demodulize data_model.class.name
-        template_names[cls] ||= inflector.underscore cls
+        cls = data_model.class.name.demodulize
+        template_names[cls] ||= cls.underscore.to_sym
       end
 
       def template_names

@@ -1,8 +1,6 @@
 module SchemaOrg
   module Codegen
     class ModelFactory
-      include Import[:inflector]
-
       def data_type_from_subject(subject, parent:)
         Models::DataType.new(
           comment_lines: subject.comment_lines,
@@ -24,8 +22,8 @@ module SchemaOrg
 
         Models::Property.new(
           comment_lines: subject.comment_lines,
-          name: inflector.underscore(subject.name),
-          superseded_by: subject.superseded_by.then { it.nil? ? nil : inflector.underscore(it) },
+          name: subject.name.to_s.underscore.to_sym,
+          superseded_by: subject.superseded_by.try { it.to_s.underscore.to_sym },
           supersedes:,
           types: subject.types,
         )

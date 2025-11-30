@@ -8,7 +8,6 @@ gemspec
 gem "activesupport", "~> 8.1.1"
 gem "bootsnap", "~> 1.19.0", require: false
 gem "dry-configurable", "~> 1.3.0"
-gem "dry-inflector", "~> 1.2.0"
 gem "dry-initializer", "~> 3.2.0"
 gem "dry-struct", "~> 1.8.0"
 gem "dry-system", "~> 1.2.4"

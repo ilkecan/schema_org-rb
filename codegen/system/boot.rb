@@ -9,6 +9,9 @@ Bootsnap.setup(
   readonly:             true,                 # Use the caches but don't update them on miss or stale entries.
 )
 
+require "active_support"
+require "active_support/core_ext"
+
 require_relative "container"
 require_relative "import"
 App.finalize!

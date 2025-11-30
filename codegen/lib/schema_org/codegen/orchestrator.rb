@@ -1,7 +1,7 @@
 module SchemaOrg
   module Codegen
     class Orchestrator
-      include Import[:generator, :inflector, :manifest, :model_factory, :parser]
+      include Import[:generator, :manifest, :model_factory, :parser]
 
       def orchestrate
         generate_files
@@ -52,7 +52,7 @@ module SchemaOrg
         parser.properties.each do
           next if it.superseded_by.nil?
 
-          supersedes[it.superseded_by] = inflector.underscore it.label
+          supersedes[it.superseded_by] = it.label.to_s.underscore.to_sym
         end
         supersedes
       end

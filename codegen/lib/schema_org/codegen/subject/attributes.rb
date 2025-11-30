@@ -2,8 +2,6 @@ module SchemaOrg
   module Codegen
     class Subject
       class Attributes
-        include Import[:inflector]
-
         def each(&block)
           attributes.each(&block)
         end
@@ -44,7 +42,7 @@ module SchemaOrg
               it.merge!(
                 max: it[:count].max,
                 min: it[:count].min,
-                name: inflector.underscore(it[:name]).to_sym,
+                name: it[:name].to_s.underscore.to_sym,
                 optional: it[:count].include?(0),
               )
               it[:array] = it[:max] > 1 unless it.key?(:array)
