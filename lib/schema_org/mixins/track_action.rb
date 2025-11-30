@@ -8,7 +8,7 @@ module SchemaOrg
       include FindAction
 
       included do
-        option :delivery_method # A sub property of instrument. The method of delivery.
+        option :delivery_method, optional: true # A sub property of instrument. The method of delivery.
       end
     end
   end

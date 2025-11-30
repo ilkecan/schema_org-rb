@@ -8,7 +8,7 @@ module SchemaOrg
       include TransferAction
 
       included do
-        option :lender # A sub property of participant. The person that lends the object being borrowed.
+        option :lender, optional: true # A sub property of participant. The person that lends the object being borrowed.
       end
     end
   end

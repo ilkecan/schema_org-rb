@@ -8,9 +8,9 @@ module SchemaOrg
       include Reservation
 
       included do
-        option :party_size # Number of people the reservation should accommodate.
-        option :pickup_location # Where a taxi will pick up a passenger or a rental car can be picked up.
-        option :pickup_time # When a taxi will pick up a passenger or a rental car can be picked up.
+        option :party_size, optional: true # Number of people the reservation should accommodate.
+        option :pickup_location, optional: true # Where a taxi will pick up a passenger or a rental car can be picked up.
+        option :pickup_time, optional: true # When a taxi will pick up a passenger or a rental car can be picked up.
       end
     end
   end

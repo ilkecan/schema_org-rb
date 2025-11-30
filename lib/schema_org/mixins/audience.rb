@@ -8,8 +8,8 @@ module SchemaOrg
       include Intangible
 
       included do
-        option :audience_type # The target group associated with a given audience (e.g. veterans, car owners, musicians, etc.).
-        option :geographic_area # The geographic area associated with the audience.
+        option :audience_type, optional: true # The target group associated with a given audience (e.g. veterans, car owners, musicians, etc.).
+        option :geographic_area, optional: true # The geographic area associated with the audience.
       end
     end
   end

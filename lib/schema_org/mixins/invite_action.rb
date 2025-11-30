@@ -8,7 +8,7 @@ module SchemaOrg
       include CommunicateAction
 
       included do
-        option :event # Upcoming or past event associated with this place, organization, or action. Supersedes `events`.
+        option :event, optional: true # Upcoming or past event associated with this place, organization, or action. Supersedes `events`.
       end
     end
   end

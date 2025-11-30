@@ -8,7 +8,7 @@ module SchemaOrg
       include PriceSpecification
 
       included do
-        option :price_component # This property links to all [[UnitPriceSpecification]] nodes that apply in parallel for the [[CompoundPriceSpecification]] node.
+        option :price_component, optional: true # This property links to all [[UnitPriceSpecification]] nodes that apply in parallel for the [[CompoundPriceSpecification]] node.
       end
     end
   end

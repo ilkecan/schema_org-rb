@@ -8,7 +8,7 @@ module SchemaOrg
       include Article
 
       included do
-        option :shared_content # A CreativeWork such as an image, video, or audio clip shared as part of this posting.
+        option :shared_content, optional: true # A CreativeWork such as an image, video, or audio clip shared as part of this posting.
       end
     end
   end

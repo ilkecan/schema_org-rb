@@ -8,8 +8,8 @@ module SchemaOrg
       include GeoShape
 
       included do
-        option :geo_midpoint # Indicates the GeoCoordinates at the centre of a GeoShape, e.g. GeoCircle.
-        option :geo_radius # Indicates the approximate radius of a GeoCircle (metres unless indicated otherwise via Distance notation).
+        option :geo_midpoint, optional: true # Indicates the GeoCoordinates at the centre of a GeoShape, e.g. GeoCircle.
+        option :geo_radius, optional: true # Indicates the approximate radius of a GeoCircle (metres unless indicated otherwise via Distance notation).
       end
     end
   end

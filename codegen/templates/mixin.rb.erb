@@ -14,7 +14,7 @@ module SchemaOrg
 <% unless properties.empty? -%>
       included do
 <% properties.each do -%>
-        option :<%= it.name %> # <%= it.lines.join ' ' %>
+        option :<%= it.name %>, optional: true # <%= it.lines.join ' ' %>
 <% end -%>
       end
 <% end -%>

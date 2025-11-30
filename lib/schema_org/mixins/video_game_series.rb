@@ -8,28 +8,28 @@ module SchemaOrg
       include CreativeWorkSeries
 
       included do
-        option :actors # An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip. Superseded by `actor`.
-        option :character_attribute # A piece of data that represents a particular aspect of a fictional character (skill, power, character points, advantage, disadvantage).
-        option :cheat_code # Cheat codes to the game.
-        option :directors # A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip. Superseded by `director`.
-        option :episodes # An episode of a TV/radio series or season. Superseded by `episode`.
-        option :game_item # An item is an object within the game world that can be collected by a player or, occasionally, a non-player character.
-        option :game_location # Real or fictional location of the game (or part of game).
-        option :game_platform # The electronic systems used to play <a href="http://en.wikipedia.org/wiki/Category:Video_game_platforms">video games</a>.
-        option :music_by # The composer of the soundtrack.
-        option :number_of_episodes # The number of episodes in this season or series.
-        option :number_of_players # Indicate how many people can play this game (minimum, maximum, or range).
-        option :number_of_seasons # The number of seasons in this series.
-        option :play_mode # Indicates whether this game is multi-player, co-op or single-player.  The game can be marked as multi-player, co-op and single-player at the same time.
-        option :production_company # The production company or studio responsible for the item, e.g. series, video game, episode etc.
-        option :quest # The task that a player-controlled character, or group of characters may complete in order to gain a reward.
-        option :seasons # A season in a media series. Superseded by `season`.
-        option :trailer # The trailer of a movie or TV/radio series, season, episode, etc.
-        option :actor # An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes `actors`.
-        option :contains_season # A season that is part of the media series. Supersedes `season`.
-        option :director # A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes `directors`.
-        option :episode # An episode of a TV, radio or game media within a series or season. Supersedes `episodes`.
-        option :season # A season in a media series. Supersedes `seasons`. Superseded by `contains_season`.
+        option :actors, optional: true # An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip. Superseded by `actor`.
+        option :character_attribute, optional: true # A piece of data that represents a particular aspect of a fictional character (skill, power, character points, advantage, disadvantage).
+        option :cheat_code, optional: true # Cheat codes to the game.
+        option :directors, optional: true # A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip. Superseded by `director`.
+        option :episodes, optional: true # An episode of a TV/radio series or season. Superseded by `episode`.
+        option :game_item, optional: true # An item is an object within the game world that can be collected by a player or, occasionally, a non-player character.
+        option :game_location, optional: true # Real or fictional location of the game (or part of game).
+        option :game_platform, optional: true # The electronic systems used to play <a href="http://en.wikipedia.org/wiki/Category:Video_game_platforms">video games</a>.
+        option :music_by, optional: true # The composer of the soundtrack.
+        option :number_of_episodes, optional: true # The number of episodes in this season or series.
+        option :number_of_players, optional: true # Indicate how many people can play this game (minimum, maximum, or range).
+        option :number_of_seasons, optional: true # The number of seasons in this series.
+        option :play_mode, optional: true # Indicates whether this game is multi-player, co-op or single-player.  The game can be marked as multi-player, co-op and single-player at the same time.
+        option :production_company, optional: true # The production company or studio responsible for the item, e.g. series, video game, episode etc.
+        option :quest, optional: true # The task that a player-controlled character, or group of characters may complete in order to gain a reward.
+        option :seasons, optional: true # A season in a media series. Superseded by `season`.
+        option :trailer, optional: true # The trailer of a movie or TV/radio series, season, episode, etc.
+        option :actor, optional: true # An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes `actors`.
+        option :contains_season, optional: true # A season that is part of the media series. Supersedes `season`.
+        option :director, optional: true # A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes `directors`.
+        option :episode, optional: true # An episode of a TV, radio or game media within a series or season. Supersedes `episodes`.
+        option :season, optional: true # A season in a media series. Supersedes `seasons`. Superseded by `contains_season`.
       end
     end
   end

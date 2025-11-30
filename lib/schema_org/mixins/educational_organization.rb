@@ -9,7 +9,7 @@ module SchemaOrg
       include Organization
 
       included do
-        option :alumni # Alumni of an organization. Inverse-property: `alumni_of`.
+        option :alumni, optional: true # Alumni of an organization. Inverse-property: `alumni_of`.
       end
     end
   end

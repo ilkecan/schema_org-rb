@@ -8,7 +8,7 @@ module SchemaOrg
       include StructuredValue
 
       included do
-        option :fuel_type # The type of fuel suitable for the engine or engines of the vehicle. If the vehicle has only one engine, this property can be attached directly to the vehicle.
+        option :fuel_type, optional: true # The type of fuel suitable for the engine or engines of the vehicle. If the vehicle has only one engine, this property can be attached directly to the vehicle.
       end
     end
   end

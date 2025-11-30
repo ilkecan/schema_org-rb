@@ -8,7 +8,7 @@ module SchemaOrg
       include Organization
 
       included do
-        option :sport # A type of sport (e.g. Baseball).
+        option :sport, optional: true # A type of sport (e.g. Baseball).
       end
     end
   end

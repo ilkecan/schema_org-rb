@@ -8,8 +8,8 @@ module SchemaOrg
       include Article
 
       included do
-        option :dependencies # Prerequisites needed to fulfill steps in article.
-        option :proficiency_level # Proficiency needed for this content; expected values: 'Beginner', 'Expert'.
+        option :dependencies, optional: true # Prerequisites needed to fulfill steps in article.
+        option :proficiency_level, optional: true # Proficiency needed for this content; expected values: 'Beginner', 'Expert'.
       end
     end
   end

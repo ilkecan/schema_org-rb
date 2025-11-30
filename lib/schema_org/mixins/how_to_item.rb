@@ -8,7 +8,7 @@ module SchemaOrg
       include ListItem
 
       included do
-        option :required_quantity # The required quantity of the item(s).
+        option :required_quantity, optional: true # The required quantity of the item(s).
       end
     end
   end

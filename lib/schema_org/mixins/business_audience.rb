@@ -8,9 +8,9 @@ module SchemaOrg
       include Audience
 
       included do
-        option :number_of_employees # The number of employees in an organization, e.g. business.
-        option :yearly_revenue # The size of the business in annual revenue.
-        option :years_in_operation # The age of the business.
+        option :number_of_employees, optional: true # The number of employees in an organization, e.g. business.
+        option :yearly_revenue, optional: true # The size of the business in annual revenue.
+        option :years_in_operation, optional: true # The age of the business.
       end
     end
   end

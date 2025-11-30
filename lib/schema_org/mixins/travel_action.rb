@@ -8,7 +8,7 @@ module SchemaOrg
       include MoveAction
 
       included do
-        option :distance # The distance travelled, e.g. exercising or travelling.
+        option :distance, optional: true # The distance travelled, e.g. exercising or travelling.
       end
     end
   end

@@ -8,7 +8,7 @@ module SchemaOrg
       include Intangible
 
       included do
-        option :broadcast_frequency_value # The frequency in MHz for a particular broadcast.
+        option :broadcast_frequency_value, optional: true # The frequency in MHz for a particular broadcast.
       end
     end
   end

@@ -8,7 +8,7 @@ module SchemaOrg
       include Reservation
 
       included do
-        option :sub_reservation # The individual reservations included in the package. Typically a repeated property.
+        option :sub_reservation, optional: true # The individual reservations included in the package. Typically a repeated property.
       end
     end
   end

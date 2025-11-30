@@ -8,7 +8,7 @@ module SchemaOrg
       include Audience
 
       included do
-        option :educational_role # An educationalRole of an EducationalAudience.
+        option :educational_role, optional: true # An educationalRole of an EducationalAudience.
       end
     end
   end

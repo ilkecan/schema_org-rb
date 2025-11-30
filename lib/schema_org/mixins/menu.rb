@@ -8,8 +8,8 @@ module SchemaOrg
       include CreativeWork
 
       included do
-        option :has_menu_item # A food or drink item contained in a menu or menu section.
-        option :has_menu_section # A subgrouping of the menu (by dishes, course, serving time period, etc.).
+        option :has_menu_item, optional: true # A food or drink item contained in a menu or menu section.
+        option :has_menu_section, optional: true # A subgrouping of the menu (by dishes, course, serving time period, etc.).
       end
     end
   end

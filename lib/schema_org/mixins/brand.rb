@@ -8,10 +8,10 @@ module SchemaOrg
       include Intangible
 
       included do
-        option :aggregate_rating # The overall rating, based on a collection of reviews or ratings, of the item.
-        option :logo # An associated logo.
-        option :slogan # A slogan or motto associated with the item.
-        option :review # A review of the item. Supersedes `reviews`.
+        option :aggregate_rating, optional: true # The overall rating, based on a collection of reviews or ratings, of the item.
+        option :logo, optional: true # An associated logo.
+        option :slogan, optional: true # A slogan or motto associated with the item.
+        option :review, optional: true # A review of the item. Supersedes `reviews`.
       end
     end
   end

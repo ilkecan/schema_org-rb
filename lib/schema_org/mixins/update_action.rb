@@ -8,8 +8,8 @@ module SchemaOrg
       include Action
 
       included do
-        option :collection # A sub property of object. The collection target of the action. Superseded by `target_collection`.
-        option :target_collection # A sub property of object. The collection target of the action. Supersedes `collection`.
+        option :collection, optional: true # A sub property of object. The collection target of the action. Superseded by `target_collection`.
+        option :target_collection, optional: true # A sub property of object. The collection target of the action. Supersedes `collection`.
       end
     end
   end

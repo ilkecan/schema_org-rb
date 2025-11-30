@@ -8,8 +8,8 @@ module SchemaOrg
       include PeopleAudience
 
       included do
-        option :child_max_age # Maximal age of the child.
-        option :child_min_age # Minimal age of the child.
+        option :child_max_age, optional: true # Maximal age of the child.
+        option :child_min_age, optional: true # Minimal age of the child.
       end
     end
   end

@@ -8,8 +8,8 @@ module SchemaOrg
       include Intangible
 
       included do
-        option :grantee # The person, organization, contact point, or audience that has been granted this permission.
-        option :permission_type # The type of permission granted the person, organization, or audience.
+        option :grantee, optional: true # The person, organization, contact point, or audience that has been granted this permission.
+        option :permission_type, optional: true # The type of permission granted the person, organization, or audience.
       end
     end
   end

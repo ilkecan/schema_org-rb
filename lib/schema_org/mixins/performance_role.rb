@@ -8,7 +8,7 @@ module SchemaOrg
       include Role
 
       included do
-        option :character_name # The name of a character played in some acting or performing role, i.e. in a PerformanceRole.
+        option :character_name, optional: true # The name of a character played in some acting or performing role, i.e. in a PerformanceRole.
       end
     end
   end

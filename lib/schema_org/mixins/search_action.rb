@@ -8,7 +8,7 @@ module SchemaOrg
       include Action
 
       included do
-        option :query # A sub property of instrument. The query used on this action.
+        option :query, optional: true # A sub property of instrument. The query used on this action.
       end
     end
   end

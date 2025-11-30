@@ -8,8 +8,8 @@ module SchemaOrg
       include CivicStructure
 
       included do
-        option :iata_code # IATA identifier for an airline or airport.
-        option :icao_code # ICAO identifier for an airport.
+        option :iata_code, optional: true # IATA identifier for an airline or airport.
+        option :icao_code, optional: true # ICAO identifier for an airport.
       end
     end
   end

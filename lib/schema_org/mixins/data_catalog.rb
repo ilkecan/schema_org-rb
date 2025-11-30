@@ -8,7 +8,7 @@ module SchemaOrg
       include CreativeWork
 
       included do
-        option :dataset # A dataset contained in this catalog. Inverse-property: `included_in_data_catalog`.
+        option :dataset, optional: true # A dataset contained in this catalog. Inverse-property: `included_in_data_catalog`.
       end
     end
   end

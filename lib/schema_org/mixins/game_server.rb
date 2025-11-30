@@ -8,9 +8,9 @@ module SchemaOrg
       include Intangible
 
       included do
-        option :players_online # Number of players on the server.
-        option :server_status # Status of a game server.
-        option :game # Video game which is played on this server. Inverse-property: `game_server`.
+        option :players_online, optional: true # Number of players on the server.
+        option :server_status, optional: true # Status of a game server.
+        option :game, optional: true # Video game which is played on this server. Inverse-property: `game_server`.
       end
     end
   end

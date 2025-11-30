@@ -8,8 +8,8 @@ module SchemaOrg
       include MediaObject
 
       included do
-        option :caption # The caption for this object. For downloadable machine formats (closed caption, subtitles etc.) use MediaObject and indicate the [[encodingFormat]].
-        option :transcript # If this MediaObject is an AudioObject or VideoObject, the transcript of that object.
+        option :caption, optional: true # The caption for this object. For downloadable machine formats (closed caption, subtitles etc.) use MediaObject and indicate the [[encodingFormat]].
+        option :transcript, optional: true # If this MediaObject is an AudioObject or VideoObject, the transcript of that object.
       end
     end
   end

@@ -8,8 +8,8 @@ module SchemaOrg
       include Intangible
 
       included do
-        option :authenticator # The Organization responsible for authenticating the user's subscription. For example, many media apps require a cable/satellite provider to authenticate your subscription before playing media.
-        option :expects_acceptance_of # An Offer which must be accepted before the user can perform the Action. For example, the user may need to buy a movie before being able to watch it.
+        option :authenticator, optional: true # The Organization responsible for authenticating the user's subscription. For example, many media apps require a cable/satellite provider to authenticate your subscription before playing media.
+        option :expects_acceptance_of, optional: true # An Offer which must be accepted before the user can perform the Action. For example, the user may need to buy a movie before being able to watch it.
       end
     end
   end

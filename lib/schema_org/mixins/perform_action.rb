@@ -8,7 +8,7 @@ module SchemaOrg
       include PlayAction
 
       included do
-        option :entertainment_business # A sub property of location. The entertainment business where the action occurred.
+        option :entertainment_business, optional: true # A sub property of location. The entertainment business where the action occurred.
       end
     end
   end

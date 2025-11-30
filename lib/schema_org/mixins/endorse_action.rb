@@ -8,7 +8,7 @@ module SchemaOrg
       include ReactAction
 
       included do
-        option :endorsee # A sub property of participant. The person/organization being supported.
+        option :endorsee, optional: true # A sub property of participant. The person/organization being supported.
       end
     end
   end

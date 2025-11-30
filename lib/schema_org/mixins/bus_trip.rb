@@ -8,10 +8,10 @@ module SchemaOrg
       include Trip
 
       included do
-        option :arrival_bus_stop # The stop or station from which the bus arrives.
-        option :bus_name # The name of the bus (e.g. Bolt Express).
-        option :bus_number # The unique identifier for the bus.
-        option :departure_bus_stop # The stop or station from which the bus departs.
+        option :arrival_bus_stop, optional: true # The stop or station from which the bus arrives.
+        option :bus_name, optional: true # The name of the bus (e.g. Bolt Express).
+        option :bus_number, optional: true # The unique identifier for the bus.
+        option :departure_bus_stop, optional: true # The stop or station from which the bus departs.
       end
     end
   end

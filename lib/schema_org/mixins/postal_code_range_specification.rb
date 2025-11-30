@@ -8,8 +8,8 @@ module SchemaOrg
       include StructuredValue
 
       included do
-        option :postal_code_begin # First postal code in a range (included).
-        option :postal_code_end # Last postal code in the range (included). Needs to be after [[postalCodeBegin]].
+        option :postal_code_begin, optional: true # First postal code in a range (included).
+        option :postal_code_end, optional: true # Last postal code in the range (included). Needs to be after [[postalCodeBegin]].
       end
     end
   end

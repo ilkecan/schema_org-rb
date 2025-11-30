@@ -8,7 +8,7 @@ module SchemaOrg
       include SoftwareApplication
 
       included do
-        option :browser_requirements # Specifies browser requirements in human-readable text. For example, 'requires HTML5 support'.
+        option :browser_requirements, optional: true # Specifies browser requirements in human-readable text. For example, 'requires HTML5 support'.
       end
     end
   end

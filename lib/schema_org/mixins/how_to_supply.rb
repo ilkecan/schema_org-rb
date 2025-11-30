@@ -8,7 +8,7 @@ module SchemaOrg
       include HowToItem
 
       included do
-        option :estimated_cost # The estimated cost of the supply or supplies consumed when performing instructions.
+        option :estimated_cost, optional: true # The estimated cost of the supply or supplies consumed when performing instructions.
       end
     end
   end

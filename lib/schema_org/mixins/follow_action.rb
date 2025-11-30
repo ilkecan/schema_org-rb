@@ -8,7 +8,7 @@ module SchemaOrg
       include InteractAction
 
       included do
-        option :followee # A sub property of object. The person or organization being followed.
+        option :followee, optional: true # A sub property of object. The person or organization being followed.
       end
     end
   end

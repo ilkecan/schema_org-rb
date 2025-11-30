@@ -8,8 +8,8 @@ module SchemaOrg
       include TradeAction
 
       included do
-        option :landlord # A sub property of participant. The owner of the real estate property.
-        option :real_estate_agent # A sub property of participant. The real estate agent involved in the action.
+        option :landlord, optional: true # A sub property of participant. The owner of the real estate property.
+        option :real_estate_agent, optional: true # A sub property of participant. The real estate agent involved in the action.
       end
     end
   end

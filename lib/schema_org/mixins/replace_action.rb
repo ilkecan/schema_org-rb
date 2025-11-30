@@ -8,8 +8,8 @@ module SchemaOrg
       include UpdateAction
 
       included do
-        option :replacee # A sub property of object. The object that is being replaced.
-        option :replacer # A sub property of object. The object that replaces.
+        option :replacee, optional: true # A sub property of object. The object that is being replaced.
+        option :replacer, optional: true # A sub property of object. The object that replaces.
       end
     end
   end

@@ -8,7 +8,7 @@ module SchemaOrg
       include Review
 
       included do
-        option :claim_reviewed # A short summary of the specific claims reviewed in a ClaimReview.
+        option :claim_reviewed, optional: true # A short summary of the specific claims reviewed in a ClaimReview.
       end
     end
   end

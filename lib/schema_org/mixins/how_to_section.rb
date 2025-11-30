@@ -10,7 +10,7 @@ module SchemaOrg
       include ListItem
 
       included do
-        option :steps # A single step item (as HowToStep, text, document, video, etc.) or a HowToSection (originally misnamed 'steps'; 'step' is preferred). Superseded by `step`.
+        option :steps, optional: true # A single step item (as HowToStep, text, document, video, etc.) or a HowToSection (originally misnamed 'steps'; 'step' is preferred). Superseded by `step`.
       end
     end
   end

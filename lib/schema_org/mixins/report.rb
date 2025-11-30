@@ -8,7 +8,7 @@ module SchemaOrg
       include Article
 
       included do
-        option :report_number # The number or other unique designator assigned to a Report by the publishing organization.
+        option :report_number, optional: true # The number or other unique designator assigned to a Report by the publishing organization.
       end
     end
   end

@@ -8,7 +8,7 @@ module SchemaOrg
       include Dataset
 
       included do
-        option :data_feed_element # An item within a data feed. Data feeds may have many elements.
+        option :data_feed_element, optional: true # An item within a data feed. Data feeds may have many elements.
       end
     end
   end

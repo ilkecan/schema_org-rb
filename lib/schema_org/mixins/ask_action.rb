@@ -8,7 +8,7 @@ module SchemaOrg
       include CommunicateAction
 
       included do
-        option :question # A sub property of object. A question.
+        option :question, optional: true # A sub property of object. A question.
       end
     end
   end

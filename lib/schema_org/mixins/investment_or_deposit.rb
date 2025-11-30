@@ -8,7 +8,7 @@ module SchemaOrg
       include FinancialProduct
 
       included do
-        option :amount # The amount of money.
+        option :amount, optional: true # The amount of money.
       end
     end
   end

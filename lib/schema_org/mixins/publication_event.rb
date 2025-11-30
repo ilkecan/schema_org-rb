@@ -8,8 +8,8 @@ module SchemaOrg
       include Event
 
       included do
-        option :free # A flag to signal that the item, event, or place is accessible for free. Superseded by `is_accessible_for_free`.
-        option :published_on # A broadcast service associated with the publication event.
+        option :free, optional: true # A flag to signal that the item, event, or place is accessible for free. Superseded by `is_accessible_for_free`.
+        option :published_on, optional: true # A broadcast service associated with the publication event.
       end
     end
   end

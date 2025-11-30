@@ -8,7 +8,7 @@ module SchemaOrg
       include SoftwareApplication
 
       included do
-        option :carrier_requirements # Specifies specific carrier(s) requirements for the application (e.g. an application may only work on a specific carrier network).
+        option :carrier_requirements, optional: true # Specifies specific carrier(s) requirements for the application (e.g. an application may only work on a specific carrier network).
       end
     end
   end

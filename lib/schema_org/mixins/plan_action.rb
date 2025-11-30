@@ -8,7 +8,7 @@ module SchemaOrg
       include OrganizeAction
 
       included do
-        option :scheduled_time # The time the object is scheduled to.
+        option :scheduled_time, optional: true # The time the object is scheduled to.
       end
     end
   end

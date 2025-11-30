@@ -8,10 +8,10 @@ module SchemaOrg
       include Reservation
 
       included do
-        option :dropoff_location # Where a rental car can be dropped off.
-        option :dropoff_time # When a rental car can be dropped off.
-        option :pickup_location # Where a taxi will pick up a passenger or a rental car can be picked up.
-        option :pickup_time # When a taxi will pick up a passenger or a rental car can be picked up.
+        option :dropoff_location, optional: true # Where a rental car can be dropped off.
+        option :dropoff_time, optional: true # When a rental car can be dropped off.
+        option :pickup_location, optional: true # Where a taxi will pick up a passenger or a rental car can be picked up.
+        option :pickup_time, optional: true # When a taxi will pick up a passenger or a rental car can be picked up.
       end
     end
   end

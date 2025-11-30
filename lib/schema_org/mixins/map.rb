@@ -8,7 +8,7 @@ module SchemaOrg
       include CreativeWork
 
       included do
-        option :map_type # Indicates the kind of Map, from the MapCategoryType Enumeration.
+        option :map_type, optional: true # Indicates the kind of Map, from the MapCategoryType Enumeration.
       end
     end
   end

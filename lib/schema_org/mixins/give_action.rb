@@ -8,7 +8,7 @@ module SchemaOrg
       include TransferAction
 
       included do
-        option :recipient # A sub property of participant. The participant who is at the receiving end of the action.
+        option :recipient, optional: true # A sub property of participant. The participant who is at the receiving end of the action.
       end
     end
   end

@@ -8,9 +8,9 @@ module SchemaOrg
       include BlogPosting
 
       included do
-        option :coverage_end_time # The time when the live blog will stop covering the Event. Note that coverage may continue after the Event concludes.
-        option :coverage_start_time # The time when the live blog will begin covering the Event. Note that coverage may begin before the Event's start time. The LiveBlogPosting may also be created before coverage begins.
-        option :live_blog_update # An update to the LiveBlog.
+        option :coverage_end_time, optional: true # The time when the live blog will stop covering the Event. Note that coverage may continue after the Event concludes.
+        option :coverage_start_time, optional: true # The time when the live blog will begin covering the Event. Note that coverage may begin before the Event's start time. The LiveBlogPosting may also be created before coverage begins.
+        option :live_blog_update, optional: true # An update to the LiveBlog.
       end
     end
   end

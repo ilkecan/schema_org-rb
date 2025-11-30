@@ -8,7 +8,7 @@ module SchemaOrg
       include AssessAction
 
       included do
-        option :result_review # A sub property of result. The review that resulted in the performing of the action.
+        option :result_review, optional: true # A sub property of result. The review that resulted in the performing of the action.
       end
     end
   end

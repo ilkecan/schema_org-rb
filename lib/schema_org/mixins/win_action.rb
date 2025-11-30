@@ -8,7 +8,7 @@ module SchemaOrg
       include AchieveAction
 
       included do
-        option :loser # A sub property of participant. The loser of the action.
+        option :loser, optional: true # A sub property of participant. The loser of the action.
       end
     end
   end

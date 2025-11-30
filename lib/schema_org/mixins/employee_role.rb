@@ -8,8 +8,8 @@ module SchemaOrg
       include OrganizationRole
 
       included do
-        option :base_salary # The base salary of the job or of an employee in an EmployeeRole.
-        option :salary_currency # The currency (coded using [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217)) used for the main salary information in this job posting or for this employee.
+        option :base_salary, optional: true # The base salary of the job or of an employee in an EmployeeRole.
+        option :salary_currency, optional: true # The currency (coded using [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217)) used for the main salary information in this job posting or for this employee.
       end
     end
   end

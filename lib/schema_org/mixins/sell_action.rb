@@ -8,8 +8,8 @@ module SchemaOrg
       include TradeAction
 
       included do
-        option :buyer # A sub property of participant. The participant/person/organization that bought the object.
-        option :warranty_promise # The warranty promise(s) included in the offer. Superseded by `warranty`.
+        option :buyer, optional: true # A sub property of participant. The participant/person/organization that bought the object.
+        option :warranty_promise, optional: true # The warranty promise(s) included in the offer. Superseded by `warranty`.
       end
     end
   end

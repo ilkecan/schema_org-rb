@@ -9,7 +9,7 @@ module SchemaOrg
       include EntertainmentBusiness
 
       included do
-        option :screen_count # The number of screens in the movie theater.
+        option :screen_count, optional: true # The number of screens in the movie theater.
       end
     end
   end

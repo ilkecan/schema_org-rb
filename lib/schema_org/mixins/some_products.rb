@@ -8,7 +8,7 @@ module SchemaOrg
       include Product
 
       included do
-        option :inventory_level # The current approximate inventory level for the item or items.
+        option :inventory_level, optional: true # The current approximate inventory level for the item or items.
       end
     end
   end

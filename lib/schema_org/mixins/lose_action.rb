@@ -8,7 +8,7 @@ module SchemaOrg
       include AchieveAction
 
       included do
-        option :winner # A sub property of participant. The winner of the action.
+        option :winner, optional: true # A sub property of participant. The winner of the action.
       end
     end
   end

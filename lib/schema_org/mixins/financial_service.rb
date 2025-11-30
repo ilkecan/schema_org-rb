@@ -8,7 +8,7 @@ module SchemaOrg
       include LocalBusiness
 
       included do
-        option :fees_and_commissions_specification # Description of fees, commissions, and other terms applied either to a class of financial product, or by a financial service organization.
+        option :fees_and_commissions_specification, optional: true # Description of fees, commissions, and other terms applied either to a class of financial product, or by a financial service organization.
       end
     end
   end
