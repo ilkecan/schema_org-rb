@@ -12,7 +12,7 @@ module SchemaOrg
         option :members # A member of this organization. Superseded by `member`.
         option :membership_number # A unique identifier for the membership.
         option :program_name # The program providing the membership. It is preferable to use [:program](https://schema.org/program) instead.
-        option :member # A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals. Supersedes `music_group_member`.
+        option :member # A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals. Supersedes `music_group_member`. Inverse-property: `member_of`.
       end
     end
   end

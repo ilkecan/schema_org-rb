@@ -13,7 +13,7 @@ module SchemaOrg
         option :in_playlist # The playlist to which this recording belongs.
         option :isrc_code # The International Standard Recording Code for the recording.
         option :duration # The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).
-        option :recording_of # The composition this track is a recording of.
+        option :recording_of # The composition this track is a recording of. Inverse-property: `recorded_as`.
       end
     end
   end

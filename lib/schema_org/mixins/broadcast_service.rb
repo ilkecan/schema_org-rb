@@ -16,7 +16,7 @@ module SchemaOrg
         option :broadcaster # The organization owning or operating the broadcast service.
         option :parent_service # A broadcast service to which the broadcast service may belong to such as regional variations of a national channel.
         option :video_format # The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD, etc.).
-        option :has_broadcast_channel # A broadcast channel of a broadcast service.
+        option :has_broadcast_channel # A broadcast channel of a broadcast service. Inverse-property: `provides_broadcast_service`.
       end
     end
   end

@@ -19,10 +19,12 @@ module SchemaOrg
         end
 
         def supersession_lines
-          xs = []
-          xs << "Supersedes `#{supersedes}`." unless supersedes.nil?
-          xs << "Superseded by `#{superseded_by}`." unless superseded_by.nil?
-          xs
+          @supression_lines ||= begin
+            xs = []
+            xs << "Supersedes `#{supersedes}`." if supersedes.present?
+            xs << "Superseded by `#{superseded_by}`." if superseded_by.present?
+            xs
+          end
         end
       end
     end

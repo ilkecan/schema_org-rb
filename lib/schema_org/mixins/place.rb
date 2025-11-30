@@ -34,12 +34,12 @@ module SchemaOrg
         option :smoking_allowed # Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room.
         option :special_opening_hours_specification # The special opening hours of a certain place.\n\nUse this to explicitly override general opening hours brought in scope by [[openingHoursSpecification]] or [[openingHours]].
         option :telephone # The telephone number.
-        option :contains_place # The basic containment relation between a place and another that it contains.
+        option :contains_place # The basic containment relation between a place and another that it contains. Inverse-property: `contained_in_place`.
         option :event # Upcoming or past event associated with this place, organization, or action. Supersedes `events`.
         option :is_accessible_for_free # A flag to signal that the item, event, or place is accessible for free. Supersedes `free`.
         option :photo # A photograph of this place. Supersedes `photos`.
         option :review # A review of the item. Supersedes `reviews`.
-        option :contained_in_place # The basic containment relation between a place and one that contains it. Supersedes `contained_in`.
+        option :contained_in_place # The basic containment relation between a place and one that contains it. Supersedes `contained_in`. Inverse-property: `contains_place`.
         option :has_map # A URL to a map of the place. Supersedes `maps`.
       end
     end

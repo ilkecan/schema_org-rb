@@ -34,14 +34,14 @@ module SchemaOrg
         option :duration # The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).
         option :in_language # The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]]. Supersedes `language`.
         option :is_accessible_for_free # A flag to signal that the item, event, or place is accessible for free. Supersedes `free`.
-        option :offers # An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
+        option :offers # An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse-property: `item_offered`.
         option :performer # A performer at the event&#x2014;for example, a presenter, musician, musical group or actor. Supersedes `performers`.
-        option :recorded_in # The CreativeWork that captured all or part of this Event.
+        option :recorded_in # The CreativeWork that captured all or part of this Event. Inverse-property: `recorded_at`.
         option :review # A review of the item. Supersedes `reviews`.
         option :sponsor # A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.
-        option :super_event # An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent.
-        option :about # The subject matter of the content.
-        option :sub_event # An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference. Supersedes `sub_events`.
+        option :super_event # An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent. Inverse-property: `sub_event`.
+        option :about # The subject matter of the content. Inverse-property: `subject_of`.
+        option :sub_event # An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference. Supersedes `sub_events`. Inverse-property: `super_event`.
         option :work_featured # A work featured in some event, e.g. exhibited in an ExhibitionEvent.        Specific subproperties are available for workPerformed (e.g. a play), or a workPresented (a Movie at a ScreeningEvent).
         option :location # The location of, for example, where an event is happening, where an organization is located, or where an action takes place.
       end

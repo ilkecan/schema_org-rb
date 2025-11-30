@@ -57,15 +57,15 @@ module SchemaOrg
         option :weight # The weight of the product or person.
         option :work_location # A contact location for a person's place of work.
         option :works_for # Organizations that the person works for.
-        option :alumni_of # An organization that the person is an alumni of.
+        option :alumni_of # An organization that the person is an alumni of. Inverse-property: `alumni`.
         option :award # An award won by or for this item. Supersedes `awards`.
         option :colleague # A colleague of the person. Supersedes `colleagues`.
         option :contact_point # A contact point for a person or organization. Supersedes `contact_points`.
-        option :makes_offer # A pointer to products or services offered by the organization or person.
+        option :makes_offer # A pointer to products or services offered by the organization or person. Inverse-property: `offered_by`.
         option :parent # A parent of this person. Supersedes `parents`.
         option :sibling # A sibling of the person. Supersedes `siblings`.
         option :sponsor # A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.
-        option :member_of # An Organization (or ProgramMembership) to which this Person or Organization belongs.
+        option :member_of # An Organization (or ProgramMembership) to which this Person or Organization belongs. Inverse-property: `member`.
       end
     end
   end

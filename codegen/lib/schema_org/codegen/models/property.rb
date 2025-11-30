@@ -3,6 +3,7 @@ module SchemaOrg
     module Models
       class Property < Base
         attribute :comment_lines, Types::Array.of(Types::Coercible::String)
+        attribute :inverse_of, Types::Coercible::Symbol.optional
         attribute :name, Types::Coercible::Symbol
         attribute :superseded_by, Types::Coercible::Symbol.optional
         attribute :supersedes, Types::Coercible::Symbol.optional
@@ -11,6 +12,7 @@ module SchemaOrg
         def self.from_subject(subject, supersedes:)
           new(
             comment_lines: subject.comment_lines,
+            inverse_of: subject.inverse_of.try { it.to_s.underscore.to_sym },
             name: subject.name.to_s.underscore.to_sym,
             superseded_by: subject.superseded_by.try { it.to_s.underscore.to_sym },
             supersedes:,
@@ -19,14 +21,13 @@ module SchemaOrg
         end
 
         def lines
-          comment_lines + supersession_lines
-        end
-
-        def supersession_lines
-          xs = []
-          xs << "Supersedes `#{supersedes}`." unless supersedes.nil?
-          xs << "Superseded by `#{superseded_by}`." unless superseded_by.nil?
-          xs
+          @lines ||= begin
+            xs = comment_lines
+            xs << "Supersedes `#{supersedes}`." if supersedes.present?
+            xs << "Superseded by `#{superseded_by}`." if superseded_by.present?
+            xs << "Inverse-property: `#{inverse_of}`." if inverse_of.present?
+            xs
+          end
         end
       end
     end

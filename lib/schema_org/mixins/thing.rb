@@ -14,8 +14,8 @@ module SchemaOrg
         option :url # URL of the item.
         option :alternate_name # An alias for the item.
         option :description # A description of the item.
-        option :main_entity_of_page # Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
-        option :subject_of # A CreativeWork or Event about this Thing.
+        option :main_entity_of_page # Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details. Inverse-property: `main_entity`.
+        option :subject_of # A CreativeWork or Event about this Thing. Inverse-property: `about`.
         option :image # An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
         option :identifier # The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.
       end

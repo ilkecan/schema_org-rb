@@ -45,8 +45,8 @@ module SchemaOrg
         option :sku # The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.
         option :valid_from # The date when the item becomes valid.
         option :valid_through # The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-        option :item_offered # An item being offered (or demanded). The transactional nature of the offer or demand is documented using [[businessFunction]], e.g. sell, lease etc. While several common expected types are listed explicitly in this definition, others can be used. Using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
-        option :offered_by # A pointer to the organization or person making the offer.
+        option :item_offered # An item being offered (or demanded). The transactional nature of the offer or demand is documented using [[businessFunction]], e.g. sell, lease etc. While several common expected types are listed explicitly in this definition, others can be used. Using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse-property: `offers`.
+        option :offered_by # A pointer to the organization or person making the offer. Inverse-property: `makes_offer`.
         option :review # A review of the item. Supersedes `reviews`.
         option :serial_number # The serial number or any alphanumeric identifier of a particular product. When attached to an offer, it is a shortcut for the serial number of the product included in the offer.
         option :warranty # The warranty promise(s) included in the offer. Supersedes `warranty_promise`.

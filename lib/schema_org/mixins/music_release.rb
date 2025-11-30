@@ -13,7 +13,7 @@ module SchemaOrg
         option :music_release_format # Format of this release (the type of recording media used, i.e. compact disc, digital media, LP, etc.).
         option :record_label # The label that issued the release.
         option :duration # The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).
-        option :release_of # The album this is a release of.
+        option :release_of # The album this is a release of. Inverse-property: `album_release`.
       end
     end
   end

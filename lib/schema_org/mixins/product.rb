@@ -43,7 +43,7 @@ module SchemaOrg
         option :width # The width of the item.
         option :audience # An intended audience, i.e. a group for whom something was created. Supersedes `service_audience`.
         option :award # An award won by or for this item. Supersedes `awards`.
-        option :offers # An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
+        option :offers # An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse-property: `item_offered`.
         option :review # A review of the item. Supersedes `reviews`.
         option :material # A material that something is made from, e.g. leather, wool, cotton, paper.
       end

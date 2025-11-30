@@ -17,7 +17,7 @@ module SchemaOrg
         option :music_arrangement # An arrangement derived from the composition.
         option :music_composition_form # The type of composition (e.g. overture, sonata, symphony, etc.).
         option :musical_key # The key, mode, or scale this composition uses.
-        option :recorded_as # An audio recording of the work.
+        option :recorded_as # An audio recording of the work. Inverse-property: `recording_of`.
       end
     end
   end

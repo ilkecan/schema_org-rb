@@ -13,7 +13,7 @@ module SchemaOrg
         option :broadcast_service_tier # The type of service required to have access to the channel (e.g. Standard or Premium).
         option :genre # Genre of the creative work, broadcast channel or group.
         option :in_broadcast_lineup # The CableOrSatelliteService offering the channel.
-        option :provides_broadcast_service # The BroadcastService offered on this channel.
+        option :provides_broadcast_service # The BroadcastService offered on this channel. Inverse-property: `has_broadcast_channel`.
       end
     end
   end

@@ -48,21 +48,21 @@ module SchemaOrg
         option :tax_id # The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.
         option :telephone # The telephone number.
         option :vat_id # The Value-added Tax ID of the organization or person.
-        option :alumni # Alumni of an organization.
+        option :alumni # Alumni of an organization. Inverse-property: `alumni_of`.
         option :award # An award won by or for this item. Supersedes `awards`.
         option :contact_point # A contact point for a person or organization. Supersedes `contact_points`.
         option :employee # Someone working for this organization. Supersedes `employees`.
         option :event # Upcoming or past event associated with this place, organization, or action. Supersedes `events`.
         option :founder # A person or organization who founded this organization. Supersedes `founders`.
-        option :makes_offer # A pointer to products or services offered by the organization or person.
+        option :makes_offer # A pointer to products or services offered by the organization or person. Inverse-property: `offered_by`.
         option :review # A review of the item. Supersedes `reviews`.
         option :service_area # The geographic area where the service is provided. Supersedes `area`. Superseded by `area_served`.
         option :sponsor # A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.
-        option :sub_organization # A relationship between two organizations where the first includes the second, e.g., as a subsidiary. See also: the more specific 'department' property.
-        option :member_of # An Organization (or ProgramMembership) to which this Person or Organization belongs.
-        option :parent_organization # The larger organization that this organization is a [[subOrganization]] of, if any. Supersedes `branch_of`.
+        option :sub_organization # A relationship between two organizations where the first includes the second, e.g., as a subsidiary. See also: the more specific 'department' property. Inverse-property: `parent_organization`.
+        option :member_of # An Organization (or ProgramMembership) to which this Person or Organization belongs. Inverse-property: `member`.
+        option :parent_organization # The larger organization that this organization is a [[subOrganization]] of, if any. Supersedes `branch_of`. Inverse-property: `sub_organization`.
         option :area_served # The geographic area where a service or offered item is provided. Supersedes `service_area`.
-        option :member # A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals. Supersedes `music_group_member`.
+        option :member # A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals. Supersedes `music_group_member`. Inverse-property: `member_of`.
         option :location # The location of, for example, where an event is happening, where an organization is located, or where an action takes place.
       end
     end

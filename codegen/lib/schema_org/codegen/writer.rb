@@ -4,7 +4,7 @@ module SchemaOrg
       def write(file, content)
         parent = file.parent
         parent.mkdir unless parent.exist?
-        file.write content
+        File.atomic_write(file) { it.write content }
       end
     end
   end

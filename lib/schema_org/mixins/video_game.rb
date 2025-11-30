@@ -20,7 +20,7 @@ module SchemaOrg
         option :trailer # The trailer of a movie or TV/radio series, season, episode, etc.
         option :actor # An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes `actors`.
         option :director # A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes `directors`.
-        option :game_server # The server on which  it is possible to play the game.
+        option :game_server # The server on which  it is possible to play the game. Inverse-property: `game`.
       end
     end
   end
