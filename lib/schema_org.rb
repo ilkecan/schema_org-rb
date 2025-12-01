@@ -7,5 +7,7 @@ loader.inflector.inflect('schema_version' => 'SCHEMA_VERSION')
 loader.setup
 
 module SchemaOrg
+  CONTEXT = 'https://schema.org'.freeze
+
   private_constant :Base
 end
