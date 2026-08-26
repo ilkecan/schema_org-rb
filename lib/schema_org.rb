@@ -1,8 +1,9 @@
 require "zeitwerk"
+require_relative "schema_org/generated_vocabulary"
 
 loader = Zeitwerk::Loader.for_gem
 loader.collapse("#{__dir__}/schema_org/types")
-loader.inflector.inflect("schema_version" => "SCHEMA_VERSION", "url" => "URL", "date_time" => "DateTime")
+loader.inflector.inflect(SchemaOrg::GeneratedVocabulary.inflections)
 loader.setup
 require_relative "schema_org/base"
 
