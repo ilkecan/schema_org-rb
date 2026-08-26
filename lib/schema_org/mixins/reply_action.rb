@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ReplyAction
-      extend ActiveSupport::Concern
-
       include CommunicateAction
 
-      included do
-        option :result_comment, optional: true # A sub property of result. The Comment created or sent as a result of this action.
+      def self.schema_property_definitions
+        {
+          :result_comment => {
+            schema_name: "resultComment",
+            ranges: ["Comment"],
+          }.freeze,
+        }.freeze
       end
+
+      def result_comment
+        read_property(:result_comment)
+      end
+
+      def result_comment=(value)
+        write_property(:result_comment, value)
+      end
+
     end
   end
 end

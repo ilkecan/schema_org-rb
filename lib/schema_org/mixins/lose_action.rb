@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module LoseAction
-      extend ActiveSupport::Concern
-
       include AchieveAction
 
-      included do
-        option :winner, optional: true # A sub property of participant. The winner of the action.
+      def self.schema_property_definitions
+        {
+          :winner => {
+            schema_name: "winner",
+            ranges: ["Person"],
+          }.freeze,
+        }.freeze
       end
+
+      def winner
+        read_property(:winner)
+      end
+
+      def winner=(value)
+        write_property(:winner, value)
+      end
+
     end
   end
 end

@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module AskAction
-      extend ActiveSupport::Concern
-
       include CommunicateAction
 
-      included do
-        option :question, optional: true # A sub property of object. A question.
+      def self.schema_property_definitions
+        {
+          :question => {
+            schema_name: "question",
+            ranges: ["Question"],
+          }.freeze,
+        }.freeze
       end
+
+      def question
+        read_property(:question)
+      end
+
+      def question=(value)
+        write_property(:question, value)
+      end
+
     end
   end
 end

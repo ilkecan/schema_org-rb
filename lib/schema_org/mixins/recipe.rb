@@ -1,24 +1,133 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Recipe
-      extend ActiveSupport::Concern
-
       include HowTo
 
-      included do
-        option :cook_time, optional: true # The time it takes to actually cook the dish, in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).
-        option :cooking_method, optional: true # The method of cooking, such as Frying, Steaming, ...
-        option :ingredients, optional: true # A single ingredient used in the recipe, e.g. sugar, flour or garlic. Superseded by `recipe_ingredient`.
-        option :nutrition, optional: true # Nutrition information about the recipe or menu item.
-        option :recipe_category, optional: true # The category of the recipe—for example, appetizer, entree, etc.
-        option :recipe_cuisine, optional: true # The cuisine of the recipe (for example, French or Ethiopian).
-        option :recipe_instructions, optional: true # A step in making the recipe, in the form of a single item (document, video, etc.) or an ordered list with HowToStep and/or HowToSection items.
-        option :recipe_yield, optional: true # The quantity produced by the recipe (for example, number of people served, number of servings, etc).
-        option :suitable_for_diet, optional: true # Indicates a dietary restriction or guideline for which this recipe or menu item is suitable, e.g. diabetic, halal etc.
-        option :recipe_ingredient, optional: true # An ingredient or ordered list of ingredients and potentially quantities used in the recipe, e.g. 1 cup of sugar, flour or garlic.  The ingredients can be represented as free text or more structured values. Supersedes `ingredients`.
+      def self.schema_property_definitions
+        {
+          :cook_time => {
+            schema_name: "cookTime",
+            ranges: ["Duration"],
+          }.freeze,
+          :cooking_method => {
+            schema_name: "cookingMethod",
+            ranges: ["Text"],
+          }.freeze,
+          :ingredients => {
+            schema_name: "ingredients",
+            ranges: ["Text"],
+          }.freeze,
+          :nutrition => {
+            schema_name: "nutrition",
+            ranges: ["NutritionInformation"],
+          }.freeze,
+          :recipe_category => {
+            schema_name: "recipeCategory",
+            ranges: ["Text"],
+          }.freeze,
+          :recipe_cuisine => {
+            schema_name: "recipeCuisine",
+            ranges: ["Text"],
+          }.freeze,
+          :recipe_ingredient => {
+            schema_name: "recipeIngredient",
+            ranges: ["ItemList", "PropertyValue", "Text"],
+          }.freeze,
+          :recipe_instructions => {
+            schema_name: "recipeInstructions",
+            ranges: ["CreativeWork", "ItemList", "Text"],
+          }.freeze,
+          :recipe_yield => {
+            schema_name: "recipeYield",
+            ranges: ["QuantitativeValue", "Text"],
+          }.freeze,
+          :suitable_for_diet => {
+            schema_name: "suitableForDiet",
+            ranges: ["RestrictedDiet"],
+          }.freeze,
+        }.freeze
       end
+
+      def cook_time
+        read_property(:cook_time)
+      end
+
+      def cook_time=(value)
+        write_property(:cook_time, value)
+      end
+
+      def cooking_method
+        read_property(:cooking_method)
+      end
+
+      def cooking_method=(value)
+        write_property(:cooking_method, value)
+      end
+
+      def ingredients
+        read_property(:ingredients)
+      end
+
+      def ingredients=(value)
+        write_property(:ingredients, value)
+      end
+
+      def nutrition
+        read_property(:nutrition)
+      end
+
+      def nutrition=(value)
+        write_property(:nutrition, value)
+      end
+
+      def recipe_category
+        read_property(:recipe_category)
+      end
+
+      def recipe_category=(value)
+        write_property(:recipe_category, value)
+      end
+
+      def recipe_cuisine
+        read_property(:recipe_cuisine)
+      end
+
+      def recipe_cuisine=(value)
+        write_property(:recipe_cuisine, value)
+      end
+
+      def recipe_ingredient
+        read_property(:recipe_ingredient)
+      end
+
+      def recipe_ingredient=(value)
+        write_property(:recipe_ingredient, value)
+      end
+
+      def recipe_instructions
+        read_property(:recipe_instructions)
+      end
+
+      def recipe_instructions=(value)
+        write_property(:recipe_instructions, value)
+      end
+
+      def recipe_yield
+        read_property(:recipe_yield)
+      end
+
+      def recipe_yield=(value)
+        write_property(:recipe_yield, value)
+      end
+
+      def suitable_for_diet
+        read_property(:suitable_for_diet)
+      end
+
+      def suitable_for_diet=(value)
+        write_property(:suitable_for_diet, value)
+      end
+
     end
   end
 end

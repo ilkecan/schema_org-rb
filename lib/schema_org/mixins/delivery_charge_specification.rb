@@ -1,18 +1,61 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module DeliveryChargeSpecification
-      extend ActiveSupport::Concern
-
       include PriceSpecification
 
-      included do
-        option :applies_to_delivery_method, optional: true # The delivery method(s) to which the delivery charge or payment charge specification applies.
-        option :eligible_region, optional: true # The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is valid.\n\nSee also [[ineligibleRegion]].
-        option :ineligible_region, optional: true # The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is not valid, e.g. a region where the transaction is not allowed.\n\nSee also [[eligibleRegion]].
-        option :area_served, optional: true # The geographic area where a service or offered item is provided. Supersedes `service_area`.
+      def self.schema_property_definitions
+        {
+          :applies_to_delivery_method => {
+            schema_name: "appliesToDeliveryMethod",
+            ranges: ["DeliveryMethod"],
+          }.freeze,
+          :area_served => {
+            schema_name: "areaServed",
+            ranges: ["AdministrativeArea", "GeoShape", "Place", "Text"],
+          }.freeze,
+          :eligible_region => {
+            schema_name: "eligibleRegion",
+            ranges: ["GeoShape", "Place", "Text"],
+          }.freeze,
+          :ineligible_region => {
+            schema_name: "ineligibleRegion",
+            ranges: ["GeoShape", "Place", "Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def applies_to_delivery_method
+        read_property(:applies_to_delivery_method)
+      end
+
+      def applies_to_delivery_method=(value)
+        write_property(:applies_to_delivery_method, value)
+      end
+
+      def area_served
+        read_property(:area_served)
+      end
+
+      def area_served=(value)
+        write_property(:area_served, value)
+      end
+
+      def eligible_region
+        read_property(:eligible_region)
+      end
+
+      def eligible_region=(value)
+        write_property(:eligible_region, value)
+      end
+
+      def ineligible_region
+        read_property(:ineligible_region)
+      end
+
+      def ineligible_region=(value)
+        write_property(:ineligible_region, value)
+      end
+
     end
   end
 end

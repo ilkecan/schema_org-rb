@@ -1,11 +1,13 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module BookFormatType
-      extend ActiveSupport::Concern
-
       include Enumeration
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

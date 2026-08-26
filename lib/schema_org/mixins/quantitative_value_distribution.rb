@@ -1,20 +1,85 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module QuantitativeValueDistribution
-      extend ActiveSupport::Concern
-
       include StructuredValue
 
-      included do
-        option :median, optional: true # The median value.
-        option :percentile10, optional: true # The 10th percentile value.
-        option :percentile25, optional: true # The 25th percentile value.
-        option :percentile75, optional: true # The 75th percentile value.
-        option :percentile90, optional: true # The 90th percentile value.
-        option :duration, optional: true # The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).
+      def self.schema_property_definitions
+        {
+          :duration => {
+            schema_name: "duration",
+            ranges: ["Duration"],
+          }.freeze,
+          :median => {
+            schema_name: "median",
+            ranges: ["Number"],
+          }.freeze,
+          :percentile10 => {
+            schema_name: "percentile10",
+            ranges: ["Number"],
+          }.freeze,
+          :percentile25 => {
+            schema_name: "percentile25",
+            ranges: ["Number"],
+          }.freeze,
+          :percentile75 => {
+            schema_name: "percentile75",
+            ranges: ["Number"],
+          }.freeze,
+          :percentile90 => {
+            schema_name: "percentile90",
+            ranges: ["Number"],
+          }.freeze,
+        }.freeze
       end
+
+      def duration
+        read_property(:duration)
+      end
+
+      def duration=(value)
+        write_property(:duration, value)
+      end
+
+      def median
+        read_property(:median)
+      end
+
+      def median=(value)
+        write_property(:median, value)
+      end
+
+      def percentile10
+        read_property(:percentile10)
+      end
+
+      def percentile10=(value)
+        write_property(:percentile10, value)
+      end
+
+      def percentile25
+        read_property(:percentile25)
+      end
+
+      def percentile25=(value)
+        write_property(:percentile25, value)
+      end
+
+      def percentile75
+        read_property(:percentile75)
+      end
+
+      def percentile75=(value)
+        write_property(:percentile75, value)
+      end
+
+      def percentile90
+        read_property(:percentile90)
+      end
+
+      def percentile90=(value)
+        write_property(:percentile90, value)
+      end
+
     end
   end
 end

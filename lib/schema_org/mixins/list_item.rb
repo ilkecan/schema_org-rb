@@ -1,18 +1,61 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ListItem
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :item, optional: true # An entity represented by an entry in a list or data feed (e.g. an 'artist' in a list of 'artists').
-        option :next_item, optional: true # A link to the ListItem that follows the current one.
-        option :previous_item, optional: true # A link to the ListItem that precedes the current one.
-        option :position, optional: true # The position of an item in a series or sequence of items.
+      def self.schema_property_definitions
+        {
+          :item => {
+            schema_name: "item",
+            ranges: ["Thing"],
+          }.freeze,
+          :next_item => {
+            schema_name: "nextItem",
+            ranges: ["ListItem"],
+          }.freeze,
+          :position => {
+            schema_name: "position",
+            ranges: ["Integer", "Text"],
+          }.freeze,
+          :previous_item => {
+            schema_name: "previousItem",
+            ranges: ["ListItem"],
+          }.freeze,
+        }.freeze
       end
+
+      def item
+        read_property(:item)
+      end
+
+      def item=(value)
+        write_property(:item, value)
+      end
+
+      def next_item
+        read_property(:next_item)
+      end
+
+      def next_item=(value)
+        write_property(:next_item, value)
+      end
+
+      def position
+        read_property(:position)
+      end
+
+      def position=(value)
+        write_property(:position, value)
+      end
+
+      def previous_item
+        read_property(:previous_item)
+      end
+
+      def previous_item=(value)
+        write_property(:previous_item, value)
+      end
+
     end
   end
 end

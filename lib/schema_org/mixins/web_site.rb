@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module WebSite
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :issn, optional: true # The International Standard Serial Number (ISSN) that identifies this serial publication. You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L) for, this serial publication.
+      def self.schema_property_definitions
+        {
+          :issn => {
+            schema_name: "issn",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def issn
+        read_property(:issn)
+      end
+
+      def issn=(value)
+        write_property(:issn, value)
+      end
+
     end
   end
 end

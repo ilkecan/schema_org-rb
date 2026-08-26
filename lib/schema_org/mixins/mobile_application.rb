@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module MobileApplication
-      extend ActiveSupport::Concern
-
       include SoftwareApplication
 
-      included do
-        option :carrier_requirements, optional: true # Specifies specific carrier(s) requirements for the application (e.g. an application may only work on a specific carrier network).
+      def self.schema_property_definitions
+        {
+          :carrier_requirements => {
+            schema_name: "carrierRequirements",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def carrier_requirements
+        read_property(:carrier_requirements)
+      end
+
+      def carrier_requirements=(value)
+        write_property(:carrier_requirements, value)
+      end
+
     end
   end
 end

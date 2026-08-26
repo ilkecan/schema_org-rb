@@ -1,16 +1,26 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module MovieTheater
-      extend ActiveSupport::Concern
-
       include CivicStructure
       include EntertainmentBusiness
 
-      included do
-        option :screen_count, optional: true # The number of screens in the movie theater.
+      def self.schema_property_definitions
+        {
+          :screen_count => {
+            schema_name: "screenCount",
+            ranges: ["Number"],
+          }.freeze,
+        }.freeze
       end
+
+      def screen_count
+        read_property(:screen_count)
+      end
+
+      def screen_count=(value)
+        write_property(:screen_count, value)
+      end
+
     end
   end
 end

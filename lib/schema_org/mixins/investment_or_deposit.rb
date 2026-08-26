@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module InvestmentOrDeposit
-      extend ActiveSupport::Concern
-
       include FinancialProduct
 
-      included do
-        option :amount, optional: true # The amount of money.
+      def self.schema_property_definitions
+        {
+          :amount => {
+            schema_name: "amount",
+            ranges: ["MonetaryAmount", "Number"],
+          }.freeze,
+        }.freeze
       end
+
+      def amount
+        read_property(:amount)
+      end
+
+      def amount=(value)
+        write_property(:amount, value)
+      end
+
     end
   end
 end

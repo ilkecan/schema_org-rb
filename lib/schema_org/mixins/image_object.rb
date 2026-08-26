@@ -1,17 +1,49 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ImageObject
-      extend ActiveSupport::Concern
-
       include MediaObject
 
-      included do
-        option :caption, optional: true # The caption for this object. For downloadable machine formats (closed caption, subtitles etc.) use MediaObject and indicate the [[encodingFormat]].
-        option :exif_data, optional: true # exif data for this object.
-        option :representative_of_page, optional: true # Indicates whether this image is representative of the content of the page.
+      def self.schema_property_definitions
+        {
+          :caption => {
+            schema_name: "caption",
+            ranges: ["MediaObject", "Text"],
+          }.freeze,
+          :exif_data => {
+            schema_name: "exifData",
+            ranges: ["PropertyValue", "Text"],
+          }.freeze,
+          :representative_of_page => {
+            schema_name: "representativeOfPage",
+            ranges: ["Boolean"],
+          }.freeze,
+        }.freeze
       end
+
+      def caption
+        read_property(:caption)
+      end
+
+      def caption=(value)
+        write_property(:caption, value)
+      end
+
+      def exif_data
+        read_property(:exif_data)
+      end
+
+      def exif_data=(value)
+        write_property(:exif_data, value)
+      end
+
+      def representative_of_page
+        read_property(:representative_of_page)
+      end
+
+      def representative_of_page=(value)
+        write_property(:representative_of_page, value)
+      end
+
     end
   end
 end

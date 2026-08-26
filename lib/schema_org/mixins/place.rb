@@ -1,47 +1,409 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Place
-      extend ActiveSupport::Concern
-
       include Thing
 
-      included do
-        option :additional_property, optional: true # A property-value pair representing an additional characteristic of the entity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
-        option :address, optional: true # Physical address of the item.
-        option :aggregate_rating, optional: true # The overall rating, based on a collection of reviews or ratings, of the item.
-        option :amenity_feature, optional: true # An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs.
-        option :branch_code, optional: true # A short textual code (also called "store code") that uniquely identifies a place of business. The code is typically assigned by the parentOrganization and used in structured URLs.\n\nFor example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is a branchCode for a particular branch.
-        option :contained_in, optional: true # The basic containment relation between a place and one that contains it. Superseded by `contained_in_place`.
-        option :events, optional: true # Upcoming or past events associated with this place or organization. Superseded by `event`.
-        option :fax_number, optional: true # The fax number.
-        option :geo, optional: true # The geo coordinates of the place.
-        option :global_location_number, optional: true # The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.
-        option :isic_v4, optional: true # The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.
-        option :keywords, optional: true # Keywords or tags used to describe some item. Multiple textual entries in a keywords list are typically delimited by commas, or by repeating the property.
-        option :latitude, optional: true # The latitude of a location. For example ```37.42242``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
-        option :logo, optional: true # An associated logo.
-        option :longitude, optional: true # The longitude of a location. For example ```-122.08585``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
-        option :map, optional: true # A URL to a map of the place. Superseded by `has_map`.
-        option :maps, optional: true # A URL to a map of the place. Superseded by `has_map`.
-        option :maximum_attendee_capacity, optional: true # The total number of individuals that may attend an event or venue.
-        option :opening_hours_specification, optional: true # The opening hours of a certain place.
-        option :photos, optional: true # Photographs of this place. Superseded by `photo`.
-        option :public_access, optional: true # A flag to signal that the [[Place]] is open to public visitors.  If this property is omitted there is no assumed default boolean value.
-        option :reviews, optional: true # Review of the item. Superseded by `review`.
-        option :slogan, optional: true # A slogan or motto associated with the item.
-        option :smoking_allowed, optional: true # Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room.
-        option :special_opening_hours_specification, optional: true # The special opening hours of a certain place.\n\nUse this to explicitly override general opening hours brought in scope by [[openingHoursSpecification]] or [[openingHours]].
-        option :telephone, optional: true # The telephone number.
-        option :contains_place, optional: true # The basic containment relation between a place and another that it contains. Inverse-property: `contained_in_place`.
-        option :event, optional: true # Upcoming or past event associated with this place, organization, or action. Supersedes `events`.
-        option :is_accessible_for_free, optional: true # A flag to signal that the item, event, or place is accessible for free. Supersedes `free`.
-        option :photo, optional: true # A photograph of this place. Supersedes `photos`.
-        option :review, optional: true # A review of the item. Supersedes `reviews`.
-        option :contained_in_place, optional: true # The basic containment relation between a place and one that contains it. Supersedes `contained_in`. Inverse-property: `contains_place`.
-        option :has_map, optional: true # A URL to a map of the place. Supersedes `maps`.
+      def self.schema_property_definitions
+        {
+          :additional_property => {
+            schema_name: "additionalProperty",
+            ranges: ["PropertyValue"],
+          }.freeze,
+          :address => {
+            schema_name: "address",
+            ranges: ["PostalAddress", "Text"],
+          }.freeze,
+          :aggregate_rating => {
+            schema_name: "aggregateRating",
+            ranges: ["AggregateRating"],
+          }.freeze,
+          :amenity_feature => {
+            schema_name: "amenityFeature",
+            ranges: ["LocationFeatureSpecification"],
+          }.freeze,
+          :branch_code => {
+            schema_name: "branchCode",
+            ranges: ["Text"],
+          }.freeze,
+          :contained_in => {
+            schema_name: "containedIn",
+            ranges: ["Place"],
+          }.freeze,
+          :contained_in_place => {
+            schema_name: "containedInPlace",
+            ranges: ["Place"],
+          }.freeze,
+          :contains_place => {
+            schema_name: "containsPlace",
+            ranges: ["Place"],
+          }.freeze,
+          :event => {
+            schema_name: "event",
+            ranges: ["Event"],
+          }.freeze,
+          :events => {
+            schema_name: "events",
+            ranges: ["Event"],
+          }.freeze,
+          :fax_number => {
+            schema_name: "faxNumber",
+            ranges: ["Text"],
+          }.freeze,
+          :geo => {
+            schema_name: "geo",
+            ranges: ["GeoCoordinates", "GeoShape"],
+          }.freeze,
+          :global_location_number => {
+            schema_name: "globalLocationNumber",
+            ranges: ["Text"],
+          }.freeze,
+          :has_map => {
+            schema_name: "hasMap",
+            ranges: ["Map", "URL"],
+          }.freeze,
+          :is_accessible_for_free => {
+            schema_name: "isAccessibleForFree",
+            ranges: ["Boolean"],
+          }.freeze,
+          :isic_v4 => {
+            schema_name: "isicV4",
+            ranges: ["Text"],
+          }.freeze,
+          :keywords => {
+            schema_name: "keywords",
+            ranges: ["DefinedTerm", "Text", "URL"],
+          }.freeze,
+          :latitude => {
+            schema_name: "latitude",
+            ranges: ["Number", "Text"],
+          }.freeze,
+          :logo => {
+            schema_name: "logo",
+            ranges: ["ImageObject", "URL"],
+          }.freeze,
+          :longitude => {
+            schema_name: "longitude",
+            ranges: ["Number", "Text"],
+          }.freeze,
+          :map => {
+            schema_name: "map",
+            ranges: ["URL"],
+          }.freeze,
+          :maps => {
+            schema_name: "maps",
+            ranges: ["URL"],
+          }.freeze,
+          :maximum_attendee_capacity => {
+            schema_name: "maximumAttendeeCapacity",
+            ranges: ["Integer"],
+          }.freeze,
+          :opening_hours_specification => {
+            schema_name: "openingHoursSpecification",
+            ranges: ["OpeningHoursSpecification"],
+          }.freeze,
+          :photo => {
+            schema_name: "photo",
+            ranges: ["ImageObject", "Photograph"],
+          }.freeze,
+          :photos => {
+            schema_name: "photos",
+            ranges: ["ImageObject", "Photograph"],
+          }.freeze,
+          :public_access => {
+            schema_name: "publicAccess",
+            ranges: ["Boolean"],
+          }.freeze,
+          :review => {
+            schema_name: "review",
+            ranges: ["Review"],
+          }.freeze,
+          :reviews => {
+            schema_name: "reviews",
+            ranges: ["Review"],
+          }.freeze,
+          :slogan => {
+            schema_name: "slogan",
+            ranges: ["Text"],
+          }.freeze,
+          :smoking_allowed => {
+            schema_name: "smokingAllowed",
+            ranges: ["Boolean"],
+          }.freeze,
+          :special_opening_hours_specification => {
+            schema_name: "specialOpeningHoursSpecification",
+            ranges: ["OpeningHoursSpecification"],
+          }.freeze,
+          :telephone => {
+            schema_name: "telephone",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def additional_property
+        read_property(:additional_property)
+      end
+
+      def additional_property=(value)
+        write_property(:additional_property, value)
+      end
+
+      def address
+        read_property(:address)
+      end
+
+      def address=(value)
+        write_property(:address, value)
+      end
+
+      def aggregate_rating
+        read_property(:aggregate_rating)
+      end
+
+      def aggregate_rating=(value)
+        write_property(:aggregate_rating, value)
+      end
+
+      def amenity_feature
+        read_property(:amenity_feature)
+      end
+
+      def amenity_feature=(value)
+        write_property(:amenity_feature, value)
+      end
+
+      def branch_code
+        read_property(:branch_code)
+      end
+
+      def branch_code=(value)
+        write_property(:branch_code, value)
+      end
+
+      def contained_in
+        read_property(:contained_in)
+      end
+
+      def contained_in=(value)
+        write_property(:contained_in, value)
+      end
+
+      def contained_in_place
+        read_property(:contained_in_place)
+      end
+
+      def contained_in_place=(value)
+        write_property(:contained_in_place, value)
+      end
+
+      def contains_place
+        read_property(:contains_place)
+      end
+
+      def contains_place=(value)
+        write_property(:contains_place, value)
+      end
+
+      def event
+        read_property(:event)
+      end
+
+      def event=(value)
+        write_property(:event, value)
+      end
+
+      def events
+        read_property(:events)
+      end
+
+      def events=(value)
+        write_property(:events, value)
+      end
+
+      def fax_number
+        read_property(:fax_number)
+      end
+
+      def fax_number=(value)
+        write_property(:fax_number, value)
+      end
+
+      def geo
+        read_property(:geo)
+      end
+
+      def geo=(value)
+        write_property(:geo, value)
+      end
+
+      def global_location_number
+        read_property(:global_location_number)
+      end
+
+      def global_location_number=(value)
+        write_property(:global_location_number, value)
+      end
+
+      def has_map
+        read_property(:has_map)
+      end
+
+      def has_map=(value)
+        write_property(:has_map, value)
+      end
+
+      def is_accessible_for_free
+        read_property(:is_accessible_for_free)
+      end
+
+      def is_accessible_for_free=(value)
+        write_property(:is_accessible_for_free, value)
+      end
+
+      def isic_v4
+        read_property(:isic_v4)
+      end
+
+      def isic_v4=(value)
+        write_property(:isic_v4, value)
+      end
+
+      def keywords
+        read_property(:keywords)
+      end
+
+      def keywords=(value)
+        write_property(:keywords, value)
+      end
+
+      def latitude
+        read_property(:latitude)
+      end
+
+      def latitude=(value)
+        write_property(:latitude, value)
+      end
+
+      def logo
+        read_property(:logo)
+      end
+
+      def logo=(value)
+        write_property(:logo, value)
+      end
+
+      def longitude
+        read_property(:longitude)
+      end
+
+      def longitude=(value)
+        write_property(:longitude, value)
+      end
+
+      def map
+        read_property(:map)
+      end
+
+      def map=(value)
+        write_property(:map, value)
+      end
+
+      def maps
+        read_property(:maps)
+      end
+
+      def maps=(value)
+        write_property(:maps, value)
+      end
+
+      def maximum_attendee_capacity
+        read_property(:maximum_attendee_capacity)
+      end
+
+      def maximum_attendee_capacity=(value)
+        write_property(:maximum_attendee_capacity, value)
+      end
+
+      def opening_hours_specification
+        read_property(:opening_hours_specification)
+      end
+
+      def opening_hours_specification=(value)
+        write_property(:opening_hours_specification, value)
+      end
+
+      def photo
+        read_property(:photo)
+      end
+
+      def photo=(value)
+        write_property(:photo, value)
+      end
+
+      def photos
+        read_property(:photos)
+      end
+
+      def photos=(value)
+        write_property(:photos, value)
+      end
+
+      def public_access
+        read_property(:public_access)
+      end
+
+      def public_access=(value)
+        write_property(:public_access, value)
+      end
+
+      def review
+        read_property(:review)
+      end
+
+      def review=(value)
+        write_property(:review, value)
+      end
+
+      def reviews
+        read_property(:reviews)
+      end
+
+      def reviews=(value)
+        write_property(:reviews, value)
+      end
+
+      def slogan
+        read_property(:slogan)
+      end
+
+      def slogan=(value)
+        write_property(:slogan, value)
+      end
+
+      def smoking_allowed
+        read_property(:smoking_allowed)
+      end
+
+      def smoking_allowed=(value)
+        write_property(:smoking_allowed, value)
+      end
+
+      def special_opening_hours_specification
+        read_property(:special_opening_hours_specification)
+      end
+
+      def special_opening_hours_specification=(value)
+        write_property(:special_opening_hours_specification, value)
+      end
+
+      def telephone
+        read_property(:telephone)
+      end
+
+      def telephone=(value)
+        write_property(:telephone, value)
+      end
+
     end
   end
 end

@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module TechArticle
-      extend ActiveSupport::Concern
-
       include Article
 
-      included do
-        option :dependencies, optional: true # Prerequisites needed to fulfill steps in article.
-        option :proficiency_level, optional: true # Proficiency needed for this content; expected values: 'Beginner', 'Expert'.
+      def self.schema_property_definitions
+        {
+          :dependencies => {
+            schema_name: "dependencies",
+            ranges: ["Text"],
+          }.freeze,
+          :proficiency_level => {
+            schema_name: "proficiencyLevel",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def dependencies
+        read_property(:dependencies)
+      end
+
+      def dependencies=(value)
+        write_property(:dependencies, value)
+      end
+
+      def proficiency_level
+        read_property(:proficiency_level)
+      end
+
+      def proficiency_level=(value)
+        write_property(:proficiency_level, value)
+      end
+
     end
   end
 end

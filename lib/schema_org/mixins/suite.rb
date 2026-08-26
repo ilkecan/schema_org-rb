@@ -1,17 +1,49 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Suite
-      extend ActiveSupport::Concern
-
       include Accommodation
 
-      included do
-        option :bed, optional: true # The type of bed or beds included in the accommodation. For the single case of just one bed of a certain type, you use bed directly with a text.       If you want to indicate the quantity of a certain kind of bed, use an instance of BedDetails. For more detailed information, use the amenityFeature property.
-        option :number_of_rooms, optional: true # The number of rooms (excluding bathrooms and closets) of the accommodation or lodging business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.
-        option :occupancy, optional: true # The allowed total occupancy for the accommodation in persons (including infants etc). For individual accommodations, this is not necessarily the legal maximum but defines the permitted usage as per the contractual agreement (e.g. a double room used by a single person). Typical unit code(s): C62 for person.
+      def self.schema_property_definitions
+        {
+          :bed => {
+            schema_name: "bed",
+            ranges: ["BedDetails", "BedType", "Text"],
+          }.freeze,
+          :number_of_rooms => {
+            schema_name: "numberOfRooms",
+            ranges: ["Number", "QuantitativeValue"],
+          }.freeze,
+          :occupancy => {
+            schema_name: "occupancy",
+            ranges: ["QuantitativeValue"],
+          }.freeze,
+        }.freeze
       end
+
+      def bed
+        read_property(:bed)
+      end
+
+      def bed=(value)
+        write_property(:bed, value)
+      end
+
+      def number_of_rooms
+        read_property(:number_of_rooms)
+      end
+
+      def number_of_rooms=(value)
+        write_property(:number_of_rooms, value)
+      end
+
+      def occupancy
+        read_property(:occupancy)
+      end
+
+      def occupancy=(value)
+        write_property(:occupancy, value)
+      end
+
     end
   end
 end

@@ -1,21 +1,97 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module PostalAddress
-      extend ActiveSupport::Concern
-
       include ContactPoint
 
-      included do
-        option :address_country, optional: true # The country. Recommended to be in 2-letter [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1) format, for example "US". For backward compatibility, a 3-letter [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code such as "SGP" or a full country name such as "Singapore" can also be used.
-        option :address_locality, optional: true # The locality in which the street address is, and which is in the region. For example, Mountain View.
-        option :address_region, optional: true # The region in which the locality is, and which is in the country. For example, California or another appropriate first-level [Administrative division](https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country).
-        option :extended_address, optional: true # An address extension such as an apartment number, C/O or alternative name.
-        option :post_office_box_number, optional: true # The post office box number for PO box addresses.
-        option :postal_code, optional: true # The postal code. For example, 94043.
-        option :street_address, optional: true # The street address. For example, 1600 Amphitheatre Pkwy.
+      def self.schema_property_definitions
+        {
+          :address_country => {
+            schema_name: "addressCountry",
+            ranges: ["Country", "Text"],
+          }.freeze,
+          :address_locality => {
+            schema_name: "addressLocality",
+            ranges: ["Text"],
+          }.freeze,
+          :address_region => {
+            schema_name: "addressRegion",
+            ranges: ["AdministrativeArea", "Text"],
+          }.freeze,
+          :extended_address => {
+            schema_name: "extendedAddress",
+            ranges: ["Text"],
+          }.freeze,
+          :post_office_box_number => {
+            schema_name: "postOfficeBoxNumber",
+            ranges: ["Text"],
+          }.freeze,
+          :postal_code => {
+            schema_name: "postalCode",
+            ranges: ["Text"],
+          }.freeze,
+          :street_address => {
+            schema_name: "streetAddress",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def address_country
+        read_property(:address_country)
+      end
+
+      def address_country=(value)
+        write_property(:address_country, value)
+      end
+
+      def address_locality
+        read_property(:address_locality)
+      end
+
+      def address_locality=(value)
+        write_property(:address_locality, value)
+      end
+
+      def address_region
+        read_property(:address_region)
+      end
+
+      def address_region=(value)
+        write_property(:address_region, value)
+      end
+
+      def extended_address
+        read_property(:extended_address)
+      end
+
+      def extended_address=(value)
+        write_property(:extended_address, value)
+      end
+
+      def post_office_box_number
+        read_property(:post_office_box_number)
+      end
+
+      def post_office_box_number=(value)
+        write_property(:post_office_box_number, value)
+      end
+
+      def postal_code
+        read_property(:postal_code)
+      end
+
+      def postal_code=(value)
+        write_property(:postal_code, value)
+      end
+
+      def street_address
+        read_property(:street_address)
+      end
+
+      def street_address=(value)
+        write_property(:street_address, value)
+      end
+
     end
   end
 end

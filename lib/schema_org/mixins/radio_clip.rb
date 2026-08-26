@@ -1,11 +1,13 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module RadioClip
-      extend ActiveSupport::Concern
-
       include Clip
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

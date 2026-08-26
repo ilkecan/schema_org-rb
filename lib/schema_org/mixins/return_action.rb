@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ReturnAction
-      extend ActiveSupport::Concern
-
       include TransferAction
 
-      included do
-        option :recipient, optional: true # A sub property of participant. The participant who is at the receiving end of the action.
+      def self.schema_property_definitions
+        {
+          :recipient => {
+            schema_name: "recipient",
+            ranges: ["Audience", "ContactPoint", "Organization", "Person"],
+          }.freeze,
+        }.freeze
       end
+
+      def recipient
+        read_property(:recipient)
+      end
+
+      def recipient=(value)
+        write_property(:recipient, value)
+      end
+
     end
   end
 end

@@ -1,19 +1,73 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module AlignmentObject
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :alignment_type, optional: true # A category of alignment between the learning resource and the framework node. Recommended values include: 'requires', 'textComplexity', 'readingLevel', and 'educationalSubject'.
-        option :educational_framework, optional: true # The framework to which the resource being described is aligned.
-        option :target_description, optional: true # The description of a node in an established educational framework.
-        option :target_name, optional: true # The name of a node in an established educational framework.
-        option :target_url, optional: true # The URL of a node in an established educational framework.
+      def self.schema_property_definitions
+        {
+          :alignment_type => {
+            schema_name: "alignmentType",
+            ranges: ["Text"],
+          }.freeze,
+          :educational_framework => {
+            schema_name: "educationalFramework",
+            ranges: ["Text"],
+          }.freeze,
+          :target_description => {
+            schema_name: "targetDescription",
+            ranges: ["Text"],
+          }.freeze,
+          :target_name => {
+            schema_name: "targetName",
+            ranges: ["Text"],
+          }.freeze,
+          :target_url => {
+            schema_name: "targetUrl",
+            ranges: ["URL"],
+          }.freeze,
+        }.freeze
       end
+
+      def alignment_type
+        read_property(:alignment_type)
+      end
+
+      def alignment_type=(value)
+        write_property(:alignment_type, value)
+      end
+
+      def educational_framework
+        read_property(:educational_framework)
+      end
+
+      def educational_framework=(value)
+        write_property(:educational_framework, value)
+      end
+
+      def target_description
+        read_property(:target_description)
+      end
+
+      def target_description=(value)
+        write_property(:target_description, value)
+      end
+
+      def target_name
+        read_property(:target_name)
+      end
+
+      def target_name=(value)
+        write_property(:target_name, value)
+      end
+
+      def target_url
+        read_property(:target_url)
+      end
+
+      def target_url=(value)
+        write_property(:target_url, value)
+      end
+
     end
   end
 end

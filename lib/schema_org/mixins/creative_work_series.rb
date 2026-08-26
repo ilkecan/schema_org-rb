@@ -1,18 +1,50 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module CreativeWorkSeries
-      extend ActiveSupport::Concern
-
       include CreativeWork
       include Series
 
-      included do
-        option :end_date, optional: true # The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).
-        option :issn, optional: true # The International Standard Serial Number (ISSN) that identifies this serial publication. You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L) for, this serial publication.
-        option :start_date, optional: true # The start date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).
+      def self.schema_property_definitions
+        {
+          :end_date => {
+            schema_name: "endDate",
+            ranges: ["Date", "DateTime"],
+          }.freeze,
+          :issn => {
+            schema_name: "issn",
+            ranges: ["Text"],
+          }.freeze,
+          :start_date => {
+            schema_name: "startDate",
+            ranges: ["Date", "DateTime"],
+          }.freeze,
+        }.freeze
       end
+
+      def end_date
+        read_property(:end_date)
+      end
+
+      def end_date=(value)
+        write_property(:end_date, value)
+      end
+
+      def issn
+        read_property(:issn)
+      end
+
+      def issn=(value)
+        write_property(:issn, value)
+      end
+
+      def start_date
+        read_property(:start_date)
+      end
+
+      def start_date=(value)
+        write_property(:start_date, value)
+      end
+
     end
   end
 end

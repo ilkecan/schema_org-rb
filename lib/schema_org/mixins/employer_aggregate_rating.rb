@@ -1,11 +1,13 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module EmployerAggregateRating
-      extend ActiveSupport::Concern
-
       include AggregateRating
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

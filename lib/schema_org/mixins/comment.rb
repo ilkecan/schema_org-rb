@@ -1,18 +1,61 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Comment
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :downvote_count, optional: true # The number of downvotes this question, answer or comment has received from the community.
-        option :parent_item, optional: true # The parent of a question, answer or item in general. Typically used for Q/A discussion threads e.g. a chain of comments with the first comment being an [[Article]] or other [[CreativeWork]]. See also [[comment]] which points from something to a comment about it.
-        option :shared_content, optional: true # A CreativeWork such as an image, video, or audio clip shared as part of this posting.
-        option :upvote_count, optional: true # The number of upvotes this question, answer or comment has received from the community.
+      def self.schema_property_definitions
+        {
+          :downvote_count => {
+            schema_name: "downvoteCount",
+            ranges: ["Integer"],
+          }.freeze,
+          :parent_item => {
+            schema_name: "parentItem",
+            ranges: ["Comment", "CreativeWork"],
+          }.freeze,
+          :shared_content => {
+            schema_name: "sharedContent",
+            ranges: ["CreativeWork"],
+          }.freeze,
+          :upvote_count => {
+            schema_name: "upvoteCount",
+            ranges: ["Integer"],
+          }.freeze,
+        }.freeze
       end
+
+      def downvote_count
+        read_property(:downvote_count)
+      end
+
+      def downvote_count=(value)
+        write_property(:downvote_count, value)
+      end
+
+      def parent_item
+        read_property(:parent_item)
+      end
+
+      def parent_item=(value)
+        write_property(:parent_item, value)
+      end
+
+      def shared_content
+        read_property(:shared_content)
+      end
+
+      def shared_content=(value)
+        write_property(:shared_content, value)
+      end
+
+      def upvote_count
+        read_property(:upvote_count)
+      end
+
+      def upvote_count=(value)
+        write_property(:upvote_count, value)
+      end
+
     end
   end
 end

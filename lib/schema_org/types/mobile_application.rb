@@ -4,5 +4,21 @@ module SchemaOrg
   # A software application designed specifically to work well on a mobile device such as a telephone.
   class MobileApplication < Base
     include Mixins::MobileApplication
+    SCHEMA_TYPES = [self, SchemaOrg::SoftwareApplication, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
+
+    class << self
+      def schema_types
+        SCHEMA_TYPES
+      end
+
+      def schema_type?(other_type)
+        Base.schema_type_argument!(other_type)
+        SCHEMA_TYPES.include?(other_type)
+      end
+
+      def new(**properties)
+        super
+      end
+    end
   end
 end

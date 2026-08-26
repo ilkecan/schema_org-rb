@@ -1,24 +1,133 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ContactPoint
-      extend ActiveSupport::Concern
-
       include StructuredValue
 
-      included do
-        option :available_language, optional: true # A language someone may use with or at the item, service or place. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[inLanguage]].
-        option :contact_option, optional: true # An option available on this contact point (e.g. a toll-free number or support for hearing-impaired callers).
-        option :contact_type, optional: true # A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.
-        option :email, optional: true # Email address.
-        option :fax_number, optional: true # The fax number.
-        option :hours_available, optional: true # The hours during which this service or contact is available.
-        option :product_supported, optional: true # The product or service this support contact point is related to (such as product support for a particular product line). This can be a specific product or product line (e.g. "iPhone") or a general category of products or services (e.g. "smartphones").
-        option :telephone, optional: true # The telephone number.
-        option :service_area, optional: true # The geographic area where the service is provided. Supersedes `area`. Superseded by `area_served`.
-        option :area_served, optional: true # The geographic area where a service or offered item is provided. Supersedes `service_area`.
+      def self.schema_property_definitions
+        {
+          :area_served => {
+            schema_name: "areaServed",
+            ranges: ["AdministrativeArea", "GeoShape", "Place", "Text"],
+          }.freeze,
+          :available_language => {
+            schema_name: "availableLanguage",
+            ranges: ["Language", "Text"],
+          }.freeze,
+          :contact_option => {
+            schema_name: "contactOption",
+            ranges: ["ContactPointOption"],
+          }.freeze,
+          :contact_type => {
+            schema_name: "contactType",
+            ranges: ["Text"],
+          }.freeze,
+          :email => {
+            schema_name: "email",
+            ranges: ["Text"],
+          }.freeze,
+          :fax_number => {
+            schema_name: "faxNumber",
+            ranges: ["Text"],
+          }.freeze,
+          :hours_available => {
+            schema_name: "hoursAvailable",
+            ranges: ["OpeningHoursSpecification"],
+          }.freeze,
+          :product_supported => {
+            schema_name: "productSupported",
+            ranges: ["Product", "Text"],
+          }.freeze,
+          :service_area => {
+            schema_name: "serviceArea",
+            ranges: ["AdministrativeArea", "GeoShape", "Place"],
+          }.freeze,
+          :telephone => {
+            schema_name: "telephone",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def area_served
+        read_property(:area_served)
+      end
+
+      def area_served=(value)
+        write_property(:area_served, value)
+      end
+
+      def available_language
+        read_property(:available_language)
+      end
+
+      def available_language=(value)
+        write_property(:available_language, value)
+      end
+
+      def contact_option
+        read_property(:contact_option)
+      end
+
+      def contact_option=(value)
+        write_property(:contact_option, value)
+      end
+
+      def contact_type
+        read_property(:contact_type)
+      end
+
+      def contact_type=(value)
+        write_property(:contact_type, value)
+      end
+
+      def email
+        read_property(:email)
+      end
+
+      def email=(value)
+        write_property(:email, value)
+      end
+
+      def fax_number
+        read_property(:fax_number)
+      end
+
+      def fax_number=(value)
+        write_property(:fax_number, value)
+      end
+
+      def hours_available
+        read_property(:hours_available)
+      end
+
+      def hours_available=(value)
+        write_property(:hours_available, value)
+      end
+
+      def product_supported
+        read_property(:product_supported)
+      end
+
+      def product_supported=(value)
+        write_property(:product_supported, value)
+      end
+
+      def service_area
+        read_property(:service_area)
+      end
+
+      def service_area=(value)
+        write_property(:service_area, value)
+      end
+
+      def telephone
+        read_property(:telephone)
+      end
+
+      def telephone=(value)
+        write_property(:telephone, value)
+      end
+
     end
   end
 end

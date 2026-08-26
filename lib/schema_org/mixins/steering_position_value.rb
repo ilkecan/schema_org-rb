@@ -1,11 +1,13 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module SteeringPositionValue
-      extend ActiveSupport::Concern
-
       include QualitativeValue
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

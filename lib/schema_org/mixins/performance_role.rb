@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module PerformanceRole
-      extend ActiveSupport::Concern
-
       include Role
 
-      included do
-        option :character_name, optional: true # The name of a character played in some acting or performing role, i.e. in a PerformanceRole.
+      def self.schema_property_definitions
+        {
+          :character_name => {
+            schema_name: "characterName",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def character_name
+        read_property(:character_name)
+      end
+
+      def character_name=(value)
+        write_property(:character_name, value)
+      end
+
     end
   end
 end

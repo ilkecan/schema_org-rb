@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module FollowAction
-      extend ActiveSupport::Concern
-
       include InteractAction
 
-      included do
-        option :followee, optional: true # A sub property of object. The person or organization being followed.
+      def self.schema_property_definitions
+        {
+          :followee => {
+            schema_name: "followee",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+        }.freeze
       end
+
+      def followee
+        read_property(:followee)
+      end
+
+      def followee=(value)
+        write_property(:followee, value)
+      end
+
     end
   end
 end

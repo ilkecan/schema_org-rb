@@ -1,11 +1,13 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module VideoGallery
-      extend ActiveSupport::Concern
-
       include MediaGallery
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

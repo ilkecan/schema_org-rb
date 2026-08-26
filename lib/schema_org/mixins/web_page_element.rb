@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module WebPageElement
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :css_selector, optional: true # A CSS selector, e.g. of a [[SpeakableSpecification]] or [[WebPageElement]]. In the latter case, multiple matches within a page can constitute a single conceptual "Web page element".
-        option :xpath, optional: true # An XPath, e.g. of a [[SpeakableSpecification]] or [[WebPageElement]]. In the latter case, multiple matches within a page can constitute a single conceptual "Web page element".
+      def self.schema_property_definitions
+        {
+          :css_selector => {
+            schema_name: "cssSelector",
+            ranges: ["CssSelectorType"],
+          }.freeze,
+          :xpath => {
+            schema_name: "xpath",
+            ranges: ["XPathType"],
+          }.freeze,
+        }.freeze
       end
+
+      def css_selector
+        read_property(:css_selector)
+      end
+
+      def css_selector=(value)
+        write_property(:css_selector, value)
+      end
+
+      def xpath
+        read_property(:xpath)
+      end
+
+      def xpath=(value)
+        write_property(:xpath, value)
+      end
+
     end
   end
 end

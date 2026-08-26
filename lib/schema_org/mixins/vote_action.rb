@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module VoteAction
-      extend ActiveSupport::Concern
-
       include ChooseAction
 
-      included do
-        option :candidate, optional: true # A sub property of object. The candidate subject of this action.
+      def self.schema_property_definitions
+        {
+          :candidate => {
+            schema_name: "candidate",
+            ranges: ["Person"],
+          }.freeze,
+        }.freeze
       end
+
+      def candidate
+        read_property(:candidate)
+      end
+
+      def candidate=(value)
+        write_property(:candidate, value)
+      end
+
     end
   end
 end

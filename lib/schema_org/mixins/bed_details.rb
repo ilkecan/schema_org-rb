@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module BedDetails
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :number_of_beds, optional: true # The quantity of the given bed type available in the HotelRoom, Suite, House, or Apartment.
-        option :type_of_bed, optional: true # The type of bed to which the BedDetail refers, i.e. the type of bed available in the quantity indicated by quantity.
+      def self.schema_property_definitions
+        {
+          :number_of_beds => {
+            schema_name: "numberOfBeds",
+            ranges: ["Number"],
+          }.freeze,
+          :type_of_bed => {
+            schema_name: "typeOfBed",
+            ranges: ["BedType", "Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def number_of_beds
+        read_property(:number_of_beds)
+      end
+
+      def number_of_beds=(value)
+        write_property(:number_of_beds, value)
+      end
+
+      def type_of_bed
+        read_property(:type_of_bed)
+      end
+
+      def type_of_bed=(value)
+        write_property(:type_of_bed, value)
+      end
+
     end
   end
 end

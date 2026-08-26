@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module UpdateAction
-      extend ActiveSupport::Concern
-
       include Action
 
-      included do
-        option :collection, optional: true # A sub property of object. The collection target of the action. Superseded by `target_collection`.
-        option :target_collection, optional: true # A sub property of object. The collection target of the action. Supersedes `collection`.
+      def self.schema_property_definitions
+        {
+          :collection => {
+            schema_name: "collection",
+            ranges: ["Thing"],
+          }.freeze,
+          :target_collection => {
+            schema_name: "targetCollection",
+            ranges: ["Thing"],
+          }.freeze,
+        }.freeze
       end
+
+      def collection
+        read_property(:collection)
+      end
+
+      def collection=(value)
+        write_property(:collection, value)
+      end
+
+      def target_collection
+        read_property(:target_collection)
+      end
+
+      def target_collection=(value)
+        write_property(:target_collection, value)
+      end
+
     end
   end
 end

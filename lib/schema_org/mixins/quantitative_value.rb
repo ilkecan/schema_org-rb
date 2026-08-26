@@ -1,21 +1,97 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module QuantitativeValue
-      extend ActiveSupport::Concern
-
       include StructuredValue
 
-      included do
-        option :additional_property, optional: true # A property-value pair representing an additional characteristic of the entity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
-        option :max_value, optional: true # The upper value of some characteristic or property.
-        option :min_value, optional: true # The lower value of some characteristic or property.
-        option :unit_code, optional: true # The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.
-        option :unit_text, optional: true # A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for <a href='unitCode'>unitCode</a>.
-        option :value, optional: true # The value of a [[QuantitativeValue]] (including [[Observation]]) or property value node.\n\n* For [[QuantitativeValue]] and [[MonetaryAmount]], the recommended type for values is 'Number'.\n* For [[PropertyValue]], it can be 'Text', 'Number', 'Boolean', or 'StructuredValue'.\n* Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similar Unicode symbols.\n* Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.
-        option :value_reference, optional: true # A secondary value that provides additional information on the original value, e.g. a reference temperature or a type of measurement.
+      def self.schema_property_definitions
+        {
+          :additional_property => {
+            schema_name: "additionalProperty",
+            ranges: ["PropertyValue"],
+          }.freeze,
+          :max_value => {
+            schema_name: "maxValue",
+            ranges: ["Number"],
+          }.freeze,
+          :min_value => {
+            schema_name: "minValue",
+            ranges: ["Number"],
+          }.freeze,
+          :unit_code => {
+            schema_name: "unitCode",
+            ranges: ["Text", "URL"],
+          }.freeze,
+          :unit_text => {
+            schema_name: "unitText",
+            ranges: ["Text"],
+          }.freeze,
+          :value => {
+            schema_name: "value",
+            ranges: ["Boolean", "Number", "StructuredValue", "Text"],
+          }.freeze,
+          :value_reference => {
+            schema_name: "valueReference",
+            ranges: ["Enumeration", "PropertyValue", "QualitativeValue", "QuantitativeValue", "StructuredValue"],
+          }.freeze,
+        }.freeze
       end
+
+      def additional_property
+        read_property(:additional_property)
+      end
+
+      def additional_property=(value)
+        write_property(:additional_property, value)
+      end
+
+      def max_value
+        read_property(:max_value)
+      end
+
+      def max_value=(value)
+        write_property(:max_value, value)
+      end
+
+      def min_value
+        read_property(:min_value)
+      end
+
+      def min_value=(value)
+        write_property(:min_value, value)
+      end
+
+      def unit_code
+        read_property(:unit_code)
+      end
+
+      def unit_code=(value)
+        write_property(:unit_code, value)
+      end
+
+      def unit_text
+        read_property(:unit_text)
+      end
+
+      def unit_text=(value)
+        write_property(:unit_text, value)
+      end
+
+      def value
+        read_property(:value)
+      end
+
+      def value=(value)
+        write_property(:value, value)
+      end
+
+      def value_reference
+        read_property(:value_reference)
+      end
+
+      def value_reference=(value)
+        write_property(:value_reference, value)
+      end
+
     end
   end
 end

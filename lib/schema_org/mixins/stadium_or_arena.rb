@@ -1,12 +1,14 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module StadiumOrArena
-      extend ActiveSupport::Concern
-
       include CivicStructure
       include SportsActivityLocation
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

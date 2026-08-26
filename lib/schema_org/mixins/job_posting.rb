@@ -1,37 +1,289 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module JobPosting
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :base_salary, optional: true # The base salary of the job or of an employee in an EmployeeRole.
-        option :benefits, optional: true # Description of benefits associated with the job. Superseded by `job_benefits`.
-        option :date_posted, optional: true # Publication date of an online listing.
-        option :education_requirements, optional: true # Educational background needed for the position or Occupation.
-        option :employment_type, optional: true # Type of employment (e.g. full-time, part-time, contract, temporary, seasonal, internship).
-        option :estimated_salary, optional: true # An estimated salary for a job posting or occupation, based on a variety of variables including, but not limited to industry, job title, and location. Estimated salaries  are often computed by outside organizations rather than the hiring organization, who may not have committed to the estimated value.
-        option :experience_requirements, optional: true # Description of skills and experience needed for the position or Occupation.
-        option :hiring_organization, optional: true # Organization or Person offering the job position.
-        option :incentives, optional: true # Description of bonus and commission compensation aspects of the job. Superseded by `incentive_compensation`.
-        option :industry, optional: true # The industry associated with the job position.
-        option :job_location, optional: true # A (typically single) geographic location associated with the job position.
-        option :occupational_category, optional: true # A category describing the job, preferably using a term from a taxonomy such as [BLS O*NET-SOC](http://www.onetcenter.org/taxonomy.html), [ISCO-08](https://www.ilo.org/public/english/bureau/stat/isco/isco08/) or similar, with the property repeated for each applicable value. Ideally the taxonomy should be identified, and both the textual label and formal code for the category should be provided.\n Note: for historical reasons, any textual label and formal code provided as a literal may be assumed to be from O*NET-SOC.
-        option :qualifications, optional: true # Specific qualifications required for this role or Occupation.
-        option :relevant_occupation, optional: true # The Occupation for the JobPosting.
-        option :responsibilities, optional: true # Responsibilities associated with this role or Occupation.
-        option :salary_currency, optional: true # The currency (coded using [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217)) used for the main salary information in this job posting or for this employee.
-        option :skills, optional: true # A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is either claimed by a person, an organization or desired or required to fulfill a role or to work in an occupation.
-        option :special_commitments, optional: true # Any special commitments associated with this job posting. Valid entries include VeteranCommit, MilitarySpouseCommit, etc.
-        option :title, optional: true # The title of the job.
-        option :valid_through, optional: true # The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-        option :work_hours, optional: true # The typical working hours for this job (e.g. 1st shift, night shift, 8am-5pm).
-        option :incentive_compensation, optional: true # Description of bonus and commission compensation aspects of the job. Supersedes `incentives`.
-        option :job_benefits, optional: true # Description of benefits associated with the job. Supersedes `benefits`.
+      def self.schema_property_definitions
+        {
+          :base_salary => {
+            schema_name: "baseSalary",
+            ranges: ["MonetaryAmount", "Number", "PriceSpecification"],
+          }.freeze,
+          :benefits => {
+            schema_name: "benefits",
+            ranges: ["Text"],
+          }.freeze,
+          :date_posted => {
+            schema_name: "datePosted",
+            ranges: ["Date"],
+          }.freeze,
+          :education_requirements => {
+            schema_name: "educationRequirements",
+            ranges: ["Text"],
+          }.freeze,
+          :employment_type => {
+            schema_name: "employmentType",
+            ranges: ["Text"],
+          }.freeze,
+          :estimated_salary => {
+            schema_name: "estimatedSalary",
+            ranges: ["MonetaryAmount", "MonetaryAmountDistribution", "Number"],
+          }.freeze,
+          :experience_requirements => {
+            schema_name: "experienceRequirements",
+            ranges: ["Text"],
+          }.freeze,
+          :hiring_organization => {
+            schema_name: "hiringOrganization",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :incentive_compensation => {
+            schema_name: "incentiveCompensation",
+            ranges: ["Text"],
+          }.freeze,
+          :incentives => {
+            schema_name: "incentives",
+            ranges: ["Text"],
+          }.freeze,
+          :industry => {
+            schema_name: "industry",
+            ranges: ["DefinedTerm", "Text"],
+          }.freeze,
+          :job_benefits => {
+            schema_name: "jobBenefits",
+            ranges: ["Text"],
+          }.freeze,
+          :job_location => {
+            schema_name: "jobLocation",
+            ranges: ["Place"],
+          }.freeze,
+          :occupational_category => {
+            schema_name: "occupationalCategory",
+            ranges: ["Text"],
+          }.freeze,
+          :qualifications => {
+            schema_name: "qualifications",
+            ranges: ["Text"],
+          }.freeze,
+          :relevant_occupation => {
+            schema_name: "relevantOccupation",
+            ranges: ["Occupation"],
+          }.freeze,
+          :responsibilities => {
+            schema_name: "responsibilities",
+            ranges: ["Text"],
+          }.freeze,
+          :salary_currency => {
+            schema_name: "salaryCurrency",
+            ranges: ["Text"],
+          }.freeze,
+          :skills => {
+            schema_name: "skills",
+            ranges: ["DefinedTerm", "Text"],
+          }.freeze,
+          :special_commitments => {
+            schema_name: "specialCommitments",
+            ranges: ["Text"],
+          }.freeze,
+          :title => {
+            schema_name: "title",
+            ranges: ["Text"],
+          }.freeze,
+          :valid_through => {
+            schema_name: "validThrough",
+            ranges: ["Date", "DateTime"],
+          }.freeze,
+          :work_hours => {
+            schema_name: "workHours",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def base_salary
+        read_property(:base_salary)
+      end
+
+      def base_salary=(value)
+        write_property(:base_salary, value)
+      end
+
+      def benefits
+        read_property(:benefits)
+      end
+
+      def benefits=(value)
+        write_property(:benefits, value)
+      end
+
+      def date_posted
+        read_property(:date_posted)
+      end
+
+      def date_posted=(value)
+        write_property(:date_posted, value)
+      end
+
+      def education_requirements
+        read_property(:education_requirements)
+      end
+
+      def education_requirements=(value)
+        write_property(:education_requirements, value)
+      end
+
+      def employment_type
+        read_property(:employment_type)
+      end
+
+      def employment_type=(value)
+        write_property(:employment_type, value)
+      end
+
+      def estimated_salary
+        read_property(:estimated_salary)
+      end
+
+      def estimated_salary=(value)
+        write_property(:estimated_salary, value)
+      end
+
+      def experience_requirements
+        read_property(:experience_requirements)
+      end
+
+      def experience_requirements=(value)
+        write_property(:experience_requirements, value)
+      end
+
+      def hiring_organization
+        read_property(:hiring_organization)
+      end
+
+      def hiring_organization=(value)
+        write_property(:hiring_organization, value)
+      end
+
+      def incentive_compensation
+        read_property(:incentive_compensation)
+      end
+
+      def incentive_compensation=(value)
+        write_property(:incentive_compensation, value)
+      end
+
+      def incentives
+        read_property(:incentives)
+      end
+
+      def incentives=(value)
+        write_property(:incentives, value)
+      end
+
+      def industry
+        read_property(:industry)
+      end
+
+      def industry=(value)
+        write_property(:industry, value)
+      end
+
+      def job_benefits
+        read_property(:job_benefits)
+      end
+
+      def job_benefits=(value)
+        write_property(:job_benefits, value)
+      end
+
+      def job_location
+        read_property(:job_location)
+      end
+
+      def job_location=(value)
+        write_property(:job_location, value)
+      end
+
+      def occupational_category
+        read_property(:occupational_category)
+      end
+
+      def occupational_category=(value)
+        write_property(:occupational_category, value)
+      end
+
+      def qualifications
+        read_property(:qualifications)
+      end
+
+      def qualifications=(value)
+        write_property(:qualifications, value)
+      end
+
+      def relevant_occupation
+        read_property(:relevant_occupation)
+      end
+
+      def relevant_occupation=(value)
+        write_property(:relevant_occupation, value)
+      end
+
+      def responsibilities
+        read_property(:responsibilities)
+      end
+
+      def responsibilities=(value)
+        write_property(:responsibilities, value)
+      end
+
+      def salary_currency
+        read_property(:salary_currency)
+      end
+
+      def salary_currency=(value)
+        write_property(:salary_currency, value)
+      end
+
+      def skills
+        read_property(:skills)
+      end
+
+      def skills=(value)
+        write_property(:skills, value)
+      end
+
+      def special_commitments
+        read_property(:special_commitments)
+      end
+
+      def special_commitments=(value)
+        write_property(:special_commitments, value)
+      end
+
+      def title
+        read_property(:title)
+      end
+
+      def title=(value)
+        write_property(:title, value)
+      end
+
+      def valid_through
+        read_property(:valid_through)
+      end
+
+      def valid_through=(value)
+        write_property(:valid_through, value)
+      end
+
+      def work_hours
+        read_property(:work_hours)
+      end
+
+      def work_hours=(value)
+        write_property(:work_hours, value)
+      end
+
     end
   end
 end

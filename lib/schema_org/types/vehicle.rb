@@ -4,5 +4,21 @@ module SchemaOrg
   # A vehicle is a device that is designed or used to transport people or cargo over land, water, air, or through space.
   class Vehicle < Base
     include Mixins::Vehicle
+    SCHEMA_TYPES = [self, SchemaOrg::Product, SchemaOrg::Thing].freeze
+
+    class << self
+      def schema_types
+        SCHEMA_TYPES
+      end
+
+      def schema_type?(other_type)
+        Base.schema_type_argument!(other_type)
+        SCHEMA_TYPES.include?(other_type)
+      end
+
+      def new(**properties)
+        super
+      end
+    end
   end
 end

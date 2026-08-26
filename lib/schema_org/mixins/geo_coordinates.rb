@@ -1,20 +1,85 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module GeoCoordinates
-      extend ActiveSupport::Concern
-
       include StructuredValue
 
-      included do
-        option :address, optional: true # Physical address of the item.
-        option :address_country, optional: true # The country. Recommended to be in 2-letter [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1) format, for example "US". For backward compatibility, a 3-letter [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code such as "SGP" or a full country name such as "Singapore" can also be used.
-        option :elevation, optional: true # The elevation of a location ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)). Values may be of the form 'NUMBER UNIT\_OF\_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
-        option :latitude, optional: true # The latitude of a location. For example ```37.42242``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
-        option :longitude, optional: true # The longitude of a location. For example ```-122.08585``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
-        option :postal_code, optional: true # The postal code. For example, 94043.
+      def self.schema_property_definitions
+        {
+          :address => {
+            schema_name: "address",
+            ranges: ["PostalAddress", "Text"],
+          }.freeze,
+          :address_country => {
+            schema_name: "addressCountry",
+            ranges: ["Country", "Text"],
+          }.freeze,
+          :elevation => {
+            schema_name: "elevation",
+            ranges: ["Number", "Text"],
+          }.freeze,
+          :latitude => {
+            schema_name: "latitude",
+            ranges: ["Number", "Text"],
+          }.freeze,
+          :longitude => {
+            schema_name: "longitude",
+            ranges: ["Number", "Text"],
+          }.freeze,
+          :postal_code => {
+            schema_name: "postalCode",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def address
+        read_property(:address)
+      end
+
+      def address=(value)
+        write_property(:address, value)
+      end
+
+      def address_country
+        read_property(:address_country)
+      end
+
+      def address_country=(value)
+        write_property(:address_country, value)
+      end
+
+      def elevation
+        read_property(:elevation)
+      end
+
+      def elevation=(value)
+        write_property(:elevation, value)
+      end
+
+      def latitude
+        read_property(:latitude)
+      end
+
+      def latitude=(value)
+        write_property(:latitude, value)
+      end
+
+      def longitude
+        read_property(:longitude)
+      end
+
+      def longitude=(value)
+        write_property(:longitude, value)
+      end
+
+      def postal_code
+        read_property(:postal_code)
+      end
+
+      def postal_code=(value)
+        write_property(:postal_code, value)
+      end
+
     end
   end
 end

@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module CompoundPriceSpecification
-      extend ActiveSupport::Concern
-
       include PriceSpecification
 
-      included do
-        option :price_component, optional: true # This property links to all [[UnitPriceSpecification]] nodes that apply in parallel for the [[CompoundPriceSpecification]] node.
+      def self.schema_property_definitions
+        {
+          :price_component => {
+            schema_name: "priceComponent",
+            ranges: ["PriceSpecification"],
+          }.freeze,
+        }.freeze
       end
+
+      def price_component
+        read_property(:price_component)
+      end
+
+      def price_component=(value)
+        write_property(:price_component, value)
+      end
+
     end
   end
 end

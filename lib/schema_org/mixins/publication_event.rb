@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module PublicationEvent
-      extend ActiveSupport::Concern
-
       include Event
 
-      included do
-        option :free, optional: true # A flag to signal that the item, event, or place is accessible for free. Superseded by `is_accessible_for_free`.
-        option :published_on, optional: true # A broadcast service associated with the publication event.
+      def self.schema_property_definitions
+        {
+          :free => {
+            schema_name: "free",
+            ranges: ["Boolean"],
+          }.freeze,
+          :published_on => {
+            schema_name: "publishedOn",
+            ranges: ["BroadcastService"],
+          }.freeze,
+        }.freeze
       end
+
+      def free
+        read_property(:free)
+      end
+
+      def free=(value)
+        write_property(:free, value)
+      end
+
+      def published_on
+        read_property(:published_on)
+      end
+
+      def published_on=(value)
+        write_property(:published_on, value)
+      end
+
     end
   end
 end

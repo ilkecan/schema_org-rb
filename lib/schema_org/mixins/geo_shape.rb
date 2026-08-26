@@ -1,22 +1,109 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module GeoShape
-      extend ActiveSupport::Concern
-
       include StructuredValue
 
-      included do
-        option :address, optional: true # Physical address of the item.
-        option :address_country, optional: true # The country. Recommended to be in 2-letter [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1) format, for example "US". For backward compatibility, a 3-letter [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code such as "SGP" or a full country name such as "Singapore" can also be used.
-        option :box, optional: true # A box is the area enclosed by the rectangle formed by two points. The first point is the lower corner, the second point is the upper corner. A box is expressed as two points separated by a space character.
-        option :circle, optional: true # A circle is the circular region of a specified radius centered at a specified latitude and longitude. A circle is expressed as a pair followed by a radius in meters.
-        option :elevation, optional: true # The elevation of a location ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)). Values may be of the form 'NUMBER UNIT\_OF\_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
-        option :line, optional: true # A line is a point-to-point path consisting of two or more points. A line is expressed as a series of two or more point objects separated by space.
-        option :polygon, optional: true # A polygon is the area enclosed by a point-to-point path for which the starting and ending points are the same. A polygon is expressed as a series of four or more space delimited points where the first and final points are identical.
-        option :postal_code, optional: true # The postal code. For example, 94043.
+      def self.schema_property_definitions
+        {
+          :address => {
+            schema_name: "address",
+            ranges: ["PostalAddress", "Text"],
+          }.freeze,
+          :address_country => {
+            schema_name: "addressCountry",
+            ranges: ["Country", "Text"],
+          }.freeze,
+          :box => {
+            schema_name: "box",
+            ranges: ["Text"],
+          }.freeze,
+          :circle => {
+            schema_name: "circle",
+            ranges: ["Text"],
+          }.freeze,
+          :elevation => {
+            schema_name: "elevation",
+            ranges: ["Number", "Text"],
+          }.freeze,
+          :line => {
+            schema_name: "line",
+            ranges: ["Text"],
+          }.freeze,
+          :polygon => {
+            schema_name: "polygon",
+            ranges: ["Text"],
+          }.freeze,
+          :postal_code => {
+            schema_name: "postalCode",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def address
+        read_property(:address)
+      end
+
+      def address=(value)
+        write_property(:address, value)
+      end
+
+      def address_country
+        read_property(:address_country)
+      end
+
+      def address_country=(value)
+        write_property(:address_country, value)
+      end
+
+      def box
+        read_property(:box)
+      end
+
+      def box=(value)
+        write_property(:box, value)
+      end
+
+      def circle
+        read_property(:circle)
+      end
+
+      def circle=(value)
+        write_property(:circle, value)
+      end
+
+      def elevation
+        read_property(:elevation)
+      end
+
+      def elevation=(value)
+        write_property(:elevation, value)
+      end
+
+      def line
+        read_property(:line)
+      end
+
+      def line=(value)
+        write_property(:line, value)
+      end
+
+      def polygon
+        read_property(:polygon)
+      end
+
+      def polygon=(value)
+        write_property(:polygon, value)
+      end
+
+      def postal_code
+        read_property(:postal_code)
+      end
+
+      def postal_code=(value)
+        write_property(:postal_code, value)
+      end
+
     end
   end
 end

@@ -1,19 +1,73 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module TypeAndQuantityNode
-      extend ActiveSupport::Concern
-
       include StructuredValue
 
-      included do
-        option :amount_of_this_good, optional: true # The quantity of the goods included in the offer.
-        option :business_function, optional: true # The business function (e.g. sell, lease, repair, dispose) of the offer or component of a bundle (TypeAndQuantityNode). The default is http://purl.org/goodrelations/v1#Sell.
-        option :type_of_good, optional: true # The product that this structured value is referring to.
-        option :unit_code, optional: true # The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.
-        option :unit_text, optional: true # A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for <a href='unitCode'>unitCode</a>.
+      def self.schema_property_definitions
+        {
+          :amount_of_this_good => {
+            schema_name: "amountOfThisGood",
+            ranges: ["Number"],
+          }.freeze,
+          :business_function => {
+            schema_name: "businessFunction",
+            ranges: ["BusinessFunction"],
+          }.freeze,
+          :type_of_good => {
+            schema_name: "typeOfGood",
+            ranges: ["Product", "Service"],
+          }.freeze,
+          :unit_code => {
+            schema_name: "unitCode",
+            ranges: ["Text", "URL"],
+          }.freeze,
+          :unit_text => {
+            schema_name: "unitText",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def amount_of_this_good
+        read_property(:amount_of_this_good)
+      end
+
+      def amount_of_this_good=(value)
+        write_property(:amount_of_this_good, value)
+      end
+
+      def business_function
+        read_property(:business_function)
+      end
+
+      def business_function=(value)
+        write_property(:business_function, value)
+      end
+
+      def type_of_good
+        read_property(:type_of_good)
+      end
+
+      def type_of_good=(value)
+        write_property(:type_of_good, value)
+      end
+
+      def unit_code
+        read_property(:unit_code)
+      end
+
+      def unit_code=(value)
+        write_property(:unit_code, value)
+      end
+
+      def unit_text
+        read_property(:unit_text)
+      end
+
+      def unit_text=(value)
+        write_property(:unit_text, value)
+      end
+
     end
   end
 end

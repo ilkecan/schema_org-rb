@@ -1,26 +1,157 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Action
-      extend ActiveSupport::Concern
-
       include Thing
 
-      included do
-        option :action_process, optional: true # Description of the process by which the action was performed.
-        option :action_status, optional: true # Indicates the current disposition of the Action.
-        option :agent, optional: true # The direct performer or driver of the action (animate or inanimate). E.g. *John* wrote a book.
-        option :end_time, optional: true # The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to *December*. For media, including audio and video, it's the time offset of the end of a clip within a larger file.\n\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
-        option :error, optional: true # For failed actions, more information on the cause of the failure.
-        option :start_time, optional: true # The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. E.g. John wrote a book from *January* to December. For media, including audio and video, it's the time offset of the start of a clip within a larger file.\n\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
-        option :target, optional: true # Indicates a target EntryPoint, or url, for an Action.
-        option :result, optional: true # The result produced in the action. E.g. John wrote *a book*.
-        option :instrument, optional: true # The object that helped the agent perform the action. E.g. John wrote a book with *a pen*.
-        option :object, optional: true # The object upon which the action is carried out, whose state is kept intact or changed. Also known as the semantic roles patient, affected or undergoer (which change their state) or theme (which doesn't). E.g. John read *a book*.
-        option :location, optional: true # The location of, for example, where an event is happening, where an organization is located, or where an action takes place.
-        option :participant, optional: true # Other co-agents that participated in the action indirectly. E.g. John wrote a book with *Steve*.
+      def self.schema_property_definitions
+        {
+          :action_process => {
+            schema_name: "actionProcess",
+            ranges: ["HowTo"],
+          }.freeze,
+          :action_status => {
+            schema_name: "actionStatus",
+            ranges: ["ActionStatusType"],
+          }.freeze,
+          :agent => {
+            schema_name: "agent",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :end_time => {
+            schema_name: "endTime",
+            ranges: ["DateTime", "Time"],
+          }.freeze,
+          :error => {
+            schema_name: "error",
+            ranges: ["Thing"],
+          }.freeze,
+          :instrument => {
+            schema_name: "instrument",
+            ranges: ["Thing"],
+          }.freeze,
+          :location => {
+            schema_name: "location",
+            ranges: ["Place", "PostalAddress", "Text"],
+          }.freeze,
+          :object => {
+            schema_name: "object",
+            ranges: ["Thing"],
+          }.freeze,
+          :participant => {
+            schema_name: "participant",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :result => {
+            schema_name: "result",
+            ranges: ["Thing"],
+          }.freeze,
+          :start_time => {
+            schema_name: "startTime",
+            ranges: ["DateTime", "Time"],
+          }.freeze,
+          :target => {
+            schema_name: "target",
+            ranges: ["EntryPoint", "URL"],
+          }.freeze,
+        }.freeze
       end
+
+      def action_process
+        read_property(:action_process)
+      end
+
+      def action_process=(value)
+        write_property(:action_process, value)
+      end
+
+      def action_status
+        read_property(:action_status)
+      end
+
+      def action_status=(value)
+        write_property(:action_status, value)
+      end
+
+      def agent
+        read_property(:agent)
+      end
+
+      def agent=(value)
+        write_property(:agent, value)
+      end
+
+      def end_time
+        read_property(:end_time)
+      end
+
+      def end_time=(value)
+        write_property(:end_time, value)
+      end
+
+      def error
+        read_property(:error)
+      end
+
+      def error=(value)
+        write_property(:error, value)
+      end
+
+      def instrument
+        read_property(:instrument)
+      end
+
+      def instrument=(value)
+        write_property(:instrument, value)
+      end
+
+      def location
+        read_property(:location)
+      end
+
+      def location=(value)
+        write_property(:location, value)
+      end
+
+      def object
+        read_property(:object)
+      end
+
+      def object=(value)
+        write_property(:object, value)
+      end
+
+      def participant
+        read_property(:participant)
+      end
+
+      def participant=(value)
+        write_property(:participant, value)
+      end
+
+      def result
+        read_property(:result)
+      end
+
+      def result=(value)
+        write_property(:result, value)
+      end
+
+      def start_time
+        read_property(:start_time)
+      end
+
+      def start_time=(value)
+        write_property(:start_time, value)
+      end
+
+      def target
+        read_property(:target)
+      end
+
+      def target=(value)
+        write_property(:target, value)
+      end
+
     end
   end
 end

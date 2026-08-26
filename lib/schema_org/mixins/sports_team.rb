@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module SportsTeam
-      extend ActiveSupport::Concern
-
       include SportsOrganization
 
-      included do
-        option :athlete, optional: true # A person that acts as performing member of a sports team; a player as opposed to a coach.
-        option :coach, optional: true # A person that acts in a coaching role for a sports team.
+      def self.schema_property_definitions
+        {
+          :athlete => {
+            schema_name: "athlete",
+            ranges: ["Person"],
+          }.freeze,
+          :coach => {
+            schema_name: "coach",
+            ranges: ["Person"],
+          }.freeze,
+        }.freeze
       end
+
+      def athlete
+        read_property(:athlete)
+      end
+
+      def athlete=(value)
+        write_property(:athlete, value)
+      end
+
+      def coach
+        read_property(:coach)
+      end
+
+      def coach=(value)
+        write_property(:coach, value)
+      end
+
     end
   end
 end

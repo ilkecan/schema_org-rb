@@ -1,22 +1,109 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Ticket
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :date_issued, optional: true # The date the ticket was issued.
-        option :issued_by, optional: true # The organization issuing the item, for example a [[Permit]], [[Ticket]], or [[Certification]].
-        option :price_currency, optional: true # The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.\n\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types, e.g. "Ithaca HOUR".
-        option :ticket_number, optional: true # The unique identifier for the ticket.
-        option :ticket_token, optional: true # Reference to an asset (e.g., Barcode, QR code image or PDF) usable for entrance.
-        option :ticketed_seat, optional: true # The seat associated with the ticket.
-        option :total_price, optional: true # The total price for the reservation or ticket, including applicable taxes, shipping, etc.\n\nUsage guidelines:\n\n* Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similar Unicode symbols.\n* Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.
-        option :under_name, optional: true # The person or organization the reservation or ticket is for.
+      def self.schema_property_definitions
+        {
+          :date_issued => {
+            schema_name: "dateIssued",
+            ranges: ["Date", "DateTime"],
+          }.freeze,
+          :issued_by => {
+            schema_name: "issuedBy",
+            ranges: ["Organization"],
+          }.freeze,
+          :price_currency => {
+            schema_name: "priceCurrency",
+            ranges: ["Text"],
+          }.freeze,
+          :ticket_number => {
+            schema_name: "ticketNumber",
+            ranges: ["Text"],
+          }.freeze,
+          :ticket_token => {
+            schema_name: "ticketToken",
+            ranges: ["Text", "URL"],
+          }.freeze,
+          :ticketed_seat => {
+            schema_name: "ticketedSeat",
+            ranges: ["Seat"],
+          }.freeze,
+          :total_price => {
+            schema_name: "totalPrice",
+            ranges: ["Number", "PriceSpecification", "Text"],
+          }.freeze,
+          :under_name => {
+            schema_name: "underName",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+        }.freeze
       end
+
+      def date_issued
+        read_property(:date_issued)
+      end
+
+      def date_issued=(value)
+        write_property(:date_issued, value)
+      end
+
+      def issued_by
+        read_property(:issued_by)
+      end
+
+      def issued_by=(value)
+        write_property(:issued_by, value)
+      end
+
+      def price_currency
+        read_property(:price_currency)
+      end
+
+      def price_currency=(value)
+        write_property(:price_currency, value)
+      end
+
+      def ticket_number
+        read_property(:ticket_number)
+      end
+
+      def ticket_number=(value)
+        write_property(:ticket_number, value)
+      end
+
+      def ticket_token
+        read_property(:ticket_token)
+      end
+
+      def ticket_token=(value)
+        write_property(:ticket_token, value)
+      end
+
+      def ticketed_seat
+        read_property(:ticketed_seat)
+      end
+
+      def ticketed_seat=(value)
+        write_property(:ticketed_seat, value)
+      end
+
+      def total_price
+        read_property(:total_price)
+      end
+
+      def total_price=(value)
+        write_property(:total_price, value)
+      end
+
+      def under_name
+        read_property(:under_name)
+      end
+
+      def under_name=(value)
+        write_property(:under_name, value)
+      end
+
     end
   end
 end

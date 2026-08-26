@@ -4,5 +4,21 @@ module SchemaOrg
   # The act of traveling from a fromLocation to a destination by a specified mode of transport, optionally with participants.
   class TravelAction < Base
     include Mixins::TravelAction
+    SCHEMA_TYPES = [self, SchemaOrg::MoveAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
+
+    class << self
+      def schema_types
+        SCHEMA_TYPES
+      end
+
+      def schema_type?(other_type)
+        Base.schema_type_argument!(other_type)
+        SCHEMA_TYPES.include?(other_type)
+      end
+
+      def new(**properties)
+        super
+      end
+    end
   end
 end

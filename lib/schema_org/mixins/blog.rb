@@ -1,17 +1,49 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Blog
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :blog_posts, optional: true # Indicates a post that is part of a [[Blog]]. Note that historically, what we term a "Blog" was once known as a "weblog", and that what we term a "BlogPosting" is now often colloquially referred to as a "blog". Superseded by `blog_post`.
-        option :issn, optional: true # The International Standard Serial Number (ISSN) that identifies this serial publication. You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L) for, this serial publication.
-        option :blog_post, optional: true # A posting that is part of this blog. Supersedes `blog_posts`.
+      def self.schema_property_definitions
+        {
+          :blog_post => {
+            schema_name: "blogPost",
+            ranges: ["BlogPosting"],
+          }.freeze,
+          :blog_posts => {
+            schema_name: "blogPosts",
+            ranges: ["BlogPosting"],
+          }.freeze,
+          :issn => {
+            schema_name: "issn",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def blog_post
+        read_property(:blog_post)
+      end
+
+      def blog_post=(value)
+        write_property(:blog_post, value)
+      end
+
+      def blog_posts
+        read_property(:blog_posts)
+      end
+
+      def blog_posts=(value)
+        write_property(:blog_posts, value)
+      end
+
+      def issn
+        read_property(:issn)
+      end
+
+      def issn=(value)
+        write_property(:issn, value)
+      end
+
     end
   end
 end

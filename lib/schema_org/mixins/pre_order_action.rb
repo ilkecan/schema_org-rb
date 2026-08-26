@@ -1,11 +1,13 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module PreOrderAction
-      extend ActiveSupport::Concern
-
       include TradeAction
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

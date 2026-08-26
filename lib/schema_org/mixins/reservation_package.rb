@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ReservationPackage
-      extend ActiveSupport::Concern
-
       include Reservation
 
-      included do
-        option :sub_reservation, optional: true # The individual reservations included in the package. Typically a repeated property.
+      def self.schema_property_definitions
+        {
+          :sub_reservation => {
+            schema_name: "subReservation",
+            ranges: ["Reservation"],
+          }.freeze,
+        }.freeze
       end
+
+      def sub_reservation
+        read_property(:sub_reservation)
+      end
+
+      def sub_reservation=(value)
+        write_property(:sub_reservation, value)
+      end
+
     end
   end
 end

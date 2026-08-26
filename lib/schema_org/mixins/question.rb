@@ -1,18 +1,61 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Question
-      extend ActiveSupport::Concern
-
       include Comment
 
-      included do
-        option :accepted_answer, optional: true # The answer(s) that has been accepted as best, typically on a Question/Answer site. Sites vary in their selection mechanisms, e.g. drawing on community opinion and/or the view of the Question author.
-        option :answer_count, optional: true # The number of answers this question has received.
-        option :parent_item, optional: true # The parent of a question, answer or item in general. Typically used for Q/A discussion threads e.g. a chain of comments with the first comment being an [[Article]] or other [[CreativeWork]]. See also [[comment]] which points from something to a comment about it.
-        option :suggested_answer, optional: true # An answer (possibly one of several, possibly incorrect) to a Question, e.g. on a Question/Answer site.
+      def self.schema_property_definitions
+        {
+          :accepted_answer => {
+            schema_name: "acceptedAnswer",
+            ranges: ["Answer", "ItemList"],
+          }.freeze,
+          :answer_count => {
+            schema_name: "answerCount",
+            ranges: ["Integer"],
+          }.freeze,
+          :parent_item => {
+            schema_name: "parentItem",
+            ranges: ["Comment", "CreativeWork"],
+          }.freeze,
+          :suggested_answer => {
+            schema_name: "suggestedAnswer",
+            ranges: ["Answer", "ItemList"],
+          }.freeze,
+        }.freeze
       end
+
+      def accepted_answer
+        read_property(:accepted_answer)
+      end
+
+      def accepted_answer=(value)
+        write_property(:accepted_answer, value)
+      end
+
+      def answer_count
+        read_property(:answer_count)
+      end
+
+      def answer_count=(value)
+        write_property(:answer_count, value)
+      end
+
+      def parent_item
+        read_property(:parent_item)
+      end
+
+      def parent_item=(value)
+        write_property(:parent_item, value)
+      end
+
+      def suggested_answer
+        read_property(:suggested_answer)
+      end
+
+      def suggested_answer=(value)
+        write_property(:suggested_answer, value)
+      end
+
     end
   end
 end

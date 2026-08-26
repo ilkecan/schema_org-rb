@@ -1,23 +1,121 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module VideoObject
-      extend ActiveSupport::Concern
-
       include MediaObject
 
-      included do
-        option :actors, optional: true # An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip. Superseded by `actor`.
-        option :caption, optional: true # The caption for this object. For downloadable machine formats (closed caption, subtitles etc.) use MediaObject and indicate the [[encodingFormat]].
-        option :directors, optional: true # A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip. Superseded by `director`.
-        option :music_by, optional: true # The composer of the soundtrack.
-        option :transcript, optional: true # If this MediaObject is an AudioObject or VideoObject, the transcript of that object.
-        option :video_frame_size, optional: true # The frame size of the video.
-        option :video_quality, optional: true # The quality of the video.
-        option :actor, optional: true # An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes `actors`.
-        option :director, optional: true # A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes `directors`.
+      def self.schema_property_definitions
+        {
+          :actor => {
+            schema_name: "actor",
+            ranges: ["PerformingGroup", "Person"],
+          }.freeze,
+          :actors => {
+            schema_name: "actors",
+            ranges: ["Person"],
+          }.freeze,
+          :caption => {
+            schema_name: "caption",
+            ranges: ["MediaObject", "Text"],
+          }.freeze,
+          :director => {
+            schema_name: "director",
+            ranges: ["Person"],
+          }.freeze,
+          :directors => {
+            schema_name: "directors",
+            ranges: ["Person"],
+          }.freeze,
+          :music_by => {
+            schema_name: "musicBy",
+            ranges: ["MusicGroup", "Person"],
+          }.freeze,
+          :transcript => {
+            schema_name: "transcript",
+            ranges: ["Text"],
+          }.freeze,
+          :video_frame_size => {
+            schema_name: "videoFrameSize",
+            ranges: ["Text"],
+          }.freeze,
+          :video_quality => {
+            schema_name: "videoQuality",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def actor
+        read_property(:actor)
+      end
+
+      def actor=(value)
+        write_property(:actor, value)
+      end
+
+      def actors
+        read_property(:actors)
+      end
+
+      def actors=(value)
+        write_property(:actors, value)
+      end
+
+      def caption
+        read_property(:caption)
+      end
+
+      def caption=(value)
+        write_property(:caption, value)
+      end
+
+      def director
+        read_property(:director)
+      end
+
+      def director=(value)
+        write_property(:director, value)
+      end
+
+      def directors
+        read_property(:directors)
+      end
+
+      def directors=(value)
+        write_property(:directors, value)
+      end
+
+      def music_by
+        read_property(:music_by)
+      end
+
+      def music_by=(value)
+        write_property(:music_by, value)
+      end
+
+      def transcript
+        read_property(:transcript)
+      end
+
+      def transcript=(value)
+        write_property(:transcript, value)
+      end
+
+      def video_frame_size
+        read_property(:video_frame_size)
+      end
+
+      def video_frame_size=(value)
+        write_property(:video_frame_size, value)
+      end
+
+      def video_quality
+        read_property(:video_quality)
+      end
+
+      def video_quality=(value)
+        write_property(:video_quality, value)
+      end
+
     end
   end
 end

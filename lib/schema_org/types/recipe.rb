@@ -4,5 +4,21 @@ module SchemaOrg
   # A recipe. For dietary restrictions covered by the recipe, a few common restrictions are enumerated via [[suitableForDiet]]. The [[keywords]] property can also be used to add more detail.
   class Recipe < Base
     include Mixins::Recipe
+    SCHEMA_TYPES = [self, SchemaOrg::HowTo, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
+
+    class << self
+      def schema_types
+        SCHEMA_TYPES
+      end
+
+      def schema_type?(other_type)
+        Base.schema_type_argument!(other_type)
+        SCHEMA_TYPES.include?(other_type)
+      end
+
+      def new(**properties)
+        super
+      end
+    end
   end
 end

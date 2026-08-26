@@ -1,12 +1,14 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module DepositAccount
-      extend ActiveSupport::Concern
-
       include BankAccount
       include InvestmentOrDeposit
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

@@ -1,17 +1,49 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module TaxiReservation
-      extend ActiveSupport::Concern
-
       include Reservation
 
-      included do
-        option :party_size, optional: true # Number of people the reservation should accommodate.
-        option :pickup_location, optional: true # Where a taxi will pick up a passenger or a rental car can be picked up.
-        option :pickup_time, optional: true # When a taxi will pick up a passenger or a rental car can be picked up.
+      def self.schema_property_definitions
+        {
+          :party_size => {
+            schema_name: "partySize",
+            ranges: ["Integer", "QuantitativeValue"],
+          }.freeze,
+          :pickup_location => {
+            schema_name: "pickupLocation",
+            ranges: ["Place"],
+          }.freeze,
+          :pickup_time => {
+            schema_name: "pickupTime",
+            ranges: ["DateTime"],
+          }.freeze,
+        }.freeze
       end
+
+      def party_size
+        read_property(:party_size)
+      end
+
+      def party_size=(value)
+        write_property(:party_size, value)
+      end
+
+      def pickup_location
+        read_property(:pickup_location)
+      end
+
+      def pickup_location=(value)
+        write_property(:pickup_location, value)
+      end
+
+      def pickup_time
+        read_property(:pickup_time)
+      end
+
+      def pickup_time=(value)
+        write_property(:pickup_time, value)
+      end
+
     end
   end
 end

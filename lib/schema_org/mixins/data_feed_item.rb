@@ -1,18 +1,61 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module DataFeedItem
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :date_created, optional: true # The date on which the CreativeWork was created or the item was added to a DataFeed.
-        option :date_deleted, optional: true # The datetime the item was removed from the DataFeed.
-        option :date_modified, optional: true # The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.
-        option :item, optional: true # An entity represented by an entry in a list or data feed (e.g. an 'artist' in a list of 'artists').
+      def self.schema_property_definitions
+        {
+          :date_created => {
+            schema_name: "dateCreated",
+            ranges: ["Date", "DateTime"],
+          }.freeze,
+          :date_deleted => {
+            schema_name: "dateDeleted",
+            ranges: ["Date", "DateTime"],
+          }.freeze,
+          :date_modified => {
+            schema_name: "dateModified",
+            ranges: ["Date", "DateTime"],
+          }.freeze,
+          :item => {
+            schema_name: "item",
+            ranges: ["Thing"],
+          }.freeze,
+        }.freeze
       end
+
+      def date_created
+        read_property(:date_created)
+      end
+
+      def date_created=(value)
+        write_property(:date_created, value)
+      end
+
+      def date_deleted
+        read_property(:date_deleted)
+      end
+
+      def date_deleted=(value)
+        write_property(:date_deleted, value)
+      end
+
+      def date_modified
+        read_property(:date_modified)
+      end
+
+      def date_modified=(value)
+        write_property(:date_modified, value)
+      end
+
+      def item
+        read_property(:item)
+      end
+
+      def item=(value)
+        write_property(:item, value)
+      end
+
     end
   end
 end

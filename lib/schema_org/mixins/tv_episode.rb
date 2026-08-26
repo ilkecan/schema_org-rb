@@ -1,17 +1,49 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module TVEpisode
-      extend ActiveSupport::Concern
-
       include Episode
 
-      included do
-        option :country_of_origin, optional: true # The country of origin of something, including products as well as creative  works such as movie and TV content.  In the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of [[CreativeWork]] it is difficult to provide fully general guidance, and properties such as [[contentLocation]] and [[locationCreated]] may be more applicable.  In the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.
-        option :part_of_tv_series, optional: true # The TV series to which this episode or season belongs. Superseded by `part_of_series`.
-        option :subtitle_language, optional: true # Languages in which subtitles/captions are available, in [IETF BCP 47 standard format](http://tools.ietf.org/html/bcp47).
+      def self.schema_property_definitions
+        {
+          :country_of_origin => {
+            schema_name: "countryOfOrigin",
+            ranges: ["Country"],
+          }.freeze,
+          :part_of_tv_series => {
+            schema_name: "partOfTVSeries",
+            ranges: ["TVSeries"],
+          }.freeze,
+          :subtitle_language => {
+            schema_name: "subtitleLanguage",
+            ranges: ["Language", "Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def country_of_origin
+        read_property(:country_of_origin)
+      end
+
+      def country_of_origin=(value)
+        write_property(:country_of_origin, value)
+      end
+
+      def part_of_tv_series
+        read_property(:part_of_tv_series)
+      end
+
+      def part_of_tv_series=(value)
+        write_property(:part_of_tv_series, value)
+      end
+
+      def subtitle_language
+        read_property(:subtitle_language)
+      end
+
+      def subtitle_language=(value)
+        write_property(:subtitle_language, value)
+      end
+
     end
   end
 end

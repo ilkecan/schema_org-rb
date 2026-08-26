@@ -4,5 +4,21 @@ module SchemaOrg
   # A short TV program or a segment/part of a TV program.
   class TVClip < Base
     include Mixins::TVClip
+    SCHEMA_TYPES = [self, SchemaOrg::Clip, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
+
+    class << self
+      def schema_types
+        SCHEMA_TYPES
+      end
+
+      def schema_type?(other_type)
+        Base.schema_type_argument!(other_type)
+        SCHEMA_TYPES.include?(other_type)
+      end
+
+      def new(**properties)
+        super
+      end
+    end
   end
 end

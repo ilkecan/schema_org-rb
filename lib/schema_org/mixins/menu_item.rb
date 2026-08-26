@@ -1,18 +1,61 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module MenuItem
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :menu_add_on, optional: true # Additional menu item(s) such as a side dish of salad or side order of fries that can be added to this menu item. Additionally it can be a menu section containing allowed add-on menu items for this menu item.
-        option :nutrition, optional: true # Nutrition information about the recipe or menu item.
-        option :suitable_for_diet, optional: true # Indicates a dietary restriction or guideline for which this recipe or menu item is suitable, e.g. diabetic, halal etc.
-        option :offers, optional: true # An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse-property: `item_offered`.
+      def self.schema_property_definitions
+        {
+          :menu_add_on => {
+            schema_name: "menuAddOn",
+            ranges: ["MenuItem", "MenuSection"],
+          }.freeze,
+          :nutrition => {
+            schema_name: "nutrition",
+            ranges: ["NutritionInformation"],
+          }.freeze,
+          :offers => {
+            schema_name: "offers",
+            ranges: ["Demand", "Offer"],
+          }.freeze,
+          :suitable_for_diet => {
+            schema_name: "suitableForDiet",
+            ranges: ["RestrictedDiet"],
+          }.freeze,
+        }.freeze
       end
+
+      def menu_add_on
+        read_property(:menu_add_on)
+      end
+
+      def menu_add_on=(value)
+        write_property(:menu_add_on, value)
+      end
+
+      def nutrition
+        read_property(:nutrition)
+      end
+
+      def nutrition=(value)
+        write_property(:nutrition, value)
+      end
+
+      def offers
+        read_property(:offers)
+      end
+
+      def offers=(value)
+        write_property(:offers, value)
+      end
+
+      def suitable_for_diet
+        read_property(:suitable_for_diet)
+      end
+
+      def suitable_for_diet=(value)
+        write_property(:suitable_for_diet, value)
+      end
+
     end
   end
 end

@@ -1,52 +1,469 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Product
-      extend ActiveSupport::Concern
-
       include Thing
 
-      included do
-        option :additional_property, optional: true # A property-value pair representing an additional characteristic of the entity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
-        option :aggregate_rating, optional: true # The overall rating, based on a collection of reviews or ratings, of the item.
-        option :awards, optional: true # Awards won by or for this item. Superseded by `award`.
-        option :brand, optional: true # The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
-        option :category, optional: true # A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
-        option :color, optional: true # The color of the product.
-        option :country_of_origin, optional: true # The country of origin of something, including products as well as creative  works such as movie and TV content.  In the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of [[CreativeWork]] it is difficult to provide fully general guidance, and properties such as [[contentLocation]] and [[locationCreated]] may be more applicable.  In the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.
-        option :depth, optional: true # The depth of the item.
-        option :gtin12, optional: true # The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
-        option :gtin13, optional: true # The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceding zero. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
-        option :gtin14, optional: true # The GTIN-14 code of the product, or the product to which the offer refers. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
-        option :gtin8, optional: true # The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
-        option :height, optional: true # The height of the item.
-        option :is_accessory_or_spare_part_for, optional: true # A pointer to another product (or multiple products) for which this product is an accessory or spare part.
-        option :is_consumable_for, optional: true # A pointer to another product (or multiple products) for which this product is a consumable.
-        option :is_family_friendly, optional: true # Indicates whether this content is family friendly.
-        option :is_related_to, optional: true # A pointer to another, somehow related product (or multiple products).
-        option :is_similar_to, optional: true # A pointer to another, functionally similar product (or multiple products).
-        option :item_condition, optional: true # A predefined value from OfferItemCondition specifying the condition of the product or service, or the products or services included in the offer. Also used for product return policies to specify the condition of products accepted for returns.
-        option :keywords, optional: true # Keywords or tags used to describe some item. Multiple textual entries in a keywords list are typically delimited by commas, or by repeating the property.
-        option :logo, optional: true # An associated logo.
-        option :manufacturer, optional: true # The manufacturer of the product.
-        option :model, optional: true # The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties.
-        option :mpn, optional: true # The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.
-        option :product_id, optional: true # The product identifier, such as ISBN. For example: ``` meta itemprop="productID" content="isbn:123-456-789" ```.
-        option :production_date, optional: true # The date of production of the item, e.g. vehicle.
-        option :purchase_date, optional: true # The date the item, e.g. vehicle, was purchased by the current owner.
-        option :release_date, optional: true # The release date of a product or product model. This can be used to distinguish the exact variant of a product.
-        option :reviews, optional: true # Review of the item. Superseded by `review`.
-        option :sku, optional: true # The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.
-        option :slogan, optional: true # A slogan or motto associated with the item.
-        option :weight, optional: true # The weight of the product or person.
-        option :width, optional: true # The width of the item.
-        option :audience, optional: true # An intended audience, i.e. a group for whom something was created. Supersedes `service_audience`.
-        option :award, optional: true # An award won by or for this item. Supersedes `awards`.
-        option :offers, optional: true # An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse-property: `item_offered`.
-        option :review, optional: true # A review of the item. Supersedes `reviews`.
-        option :material, optional: true # A material that something is made from, e.g. leather, wool, cotton, paper.
+      def self.schema_property_definitions
+        {
+          :additional_property => {
+            schema_name: "additionalProperty",
+            ranges: ["PropertyValue"],
+          }.freeze,
+          :aggregate_rating => {
+            schema_name: "aggregateRating",
+            ranges: ["AggregateRating"],
+          }.freeze,
+          :audience => {
+            schema_name: "audience",
+            ranges: ["Audience"],
+          }.freeze,
+          :award => {
+            schema_name: "award",
+            ranges: ["Text"],
+          }.freeze,
+          :awards => {
+            schema_name: "awards",
+            ranges: ["Text"],
+          }.freeze,
+          :brand => {
+            schema_name: "brand",
+            ranges: ["Brand", "Organization"],
+          }.freeze,
+          :category => {
+            schema_name: "category",
+            ranges: ["Text", "Thing"],
+          }.freeze,
+          :color => {
+            schema_name: "color",
+            ranges: ["Text"],
+          }.freeze,
+          :country_of_origin => {
+            schema_name: "countryOfOrigin",
+            ranges: ["Country"],
+          }.freeze,
+          :depth => {
+            schema_name: "depth",
+            ranges: ["Distance", "QuantitativeValue"],
+          }.freeze,
+          :gtin12 => {
+            schema_name: "gtin12",
+            ranges: ["Text"],
+          }.freeze,
+          :gtin13 => {
+            schema_name: "gtin13",
+            ranges: ["Text"],
+          }.freeze,
+          :gtin14 => {
+            schema_name: "gtin14",
+            ranges: ["Text"],
+          }.freeze,
+          :gtin8 => {
+            schema_name: "gtin8",
+            ranges: ["Text"],
+          }.freeze,
+          :height => {
+            schema_name: "height",
+            ranges: ["Distance", "QuantitativeValue"],
+          }.freeze,
+          :is_accessory_or_spare_part_for => {
+            schema_name: "isAccessoryOrSparePartFor",
+            ranges: ["Product"],
+          }.freeze,
+          :is_consumable_for => {
+            schema_name: "isConsumableFor",
+            ranges: ["Product"],
+          }.freeze,
+          :is_family_friendly => {
+            schema_name: "isFamilyFriendly",
+            ranges: ["Boolean"],
+          }.freeze,
+          :is_related_to => {
+            schema_name: "isRelatedTo",
+            ranges: ["Product", "Service"],
+          }.freeze,
+          :is_similar_to => {
+            schema_name: "isSimilarTo",
+            ranges: ["Product", "Service"],
+          }.freeze,
+          :item_condition => {
+            schema_name: "itemCondition",
+            ranges: ["OfferItemCondition"],
+          }.freeze,
+          :keywords => {
+            schema_name: "keywords",
+            ranges: ["DefinedTerm", "Text", "URL"],
+          }.freeze,
+          :logo => {
+            schema_name: "logo",
+            ranges: ["ImageObject", "URL"],
+          }.freeze,
+          :manufacturer => {
+            schema_name: "manufacturer",
+            ranges: ["Organization"],
+          }.freeze,
+          :material => {
+            schema_name: "material",
+            ranges: ["Product", "Text", "URL"],
+          }.freeze,
+          :model => {
+            schema_name: "model",
+            ranges: ["ProductModel", "Text"],
+          }.freeze,
+          :mpn => {
+            schema_name: "mpn",
+            ranges: ["Text"],
+          }.freeze,
+          :offers => {
+            schema_name: "offers",
+            ranges: ["Demand", "Offer"],
+          }.freeze,
+          :product_id => {
+            schema_name: "productID",
+            ranges: ["Text"],
+          }.freeze,
+          :production_date => {
+            schema_name: "productionDate",
+            ranges: ["Date"],
+          }.freeze,
+          :purchase_date => {
+            schema_name: "purchaseDate",
+            ranges: ["Date"],
+          }.freeze,
+          :release_date => {
+            schema_name: "releaseDate",
+            ranges: ["Date"],
+          }.freeze,
+          :review => {
+            schema_name: "review",
+            ranges: ["Review"],
+          }.freeze,
+          :reviews => {
+            schema_name: "reviews",
+            ranges: ["Review"],
+          }.freeze,
+          :sku => {
+            schema_name: "sku",
+            ranges: ["Text"],
+          }.freeze,
+          :slogan => {
+            schema_name: "slogan",
+            ranges: ["Text"],
+          }.freeze,
+          :weight => {
+            schema_name: "weight",
+            ranges: ["QuantitativeValue"],
+          }.freeze,
+          :width => {
+            schema_name: "width",
+            ranges: ["Distance", "QuantitativeValue"],
+          }.freeze,
+        }.freeze
       end
+
+      def additional_property
+        read_property(:additional_property)
+      end
+
+      def additional_property=(value)
+        write_property(:additional_property, value)
+      end
+
+      def aggregate_rating
+        read_property(:aggregate_rating)
+      end
+
+      def aggregate_rating=(value)
+        write_property(:aggregate_rating, value)
+      end
+
+      def audience
+        read_property(:audience)
+      end
+
+      def audience=(value)
+        write_property(:audience, value)
+      end
+
+      def award
+        read_property(:award)
+      end
+
+      def award=(value)
+        write_property(:award, value)
+      end
+
+      def awards
+        read_property(:awards)
+      end
+
+      def awards=(value)
+        write_property(:awards, value)
+      end
+
+      def brand
+        read_property(:brand)
+      end
+
+      def brand=(value)
+        write_property(:brand, value)
+      end
+
+      def category
+        read_property(:category)
+      end
+
+      def category=(value)
+        write_property(:category, value)
+      end
+
+      def color
+        read_property(:color)
+      end
+
+      def color=(value)
+        write_property(:color, value)
+      end
+
+      def country_of_origin
+        read_property(:country_of_origin)
+      end
+
+      def country_of_origin=(value)
+        write_property(:country_of_origin, value)
+      end
+
+      def depth
+        read_property(:depth)
+      end
+
+      def depth=(value)
+        write_property(:depth, value)
+      end
+
+      def gtin12
+        read_property(:gtin12)
+      end
+
+      def gtin12=(value)
+        write_property(:gtin12, value)
+      end
+
+      def gtin13
+        read_property(:gtin13)
+      end
+
+      def gtin13=(value)
+        write_property(:gtin13, value)
+      end
+
+      def gtin14
+        read_property(:gtin14)
+      end
+
+      def gtin14=(value)
+        write_property(:gtin14, value)
+      end
+
+      def gtin8
+        read_property(:gtin8)
+      end
+
+      def gtin8=(value)
+        write_property(:gtin8, value)
+      end
+
+      def height
+        read_property(:height)
+      end
+
+      def height=(value)
+        write_property(:height, value)
+      end
+
+      def is_accessory_or_spare_part_for
+        read_property(:is_accessory_or_spare_part_for)
+      end
+
+      def is_accessory_or_spare_part_for=(value)
+        write_property(:is_accessory_or_spare_part_for, value)
+      end
+
+      def is_consumable_for
+        read_property(:is_consumable_for)
+      end
+
+      def is_consumable_for=(value)
+        write_property(:is_consumable_for, value)
+      end
+
+      def is_family_friendly
+        read_property(:is_family_friendly)
+      end
+
+      def is_family_friendly=(value)
+        write_property(:is_family_friendly, value)
+      end
+
+      def is_related_to
+        read_property(:is_related_to)
+      end
+
+      def is_related_to=(value)
+        write_property(:is_related_to, value)
+      end
+
+      def is_similar_to
+        read_property(:is_similar_to)
+      end
+
+      def is_similar_to=(value)
+        write_property(:is_similar_to, value)
+      end
+
+      def item_condition
+        read_property(:item_condition)
+      end
+
+      def item_condition=(value)
+        write_property(:item_condition, value)
+      end
+
+      def keywords
+        read_property(:keywords)
+      end
+
+      def keywords=(value)
+        write_property(:keywords, value)
+      end
+
+      def logo
+        read_property(:logo)
+      end
+
+      def logo=(value)
+        write_property(:logo, value)
+      end
+
+      def manufacturer
+        read_property(:manufacturer)
+      end
+
+      def manufacturer=(value)
+        write_property(:manufacturer, value)
+      end
+
+      def material
+        read_property(:material)
+      end
+
+      def material=(value)
+        write_property(:material, value)
+      end
+
+      def model
+        read_property(:model)
+      end
+
+      def model=(value)
+        write_property(:model, value)
+      end
+
+      def mpn
+        read_property(:mpn)
+      end
+
+      def mpn=(value)
+        write_property(:mpn, value)
+      end
+
+      def offers
+        read_property(:offers)
+      end
+
+      def offers=(value)
+        write_property(:offers, value)
+      end
+
+      def product_id
+        read_property(:product_id)
+      end
+
+      def product_id=(value)
+        write_property(:product_id, value)
+      end
+
+      def production_date
+        read_property(:production_date)
+      end
+
+      def production_date=(value)
+        write_property(:production_date, value)
+      end
+
+      def purchase_date
+        read_property(:purchase_date)
+      end
+
+      def purchase_date=(value)
+        write_property(:purchase_date, value)
+      end
+
+      def release_date
+        read_property(:release_date)
+      end
+
+      def release_date=(value)
+        write_property(:release_date, value)
+      end
+
+      def review
+        read_property(:review)
+      end
+
+      def review=(value)
+        write_property(:review, value)
+      end
+
+      def reviews
+        read_property(:reviews)
+      end
+
+      def reviews=(value)
+        write_property(:reviews, value)
+      end
+
+      def sku
+        read_property(:sku)
+      end
+
+      def sku=(value)
+        write_property(:sku, value)
+      end
+
+      def slogan
+        read_property(:slogan)
+      end
+
+      def slogan=(value)
+        write_property(:slogan, value)
+      end
+
+      def weight
+        read_property(:weight)
+      end
+
+      def weight=(value)
+        write_property(:weight, value)
+      end
+
+      def width
+        read_property(:width)
+      end
+
+      def width=(value)
+        write_property(:width, value)
+      end
+
     end
   end
 end

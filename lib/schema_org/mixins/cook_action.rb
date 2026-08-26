@@ -1,17 +1,49 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module CookAction
-      extend ActiveSupport::Concern
-
       include CreateAction
 
-      included do
-        option :food_establishment, optional: true # A sub property of location. The specific food establishment where the action occurred.
-        option :food_event, optional: true # A sub property of location. The specific food event where the action occurred.
-        option :recipe, optional: true # A sub property of instrument. The recipe/instructions used to perform the action.
+      def self.schema_property_definitions
+        {
+          :food_establishment => {
+            schema_name: "foodEstablishment",
+            ranges: ["FoodEstablishment", "Place"],
+          }.freeze,
+          :food_event => {
+            schema_name: "foodEvent",
+            ranges: ["FoodEvent"],
+          }.freeze,
+          :recipe => {
+            schema_name: "recipe",
+            ranges: ["Recipe"],
+          }.freeze,
+        }.freeze
       end
+
+      def food_establishment
+        read_property(:food_establishment)
+      end
+
+      def food_establishment=(value)
+        write_property(:food_establishment, value)
+      end
+
+      def food_event
+        read_property(:food_event)
+      end
+
+      def food_event=(value)
+        write_property(:food_event, value)
+      end
+
+      def recipe
+        read_property(:recipe)
+      end
+
+      def recipe=(value)
+        write_property(:recipe, value)
+      end
+
     end
   end
 end

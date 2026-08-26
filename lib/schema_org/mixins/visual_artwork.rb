@@ -1,23 +1,121 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module VisualArtwork
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :art_edition, optional: true # The number of copies when multiple copies of a piece of artwork are produced - e.g. for a limited edition of 20 prints, 'artEdition' refers to the total number of copies (in this example "20").
-        option :art_medium, optional: true # The material used. (E.g. Oil, Watercolour, Acrylic, Linoprint, Marble, Cyanotype, Digital, Lithograph, DryPoint, Intaglio, Pastel, Woodcut, Pencil, Mixed Media, etc.)
-        option :artform, optional: true # e.g. Painting, Drawing, Sculpture, Print, Photograph, Assemblage, Collage, etc.
-        option :depth, optional: true # The depth of the item.
-        option :height, optional: true # The height of the item.
-        option :surface, optional: true # A material used as a surface in some artwork, e.g. Canvas, Paper, Wood, Board, etc. Superseded by `artwork_surface`.
-        option :weight, optional: true # The weight of the product or person.
-        option :width, optional: true # The width of the item.
-        option :artwork_surface, optional: true # The supporting materials for the artwork, e.g. Canvas, Paper, Wood, Board, etc. Supersedes `surface`.
+      def self.schema_property_definitions
+        {
+          :art_edition => {
+            schema_name: "artEdition",
+            ranges: ["Integer", "Text"],
+          }.freeze,
+          :art_medium => {
+            schema_name: "artMedium",
+            ranges: ["Text", "URL"],
+          }.freeze,
+          :artform => {
+            schema_name: "artform",
+            ranges: ["Text", "URL"],
+          }.freeze,
+          :artwork_surface => {
+            schema_name: "artworkSurface",
+            ranges: ["Text", "URL"],
+          }.freeze,
+          :depth => {
+            schema_name: "depth",
+            ranges: ["Distance", "QuantitativeValue"],
+          }.freeze,
+          :height => {
+            schema_name: "height",
+            ranges: ["Distance", "QuantitativeValue"],
+          }.freeze,
+          :surface => {
+            schema_name: "surface",
+            ranges: ["Text", "URL"],
+          }.freeze,
+          :weight => {
+            schema_name: "weight",
+            ranges: ["QuantitativeValue"],
+          }.freeze,
+          :width => {
+            schema_name: "width",
+            ranges: ["Distance", "QuantitativeValue"],
+          }.freeze,
+        }.freeze
       end
+
+      def art_edition
+        read_property(:art_edition)
+      end
+
+      def art_edition=(value)
+        write_property(:art_edition, value)
+      end
+
+      def art_medium
+        read_property(:art_medium)
+      end
+
+      def art_medium=(value)
+        write_property(:art_medium, value)
+      end
+
+      def artform
+        read_property(:artform)
+      end
+
+      def artform=(value)
+        write_property(:artform, value)
+      end
+
+      def artwork_surface
+        read_property(:artwork_surface)
+      end
+
+      def artwork_surface=(value)
+        write_property(:artwork_surface, value)
+      end
+
+      def depth
+        read_property(:depth)
+      end
+
+      def depth=(value)
+        write_property(:depth, value)
+      end
+
+      def height
+        read_property(:height)
+      end
+
+      def height=(value)
+        write_property(:height, value)
+      end
+
+      def surface
+        read_property(:surface)
+      end
+
+      def surface=(value)
+        write_property(:surface, value)
+      end
+
+      def weight
+        read_property(:weight)
+      end
+
+      def weight=(value)
+        write_property(:weight, value)
+      end
+
+      def width
+        read_property(:width)
+      end
+
+      def width=(value)
+        write_property(:width, value)
+      end
+
     end
   end
 end

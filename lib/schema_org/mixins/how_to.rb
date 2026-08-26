@@ -1,23 +1,121 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module HowTo
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :estimated_cost, optional: true # The estimated cost of the supply or supplies consumed when performing instructions.
-        option :prep_time, optional: true # The length of time it takes to prepare the items to be used in instructions or a direction, in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).
-        option :steps, optional: true # A single step item (as HowToStep, text, document, video, etc.) or a HowToSection (originally misnamed 'steps'; 'step' is preferred). Superseded by `step`.
-        option :tool, optional: true # A sub property of instrument. An object used (but not consumed) when performing instructions or a direction.
-        option :total_time, optional: true # The total time required to perform instructions or a direction (including time to prepare the supplies), in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).
-        option :perform_time, optional: true # The length of time it takes to perform instructions or a direction (not including time to prepare the supplies), in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).
-        option :yield, optional: true # The quantity that results by performing instructions. For example, a paper airplane, 10 personalized candles.
-        option :step, optional: true # A single step item (as HowToStep, text, document, video, etc.) or a HowToSection. Supersedes `steps`.
-        option :supply, optional: true # A sub-property of instrument. A supply consumed when performing instructions or a direction.
+      def self.schema_property_definitions
+        {
+          :estimated_cost => {
+            schema_name: "estimatedCost",
+            ranges: ["MonetaryAmount", "Text"],
+          }.freeze,
+          :perform_time => {
+            schema_name: "performTime",
+            ranges: ["Duration"],
+          }.freeze,
+          :prep_time => {
+            schema_name: "prepTime",
+            ranges: ["Duration"],
+          }.freeze,
+          :step => {
+            schema_name: "step",
+            ranges: ["CreativeWork", "HowToSection", "HowToStep", "Text"],
+          }.freeze,
+          :steps => {
+            schema_name: "steps",
+            ranges: ["CreativeWork", "ItemList", "Text"],
+          }.freeze,
+          :supply => {
+            schema_name: "supply",
+            ranges: ["HowToSupply", "Text"],
+          }.freeze,
+          :tool => {
+            schema_name: "tool",
+            ranges: ["HowToTool", "Text"],
+          }.freeze,
+          :total_time => {
+            schema_name: "totalTime",
+            ranges: ["Duration"],
+          }.freeze,
+          :yield => {
+            schema_name: "yield",
+            ranges: ["QuantitativeValue", "Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def estimated_cost
+        read_property(:estimated_cost)
+      end
+
+      def estimated_cost=(value)
+        write_property(:estimated_cost, value)
+      end
+
+      def perform_time
+        read_property(:perform_time)
+      end
+
+      def perform_time=(value)
+        write_property(:perform_time, value)
+      end
+
+      def prep_time
+        read_property(:prep_time)
+      end
+
+      def prep_time=(value)
+        write_property(:prep_time, value)
+      end
+
+      def step
+        read_property(:step)
+      end
+
+      def step=(value)
+        write_property(:step, value)
+      end
+
+      def steps
+        read_property(:steps)
+      end
+
+      def steps=(value)
+        write_property(:steps, value)
+      end
+
+      def supply
+        read_property(:supply)
+      end
+
+      def supply=(value)
+        write_property(:supply, value)
+      end
+
+      def tool
+        read_property(:tool)
+      end
+
+      def tool=(value)
+        write_property(:tool, value)
+      end
+
+      def total_time
+        read_property(:total_time)
+      end
+
+      def total_time=(value)
+        write_property(:total_time, value)
+      end
+
+      def yield
+        read_property(:yield)
+      end
+
+      def yield=(value)
+        write_property(:yield, value)
+      end
+
     end
   end
 end

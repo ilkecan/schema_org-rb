@@ -1,19 +1,74 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module DefinedRegion
-      extend ActiveSupport::Concern
-
+      include Place
       include StructuredValue
 
-      included do
-        option :address_country, optional: true # The country. Recommended to be in 2-letter [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1) format, for example "US". For backward compatibility, a 3-letter [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code such as "SGP" or a full country name such as "Singapore" can also be used.
-        option :address_region, optional: true # The region in which the locality is, and which is in the country. For example, California or another appropriate first-level [Administrative division](https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country).
-        option :postal_code, optional: true # The postal code. For example, 94043.
-        option :postal_code_prefix, optional: true # A defined range of postal codes indicated by a common textual prefix. Used for non-numeric systems such as UK.
-        option :postal_code_range, optional: true # A defined range of postal codes.
+      def self.schema_property_definitions
+        {
+          :address_country => {
+            schema_name: "addressCountry",
+            ranges: ["Country", "Text"],
+          }.freeze,
+          :address_region => {
+            schema_name: "addressRegion",
+            ranges: ["AdministrativeArea", "Text"],
+          }.freeze,
+          :postal_code => {
+            schema_name: "postalCode",
+            ranges: ["Text"],
+          }.freeze,
+          :postal_code_prefix => {
+            schema_name: "postalCodePrefix",
+            ranges: ["Text"],
+          }.freeze,
+          :postal_code_range => {
+            schema_name: "postalCodeRange",
+            ranges: ["PostalCodeRangeSpecification"],
+          }.freeze,
+        }.freeze
       end
+
+      def address_country
+        read_property(:address_country)
+      end
+
+      def address_country=(value)
+        write_property(:address_country, value)
+      end
+
+      def address_region
+        read_property(:address_region)
+      end
+
+      def address_region=(value)
+        write_property(:address_region, value)
+      end
+
+      def postal_code
+        read_property(:postal_code)
+      end
+
+      def postal_code=(value)
+        write_property(:postal_code, value)
+      end
+
+      def postal_code_prefix
+        read_property(:postal_code_prefix)
+      end
+
+      def postal_code_prefix=(value)
+        write_property(:postal_code_prefix, value)
+      end
+
+      def postal_code_range
+        read_property(:postal_code_range)
+      end
+
+      def postal_code_range=(value)
+        write_property(:postal_code_range, value)
+      end
+
     end
   end
 end

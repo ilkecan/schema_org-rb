@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module BorrowAction
-      extend ActiveSupport::Concern
-
       include TransferAction
 
-      included do
-        option :lender, optional: true # A sub property of participant. The person that lends the object being borrowed.
+      def self.schema_property_definitions
+        {
+          :lender => {
+            schema_name: "lender",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+        }.freeze
       end
+
+      def lender
+        read_property(:lender)
+      end
+
+      def lender=(value)
+        write_property(:lender, value)
+      end
+
     end
   end
 end

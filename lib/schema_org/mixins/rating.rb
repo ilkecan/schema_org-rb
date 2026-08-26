@@ -1,19 +1,73 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Rating
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :author, optional: true # The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.
-        option :best_rating, optional: true # The highest value allowed in this rating system.
-        option :rating_value, optional: true # The rating for the content.\n\nUsage guidelines:\n\n* Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similar Unicode symbols.\n* Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.
-        option :review_aspect, optional: true # This Review or Rating is relevant to this part or facet of the itemReviewed.
-        option :worst_rating, optional: true # The lowest value allowed in this rating system.
+      def self.schema_property_definitions
+        {
+          :author => {
+            schema_name: "author",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :best_rating => {
+            schema_name: "bestRating",
+            ranges: ["Number", "Text"],
+          }.freeze,
+          :rating_value => {
+            schema_name: "ratingValue",
+            ranges: ["Number", "Text"],
+          }.freeze,
+          :review_aspect => {
+            schema_name: "reviewAspect",
+            ranges: ["StructuredValue", "Text"],
+          }.freeze,
+          :worst_rating => {
+            schema_name: "worstRating",
+            ranges: ["Number", "Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def author
+        read_property(:author)
+      end
+
+      def author=(value)
+        write_property(:author, value)
+      end
+
+      def best_rating
+        read_property(:best_rating)
+      end
+
+      def best_rating=(value)
+        write_property(:best_rating, value)
+      end
+
+      def rating_value
+        read_property(:rating_value)
+      end
+
+      def rating_value=(value)
+        write_property(:rating_value, value)
+      end
+
+      def review_aspect
+        read_property(:review_aspect)
+      end
+
+      def review_aspect=(value)
+        write_property(:review_aspect, value)
+      end
+
+      def worst_rating
+        read_property(:worst_rating)
+      end
+
+      def worst_rating=(value)
+        write_property(:worst_rating, value)
+      end
+
     end
   end
 end

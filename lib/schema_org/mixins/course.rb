@@ -1,17 +1,49 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Course
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :course_code, optional: true # The identifier for the [[Course]] used by the course [[provider]] (e.g. CS101 or 6.001).
-        option :course_prerequisites, optional: true # Requirements for taking the Course. May be completion of another [[Course]] or a textual description like "permission of instructor". Requirements may be a pre-requisite competency, referenced using [[AlignmentObject]].
-        option :has_course_instance, optional: true # An offering of the course at a specific time and place or through specific media or mode of study or to a specific section of students.
+      def self.schema_property_definitions
+        {
+          :course_code => {
+            schema_name: "courseCode",
+            ranges: ["Text"],
+          }.freeze,
+          :course_prerequisites => {
+            schema_name: "coursePrerequisites",
+            ranges: ["AlignmentObject", "Course", "Text"],
+          }.freeze,
+          :has_course_instance => {
+            schema_name: "hasCourseInstance",
+            ranges: ["CourseInstance"],
+          }.freeze,
+        }.freeze
       end
+
+      def course_code
+        read_property(:course_code)
+      end
+
+      def course_code=(value)
+        write_property(:course_code, value)
+      end
+
+      def course_prerequisites
+        read_property(:course_prerequisites)
+      end
+
+      def course_prerequisites=(value)
+        write_property(:course_prerequisites, value)
+      end
+
+      def has_course_instance
+        read_property(:has_course_instance)
+      end
+
+      def has_course_instance=(value)
+        write_property(:has_course_instance, value)
+      end
+
     end
   end
 end

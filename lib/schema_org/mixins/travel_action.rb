@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module TravelAction
-      extend ActiveSupport::Concern
-
       include MoveAction
 
-      included do
-        option :distance, optional: true # The distance travelled, e.g. exercising or travelling.
+      def self.schema_property_definitions
+        {
+          :distance => {
+            schema_name: "distance",
+            ranges: ["Distance"],
+          }.freeze,
+        }.freeze
       end
+
+      def distance
+        read_property(:distance)
+      end
+
+      def distance=(value)
+        write_property(:distance, value)
+      end
+
     end
   end
 end

@@ -1,30 +1,205 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Invoice
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :account_id, optional: true # The identifier for the account the payment will be applied to.
-        option :billing_period, optional: true # The time interval used to compute the invoice.
-        option :category, optional: true # A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
-        option :confirmation_number, optional: true # A number that confirms the given order or payment has been received.
-        option :customer, optional: true # Party placing the order or paying the invoice.
-        option :minimum_payment_due, optional: true # The minimum payment required at this time.
-        option :payment_due, optional: true # The date that payment is due. Superseded by `payment_due_date`.
-        option :payment_method, optional: true # The name of the credit card or other method of payment for the order.
-        option :payment_method_id, optional: true # An identifier for the method of payment used (e.g. the last 4 digits of the credit card).
-        option :payment_status, optional: true # The status of payment; whether the invoice has been paid or not.
-        option :references_order, optional: true # The Order(s) related to this Invoice. One or more Orders may be combined into a single Invoice.
-        option :scheduled_payment_date, optional: true # The date the invoice is scheduled to be paid.
-        option :total_payment_due, optional: true # The total amount due.
-        option :broker, optional: true # An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred. Supersedes `booking_agent`.
-        option :payment_due_date, optional: true # The date that payment is due. Supersedes `payment_due`.
-        option :provider, optional: true # The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes `carrier`.
+      def self.schema_property_definitions
+        {
+          :account_id => {
+            schema_name: "accountId",
+            ranges: ["Text"],
+          }.freeze,
+          :billing_period => {
+            schema_name: "billingPeriod",
+            ranges: ["Duration"],
+          }.freeze,
+          :broker => {
+            schema_name: "broker",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :category => {
+            schema_name: "category",
+            ranges: ["Text", "Thing"],
+          }.freeze,
+          :confirmation_number => {
+            schema_name: "confirmationNumber",
+            ranges: ["Text"],
+          }.freeze,
+          :customer => {
+            schema_name: "customer",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :minimum_payment_due => {
+            schema_name: "minimumPaymentDue",
+            ranges: ["MonetaryAmount", "PriceSpecification"],
+          }.freeze,
+          :payment_due => {
+            schema_name: "paymentDue",
+            ranges: ["DateTime"],
+          }.freeze,
+          :payment_due_date => {
+            schema_name: "paymentDueDate",
+            ranges: ["Date", "DateTime"],
+          }.freeze,
+          :payment_method => {
+            schema_name: "paymentMethod",
+            ranges: ["PaymentMethod", "Text"],
+          }.freeze,
+          :payment_method_id => {
+            schema_name: "paymentMethodId",
+            ranges: ["Text"],
+          }.freeze,
+          :payment_status => {
+            schema_name: "paymentStatus",
+            ranges: ["PaymentStatusType", "Text"],
+          }.freeze,
+          :provider => {
+            schema_name: "provider",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :references_order => {
+            schema_name: "referencesOrder",
+            ranges: ["Order"],
+          }.freeze,
+          :scheduled_payment_date => {
+            schema_name: "scheduledPaymentDate",
+            ranges: ["Date"],
+          }.freeze,
+          :total_payment_due => {
+            schema_name: "totalPaymentDue",
+            ranges: ["MonetaryAmount", "PriceSpecification"],
+          }.freeze,
+        }.freeze
       end
+
+      def account_id
+        read_property(:account_id)
+      end
+
+      def account_id=(value)
+        write_property(:account_id, value)
+      end
+
+      def billing_period
+        read_property(:billing_period)
+      end
+
+      def billing_period=(value)
+        write_property(:billing_period, value)
+      end
+
+      def broker
+        read_property(:broker)
+      end
+
+      def broker=(value)
+        write_property(:broker, value)
+      end
+
+      def category
+        read_property(:category)
+      end
+
+      def category=(value)
+        write_property(:category, value)
+      end
+
+      def confirmation_number
+        read_property(:confirmation_number)
+      end
+
+      def confirmation_number=(value)
+        write_property(:confirmation_number, value)
+      end
+
+      def customer
+        read_property(:customer)
+      end
+
+      def customer=(value)
+        write_property(:customer, value)
+      end
+
+      def minimum_payment_due
+        read_property(:minimum_payment_due)
+      end
+
+      def minimum_payment_due=(value)
+        write_property(:minimum_payment_due, value)
+      end
+
+      def payment_due
+        read_property(:payment_due)
+      end
+
+      def payment_due=(value)
+        write_property(:payment_due, value)
+      end
+
+      def payment_due_date
+        read_property(:payment_due_date)
+      end
+
+      def payment_due_date=(value)
+        write_property(:payment_due_date, value)
+      end
+
+      def payment_method
+        read_property(:payment_method)
+      end
+
+      def payment_method=(value)
+        write_property(:payment_method, value)
+      end
+
+      def payment_method_id
+        read_property(:payment_method_id)
+      end
+
+      def payment_method_id=(value)
+        write_property(:payment_method_id, value)
+      end
+
+      def payment_status
+        read_property(:payment_status)
+      end
+
+      def payment_status=(value)
+        write_property(:payment_status, value)
+      end
+
+      def provider
+        read_property(:provider)
+      end
+
+      def provider=(value)
+        write_property(:provider, value)
+      end
+
+      def references_order
+        read_property(:references_order)
+      end
+
+      def references_order=(value)
+        write_property(:references_order, value)
+      end
+
+      def scheduled_payment_date
+        read_property(:scheduled_payment_date)
+      end
+
+      def scheduled_payment_date=(value)
+        write_property(:scheduled_payment_date, value)
+      end
+
+      def total_payment_due
+        read_property(:total_payment_due)
+      end
+
+      def total_payment_due=(value)
+        write_property(:total_payment_due, value)
+      end
+
     end
   end
 end

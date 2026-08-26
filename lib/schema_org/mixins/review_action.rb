@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ReviewAction
-      extend ActiveSupport::Concern
-
       include AssessAction
 
-      included do
-        option :result_review, optional: true # A sub property of result. The review that resulted in the performing of the action.
+      def self.schema_property_definitions
+        {
+          :result_review => {
+            schema_name: "resultReview",
+            ranges: ["Review"],
+          }.freeze,
+        }.freeze
       end
+
+      def result_review
+        read_property(:result_review)
+      end
+
+      def result_review=(value)
+        write_property(:result_review, value)
+      end
+
     end
   end
 end

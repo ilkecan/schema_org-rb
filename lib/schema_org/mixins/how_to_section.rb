@@ -1,17 +1,27 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module HowToSection
-      extend ActiveSupport::Concern
-
       include CreativeWork
       include ItemList
       include ListItem
 
-      included do
-        option :steps, optional: true # A single step item (as HowToStep, text, document, video, etc.) or a HowToSection (originally misnamed 'steps'; 'step' is preferred). Superseded by `step`.
+      def self.schema_property_definitions
+        {
+          :steps => {
+            schema_name: "steps",
+            ranges: ["CreativeWork", "ItemList", "Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def steps
+        read_property(:steps)
+      end
+
+      def steps=(value)
+        write_property(:steps, value)
+      end
+
     end
   end
 end

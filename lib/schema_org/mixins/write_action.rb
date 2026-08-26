@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module WriteAction
-      extend ActiveSupport::Concern
-
       include CreateAction
 
-      included do
-        option :language, optional: true # A sub property of instrument. The language used on this action. Superseded by `in_language`.
-        option :in_language, optional: true # The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]]. Supersedes `language`.
+      def self.schema_property_definitions
+        {
+          :in_language => {
+            schema_name: "inLanguage",
+            ranges: ["Language", "Text"],
+          }.freeze,
+          :language => {
+            schema_name: "language",
+            ranges: ["Language"],
+          }.freeze,
+        }.freeze
       end
+
+      def in_language
+        read_property(:in_language)
+      end
+
+      def in_language=(value)
+        write_property(:in_language, value)
+      end
+
+      def language
+        read_property(:language)
+      end
+
+      def language=(value)
+        write_property(:language, value)
+      end
+
     end
   end
 end

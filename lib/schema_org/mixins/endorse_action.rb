@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module EndorseAction
-      extend ActiveSupport::Concern
-
       include ReactAction
 
-      included do
-        option :endorsee, optional: true # A sub property of participant. The person/organization being supported.
+      def self.schema_property_definitions
+        {
+          :endorsee => {
+            schema_name: "endorsee",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+        }.freeze
       end
+
+      def endorsee
+        read_property(:endorsee)
+      end
+
+      def endorsee=(value)
+        write_property(:endorsee, value)
+      end
+
     end
   end
 end

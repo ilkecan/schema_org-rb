@@ -1,11 +1,13 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module CheckoutPage
-      extend ActiveSupport::Concern
-
       include WebPage
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

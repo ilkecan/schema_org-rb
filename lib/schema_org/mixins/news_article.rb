@@ -1,19 +1,73 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module NewsArticle
-      extend ActiveSupport::Concern
-
       include Article
 
-      included do
-        option :dateline, optional: true # A [dateline](https://en.wikipedia.org/wiki/Dateline) is a brief piece of text included in news articles that describes where and when the story was written or filed though the date is often omitted. Sometimes only a placename is provided.  Structured representations of dateline-related information can also be expressed more explicitly using [[locationCreated]] (which represents where a work was created, e.g. where a news report was written).  For location depicted or described in the content, use [[contentLocation]].  Dateline summaries are oriented more towards human readers than towards automated processing, and can vary substantially. Some examples: "BEIRUT, Lebanon, June 2.", "Paris, France", "December 19, 2017 11:43AM Reporting from Washington", "Beijing/Moscow", "QUEZON CITY, Philippines".
-        option :print_column, optional: true # The number of the column in which the NewsArticle appears in the print edition.
-        option :print_edition, optional: true # The edition of the print product in which the NewsArticle appears.
-        option :print_page, optional: true # If this NewsArticle appears in print, this field indicates the name of the page on which the article is found. Please note that this field is intended for the exact page name (e.g. A5, B18).
-        option :print_section, optional: true # If this NewsArticle appears in print, this field indicates the print section in which the article appeared.
+      def self.schema_property_definitions
+        {
+          :dateline => {
+            schema_name: "dateline",
+            ranges: ["Text"],
+          }.freeze,
+          :print_column => {
+            schema_name: "printColumn",
+            ranges: ["Text"],
+          }.freeze,
+          :print_edition => {
+            schema_name: "printEdition",
+            ranges: ["Text"],
+          }.freeze,
+          :print_page => {
+            schema_name: "printPage",
+            ranges: ["Text"],
+          }.freeze,
+          :print_section => {
+            schema_name: "printSection",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def dateline
+        read_property(:dateline)
+      end
+
+      def dateline=(value)
+        write_property(:dateline, value)
+      end
+
+      def print_column
+        read_property(:print_column)
+      end
+
+      def print_column=(value)
+        write_property(:print_column, value)
+      end
+
+      def print_edition
+        read_property(:print_edition)
+      end
+
+      def print_edition=(value)
+        write_property(:print_edition, value)
+      end
+
+      def print_page
+        read_property(:print_page)
+      end
+
+      def print_page=(value)
+        write_property(:print_page, value)
+      end
+
+      def print_section
+        read_property(:print_section)
+      end
+
+      def print_section=(value)
+        write_property(:print_section, value)
+      end
+
     end
   end
 end

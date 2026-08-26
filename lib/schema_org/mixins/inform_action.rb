@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module InformAction
-      extend ActiveSupport::Concern
-
       include CommunicateAction
 
-      included do
-        option :event, optional: true # Upcoming or past event associated with this place, organization, or action. Supersedes `events`.
+      def self.schema_property_definitions
+        {
+          :event => {
+            schema_name: "event",
+            ranges: ["Event"],
+          }.freeze,
+        }.freeze
       end
+
+      def event
+        read_property(:event)
+      end
+
+      def event=(value)
+        write_property(:event, value)
+      end
+
     end
   end
 end

@@ -1,19 +1,73 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ProgramMembership
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :hosting_organization, optional: true # The Organization (airline, travelers' club, retailer, etc.) the membership is made with or which offers the  MemberProgram.
-        option :members, optional: true # A member of this organization. Superseded by `member`.
-        option :membership_number, optional: true # A unique identifier for the membership.
-        option :program_name, optional: true # The program providing the membership. It is preferable to use [:program](https://schema.org/program) instead.
-        option :member, optional: true # A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals. Supersedes `music_group_member`. Inverse-property: `member_of`.
+      def self.schema_property_definitions
+        {
+          :hosting_organization => {
+            schema_name: "hostingOrganization",
+            ranges: ["Organization"],
+          }.freeze,
+          :member => {
+            schema_name: "member",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :members => {
+            schema_name: "members",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :membership_number => {
+            schema_name: "membershipNumber",
+            ranges: ["Text"],
+          }.freeze,
+          :program_name => {
+            schema_name: "programName",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def hosting_organization
+        read_property(:hosting_organization)
+      end
+
+      def hosting_organization=(value)
+        write_property(:hosting_organization, value)
+      end
+
+      def member
+        read_property(:member)
+      end
+
+      def member=(value)
+        write_property(:member, value)
+      end
+
+      def members
+        read_property(:members)
+      end
+
+      def members=(value)
+        write_property(:members, value)
+      end
+
+      def membership_number
+        read_property(:membership_number)
+      end
+
+      def membership_number=(value)
+        write_property(:membership_number, value)
+      end
+
+      def program_name
+        read_property(:program_name)
+      end
+
+      def program_name=(value)
+        write_property(:program_name, value)
+      end
+
     end
   end
 end

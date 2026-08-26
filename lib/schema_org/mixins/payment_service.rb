@@ -1,12 +1,14 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module PaymentService
-      extend ActiveSupport::Concern
-
       include FinancialProduct
       include PaymentMethod
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

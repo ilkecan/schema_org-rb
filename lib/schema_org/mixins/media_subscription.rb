@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module MediaSubscription
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :authenticator, optional: true # The Organization responsible for authenticating the user's subscription. For example, many media apps require a cable/satellite provider to authenticate your subscription before playing media.
-        option :expects_acceptance_of, optional: true # An Offer which must be accepted before the user can perform the Action. For example, the user may need to buy a movie before being able to watch it.
+      def self.schema_property_definitions
+        {
+          :authenticator => {
+            schema_name: "authenticator",
+            ranges: ["Organization"],
+          }.freeze,
+          :expects_acceptance_of => {
+            schema_name: "expectsAcceptanceOf",
+            ranges: ["Offer"],
+          }.freeze,
+        }.freeze
       end
+
+      def authenticator
+        read_property(:authenticator)
+      end
+
+      def authenticator=(value)
+        write_property(:authenticator, value)
+      end
+
+      def expects_acceptance_of
+        read_property(:expects_acceptance_of)
+      end
+
+      def expects_acceptance_of=(value)
+        write_property(:expects_acceptance_of, value)
+      end
+
     end
   end
 end

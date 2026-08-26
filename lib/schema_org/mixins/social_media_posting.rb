@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module SocialMediaPosting
-      extend ActiveSupport::Concern
-
       include Article
 
-      included do
-        option :shared_content, optional: true # A CreativeWork such as an image, video, or audio clip shared as part of this posting.
+      def self.schema_property_definitions
+        {
+          :shared_content => {
+            schema_name: "sharedContent",
+            ranges: ["CreativeWork"],
+          }.freeze,
+        }.freeze
       end
+
+      def shared_content
+        read_property(:shared_content)
+      end
+
+      def shared_content=(value)
+        write_property(:shared_content, value)
+      end
+
     end
   end
 end

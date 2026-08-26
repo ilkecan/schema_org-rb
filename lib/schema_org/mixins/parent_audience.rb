@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ParentAudience
-      extend ActiveSupport::Concern
-
       include PeopleAudience
 
-      included do
-        option :child_max_age, optional: true # Maximal age of the child.
-        option :child_min_age, optional: true # Minimal age of the child.
+      def self.schema_property_definitions
+        {
+          :child_max_age => {
+            schema_name: "childMaxAge",
+            ranges: ["Number"],
+          }.freeze,
+          :child_min_age => {
+            schema_name: "childMinAge",
+            ranges: ["Number"],
+          }.freeze,
+        }.freeze
       end
+
+      def child_max_age
+        read_property(:child_max_age)
+      end
+
+      def child_max_age=(value)
+        write_property(:child_max_age, value)
+      end
+
+      def child_min_age
+        read_property(:child_min_age)
+      end
+
+      def child_min_age=(value)
+        write_property(:child_min_age, value)
+      end
+
     end
   end
 end

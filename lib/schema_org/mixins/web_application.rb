@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module WebApplication
-      extend ActiveSupport::Concern
-
       include SoftwareApplication
 
-      included do
-        option :browser_requirements, optional: true # Specifies browser requirements in human-readable text. For example, 'requires HTML5 support'.
+      def self.schema_property_definitions
+        {
+          :browser_requirements => {
+            schema_name: "browserRequirements",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def browser_requirements
+        read_property(:browser_requirements)
+      end
+
+      def browser_requirements=(value)
+        write_property(:browser_requirements, value)
+      end
+
     end
   end
 end

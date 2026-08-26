@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module MoveAction
-      extend ActiveSupport::Concern
-
       include Action
 
-      included do
-        option :from_location, optional: true # A sub property of location. The original location of the object or the agent before the action.
-        option :to_location, optional: true # A sub property of location. The final location of the object or the agent after the action.
+      def self.schema_property_definitions
+        {
+          :from_location => {
+            schema_name: "fromLocation",
+            ranges: ["Place"],
+          }.freeze,
+          :to_location => {
+            schema_name: "toLocation",
+            ranges: ["Place"],
+          }.freeze,
+        }.freeze
       end
+
+      def from_location
+        read_property(:from_location)
+      end
+
+      def from_location=(value)
+        write_property(:from_location, value)
+      end
+
+      def to_location
+        read_property(:to_location)
+      end
+
+      def to_location=(value)
+        write_property(:to_location, value)
+      end
+
     end
   end
 end

@@ -1,11 +1,13 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module DeactivateAction
-      extend ActiveSupport::Concern
-
       include ControlAction
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

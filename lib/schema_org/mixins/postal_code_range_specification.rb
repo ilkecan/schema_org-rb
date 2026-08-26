@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module PostalCodeRangeSpecification
-      extend ActiveSupport::Concern
-
       include StructuredValue
 
-      included do
-        option :postal_code_begin, optional: true # First postal code in a range (included).
-        option :postal_code_end, optional: true # Last postal code in the range (included). Needs to be after [[postalCodeBegin]].
+      def self.schema_property_definitions
+        {
+          :postal_code_begin => {
+            schema_name: "postalCodeBegin",
+            ranges: ["Text"],
+          }.freeze,
+          :postal_code_end => {
+            schema_name: "postalCodeEnd",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def postal_code_begin
+        read_property(:postal_code_begin)
+      end
+
+      def postal_code_begin=(value)
+        write_property(:postal_code_begin, value)
+      end
+
+      def postal_code_end
+        read_property(:postal_code_end)
+      end
+
+      def postal_code_end=(value)
+        write_property(:postal_code_end, value)
+      end
+
     end
   end
 end

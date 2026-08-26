@@ -1,17 +1,49 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ScreeningEvent
-      extend ActiveSupport::Concern
-
       include Event
 
-      included do
-        option :subtitle_language, optional: true # Languages in which subtitles/captions are available, in [IETF BCP 47 standard format](http://tools.ietf.org/html/bcp47).
-        option :video_format, optional: true # The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD, etc.).
-        option :work_presented, optional: true # The movie presented during this event.
+      def self.schema_property_definitions
+        {
+          :subtitle_language => {
+            schema_name: "subtitleLanguage",
+            ranges: ["Language", "Text"],
+          }.freeze,
+          :video_format => {
+            schema_name: "videoFormat",
+            ranges: ["Text"],
+          }.freeze,
+          :work_presented => {
+            schema_name: "workPresented",
+            ranges: ["Movie"],
+          }.freeze,
+        }.freeze
       end
+
+      def subtitle_language
+        read_property(:subtitle_language)
+      end
+
+      def subtitle_language=(value)
+        write_property(:subtitle_language, value)
+      end
+
+      def video_format
+        read_property(:video_format)
+      end
+
+      def video_format=(value)
+        write_property(:video_format, value)
+      end
+
+      def work_presented
+        read_property(:work_presented)
+      end
+
+      def work_presented=(value)
+        write_property(:work_presented, value)
+      end
+
     end
   end
 end

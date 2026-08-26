@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module TrackAction
-      extend ActiveSupport::Concern
-
       include FindAction
 
-      included do
-        option :delivery_method, optional: true # A sub property of instrument. The method of delivery.
+      def self.schema_property_definitions
+        {
+          :delivery_method => {
+            schema_name: "deliveryMethod",
+            ranges: ["DeliveryMethod"],
+          }.freeze,
+        }.freeze
       end
+
+      def delivery_method
+        read_property(:delivery_method)
+      end
+
+      def delivery_method=(value)
+        write_property(:delivery_method, value)
+      end
+
     end
   end
 end

@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module GovernmentService
-      extend ActiveSupport::Concern
-
       include Service
 
-      included do
-        option :service_operator, optional: true # The operating organization, if different from the provider.  This enables the representation of services that are provided by an organization, but operated by another organization like a subcontractor.
+      def self.schema_property_definitions
+        {
+          :service_operator => {
+            schema_name: "serviceOperator",
+            ranges: ["Organization"],
+          }.freeze,
+        }.freeze
       end
+
+      def service_operator
+        read_property(:service_operator)
+      end
+
+      def service_operator=(value)
+        write_property(:service_operator, value)
+      end
+
     end
   end
 end

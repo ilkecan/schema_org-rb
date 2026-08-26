@@ -1,18 +1,61 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module RentalCarReservation
-      extend ActiveSupport::Concern
-
       include Reservation
 
-      included do
-        option :dropoff_location, optional: true # Where a rental car can be dropped off.
-        option :dropoff_time, optional: true # When a rental car can be dropped off.
-        option :pickup_location, optional: true # Where a taxi will pick up a passenger or a rental car can be picked up.
-        option :pickup_time, optional: true # When a taxi will pick up a passenger or a rental car can be picked up.
+      def self.schema_property_definitions
+        {
+          :dropoff_location => {
+            schema_name: "dropoffLocation",
+            ranges: ["Place"],
+          }.freeze,
+          :dropoff_time => {
+            schema_name: "dropoffTime",
+            ranges: ["DateTime"],
+          }.freeze,
+          :pickup_location => {
+            schema_name: "pickupLocation",
+            ranges: ["Place"],
+          }.freeze,
+          :pickup_time => {
+            schema_name: "pickupTime",
+            ranges: ["DateTime"],
+          }.freeze,
+        }.freeze
       end
+
+      def dropoff_location
+        read_property(:dropoff_location)
+      end
+
+      def dropoff_location=(value)
+        write_property(:dropoff_location, value)
+      end
+
+      def dropoff_time
+        read_property(:dropoff_time)
+      end
+
+      def dropoff_time=(value)
+        write_property(:dropoff_time, value)
+      end
+
+      def pickup_location
+        read_property(:pickup_location)
+      end
+
+      def pickup_location=(value)
+        write_property(:pickup_location, value)
+      end
+
+      def pickup_time
+        read_property(:pickup_time)
+      end
+
+      def pickup_time=(value)
+        write_property(:pickup_time, value)
+      end
+
     end
   end
 end

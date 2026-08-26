@@ -1,8 +1,25 @@
 module SchemaOrg
   # https://schema.org/Quantity
   #
-  # Quantities such as distance, time, mass, weight, etc. Particular instances of say Mass are entities like '3 kg' or '4 milligrams'.
+  # Quantities such as distance, time, mass, weight, etc. Particular instances of say Mass are strings like '3 kg' or '4 milligrams'.
   class Quantity < Base
     include Mixins::Quantity
+    SCHEMA_TYPES = [self, SchemaOrg::DataType].freeze
+    ABSTRACT_TYPE = true
+
+    class << self
+      def schema_types
+        SCHEMA_TYPES
+      end
+
+      def schema_type?(other_type)
+        Base.schema_type_argument!(other_type)
+        SCHEMA_TYPES.include?(other_type)
+      end
+
+      def new(**properties)
+        raise AbstractTypeError, "Quantity is an abstract schema type"
+      end
+    end
   end
 end

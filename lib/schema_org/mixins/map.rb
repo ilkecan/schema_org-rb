@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Map
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :map_type, optional: true # Indicates the kind of Map, from the MapCategoryType Enumeration.
+      def self.schema_property_definitions
+        {
+          :map_type => {
+            schema_name: "mapType",
+            ranges: ["MapCategoryType"],
+          }.freeze,
+        }.freeze
       end
+
+      def map_type
+        read_property(:map_type)
+      end
+
+      def map_type=(value)
+        write_property(:map_type, value)
+      end
+
     end
   end
 end

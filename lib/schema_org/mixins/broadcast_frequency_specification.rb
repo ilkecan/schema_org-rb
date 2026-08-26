@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module BroadcastFrequencySpecification
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :broadcast_frequency_value, optional: true # The frequency in MHz for a particular broadcast.
+      def self.schema_property_definitions
+        {
+          :broadcast_frequency_value => {
+            schema_name: "broadcastFrequencyValue",
+            ranges: ["Number", "QuantitativeValue"],
+          }.freeze,
+        }.freeze
       end
+
+      def broadcast_frequency_value
+        read_property(:broadcast_frequency_value)
+      end
+
+      def broadcast_frequency_value=(value)
+        write_property(:broadcast_frequency_value, value)
+      end
+
     end
   end
 end

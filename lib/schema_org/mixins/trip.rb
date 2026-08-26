@@ -1,19 +1,73 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Trip
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :arrival_time, optional: true # The expected arrival time.
-        option :departure_time, optional: true # The expected departure time.
-        option :trip_origin, optional: true # The location of origin of the trip, prior to any destination(s).
-        option :offers, optional: true # An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse-property: `item_offered`.
-        option :provider, optional: true # The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes `carrier`.
+      def self.schema_property_definitions
+        {
+          :arrival_time => {
+            schema_name: "arrivalTime",
+            ranges: ["DateTime", "Time"],
+          }.freeze,
+          :departure_time => {
+            schema_name: "departureTime",
+            ranges: ["DateTime", "Time"],
+          }.freeze,
+          :offers => {
+            schema_name: "offers",
+            ranges: ["Demand", "Offer"],
+          }.freeze,
+          :provider => {
+            schema_name: "provider",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :trip_origin => {
+            schema_name: "tripOrigin",
+            ranges: ["Place"],
+          }.freeze,
+        }.freeze
       end
+
+      def arrival_time
+        read_property(:arrival_time)
+      end
+
+      def arrival_time=(value)
+        write_property(:arrival_time, value)
+      end
+
+      def departure_time
+        read_property(:departure_time)
+      end
+
+      def departure_time=(value)
+        write_property(:departure_time, value)
+      end
+
+      def offers
+        read_property(:offers)
+      end
+
+      def offers=(value)
+        write_property(:offers, value)
+      end
+
+      def provider
+        read_property(:provider)
+      end
+
+      def provider=(value)
+        write_property(:provider, value)
+      end
+
+      def trip_origin
+        read_property(:trip_origin)
+      end
+
+      def trip_origin=(value)
+        write_property(:trip_origin, value)
+      end
+
     end
   end
 end

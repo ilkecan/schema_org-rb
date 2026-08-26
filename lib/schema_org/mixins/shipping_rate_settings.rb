@@ -1,20 +1,85 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ShippingRateSettings
-      extend ActiveSupport::Concern
-
       include StructuredValue
 
-      included do
-        option :does_not_ship, optional: true # Indicates when shipping to a particular [[shippingDestination]] is not available.
-        option :free_shipping_threshold, optional: true # A monetary value above (or at) which the shipping rate becomes free. Intended to be used via an [[OfferShippingDetails]] with [[shippingSettingsLink]] matching this [[ShippingRateSettings]].
-        option :is_unlabelled_fallback, optional: true # This can be marked 'true' to indicate that some published [[DeliveryTimeSettings]] or [[ShippingRateSettings]] are intended to apply to all [[OfferShippingDetails]] published by the same merchant, when referenced by a [[shippingSettingsLink]] in those settings. It is not meaningful to use a 'true' value for this property alongside a transitTimeLabel (for [[DeliveryTimeSettings]]) or shippingLabel (for [[ShippingRateSettings]]), since this property is for use with unlabelled settings.
-        option :shipping_destination, optional: true # indicates (possibly multiple) shipping destinations. These can be defined in several ways, e.g. postalCode ranges.
-        option :shipping_label, optional: true # Label to match an [[OfferShippingDetails]] with a [[ShippingRateSettings]] (within the context of a [[shippingSettingsLink]] cross-reference).
-        option :shipping_rate, optional: true # The shipping rate is the cost of shipping to the specified destination. Typically, the maxValue and currency values (of the [[MonetaryAmount]]) are most appropriate.
+      def self.schema_property_definitions
+        {
+          :does_not_ship => {
+            schema_name: "doesNotShip",
+            ranges: ["Boolean"],
+          }.freeze,
+          :free_shipping_threshold => {
+            schema_name: "freeShippingThreshold",
+            ranges: ["DeliveryChargeSpecification", "MonetaryAmount"],
+          }.freeze,
+          :is_unlabelled_fallback => {
+            schema_name: "isUnlabelledFallback",
+            ranges: ["Boolean"],
+          }.freeze,
+          :shipping_destination => {
+            schema_name: "shippingDestination",
+            ranges: ["DefinedRegion"],
+          }.freeze,
+          :shipping_label => {
+            schema_name: "shippingLabel",
+            ranges: ["Text"],
+          }.freeze,
+          :shipping_rate => {
+            schema_name: "shippingRate",
+            ranges: ["MonetaryAmount"],
+          }.freeze,
+        }.freeze
       end
+
+      def does_not_ship
+        read_property(:does_not_ship)
+      end
+
+      def does_not_ship=(value)
+        write_property(:does_not_ship, value)
+      end
+
+      def free_shipping_threshold
+        read_property(:free_shipping_threshold)
+      end
+
+      def free_shipping_threshold=(value)
+        write_property(:free_shipping_threshold, value)
+      end
+
+      def is_unlabelled_fallback
+        read_property(:is_unlabelled_fallback)
+      end
+
+      def is_unlabelled_fallback=(value)
+        write_property(:is_unlabelled_fallback, value)
+      end
+
+      def shipping_destination
+        read_property(:shipping_destination)
+      end
+
+      def shipping_destination=(value)
+        write_property(:shipping_destination, value)
+      end
+
+      def shipping_label
+        read_property(:shipping_label)
+      end
+
+      def shipping_label=(value)
+        write_property(:shipping_label, value)
+      end
+
+      def shipping_rate
+        read_property(:shipping_rate)
+      end
+
+      def shipping_rate=(value)
+        write_property(:shipping_rate, value)
+      end
+
     end
   end
 end

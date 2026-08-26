@@ -1,20 +1,85 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ActionAccessSpecification
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :availability_ends, optional: true # The end of the availability of the product or service included in the offer.
-        option :availability_starts, optional: true # The beginning of the availability of the product or service included in the offer.
-        option :category, optional: true # A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
-        option :eligible_region, optional: true # The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is valid.\n\nSee also [[ineligibleRegion]].
-        option :expects_acceptance_of, optional: true # An Offer which must be accepted before the user can perform the Action. For example, the user may need to buy a movie before being able to watch it.
-        option :requires_subscription, optional: true # Indicates if use of the media require a subscription  (either paid or free). Allowed values are ```true``` or ```false``` (note that an earlier version had 'yes', 'no').
+      def self.schema_property_definitions
+        {
+          :availability_ends => {
+            schema_name: "availabilityEnds",
+            ranges: ["Date", "DateTime", "Time"],
+          }.freeze,
+          :availability_starts => {
+            schema_name: "availabilityStarts",
+            ranges: ["Date", "DateTime", "Time"],
+          }.freeze,
+          :category => {
+            schema_name: "category",
+            ranges: ["Text", "Thing"],
+          }.freeze,
+          :eligible_region => {
+            schema_name: "eligibleRegion",
+            ranges: ["GeoShape", "Place", "Text"],
+          }.freeze,
+          :expects_acceptance_of => {
+            schema_name: "expectsAcceptanceOf",
+            ranges: ["Offer"],
+          }.freeze,
+          :requires_subscription => {
+            schema_name: "requiresSubscription",
+            ranges: ["Boolean", "MediaSubscription"],
+          }.freeze,
+        }.freeze
       end
+
+      def availability_ends
+        read_property(:availability_ends)
+      end
+
+      def availability_ends=(value)
+        write_property(:availability_ends, value)
+      end
+
+      def availability_starts
+        read_property(:availability_starts)
+      end
+
+      def availability_starts=(value)
+        write_property(:availability_starts, value)
+      end
+
+      def category
+        read_property(:category)
+      end
+
+      def category=(value)
+        write_property(:category, value)
+      end
+
+      def eligible_region
+        read_property(:eligible_region)
+      end
+
+      def eligible_region=(value)
+        write_property(:eligible_region, value)
+      end
+
+      def expects_acceptance_of
+        read_property(:expects_acceptance_of)
+      end
+
+      def expects_acceptance_of=(value)
+        write_property(:expects_acceptance_of, value)
+      end
+
+      def requires_subscription
+        read_property(:requires_subscription)
+      end
+
+      def requires_subscription=(value)
+        write_property(:requires_subscription, value)
+      end
+
     end
   end
 end

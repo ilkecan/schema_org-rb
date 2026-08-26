@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Audience
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :audience_type, optional: true # The target group associated with a given audience (e.g. veterans, car owners, musicians, etc.).
-        option :geographic_area, optional: true # The geographic area associated with the audience.
+      def self.schema_property_definitions
+        {
+          :audience_type => {
+            schema_name: "audienceType",
+            ranges: ["Text"],
+          }.freeze,
+          :geographic_area => {
+            schema_name: "geographicArea",
+            ranges: ["AdministrativeArea"],
+          }.freeze,
+        }.freeze
       end
+
+      def audience_type
+        read_property(:audience_type)
+      end
+
+      def audience_type=(value)
+        write_property(:audience_type, value)
+      end
+
+      def geographic_area
+        read_property(:geographic_area)
+      end
+
+      def geographic_area=(value)
+        write_property(:geographic_area, value)
+      end
+
     end
   end
 end

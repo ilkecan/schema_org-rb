@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module SportsOrganization
-      extend ActiveSupport::Concern
-
       include Organization
 
-      included do
-        option :sport, optional: true # A type of sport (e.g. Baseball).
+      def self.schema_property_definitions
+        {
+          :sport => {
+            schema_name: "sport",
+            ranges: ["Text", "URL"],
+          }.freeze,
+        }.freeze
       end
+
+      def sport
+        read_property(:sport)
+      end
+
+      def sport=(value)
+        write_property(:sport, value)
+      end
+
     end
   end
 end

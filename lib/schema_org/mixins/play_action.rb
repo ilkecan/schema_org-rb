@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module PlayAction
-      extend ActiveSupport::Concern
-
       include Action
 
-      included do
-        option :audience, optional: true # An intended audience, i.e. a group for whom something was created. Supersedes `service_audience`.
-        option :event, optional: true # Upcoming or past event associated with this place, organization, or action. Supersedes `events`.
+      def self.schema_property_definitions
+        {
+          :audience => {
+            schema_name: "audience",
+            ranges: ["Audience"],
+          }.freeze,
+          :event => {
+            schema_name: "event",
+            ranges: ["Event"],
+          }.freeze,
+        }.freeze
       end
+
+      def audience
+        read_property(:audience)
+      end
+
+      def audience=(value)
+        write_property(:audience, value)
+      end
+
+      def event
+        read_property(:event)
+      end
+
+      def event=(value)
+        write_property(:event, value)
+      end
+
     end
   end
 end

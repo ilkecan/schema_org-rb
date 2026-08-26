@@ -1,70 +1,685 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Organization
-      extend ActiveSupport::Concern
-
       include Thing
 
-      included do
-        option :accepted_payment_method, optional: true # The payment method(s) that are accepted in general by an organization, or for some specific demand or offer.
-        option :address, optional: true # Physical address of the item.
-        option :aggregate_rating, optional: true # The overall rating, based on a collection of reviews or ratings, of the item.
-        option :awards, optional: true # Awards won by or for this item. Superseded by `award`.
-        option :brand, optional: true # The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
-        option :company_registration, optional: true # The official registration number of a business including the organization that issued it such as Company House or Chamber of Commerce.
-        option :contact_points, optional: true # A contact point for a person or organization. Superseded by `contact_point`.
-        option :department, optional: true # A relationship between an organization and a department of that organization, also described as an organization (allowing different urls, logos, opening hours). For example: a store with a pharmacy, or a bakery with a cafe.
-        option :dissolution_date, optional: true # The date that this organization was dissolved.
-        option :duns, optional: true # The Dun & Bradstreet DUNS number for identifying an organization or business person.
-        option :email, optional: true # Email address.
-        option :employees, optional: true # People working for this organization. Superseded by `employee`.
-        option :events, optional: true # Upcoming or past events associated with this place or organization. Superseded by `event`.
-        option :fax_number, optional: true # The fax number.
-        option :founders, optional: true # A person who founded this organization. Superseded by `founder`.
-        option :founding_date, optional: true # The date that this organization was founded.
-        option :founding_location, optional: true # The place where the Organization was founded.
-        option :funder, optional: true # A person or organization that supports (sponsors) something through some kind of financial contribution.
-        option :global_location_number, optional: true # The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.
-        option :has_offer_catalog, optional: true # Indicates an OfferCatalog listing for this Organization, Person, or Service.
-        option :has_pos, optional: true # Points-of-Sales operated by the organization or person.
-        option :isic_v4, optional: true # The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.
-        option :keywords, optional: true # Keywords or tags used to describe some item. Multiple textual entries in a keywords list are typically delimited by commas, or by repeating the property.
-        option :legal_address, optional: true # The legal address of an organization which acts as the officially registered address used for legal and tax purposes. The legal address can be different from the place of operations of a business and other addresses can be part of an organization.
-        option :legal_name, optional: true # The official name of the organization, e.g. the registered company name.
-        option :legal_representative, optional: true # One or multiple persons who represent this organization legally such as CEO or sole administrator.
-        option :lei_code, optional: true # An organization identifier that uniquely identifies a legal entity as defined in ISO 17442.
-        option :logo, optional: true # An associated logo.
-        option :members, optional: true # A member of this organization. Superseded by `member`.
-        option :naics, optional: true # The North American Industry Classification System (NAICS) code for a particular organization or business person.
-        option :number_of_employees, optional: true # The number of employees in an organization, e.g. business.
-        option :owns, optional: true # Products owned by the organization or person.
-        option :publishing_principles, optional: true # The publishingPrinciples property indicates (typically via [[URL]]) a document describing the editorial principles of an [[Organization]] (or individual, e.g. a [[Person]] writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of the party primarily responsible for the creation of the [[CreativeWork]].  While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.
-        option :reviews, optional: true # Review of the item. Superseded by `review`.
-        option :seeks, optional: true # A pointer to products or services sought by the organization or person (demand).
-        option :skills, optional: true # A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is either claimed by a person, an organization or desired or required to fulfill a role or to work in an occupation.
-        option :slogan, optional: true # A slogan or motto associated with the item.
-        option :tax_id, optional: true # The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.
-        option :telephone, optional: true # The telephone number.
-        option :vat_id, optional: true # The Value-added Tax ID of the organization or person.
-        option :alumni, optional: true # Alumni of an organization. Inverse-property: `alumni_of`.
-        option :award, optional: true # An award won by or for this item. Supersedes `awards`.
-        option :contact_point, optional: true # A contact point for a person or organization. Supersedes `contact_points`.
-        option :employee, optional: true # Someone working for this organization. Supersedes `employees`.
-        option :event, optional: true # Upcoming or past event associated with this place, organization, or action. Supersedes `events`.
-        option :founder, optional: true # A person or organization who founded this organization. Supersedes `founders`.
-        option :makes_offer, optional: true # A pointer to products or services offered by the organization or person. Inverse-property: `offered_by`.
-        option :review, optional: true # A review of the item. Supersedes `reviews`.
-        option :service_area, optional: true # The geographic area where the service is provided. Supersedes `area`. Superseded by `area_served`.
-        option :sponsor, optional: true # A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.
-        option :sub_organization, optional: true # A relationship between two organizations where the first includes the second, e.g., as a subsidiary. See also: the more specific 'department' property. Inverse-property: `parent_organization`.
-        option :member_of, optional: true # An Organization (or ProgramMembership) to which this Person or Organization belongs. Inverse-property: `member`.
-        option :parent_organization, optional: true # The larger organization that this organization is a [[subOrganization]] of, if any. Supersedes `branch_of`. Inverse-property: `sub_organization`.
-        option :area_served, optional: true # The geographic area where a service or offered item is provided. Supersedes `service_area`.
-        option :member, optional: true # A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals. Supersedes `music_group_member`. Inverse-property: `member_of`.
-        option :location, optional: true # The location of, for example, where an event is happening, where an organization is located, or where an action takes place.
+      def self.schema_property_definitions
+        {
+          :accepted_payment_method => {
+            schema_name: "acceptedPaymentMethod",
+            ranges: ["LoanOrCredit", "PaymentMethod", "Text"],
+          }.freeze,
+          :address => {
+            schema_name: "address",
+            ranges: ["PostalAddress", "Text"],
+          }.freeze,
+          :aggregate_rating => {
+            schema_name: "aggregateRating",
+            ranges: ["AggregateRating"],
+          }.freeze,
+          :alumni => {
+            schema_name: "alumni",
+            ranges: ["Person"],
+          }.freeze,
+          :area_served => {
+            schema_name: "areaServed",
+            ranges: ["AdministrativeArea", "GeoShape", "Place", "Text"],
+          }.freeze,
+          :award => {
+            schema_name: "award",
+            ranges: ["Text"],
+          }.freeze,
+          :awards => {
+            schema_name: "awards",
+            ranges: ["Text"],
+          }.freeze,
+          :brand => {
+            schema_name: "brand",
+            ranges: ["Brand", "Organization"],
+          }.freeze,
+          :company_registration => {
+            schema_name: "companyRegistration",
+            ranges: ["Certification"],
+          }.freeze,
+          :contact_point => {
+            schema_name: "contactPoint",
+            ranges: ["ContactPoint"],
+          }.freeze,
+          :contact_points => {
+            schema_name: "contactPoints",
+            ranges: ["ContactPoint"],
+          }.freeze,
+          :department => {
+            schema_name: "department",
+            ranges: ["Organization"],
+          }.freeze,
+          :dissolution_date => {
+            schema_name: "dissolutionDate",
+            ranges: ["Date"],
+          }.freeze,
+          :duns => {
+            schema_name: "duns",
+            ranges: ["Text"],
+          }.freeze,
+          :email => {
+            schema_name: "email",
+            ranges: ["Text"],
+          }.freeze,
+          :employee => {
+            schema_name: "employee",
+            ranges: ["Person"],
+          }.freeze,
+          :employees => {
+            schema_name: "employees",
+            ranges: ["Person"],
+          }.freeze,
+          :event => {
+            schema_name: "event",
+            ranges: ["Event"],
+          }.freeze,
+          :events => {
+            schema_name: "events",
+            ranges: ["Event"],
+          }.freeze,
+          :fax_number => {
+            schema_name: "faxNumber",
+            ranges: ["Text"],
+          }.freeze,
+          :founder => {
+            schema_name: "founder",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :founders => {
+            schema_name: "founders",
+            ranges: ["Person"],
+          }.freeze,
+          :founding_date => {
+            schema_name: "foundingDate",
+            ranges: ["Date"],
+          }.freeze,
+          :founding_location => {
+            schema_name: "foundingLocation",
+            ranges: ["Place"],
+          }.freeze,
+          :funder => {
+            schema_name: "funder",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :global_location_number => {
+            schema_name: "globalLocationNumber",
+            ranges: ["Text"],
+          }.freeze,
+          :has_offer_catalog => {
+            schema_name: "hasOfferCatalog",
+            ranges: ["OfferCatalog"],
+          }.freeze,
+          :has_pos => {
+            schema_name: "hasPOS",
+            ranges: ["Place"],
+          }.freeze,
+          :isic_v4 => {
+            schema_name: "isicV4",
+            ranges: ["Text"],
+          }.freeze,
+          :keywords => {
+            schema_name: "keywords",
+            ranges: ["DefinedTerm", "Text", "URL"],
+          }.freeze,
+          :legal_address => {
+            schema_name: "legalAddress",
+            ranges: ["PostalAddress"],
+          }.freeze,
+          :legal_name => {
+            schema_name: "legalName",
+            ranges: ["Text"],
+          }.freeze,
+          :legal_representative => {
+            schema_name: "legalRepresentative",
+            ranges: ["Person"],
+          }.freeze,
+          :lei_code => {
+            schema_name: "leiCode",
+            ranges: ["Text"],
+          }.freeze,
+          :location => {
+            schema_name: "location",
+            ranges: ["Place", "PostalAddress", "Text"],
+          }.freeze,
+          :logo => {
+            schema_name: "logo",
+            ranges: ["ImageObject", "URL"],
+          }.freeze,
+          :makes_offer => {
+            schema_name: "makesOffer",
+            ranges: ["Offer"],
+          }.freeze,
+          :member => {
+            schema_name: "member",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :member_of => {
+            schema_name: "memberOf",
+            ranges: ["Organization", "ProgramMembership"],
+          }.freeze,
+          :members => {
+            schema_name: "members",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :naics => {
+            schema_name: "naics",
+            ranges: ["Text"],
+          }.freeze,
+          :number_of_employees => {
+            schema_name: "numberOfEmployees",
+            ranges: ["QuantitativeValue"],
+          }.freeze,
+          :owns => {
+            schema_name: "owns",
+            ranges: ["Thing"],
+          }.freeze,
+          :parent_organization => {
+            schema_name: "parentOrganization",
+            ranges: ["Organization"],
+          }.freeze,
+          :publishing_principles => {
+            schema_name: "publishingPrinciples",
+            ranges: ["CreativeWork", "URL"],
+          }.freeze,
+          :review => {
+            schema_name: "review",
+            ranges: ["Review"],
+          }.freeze,
+          :reviews => {
+            schema_name: "reviews",
+            ranges: ["Review"],
+          }.freeze,
+          :seeks => {
+            schema_name: "seeks",
+            ranges: ["Demand"],
+          }.freeze,
+          :service_area => {
+            schema_name: "serviceArea",
+            ranges: ["AdministrativeArea", "GeoShape", "Place"],
+          }.freeze,
+          :skills => {
+            schema_name: "skills",
+            ranges: ["DefinedTerm", "Text"],
+          }.freeze,
+          :slogan => {
+            schema_name: "slogan",
+            ranges: ["Text"],
+          }.freeze,
+          :sponsor => {
+            schema_name: "sponsor",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :sub_organization => {
+            schema_name: "subOrganization",
+            ranges: ["Organization"],
+          }.freeze,
+          :tax_id => {
+            schema_name: "taxID",
+            ranges: ["Text"],
+          }.freeze,
+          :telephone => {
+            schema_name: "telephone",
+            ranges: ["Text"],
+          }.freeze,
+          :vat_id => {
+            schema_name: "vatID",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def accepted_payment_method
+        read_property(:accepted_payment_method)
+      end
+
+      def accepted_payment_method=(value)
+        write_property(:accepted_payment_method, value)
+      end
+
+      def address
+        read_property(:address)
+      end
+
+      def address=(value)
+        write_property(:address, value)
+      end
+
+      def aggregate_rating
+        read_property(:aggregate_rating)
+      end
+
+      def aggregate_rating=(value)
+        write_property(:aggregate_rating, value)
+      end
+
+      def alumni
+        read_property(:alumni)
+      end
+
+      def alumni=(value)
+        write_property(:alumni, value)
+      end
+
+      def area_served
+        read_property(:area_served)
+      end
+
+      def area_served=(value)
+        write_property(:area_served, value)
+      end
+
+      def award
+        read_property(:award)
+      end
+
+      def award=(value)
+        write_property(:award, value)
+      end
+
+      def awards
+        read_property(:awards)
+      end
+
+      def awards=(value)
+        write_property(:awards, value)
+      end
+
+      def brand
+        read_property(:brand)
+      end
+
+      def brand=(value)
+        write_property(:brand, value)
+      end
+
+      def company_registration
+        read_property(:company_registration)
+      end
+
+      def company_registration=(value)
+        write_property(:company_registration, value)
+      end
+
+      def contact_point
+        read_property(:contact_point)
+      end
+
+      def contact_point=(value)
+        write_property(:contact_point, value)
+      end
+
+      def contact_points
+        read_property(:contact_points)
+      end
+
+      def contact_points=(value)
+        write_property(:contact_points, value)
+      end
+
+      def department
+        read_property(:department)
+      end
+
+      def department=(value)
+        write_property(:department, value)
+      end
+
+      def dissolution_date
+        read_property(:dissolution_date)
+      end
+
+      def dissolution_date=(value)
+        write_property(:dissolution_date, value)
+      end
+
+      def duns
+        read_property(:duns)
+      end
+
+      def duns=(value)
+        write_property(:duns, value)
+      end
+
+      def email
+        read_property(:email)
+      end
+
+      def email=(value)
+        write_property(:email, value)
+      end
+
+      def employee
+        read_property(:employee)
+      end
+
+      def employee=(value)
+        write_property(:employee, value)
+      end
+
+      def employees
+        read_property(:employees)
+      end
+
+      def employees=(value)
+        write_property(:employees, value)
+      end
+
+      def event
+        read_property(:event)
+      end
+
+      def event=(value)
+        write_property(:event, value)
+      end
+
+      def events
+        read_property(:events)
+      end
+
+      def events=(value)
+        write_property(:events, value)
+      end
+
+      def fax_number
+        read_property(:fax_number)
+      end
+
+      def fax_number=(value)
+        write_property(:fax_number, value)
+      end
+
+      def founder
+        read_property(:founder)
+      end
+
+      def founder=(value)
+        write_property(:founder, value)
+      end
+
+      def founders
+        read_property(:founders)
+      end
+
+      def founders=(value)
+        write_property(:founders, value)
+      end
+
+      def founding_date
+        read_property(:founding_date)
+      end
+
+      def founding_date=(value)
+        write_property(:founding_date, value)
+      end
+
+      def founding_location
+        read_property(:founding_location)
+      end
+
+      def founding_location=(value)
+        write_property(:founding_location, value)
+      end
+
+      def funder
+        read_property(:funder)
+      end
+
+      def funder=(value)
+        write_property(:funder, value)
+      end
+
+      def global_location_number
+        read_property(:global_location_number)
+      end
+
+      def global_location_number=(value)
+        write_property(:global_location_number, value)
+      end
+
+      def has_offer_catalog
+        read_property(:has_offer_catalog)
+      end
+
+      def has_offer_catalog=(value)
+        write_property(:has_offer_catalog, value)
+      end
+
+      def has_pos
+        read_property(:has_pos)
+      end
+
+      def has_pos=(value)
+        write_property(:has_pos, value)
+      end
+
+      def isic_v4
+        read_property(:isic_v4)
+      end
+
+      def isic_v4=(value)
+        write_property(:isic_v4, value)
+      end
+
+      def keywords
+        read_property(:keywords)
+      end
+
+      def keywords=(value)
+        write_property(:keywords, value)
+      end
+
+      def legal_address
+        read_property(:legal_address)
+      end
+
+      def legal_address=(value)
+        write_property(:legal_address, value)
+      end
+
+      def legal_name
+        read_property(:legal_name)
+      end
+
+      def legal_name=(value)
+        write_property(:legal_name, value)
+      end
+
+      def legal_representative
+        read_property(:legal_representative)
+      end
+
+      def legal_representative=(value)
+        write_property(:legal_representative, value)
+      end
+
+      def lei_code
+        read_property(:lei_code)
+      end
+
+      def lei_code=(value)
+        write_property(:lei_code, value)
+      end
+
+      def location
+        read_property(:location)
+      end
+
+      def location=(value)
+        write_property(:location, value)
+      end
+
+      def logo
+        read_property(:logo)
+      end
+
+      def logo=(value)
+        write_property(:logo, value)
+      end
+
+      def makes_offer
+        read_property(:makes_offer)
+      end
+
+      def makes_offer=(value)
+        write_property(:makes_offer, value)
+      end
+
+      def member
+        read_property(:member)
+      end
+
+      def member=(value)
+        write_property(:member, value)
+      end
+
+      def member_of
+        read_property(:member_of)
+      end
+
+      def member_of=(value)
+        write_property(:member_of, value)
+      end
+
+      def members
+        read_property(:members)
+      end
+
+      def members=(value)
+        write_property(:members, value)
+      end
+
+      def naics
+        read_property(:naics)
+      end
+
+      def naics=(value)
+        write_property(:naics, value)
+      end
+
+      def number_of_employees
+        read_property(:number_of_employees)
+      end
+
+      def number_of_employees=(value)
+        write_property(:number_of_employees, value)
+      end
+
+      def owns
+        read_property(:owns)
+      end
+
+      def owns=(value)
+        write_property(:owns, value)
+      end
+
+      def parent_organization
+        read_property(:parent_organization)
+      end
+
+      def parent_organization=(value)
+        write_property(:parent_organization, value)
+      end
+
+      def publishing_principles
+        read_property(:publishing_principles)
+      end
+
+      def publishing_principles=(value)
+        write_property(:publishing_principles, value)
+      end
+
+      def review
+        read_property(:review)
+      end
+
+      def review=(value)
+        write_property(:review, value)
+      end
+
+      def reviews
+        read_property(:reviews)
+      end
+
+      def reviews=(value)
+        write_property(:reviews, value)
+      end
+
+      def seeks
+        read_property(:seeks)
+      end
+
+      def seeks=(value)
+        write_property(:seeks, value)
+      end
+
+      def service_area
+        read_property(:service_area)
+      end
+
+      def service_area=(value)
+        write_property(:service_area, value)
+      end
+
+      def skills
+        read_property(:skills)
+      end
+
+      def skills=(value)
+        write_property(:skills, value)
+      end
+
+      def slogan
+        read_property(:slogan)
+      end
+
+      def slogan=(value)
+        write_property(:slogan, value)
+      end
+
+      def sponsor
+        read_property(:sponsor)
+      end
+
+      def sponsor=(value)
+        write_property(:sponsor, value)
+      end
+
+      def sub_organization
+        read_property(:sub_organization)
+      end
+
+      def sub_organization=(value)
+        write_property(:sub_organization, value)
+      end
+
+      def tax_id
+        read_property(:tax_id)
+      end
+
+      def tax_id=(value)
+        write_property(:tax_id, value)
+      end
+
+      def telephone
+        read_property(:telephone)
+      end
+
+      def telephone=(value)
+        write_property(:telephone, value)
+      end
+
+      def vat_id
+        read_property(:vat_id)
+      end
+
+      def vat_id=(value)
+        write_property(:vat_id, value)
+      end
+
     end
   end
 end

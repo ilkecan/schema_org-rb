@@ -1,21 +1,97 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Article
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :article_body, optional: true # The actual body of the article.
-        option :article_section, optional: true # Articles may belong to one or more 'sections' in a magazine or newspaper, such as Sports, Lifestyle, etc.
-        option :page_end, optional: true # The page on which the work ends; for example "138" or "xvi".
-        option :page_start, optional: true # The page on which the work starts; for example "135" or "xiii".
-        option :pagination, optional: true # Any description of pages that is not separated into pageStart and pageEnd; for example, "1-6, 9, 55" or "10-12, 46-49".
-        option :speakable, optional: true # Indicates sections of a Web page that are particularly 'speakable' in the sense of being highlighted as being especially appropriate for text-to-speech conversion. Other sections of a page may also be usefully spoken in particular circumstances; the 'speakable' property serves to indicate the parts most likely to be generally useful for speech.  The *speakable* property can be repeated an arbitrary number of times, with three kinds of possible 'content-locator' values:  1.) *id-value* URL references - uses *id-value* of an element in the page being annotated. The simplest use of *speakable* has (potentially relative) URL values, referencing identified sections of the document concerned.  2.) CSS Selectors - addresses content in the annotated page, e.g. via class attribute. Use the [[cssSelector]] property.  3.)  XPaths - addresses content via XPaths (assuming an XML view of the content). Use the [[xpath]] property.   For more sophisticated markup of speakable sections beyond simple ID references, either CSS selectors or XPath expressions to pick out document section(s) as speakable. For this we define a supporting type, [[SpeakableSpecification]]  which is defined to be a possible value of the *speakable* property.
-        option :word_count, optional: true # The number of words in the text of the CreativeWork such as an Article, Book, etc.
+      def self.schema_property_definitions
+        {
+          :article_body => {
+            schema_name: "articleBody",
+            ranges: ["Text"],
+          }.freeze,
+          :article_section => {
+            schema_name: "articleSection",
+            ranges: ["Text"],
+          }.freeze,
+          :page_end => {
+            schema_name: "pageEnd",
+            ranges: ["Integer", "Text"],
+          }.freeze,
+          :page_start => {
+            schema_name: "pageStart",
+            ranges: ["Integer", "Text"],
+          }.freeze,
+          :pagination => {
+            schema_name: "pagination",
+            ranges: ["Text"],
+          }.freeze,
+          :speakable => {
+            schema_name: "speakable",
+            ranges: ["SpeakableSpecification", "URL"],
+          }.freeze,
+          :word_count => {
+            schema_name: "wordCount",
+            ranges: ["Integer"],
+          }.freeze,
+        }.freeze
       end
+
+      def article_body
+        read_property(:article_body)
+      end
+
+      def article_body=(value)
+        write_property(:article_body, value)
+      end
+
+      def article_section
+        read_property(:article_section)
+      end
+
+      def article_section=(value)
+        write_property(:article_section, value)
+      end
+
+      def page_end
+        read_property(:page_end)
+      end
+
+      def page_end=(value)
+        write_property(:page_end, value)
+      end
+
+      def page_start
+        read_property(:page_start)
+      end
+
+      def page_start=(value)
+        write_property(:page_start, value)
+      end
+
+      def pagination
+        read_property(:pagination)
+      end
+
+      def pagination=(value)
+        write_property(:pagination, value)
+      end
+
+      def speakable
+        read_property(:speakable)
+      end
+
+      def speakable=(value)
+        write_property(:speakable, value)
+      end
+
+      def word_count
+        read_property(:word_count)
+      end
+
+      def word_count=(value)
+        write_property(:word_count, value)
+      end
+
     end
   end
 end

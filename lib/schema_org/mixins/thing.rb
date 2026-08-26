@@ -1,24 +1,168 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Thing
-      extend ActiveSupport::Concern
 
-      included do
-        option :additional_type, optional: true # An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
-        option :disambiguating_description, optional: true # A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
-        option :name, optional: true # The name of the item.
-        option :potential_action, optional: true # Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-        option :same_as, optional: true # URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
-        option :url, optional: true # URL of the item.
-        option :alternate_name, optional: true # An alias for the item.
-        option :description, optional: true # A description of the item.
-        option :main_entity_of_page, optional: true # Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details. Inverse-property: `main_entity`.
-        option :subject_of, optional: true # A CreativeWork or Event about this Thing. Inverse-property: `about`.
-        option :image, optional: true # An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
-        option :identifier, optional: true # The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.
+      def self.schema_property_definitions
+        {
+          :additional_type => {
+            schema_name: "additionalType",
+            ranges: ["Text", "URL"],
+          }.freeze,
+          :alternate_name => {
+            schema_name: "alternateName",
+            ranges: ["Text"],
+          }.freeze,
+          :description => {
+            schema_name: "description",
+            ranges: ["Text", "TextObject"],
+          }.freeze,
+          :disambiguating_description => {
+            schema_name: "disambiguatingDescription",
+            ranges: ["Text"],
+          }.freeze,
+          :identifier => {
+            schema_name: "identifier",
+            ranges: ["PropertyValue", "Text", "URL"],
+          }.freeze,
+          :image => {
+            schema_name: "image",
+            ranges: ["ImageObject", "URL"],
+          }.freeze,
+          :main_entity_of_page => {
+            schema_name: "mainEntityOfPage",
+            ranges: ["CreativeWork", "URL"],
+          }.freeze,
+          :name => {
+            schema_name: "name",
+            ranges: ["Text"],
+          }.freeze,
+          :owner => {
+            schema_name: "owner",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :potential_action => {
+            schema_name: "potentialAction",
+            ranges: ["Action"],
+          }.freeze,
+          :same_as => {
+            schema_name: "sameAs",
+            ranges: ["URL"],
+          }.freeze,
+          :subject_of => {
+            schema_name: "subjectOf",
+            ranges: ["CreativeWork", "Event"],
+          }.freeze,
+          :url => {
+            schema_name: "url",
+            ranges: ["URL"],
+          }.freeze,
+        }.freeze
       end
+
+      def additional_type
+        read_property(:additional_type)
+      end
+
+      def additional_type=(value)
+        write_property(:additional_type, value)
+      end
+
+      def alternate_name
+        read_property(:alternate_name)
+      end
+
+      def alternate_name=(value)
+        write_property(:alternate_name, value)
+      end
+
+      def description
+        read_property(:description)
+      end
+
+      def description=(value)
+        write_property(:description, value)
+      end
+
+      def disambiguating_description
+        read_property(:disambiguating_description)
+      end
+
+      def disambiguating_description=(value)
+        write_property(:disambiguating_description, value)
+      end
+
+      def identifier
+        read_property(:identifier)
+      end
+
+      def identifier=(value)
+        write_property(:identifier, value)
+      end
+
+      def image
+        read_property(:image)
+      end
+
+      def image=(value)
+        write_property(:image, value)
+      end
+
+      def main_entity_of_page
+        read_property(:main_entity_of_page)
+      end
+
+      def main_entity_of_page=(value)
+        write_property(:main_entity_of_page, value)
+      end
+
+      def name
+        read_property(:name)
+      end
+
+      def name=(value)
+        write_property(:name, value)
+      end
+
+      def owner
+        read_property(:owner)
+      end
+
+      def owner=(value)
+        write_property(:owner, value)
+      end
+
+      def potential_action
+        read_property(:potential_action)
+      end
+
+      def potential_action=(value)
+        write_property(:potential_action, value)
+      end
+
+      def same_as
+        read_property(:same_as)
+      end
+
+      def same_as=(value)
+        write_property(:same_as, value)
+      end
+
+      def subject_of
+        read_property(:subject_of)
+      end
+
+      def subject_of=(value)
+        write_property(:subject_of, value)
+      end
+
+      def url
+        read_property(:url)
+      end
+
+      def url=(value)
+        write_property(:url, value)
+      end
+
     end
   end
 end

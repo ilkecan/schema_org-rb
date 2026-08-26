@@ -1,20 +1,85 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Dataset
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :catalog, optional: true # A data catalog which contains this dataset. Superseded by `included_in_data_catalog`.
-        option :dataset_time_interval, optional: true # The range of temporal applicability of a dataset, e.g. for a 2011 census dataset, the year 2011 (in ISO 8601 time interval format). Superseded by `temporal_coverage`.
-        option :distribution, optional: true # A downloadable form of this dataset, at a specific location, in a specific format. This property can be repeated if different variations are available. There is no expectation that different downloadable distributions must contain exactly equivalent information (see also [DCAT](https://www.w3.org/TR/vocab-dcat-3/#Class:Distribution) on this point). Different distributions might include or exclude different subsets of the entire dataset, for example.
-        option :included_data_catalog, optional: true # A data catalog which contains this dataset (this property was previously 'catalog', preferred name is now 'includedInDataCatalog'). Superseded by `included_in_data_catalog`.
-        option :issn, optional: true # The International Standard Serial Number (ISSN) that identifies this serial publication. You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L) for, this serial publication.
-        option :included_in_data_catalog, optional: true # A data catalog which contains this dataset. Supersedes `included_data_catalog`. Inverse-property: `dataset`.
+      def self.schema_property_definitions
+        {
+          :catalog => {
+            schema_name: "catalog",
+            ranges: ["DataCatalog"],
+          }.freeze,
+          :dataset_time_interval => {
+            schema_name: "datasetTimeInterval",
+            ranges: ["DateTime"],
+          }.freeze,
+          :distribution => {
+            schema_name: "distribution",
+            ranges: ["DataDownload"],
+          }.freeze,
+          :included_data_catalog => {
+            schema_name: "includedDataCatalog",
+            ranges: ["DataCatalog"],
+          }.freeze,
+          :included_in_data_catalog => {
+            schema_name: "includedInDataCatalog",
+            ranges: ["DataCatalog"],
+          }.freeze,
+          :issn => {
+            schema_name: "issn",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def catalog
+        read_property(:catalog)
+      end
+
+      def catalog=(value)
+        write_property(:catalog, value)
+      end
+
+      def dataset_time_interval
+        read_property(:dataset_time_interval)
+      end
+
+      def dataset_time_interval=(value)
+        write_property(:dataset_time_interval, value)
+      end
+
+      def distribution
+        read_property(:distribution)
+      end
+
+      def distribution=(value)
+        write_property(:distribution, value)
+      end
+
+      def included_data_catalog
+        read_property(:included_data_catalog)
+      end
+
+      def included_data_catalog=(value)
+        write_property(:included_data_catalog, value)
+      end
+
+      def included_in_data_catalog
+        read_property(:included_in_data_catalog)
+      end
+
+      def included_in_data_catalog=(value)
+        write_property(:included_in_data_catalog, value)
+      end
+
+      def issn
+        read_property(:issn)
+      end
+
+      def issn=(value)
+        write_property(:issn, value)
+      end
+
     end
   end
 end

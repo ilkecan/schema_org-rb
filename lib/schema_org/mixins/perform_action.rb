@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module PerformAction
-      extend ActiveSupport::Concern
-
       include PlayAction
 
-      included do
-        option :entertainment_business, optional: true # A sub property of location. The entertainment business where the action occurred.
+      def self.schema_property_definitions
+        {
+          :entertainment_business => {
+            schema_name: "entertainmentBusiness",
+            ranges: ["EntertainmentBusiness"],
+          }.freeze,
+        }.freeze
       end
+
+      def entertainment_business
+        read_property(:entertainment_business)
+      end
+
+      def entertainment_business=(value)
+        write_property(:entertainment_business, value)
+      end
+
     end
   end
 end

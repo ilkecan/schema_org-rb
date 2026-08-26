@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module EngineSpecification
-      extend ActiveSupport::Concern
-
       include StructuredValue
 
-      included do
-        option :fuel_type, optional: true # The type of fuel suitable for the engine or engines of the vehicle. If the vehicle has only one engine, this property can be attached directly to the vehicle.
+      def self.schema_property_definitions
+        {
+          :fuel_type => {
+            schema_name: "fuelType",
+            ranges: ["QualitativeValue", "Text", "URL"],
+          }.freeze,
+        }.freeze
       end
+
+      def fuel_type
+        read_property(:fuel_type)
+      end
+
+      def fuel_type=(value)
+        write_property(:fuel_type, value)
+      end
+
     end
   end
 end

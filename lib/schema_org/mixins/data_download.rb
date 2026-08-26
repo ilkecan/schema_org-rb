@@ -1,11 +1,13 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module DataDownload
-      extend ActiveSupport::Concern
-
       include MediaObject
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

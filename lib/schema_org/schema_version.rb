@@ -1,3 +1,3 @@
 module SchemaOrg
-  SCHEMA_VERSION = "v29.3"
+  SCHEMA_VERSION = "v30.0"
 end

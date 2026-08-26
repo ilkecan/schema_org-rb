@@ -1,11 +1,13 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Season
-      extend ActiveSupport::Concern
-
       include CreativeWork
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

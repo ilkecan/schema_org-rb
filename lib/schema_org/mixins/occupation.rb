@@ -1,22 +1,109 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Occupation
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :education_requirements, optional: true # Educational background needed for the position or Occupation.
-        option :estimated_salary, optional: true # An estimated salary for a job posting or occupation, based on a variety of variables including, but not limited to industry, job title, and location. Estimated salaries  are often computed by outside organizations rather than the hiring organization, who may not have committed to the estimated value.
-        option :experience_requirements, optional: true # Description of skills and experience needed for the position or Occupation.
-        option :occupation_location, optional: true # The region/country for which this occupational description is appropriate. Note that educational requirements and qualifications can vary between jurisdictions.
-        option :occupational_category, optional: true # A category describing the job, preferably using a term from a taxonomy such as [BLS O*NET-SOC](http://www.onetcenter.org/taxonomy.html), [ISCO-08](https://www.ilo.org/public/english/bureau/stat/isco/isco08/) or similar, with the property repeated for each applicable value. Ideally the taxonomy should be identified, and both the textual label and formal code for the category should be provided.\n Note: for historical reasons, any textual label and formal code provided as a literal may be assumed to be from O*NET-SOC.
-        option :qualifications, optional: true # Specific qualifications required for this role or Occupation.
-        option :responsibilities, optional: true # Responsibilities associated with this role or Occupation.
-        option :skills, optional: true # A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is either claimed by a person, an organization or desired or required to fulfill a role or to work in an occupation.
+      def self.schema_property_definitions
+        {
+          :education_requirements => {
+            schema_name: "educationRequirements",
+            ranges: ["Text"],
+          }.freeze,
+          :estimated_salary => {
+            schema_name: "estimatedSalary",
+            ranges: ["MonetaryAmount", "MonetaryAmountDistribution", "Number"],
+          }.freeze,
+          :experience_requirements => {
+            schema_name: "experienceRequirements",
+            ranges: ["Text"],
+          }.freeze,
+          :occupation_location => {
+            schema_name: "occupationLocation",
+            ranges: ["AdministrativeArea"],
+          }.freeze,
+          :occupational_category => {
+            schema_name: "occupationalCategory",
+            ranges: ["Text"],
+          }.freeze,
+          :qualifications => {
+            schema_name: "qualifications",
+            ranges: ["Text"],
+          }.freeze,
+          :responsibilities => {
+            schema_name: "responsibilities",
+            ranges: ["Text"],
+          }.freeze,
+          :skills => {
+            schema_name: "skills",
+            ranges: ["DefinedTerm", "Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def education_requirements
+        read_property(:education_requirements)
+      end
+
+      def education_requirements=(value)
+        write_property(:education_requirements, value)
+      end
+
+      def estimated_salary
+        read_property(:estimated_salary)
+      end
+
+      def estimated_salary=(value)
+        write_property(:estimated_salary, value)
+      end
+
+      def experience_requirements
+        read_property(:experience_requirements)
+      end
+
+      def experience_requirements=(value)
+        write_property(:experience_requirements, value)
+      end
+
+      def occupation_location
+        read_property(:occupation_location)
+      end
+
+      def occupation_location=(value)
+        write_property(:occupation_location, value)
+      end
+
+      def occupational_category
+        read_property(:occupational_category)
+      end
+
+      def occupational_category=(value)
+        write_property(:occupational_category, value)
+      end
+
+      def qualifications
+        read_property(:qualifications)
+      end
+
+      def qualifications=(value)
+        write_property(:qualifications, value)
+      end
+
+      def responsibilities
+        read_property(:responsibilities)
+      end
+
+      def responsibilities=(value)
+        write_property(:responsibilities, value)
+      end
+
+      def skills
+        read_property(:skills)
+      end
+
+      def skills=(value)
+        write_property(:skills, value)
+      end
+
     end
   end
 end

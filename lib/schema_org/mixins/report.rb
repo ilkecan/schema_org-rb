@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Report
-      extend ActiveSupport::Concern
-
       include Article
 
-      included do
-        option :report_number, optional: true # The number or other unique designator assigned to a Report by the publishing organization.
+      def self.schema_property_definitions
+        {
+          :report_number => {
+            schema_name: "reportNumber",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def report_number
+        read_property(:report_number)
+      end
+
+      def report_number=(value)
+        write_property(:report_number, value)
+      end
+
     end
   end
 end

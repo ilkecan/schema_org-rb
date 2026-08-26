@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module DataCatalog
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :dataset, optional: true # A dataset contained in this catalog. Inverse-property: `included_in_data_catalog`.
+      def self.schema_property_definitions
+        {
+          :dataset => {
+            schema_name: "dataset",
+            ranges: ["Dataset"],
+          }.freeze,
+        }.freeze
       end
+
+      def dataset
+        read_property(:dataset)
+      end
+
+      def dataset=(value)
+        write_property(:dataset, value)
+      end
+
     end
   end
 end

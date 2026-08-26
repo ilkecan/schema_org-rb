@@ -1,21 +1,97 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Accommodation
-      extend ActiveSupport::Concern
-
       include Place
 
-      included do
-        option :amenity_feature, optional: true # An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs.
-        option :bed, optional: true # The type of bed or beds included in the accommodation. For the single case of just one bed of a certain type, you use bed directly with a text.       If you want to indicate the quantity of a certain kind of bed, use an instance of BedDetails. For more detailed information, use the amenityFeature property.
-        option :floor_size, optional: true # The size of the accommodation, e.g. in square meter or squarefoot. Typical unit code(s): MTK for square meter, FTK for square foot, or YDK for square yard.
-        option :number_of_rooms, optional: true # The number of rooms (excluding bathrooms and closets) of the accommodation or lodging business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.
-        option :occupancy, optional: true # The allowed total occupancy for the accommodation in persons (including infants etc). For individual accommodations, this is not necessarily the legal maximum but defines the permitted usage as per the contractual agreement (e.g. a double room used by a single person). Typical unit code(s): C62 for person.
-        option :permitted_usage, optional: true # Indications regarding the permitted usage of the accommodation.
-        option :pets_allowed, optional: true # Indicates whether pets are allowed to enter the accommodation or lodging business. More detailed information can be put in a text value.
+      def self.schema_property_definitions
+        {
+          :amenity_feature => {
+            schema_name: "amenityFeature",
+            ranges: ["LocationFeatureSpecification"],
+          }.freeze,
+          :bed => {
+            schema_name: "bed",
+            ranges: ["BedDetails", "BedType", "Text"],
+          }.freeze,
+          :floor_size => {
+            schema_name: "floorSize",
+            ranges: ["QuantitativeValue"],
+          }.freeze,
+          :number_of_rooms => {
+            schema_name: "numberOfRooms",
+            ranges: ["Number", "QuantitativeValue"],
+          }.freeze,
+          :occupancy => {
+            schema_name: "occupancy",
+            ranges: ["QuantitativeValue"],
+          }.freeze,
+          :permitted_usage => {
+            schema_name: "permittedUsage",
+            ranges: ["Text"],
+          }.freeze,
+          :pets_allowed => {
+            schema_name: "petsAllowed",
+            ranges: ["Boolean", "Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def amenity_feature
+        read_property(:amenity_feature)
+      end
+
+      def amenity_feature=(value)
+        write_property(:amenity_feature, value)
+      end
+
+      def bed
+        read_property(:bed)
+      end
+
+      def bed=(value)
+        write_property(:bed, value)
+      end
+
+      def floor_size
+        read_property(:floor_size)
+      end
+
+      def floor_size=(value)
+        write_property(:floor_size, value)
+      end
+
+      def number_of_rooms
+        read_property(:number_of_rooms)
+      end
+
+      def number_of_rooms=(value)
+        write_property(:number_of_rooms, value)
+      end
+
+      def occupancy
+        read_property(:occupancy)
+      end
+
+      def occupancy=(value)
+        write_property(:occupancy, value)
+      end
+
+      def permitted_usage
+        read_property(:permitted_usage)
+      end
+
+      def permitted_usage=(value)
+        write_property(:permitted_usage, value)
+      end
+
+      def pets_allowed
+        read_property(:pets_allowed)
+      end
+
+      def pets_allowed=(value)
+        write_property(:pets_allowed, value)
+      end
+
     end
   end
 end

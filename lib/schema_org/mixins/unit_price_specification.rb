@@ -1,19 +1,73 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module UnitPriceSpecification
-      extend ActiveSupport::Concern
-
       include PriceSpecification
 
-      included do
-        option :billing_increment, optional: true # This property specifies the minimal quantity and rounding increment that will be the basis for the billing. The unit of measurement is specified by the unitCode property.
-        option :price_type, optional: true # Defines the type of a price specified for an offered product, for example a list price, a (temporary) sale price or a manufacturer suggested retail price. If multiple prices are specified for an offer the [[priceType]] property can be used to identify the type of each such specified price. The value of priceType can be specified as a value from enumeration PriceTypeEnumeration or as a free form text string for price types that are not already predefined in PriceTypeEnumeration.
-        option :reference_quantity, optional: true # The reference quantity for which a certain price applies, e.g. 1 EUR per 4 kWh of electricity. This property is a replacement for unitOfMeasurement for the advanced cases where the price does not relate to a standard unit.
-        option :unit_code, optional: true # The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.
-        option :unit_text, optional: true # A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for <a href='unitCode'>unitCode</a>.
+      def self.schema_property_definitions
+        {
+          :billing_increment => {
+            schema_name: "billingIncrement",
+            ranges: ["Number"],
+          }.freeze,
+          :price_type => {
+            schema_name: "priceType",
+            ranges: ["Text"],
+          }.freeze,
+          :reference_quantity => {
+            schema_name: "referenceQuantity",
+            ranges: ["QuantitativeValue"],
+          }.freeze,
+          :unit_code => {
+            schema_name: "unitCode",
+            ranges: ["Text", "URL"],
+          }.freeze,
+          :unit_text => {
+            schema_name: "unitText",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def billing_increment
+        read_property(:billing_increment)
+      end
+
+      def billing_increment=(value)
+        write_property(:billing_increment, value)
+      end
+
+      def price_type
+        read_property(:price_type)
+      end
+
+      def price_type=(value)
+        write_property(:price_type, value)
+      end
+
+      def reference_quantity
+        read_property(:reference_quantity)
+      end
+
+      def reference_quantity=(value)
+        write_property(:reference_quantity, value)
+      end
+
+      def unit_code
+        read_property(:unit_code)
+      end
+
+      def unit_code=(value)
+        write_property(:unit_code, value)
+      end
+
+      def unit_text
+        read_property(:unit_text)
+      end
+
+      def unit_text=(value)
+        write_property(:unit_text, value)
+      end
+
     end
   end
 end

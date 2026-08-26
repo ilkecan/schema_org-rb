@@ -1,18 +1,61 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module DatedMoneySpecification
-      extend ActiveSupport::Concern
-
       include StructuredValue
 
-      included do
-        option :amount, optional: true # The amount of money.
-        option :currency, optional: true # The currency in which the monetary amount is expressed.\n\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types, e.g. "Ithaca HOUR".
-        option :end_date, optional: true # The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).
-        option :start_date, optional: true # The start date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).
+      def self.schema_property_definitions
+        {
+          :amount => {
+            schema_name: "amount",
+            ranges: ["MonetaryAmount", "Number"],
+          }.freeze,
+          :currency => {
+            schema_name: "currency",
+            ranges: ["Text"],
+          }.freeze,
+          :end_date => {
+            schema_name: "endDate",
+            ranges: ["Date", "DateTime"],
+          }.freeze,
+          :start_date => {
+            schema_name: "startDate",
+            ranges: ["Date", "DateTime"],
+          }.freeze,
+        }.freeze
       end
+
+      def amount
+        read_property(:amount)
+      end
+
+      def amount=(value)
+        write_property(:amount, value)
+      end
+
+      def currency
+        read_property(:currency)
+      end
+
+      def currency=(value)
+        write_property(:currency, value)
+      end
+
+      def end_date
+        read_property(:end_date)
+      end
+
+      def end_date=(value)
+        write_property(:end_date, value)
+      end
+
+      def start_date
+        read_property(:start_date)
+      end
+
+      def start_date=(value)
+        write_property(:start_date, value)
+      end
+
     end
   end
 end

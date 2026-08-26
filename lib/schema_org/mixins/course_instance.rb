@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module CourseInstance
-      extend ActiveSupport::Concern
-
       include Event
 
-      included do
-        option :course_mode, optional: true # The medium or means of delivery of the course instance or the mode of study, either as a text label (e.g. "online", "onsite" or "blended"; "synchronous" or "asynchronous"; "full-time" or "part-time") or as a URL reference to a term from a controlled vocabulary (e.g. https://ceds.ed.gov/element/001311#Asynchronous).
-        option :instructor, optional: true # A person assigned to instruct or provide instructional assistance for the [[CourseInstance]].
+      def self.schema_property_definitions
+        {
+          :course_mode => {
+            schema_name: "courseMode",
+            ranges: ["Text", "URL"],
+          }.freeze,
+          :instructor => {
+            schema_name: "instructor",
+            ranges: ["Person"],
+          }.freeze,
+        }.freeze
       end
+
+      def course_mode
+        read_property(:course_mode)
+      end
+
+      def course_mode=(value)
+        write_property(:course_mode, value)
+      end
+
+      def instructor
+        read_property(:instructor)
+      end
+
+      def instructor=(value)
+        write_property(:instructor, value)
+      end
+
     end
   end
 end

@@ -1,11 +1,13 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module SportsClub
-      extend ActiveSupport::Concern
-
       include SportsActivityLocation
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

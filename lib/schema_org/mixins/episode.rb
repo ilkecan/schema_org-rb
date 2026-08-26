@@ -1,25 +1,145 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Episode
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :actors, optional: true # An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip. Superseded by `actor`.
-        option :directors, optional: true # A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip. Superseded by `director`.
-        option :episode_number, optional: true # Position of the episode within an ordered group of episodes.
-        option :music_by, optional: true # The composer of the soundtrack.
-        option :part_of_season, optional: true # The season to which this episode belongs.
-        option :production_company, optional: true # The production company or studio responsible for the item, e.g. series, video game, episode etc.
-        option :trailer, optional: true # The trailer of a movie or TV/radio series, season, episode, etc.
-        option :actor, optional: true # An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes `actors`.
-        option :director, optional: true # A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes `directors`.
-        option :duration, optional: true # The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).
-        option :part_of_series, optional: true # The series to which this episode or season belongs. Supersedes `part_of_tv_series`.
+      def self.schema_property_definitions
+        {
+          :actor => {
+            schema_name: "actor",
+            ranges: ["PerformingGroup", "Person"],
+          }.freeze,
+          :actors => {
+            schema_name: "actors",
+            ranges: ["Person"],
+          }.freeze,
+          :director => {
+            schema_name: "director",
+            ranges: ["Person"],
+          }.freeze,
+          :directors => {
+            schema_name: "directors",
+            ranges: ["Person"],
+          }.freeze,
+          :duration => {
+            schema_name: "duration",
+            ranges: ["Duration"],
+          }.freeze,
+          :episode_number => {
+            schema_name: "episodeNumber",
+            ranges: ["Integer", "Text"],
+          }.freeze,
+          :music_by => {
+            schema_name: "musicBy",
+            ranges: ["MusicGroup", "Person"],
+          }.freeze,
+          :part_of_season => {
+            schema_name: "partOfSeason",
+            ranges: ["CreativeWorkSeason"],
+          }.freeze,
+          :part_of_series => {
+            schema_name: "partOfSeries",
+            ranges: ["CreativeWorkSeries"],
+          }.freeze,
+          :production_company => {
+            schema_name: "productionCompany",
+            ranges: ["Organization"],
+          }.freeze,
+          :trailer => {
+            schema_name: "trailer",
+            ranges: ["VideoObject"],
+          }.freeze,
+        }.freeze
       end
+
+      def actor
+        read_property(:actor)
+      end
+
+      def actor=(value)
+        write_property(:actor, value)
+      end
+
+      def actors
+        read_property(:actors)
+      end
+
+      def actors=(value)
+        write_property(:actors, value)
+      end
+
+      def director
+        read_property(:director)
+      end
+
+      def director=(value)
+        write_property(:director, value)
+      end
+
+      def directors
+        read_property(:directors)
+      end
+
+      def directors=(value)
+        write_property(:directors, value)
+      end
+
+      def duration
+        read_property(:duration)
+      end
+
+      def duration=(value)
+        write_property(:duration, value)
+      end
+
+      def episode_number
+        read_property(:episode_number)
+      end
+
+      def episode_number=(value)
+        write_property(:episode_number, value)
+      end
+
+      def music_by
+        read_property(:music_by)
+      end
+
+      def music_by=(value)
+        write_property(:music_by, value)
+      end
+
+      def part_of_season
+        read_property(:part_of_season)
+      end
+
+      def part_of_season=(value)
+        write_property(:part_of_season, value)
+      end
+
+      def part_of_series
+        read_property(:part_of_series)
+      end
+
+      def part_of_series=(value)
+        write_property(:part_of_series, value)
+      end
+
+      def production_company
+        read_property(:production_company)
+      end
+
+      def production_company=(value)
+        write_property(:production_company, value)
+      end
+
+      def trailer
+        read_property(:trailer)
+      end
+
+      def trailer=(value)
+        write_property(:trailer, value)
+      end
+
     end
   end
 end

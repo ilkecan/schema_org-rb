@@ -1,18 +1,61 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Role
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :end_date, optional: true # The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).
-        option :named_position, optional: true # A position played, performed or filled by a person or organization, as part of an organization. For example, an athlete in a SportsTeam might play in the position named 'Quarterback'. Superseded by `role_name`.
-        option :start_date, optional: true # The start date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).
-        option :role_name, optional: true # A role played, performed or filled by a person or organization. For example, the team of creators for a comic book might fill the roles named 'inker', 'penciller', and 'letterer'; or an athlete in a SportsTeam might play in the position named 'Quarterback'. Supersedes `named_position`.
+      def self.schema_property_definitions
+        {
+          :end_date => {
+            schema_name: "endDate",
+            ranges: ["Date", "DateTime"],
+          }.freeze,
+          :named_position => {
+            schema_name: "namedPosition",
+            ranges: ["Text", "URL"],
+          }.freeze,
+          :role_name => {
+            schema_name: "roleName",
+            ranges: ["Text", "URL"],
+          }.freeze,
+          :start_date => {
+            schema_name: "startDate",
+            ranges: ["Date", "DateTime"],
+          }.freeze,
+        }.freeze
       end
+
+      def end_date
+        read_property(:end_date)
+      end
+
+      def end_date=(value)
+        write_property(:end_date, value)
+      end
+
+      def named_position
+        read_property(:named_position)
+      end
+
+      def named_position=(value)
+        write_property(:named_position, value)
+      end
+
+      def role_name
+        read_property(:role_name)
+      end
+
+      def role_name=(value)
+        write_property(:role_name, value)
+      end
+
+      def start_date
+        read_property(:start_date)
+      end
+
+      def start_date=(value)
+        write_property(:start_date, value)
+      end
+
     end
   end
 end

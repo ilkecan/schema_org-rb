@@ -1,17 +1,49 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module BuyAction
-      extend ActiveSupport::Concern
-
       include TradeAction
 
-      included do
-        option :vendor, optional: true # 'vendor' is an earlier term for 'seller'. Superseded by `seller`.
-        option :warranty_promise, optional: true # The warranty promise(s) included in the offer. Superseded by `warranty`.
-        option :seller, optional: true # An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider. Supersedes `vendor`.
+      def self.schema_property_definitions
+        {
+          :seller => {
+            schema_name: "seller",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :vendor => {
+            schema_name: "vendor",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :warranty_promise => {
+            schema_name: "warrantyPromise",
+            ranges: ["WarrantyPromise"],
+          }.freeze,
+        }.freeze
       end
+
+      def seller
+        read_property(:seller)
+      end
+
+      def seller=(value)
+        write_property(:seller, value)
+      end
+
+      def vendor
+        read_property(:vendor)
+      end
+
+      def vendor=(value)
+        write_property(:vendor, value)
+      end
+
+      def warranty_promise
+        read_property(:warranty_promise)
+      end
+
+      def warranty_promise=(value)
+        write_property(:warranty_promise, value)
+      end
+
     end
   end
 end

@@ -1,23 +1,121 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Clip
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :actors, optional: true # An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip. Superseded by `actor`.
-        option :clip_number, optional: true # Position of the clip within an ordered group of clips.
-        option :directors, optional: true # A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip. Superseded by `director`.
-        option :music_by, optional: true # The composer of the soundtrack.
-        option :part_of_episode, optional: true # The episode to which this clip belongs.
-        option :part_of_season, optional: true # The season to which this episode belongs.
-        option :actor, optional: true # An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes `actors`.
-        option :director, optional: true # A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes `directors`.
-        option :part_of_series, optional: true # The series to which this episode or season belongs. Supersedes `part_of_tv_series`.
+      def self.schema_property_definitions
+        {
+          :actor => {
+            schema_name: "actor",
+            ranges: ["PerformingGroup", "Person"],
+          }.freeze,
+          :actors => {
+            schema_name: "actors",
+            ranges: ["Person"],
+          }.freeze,
+          :clip_number => {
+            schema_name: "clipNumber",
+            ranges: ["Integer", "Text"],
+          }.freeze,
+          :director => {
+            schema_name: "director",
+            ranges: ["Person"],
+          }.freeze,
+          :directors => {
+            schema_name: "directors",
+            ranges: ["Person"],
+          }.freeze,
+          :music_by => {
+            schema_name: "musicBy",
+            ranges: ["MusicGroup", "Person"],
+          }.freeze,
+          :part_of_episode => {
+            schema_name: "partOfEpisode",
+            ranges: ["Episode"],
+          }.freeze,
+          :part_of_season => {
+            schema_name: "partOfSeason",
+            ranges: ["CreativeWorkSeason"],
+          }.freeze,
+          :part_of_series => {
+            schema_name: "partOfSeries",
+            ranges: ["CreativeWorkSeries"],
+          }.freeze,
+        }.freeze
       end
+
+      def actor
+        read_property(:actor)
+      end
+
+      def actor=(value)
+        write_property(:actor, value)
+      end
+
+      def actors
+        read_property(:actors)
+      end
+
+      def actors=(value)
+        write_property(:actors, value)
+      end
+
+      def clip_number
+        read_property(:clip_number)
+      end
+
+      def clip_number=(value)
+        write_property(:clip_number, value)
+      end
+
+      def director
+        read_property(:director)
+      end
+
+      def director=(value)
+        write_property(:director, value)
+      end
+
+      def directors
+        read_property(:directors)
+      end
+
+      def directors=(value)
+        write_property(:directors, value)
+      end
+
+      def music_by
+        read_property(:music_by)
+      end
+
+      def music_by=(value)
+        write_property(:music_by, value)
+      end
+
+      def part_of_episode
+        read_property(:part_of_episode)
+      end
+
+      def part_of_episode=(value)
+        write_property(:part_of_episode, value)
+      end
+
+      def part_of_season
+        read_property(:part_of_season)
+      end
+
+      def part_of_season=(value)
+        write_property(:part_of_season, value)
+      end
+
+      def part_of_series
+        read_property(:part_of_series)
+      end
+
+      def part_of_series=(value)
+        write_property(:part_of_series, value)
+      end
+
     end
   end
 end

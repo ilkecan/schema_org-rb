@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module House
-      extend ActiveSupport::Concern
-
       include Accommodation
 
-      included do
-        option :number_of_rooms, optional: true # The number of rooms (excluding bathrooms and closets) of the accommodation or lodging business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.
+      def self.schema_property_definitions
+        {
+          :number_of_rooms => {
+            schema_name: "numberOfRooms",
+            ranges: ["Number", "QuantitativeValue"],
+          }.freeze,
+        }.freeze
       end
+
+      def number_of_rooms
+        read_property(:number_of_rooms)
+      end
+
+      def number_of_rooms=(value)
+        write_property(:number_of_rooms, value)
+      end
+
     end
   end
 end

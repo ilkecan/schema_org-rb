@@ -4,5 +4,21 @@ module SchemaOrg
   # The act of forming one's opinion, reaction or sentiment.
   class AssessAction < Base
     include Mixins::AssessAction
+    SCHEMA_TYPES = [self, SchemaOrg::Action, SchemaOrg::Thing].freeze
+
+    class << self
+      def schema_types
+        SCHEMA_TYPES
+      end
+
+      def schema_type?(other_type)
+        Base.schema_type_argument!(other_type)
+        SCHEMA_TYPES.include?(other_type)
+      end
+
+      def new(**properties)
+        super
+      end
+    end
   end
 end

@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module SellAction
-      extend ActiveSupport::Concern
-
       include TradeAction
 
-      included do
-        option :buyer, optional: true # A sub property of participant. The participant/person/organization that bought the object.
-        option :warranty_promise, optional: true # The warranty promise(s) included in the offer. Superseded by `warranty`.
+      def self.schema_property_definitions
+        {
+          :buyer => {
+            schema_name: "buyer",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :warranty_promise => {
+            schema_name: "warrantyPromise",
+            ranges: ["WarrantyPromise"],
+          }.freeze,
+        }.freeze
       end
+
+      def buyer
+        read_property(:buyer)
+      end
+
+      def buyer=(value)
+        write_property(:buyer, value)
+      end
+
+      def warranty_promise
+        read_property(:warranty_promise)
+      end
+
+      def warranty_promise=(value)
+        write_property(:warranty_promise, value)
+      end
+
     end
   end
 end

@@ -1,18 +1,61 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Review
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :item_reviewed, optional: true # The item that is being reviewed/rated.
-        option :review_aspect, optional: true # This Review or Rating is relevant to this part or facet of the itemReviewed.
-        option :review_body, optional: true # The actual body of the review.
-        option :review_rating, optional: true # The rating given in this review. Note that reviews can themselves be rated. The ```reviewRating``` applies to rating given by the review. The [[aggregateRating]] property applies to the review itself, as a creative work.
+      def self.schema_property_definitions
+        {
+          :item_reviewed => {
+            schema_name: "itemReviewed",
+            ranges: ["Thing"],
+          }.freeze,
+          :review_aspect => {
+            schema_name: "reviewAspect",
+            ranges: ["StructuredValue", "Text"],
+          }.freeze,
+          :review_body => {
+            schema_name: "reviewBody",
+            ranges: ["Text"],
+          }.freeze,
+          :review_rating => {
+            schema_name: "reviewRating",
+            ranges: ["Rating"],
+          }.freeze,
+        }.freeze
       end
+
+      def item_reviewed
+        read_property(:item_reviewed)
+      end
+
+      def item_reviewed=(value)
+        write_property(:item_reviewed, value)
+      end
+
+      def review_aspect
+        read_property(:review_aspect)
+      end
+
+      def review_aspect=(value)
+        write_property(:review_aspect, value)
+      end
+
+      def review_body
+        read_property(:review_body)
+      end
+
+      def review_body=(value)
+        write_property(:review_body, value)
+      end
+
+      def review_rating
+        read_property(:review_rating)
+      end
+
+      def review_rating=(value)
+        write_property(:review_rating, value)
+      end
+
     end
   end
 end

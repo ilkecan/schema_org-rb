@@ -1,16 +1,26 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module EducationalOrganization
-      extend ActiveSupport::Concern
-
       include CivicStructure
       include Organization
 
-      included do
-        option :alumni, optional: true # Alumni of an organization. Inverse-property: `alumni_of`.
+      def self.schema_property_definitions
+        {
+          :alumni => {
+            schema_name: "alumni",
+            ranges: ["Person"],
+          }.freeze,
+        }.freeze
       end
+
+      def alumni
+        read_property(:alumni)
+      end
+
+      def alumni=(value)
+        write_property(:alumni, value)
+      end
+
     end
   end
 end

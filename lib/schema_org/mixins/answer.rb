@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Answer
-      extend ActiveSupport::Concern
-
       include Comment
 
-      included do
-        option :parent_item, optional: true # The parent of a question, answer or item in general. Typically used for Q/A discussion threads e.g. a chain of comments with the first comment being an [[Article]] or other [[CreativeWork]]. See also [[comment]] which points from something to a comment about it.
+      def self.schema_property_definitions
+        {
+          :parent_item => {
+            schema_name: "parentItem",
+            ranges: ["Comment", "CreativeWork"],
+          }.freeze,
+        }.freeze
       end
+
+      def parent_item
+        read_property(:parent_item)
+      end
+
+      def parent_item=(value)
+        write_property(:parent_item, value)
+      end
+
     end
   end
 end

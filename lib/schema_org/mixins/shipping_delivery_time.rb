@@ -1,18 +1,61 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ShippingDeliveryTime
-      extend ActiveSupport::Concern
-
       include StructuredValue
 
-      included do
-        option :business_days, optional: true # Days of the week when the merchant typically operates, indicated via opening hours markup.
-        option :cutoff_time, optional: true # Order cutoff time allows merchants to describe the time after which they will no longer process orders received on that day. For orders processed after cutoff time, one day gets added to the delivery time estimate. This property is expected to be most typically used via the [[ShippingRateSettings]] publication pattern. The time is indicated using the ISO-8601 Time format, e.g. "23:30:00-05:00" would represent 6:30 pm Eastern Standard Time (EST) which is 5 hours behind Coordinated Universal Time (UTC).
-        option :handling_time, optional: true # The typical delay between the receipt of the order and the goods either leaving the warehouse or being prepared for pickup, in case the delivery method is on site pickup.  In the context of [[ShippingDeliveryTime]], Typical properties: minValue, maxValue, unitCode (d for DAY).  This is by common convention assumed to mean business days (if a unitCode is used, coded as "d"), i.e. only counting days when the business normally operates.  In the context of [[ShippingService]], use the [[ServicePeriod]] format, that contains the same information in a structured form, with cut-off time, business days and duration.
-        option :transit_time, optional: true # The typical delay the order has been sent for delivery and the goods reach the final customer.    In the context of [[ShippingDeliveryTime]], use the [[QuantitativeValue]]. Typical properties: minValue, maxValue, unitCode (d for DAY).    In the context of [[ShippingConditions]], use the [[ServicePeriod]]. It has a duration (as a [[QuantitativeValue]]) and also business days and a cut-off time.
+      def self.schema_property_definitions
+        {
+          :business_days => {
+            schema_name: "businessDays",
+            ranges: ["OpeningHoursSpecification"],
+          }.freeze,
+          :cutoff_time => {
+            schema_name: "cutoffTime",
+            ranges: ["Time"],
+          }.freeze,
+          :handling_time => {
+            schema_name: "handlingTime",
+            ranges: ["QuantitativeValue"],
+          }.freeze,
+          :transit_time => {
+            schema_name: "transitTime",
+            ranges: ["QuantitativeValue"],
+          }.freeze,
+        }.freeze
       end
+
+      def business_days
+        read_property(:business_days)
+      end
+
+      def business_days=(value)
+        write_property(:business_days, value)
+      end
+
+      def cutoff_time
+        read_property(:cutoff_time)
+      end
+
+      def cutoff_time=(value)
+        write_property(:cutoff_time, value)
+      end
+
+      def handling_time
+        read_property(:handling_time)
+      end
+
+      def handling_time=(value)
+        write_property(:handling_time, value)
+      end
+
+      def transit_time
+        read_property(:transit_time)
+      end
+
+      def transit_time=(value)
+        write_property(:transit_time, value)
+      end
+
     end
   end
 end

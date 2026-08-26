@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module DigitalDocumentPermission
-      extend ActiveSupport::Concern
-
       include Intangible
 
-      included do
-        option :grantee, optional: true # The person, organization, contact point, or audience that has been granted this permission.
-        option :permission_type, optional: true # The type of permission granted the person, organization, or audience.
+      def self.schema_property_definitions
+        {
+          :grantee => {
+            schema_name: "grantee",
+            ranges: ["Audience", "ContactPoint", "Organization", "Person"],
+          }.freeze,
+          :permission_type => {
+            schema_name: "permissionType",
+            ranges: ["DigitalDocumentPermissionType"],
+          }.freeze,
+        }.freeze
       end
+
+      def grantee
+        read_property(:grantee)
+      end
+
+      def grantee=(value)
+        write_property(:grantee, value)
+      end
+
+      def permission_type
+        read_property(:permission_type)
+      end
+
+      def permission_type=(value)
+        write_property(:permission_type, value)
+      end
+
     end
   end
 end

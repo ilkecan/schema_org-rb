@@ -1,19 +1,73 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Game
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :character_attribute, optional: true # A piece of data that represents a particular aspect of a fictional character (skill, power, character points, advantage, disadvantage).
-        option :game_item, optional: true # An item is an object within the game world that can be collected by a player or, occasionally, a non-player character.
-        option :game_location, optional: true # Real or fictional location of the game (or part of game).
-        option :number_of_players, optional: true # Indicate how many people can play this game (minimum, maximum, or range).
-        option :quest, optional: true # The task that a player-controlled character, or group of characters may complete in order to gain a reward.
+      def self.schema_property_definitions
+        {
+          :character_attribute => {
+            schema_name: "characterAttribute",
+            ranges: ["Thing"],
+          }.freeze,
+          :game_item => {
+            schema_name: "gameItem",
+            ranges: ["Thing"],
+          }.freeze,
+          :game_location => {
+            schema_name: "gameLocation",
+            ranges: ["Place", "PostalAddress", "URL"],
+          }.freeze,
+          :number_of_players => {
+            schema_name: "numberOfPlayers",
+            ranges: ["QuantitativeValue"],
+          }.freeze,
+          :quest => {
+            schema_name: "quest",
+            ranges: ["Thing"],
+          }.freeze,
+        }.freeze
       end
+
+      def character_attribute
+        read_property(:character_attribute)
+      end
+
+      def character_attribute=(value)
+        write_property(:character_attribute, value)
+      end
+
+      def game_item
+        read_property(:game_item)
+      end
+
+      def game_item=(value)
+        write_property(:game_item, value)
+      end
+
+      def game_location
+        read_property(:game_location)
+      end
+
+      def game_location=(value)
+        write_property(:game_location, value)
+      end
+
+      def number_of_players
+        read_property(:number_of_players)
+      end
+
+      def number_of_players=(value)
+        write_property(:number_of_players, value)
+      end
+
+      def quest
+        read_property(:quest)
+      end
+
+      def quest=(value)
+        write_property(:quest, value)
+      end
+
     end
   end
 end

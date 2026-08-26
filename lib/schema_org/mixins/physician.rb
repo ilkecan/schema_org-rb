@@ -1,12 +1,13 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Physician
-      extend ActiveSupport::Concern
-
-      include MedicalBusiness
       include MedicalOrganization
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

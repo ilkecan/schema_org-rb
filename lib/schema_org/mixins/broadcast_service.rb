@@ -1,23 +1,121 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module BroadcastService
-      extend ActiveSupport::Concern
-
       include Service
 
-      included do
-        option :area, optional: true # The area within which users can expect to reach the broadcast service. Superseded by `service_area`.
-        option :broadcast_affiliate_of, optional: true # The media network(s) whose content is broadcast on this station.
-        option :broadcast_display_name, optional: true # The name displayed in the channel guide. For many US affiliates, it is the network name.
-        option :broadcast_frequency, optional: true # The frequency used for over-the-air broadcasts. Numeric values or simple ranges, e.g. 87-99. In addition a shortcut idiom is supported for frequencies of AM and FM radio channels, e.g. "87 FM".
-        option :broadcast_timezone, optional: true # The timezone in [ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601) for which the service bases its broadcasts.
-        option :broadcaster, optional: true # The organization owning or operating the broadcast service.
-        option :parent_service, optional: true # A broadcast service to which the broadcast service may belong to such as regional variations of a national channel.
-        option :video_format, optional: true # The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD, etc.).
-        option :has_broadcast_channel, optional: true # A broadcast channel of a broadcast service. Inverse-property: `provides_broadcast_service`.
+      def self.schema_property_definitions
+        {
+          :area => {
+            schema_name: "area",
+            ranges: ["Place"],
+          }.freeze,
+          :broadcast_affiliate_of => {
+            schema_name: "broadcastAffiliateOf",
+            ranges: ["Organization"],
+          }.freeze,
+          :broadcast_display_name => {
+            schema_name: "broadcastDisplayName",
+            ranges: ["Text"],
+          }.freeze,
+          :broadcast_frequency => {
+            schema_name: "broadcastFrequency",
+            ranges: ["BroadcastFrequencySpecification", "Text"],
+          }.freeze,
+          :broadcast_timezone => {
+            schema_name: "broadcastTimezone",
+            ranges: ["Text"],
+          }.freeze,
+          :broadcaster => {
+            schema_name: "broadcaster",
+            ranges: ["Organization"],
+          }.freeze,
+          :has_broadcast_channel => {
+            schema_name: "hasBroadcastChannel",
+            ranges: ["BroadcastChannel"],
+          }.freeze,
+          :parent_service => {
+            schema_name: "parentService",
+            ranges: ["BroadcastService"],
+          }.freeze,
+          :video_format => {
+            schema_name: "videoFormat",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def area
+        read_property(:area)
+      end
+
+      def area=(value)
+        write_property(:area, value)
+      end
+
+      def broadcast_affiliate_of
+        read_property(:broadcast_affiliate_of)
+      end
+
+      def broadcast_affiliate_of=(value)
+        write_property(:broadcast_affiliate_of, value)
+      end
+
+      def broadcast_display_name
+        read_property(:broadcast_display_name)
+      end
+
+      def broadcast_display_name=(value)
+        write_property(:broadcast_display_name, value)
+      end
+
+      def broadcast_frequency
+        read_property(:broadcast_frequency)
+      end
+
+      def broadcast_frequency=(value)
+        write_property(:broadcast_frequency, value)
+      end
+
+      def broadcast_timezone
+        read_property(:broadcast_timezone)
+      end
+
+      def broadcast_timezone=(value)
+        write_property(:broadcast_timezone, value)
+      end
+
+      def broadcaster
+        read_property(:broadcaster)
+      end
+
+      def broadcaster=(value)
+        write_property(:broadcaster, value)
+      end
+
+      def has_broadcast_channel
+        read_property(:has_broadcast_channel)
+      end
+
+      def has_broadcast_channel=(value)
+        write_property(:has_broadcast_channel, value)
+      end
+
+      def parent_service
+        read_property(:parent_service)
+      end
+
+      def parent_service=(value)
+        write_property(:parent_service, value)
+      end
+
+      def video_format
+        read_property(:video_format)
+      end
+
+      def video_format=(value)
+        write_property(:video_format, value)
+      end
+
     end
   end
 end

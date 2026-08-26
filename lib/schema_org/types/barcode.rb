@@ -4,5 +4,21 @@ module SchemaOrg
   # An image of a visual machine-readable code such as a barcode or QR code.
   class Barcode < Base
     include Mixins::Barcode
+    SCHEMA_TYPES = [self, SchemaOrg::ImageObject, SchemaOrg::MediaObject, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
+
+    class << self
+      def schema_types
+        SCHEMA_TYPES
+      end
+
+      def schema_type?(other_type)
+        Base.schema_type_argument!(other_type)
+        SCHEMA_TYPES.include?(other_type)
+      end
+
+      def new(**properties)
+        super
+      end
+    end
   end
 end

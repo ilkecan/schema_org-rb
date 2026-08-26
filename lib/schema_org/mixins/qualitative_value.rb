@@ -1,22 +1,109 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module QualitativeValue
-      extend ActiveSupport::Concern
-
       include Enumeration
 
-      included do
-        option :additional_property, optional: true # A property-value pair representing an additional characteristic of the entity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
-        option :equal, optional: true # This ordering relation for qualitative values indicates that the subject is equal to the object.
-        option :greater, optional: true # This ordering relation for qualitative values indicates that the subject is greater than the object.
-        option :greater_or_equal, optional: true # This ordering relation for qualitative values indicates that the subject is greater than or equal to the object.
-        option :lesser, optional: true # This ordering relation for qualitative values indicates that the subject is lesser than the object.
-        option :lesser_or_equal, optional: true # This ordering relation for qualitative values indicates that the subject is lesser than or equal to the object.
-        option :non_equal, optional: true # This ordering relation for qualitative values indicates that the subject is not equal to the object.
-        option :value_reference, optional: true # A secondary value that provides additional information on the original value, e.g. a reference temperature or a type of measurement.
+      def self.schema_property_definitions
+        {
+          :additional_property => {
+            schema_name: "additionalProperty",
+            ranges: ["PropertyValue"],
+          }.freeze,
+          :equal => {
+            schema_name: "equal",
+            ranges: ["QualitativeValue"],
+          }.freeze,
+          :greater => {
+            schema_name: "greater",
+            ranges: ["QualitativeValue"],
+          }.freeze,
+          :greater_or_equal => {
+            schema_name: "greaterOrEqual",
+            ranges: ["QualitativeValue"],
+          }.freeze,
+          :lesser => {
+            schema_name: "lesser",
+            ranges: ["QualitativeValue"],
+          }.freeze,
+          :lesser_or_equal => {
+            schema_name: "lesserOrEqual",
+            ranges: ["QualitativeValue"],
+          }.freeze,
+          :non_equal => {
+            schema_name: "nonEqual",
+            ranges: ["QualitativeValue"],
+          }.freeze,
+          :value_reference => {
+            schema_name: "valueReference",
+            ranges: ["Enumeration", "PropertyValue", "QualitativeValue", "QuantitativeValue", "StructuredValue"],
+          }.freeze,
+        }.freeze
       end
+
+      def additional_property
+        read_property(:additional_property)
+      end
+
+      def additional_property=(value)
+        write_property(:additional_property, value)
+      end
+
+      def equal
+        read_property(:equal)
+      end
+
+      def equal=(value)
+        write_property(:equal, value)
+      end
+
+      def greater
+        read_property(:greater)
+      end
+
+      def greater=(value)
+        write_property(:greater, value)
+      end
+
+      def greater_or_equal
+        read_property(:greater_or_equal)
+      end
+
+      def greater_or_equal=(value)
+        write_property(:greater_or_equal, value)
+      end
+
+      def lesser
+        read_property(:lesser)
+      end
+
+      def lesser=(value)
+        write_property(:lesser, value)
+      end
+
+      def lesser_or_equal
+        read_property(:lesser_or_equal)
+      end
+
+      def lesser_or_equal=(value)
+        write_property(:lesser_or_equal, value)
+      end
+
+      def non_equal
+        read_property(:non_equal)
+      end
+
+      def non_equal=(value)
+        write_property(:non_equal, value)
+      end
+
+      def value_reference
+        read_property(:value_reference)
+      end
+
+      def value_reference=(value)
+        write_property(:value_reference, value)
+      end
+
     end
   end
 end

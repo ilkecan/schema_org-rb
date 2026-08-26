@@ -1,32 +1,229 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module MediaObject
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :associated_article, optional: true # A NewsArticle associated with the Media Object.
-        option :bitrate, optional: true # The bitrate of the media object.
-        option :content_size, optional: true # File size in (mega/kilo)bytes.
-        option :content_url, optional: true # Actual bytes of the media object, for example the image file or video file.
-        option :embed_url, optional: true # A URL pointing to a player for a specific video. In general, this is the information in the ```src``` element of an ```embed``` tag and should not be the same as the content of the ```loc``` tag.
-        option :end_time, optional: true # The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to *December*. For media, including audio and video, it's the time offset of the end of a clip within a larger file.\n\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
-        option :height, optional: true # The height of the item.
-        option :ineligible_region, optional: true # The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is not valid, e.g. a region where the transaction is not allowed.\n\nSee also [[eligibleRegion]].
-        option :player_type, optional: true # Player type required&#x2014;for example, Flash or Silverlight.
-        option :production_company, optional: true # The production company or studio responsible for the item, e.g. series, video game, episode etc.
-        option :regions_allowed, optional: true # The regions where the media is allowed. If not specified, then it's assumed to be allowed everywhere. Specify the countries in [ISO 3166 format](http://en.wikipedia.org/wiki/ISO_3166).
-        option :requires_subscription, optional: true # Indicates if use of the media require a subscription  (either paid or free). Allowed values are ```true``` or ```false``` (note that an earlier version had 'yes', 'no').
-        option :start_time, optional: true # The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. E.g. John wrote a book from *January* to December. For media, including audio and video, it's the time offset of the start of a clip within a larger file.\n\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
-        option :upload_date, optional: true # Date (including time if available) when this media object was uploaded to this site.
-        option :width, optional: true # The width of the item.
-        option :duration, optional: true # The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).
-        option :encodes_creative_work, optional: true # The CreativeWork encoded by this media object. Inverse-property: `encoding`.
-        option :encoding_format, optional: true # Media type typically expressed using a MIME format (see [IANA site](http://www.iana.org/assignments/media-types/media-types.xhtml) and [MDN reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types)), e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.  In cases where a [[CreativeWork]] has several media type representations, [[encoding]] can be used to indicate each [[MediaObject]] alongside particular [[encodingFormat]] information.  Unregistered or niche encoding and file formats can be indicated instead via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry. Supersedes `file_format`.
+      def self.schema_property_definitions
+        {
+          :associated_article => {
+            schema_name: "associatedArticle",
+            ranges: ["NewsArticle"],
+          }.freeze,
+          :bitrate => {
+            schema_name: "bitrate",
+            ranges: ["Text"],
+          }.freeze,
+          :content_size => {
+            schema_name: "contentSize",
+            ranges: ["Text"],
+          }.freeze,
+          :content_url => {
+            schema_name: "contentUrl",
+            ranges: ["URL"],
+          }.freeze,
+          :duration => {
+            schema_name: "duration",
+            ranges: ["Duration"],
+          }.freeze,
+          :embed_url => {
+            schema_name: "embedUrl",
+            ranges: ["URL"],
+          }.freeze,
+          :encodes_creative_work => {
+            schema_name: "encodesCreativeWork",
+            ranges: ["CreativeWork"],
+          }.freeze,
+          :encoding_format => {
+            schema_name: "encodingFormat",
+            ranges: ["Text", "URL"],
+          }.freeze,
+          :end_time => {
+            schema_name: "endTime",
+            ranges: ["DateTime", "Time"],
+          }.freeze,
+          :height => {
+            schema_name: "height",
+            ranges: ["Distance", "QuantitativeValue"],
+          }.freeze,
+          :ineligible_region => {
+            schema_name: "ineligibleRegion",
+            ranges: ["GeoShape", "Place", "Text"],
+          }.freeze,
+          :player_type => {
+            schema_name: "playerType",
+            ranges: ["Text"],
+          }.freeze,
+          :production_company => {
+            schema_name: "productionCompany",
+            ranges: ["Organization"],
+          }.freeze,
+          :regions_allowed => {
+            schema_name: "regionsAllowed",
+            ranges: ["Place"],
+          }.freeze,
+          :requires_subscription => {
+            schema_name: "requiresSubscription",
+            ranges: ["Boolean", "MediaSubscription"],
+          }.freeze,
+          :start_time => {
+            schema_name: "startTime",
+            ranges: ["DateTime", "Time"],
+          }.freeze,
+          :upload_date => {
+            schema_name: "uploadDate",
+            ranges: ["Date", "DateTime"],
+          }.freeze,
+          :width => {
+            schema_name: "width",
+            ranges: ["Distance", "QuantitativeValue"],
+          }.freeze,
+        }.freeze
       end
+
+      def associated_article
+        read_property(:associated_article)
+      end
+
+      def associated_article=(value)
+        write_property(:associated_article, value)
+      end
+
+      def bitrate
+        read_property(:bitrate)
+      end
+
+      def bitrate=(value)
+        write_property(:bitrate, value)
+      end
+
+      def content_size
+        read_property(:content_size)
+      end
+
+      def content_size=(value)
+        write_property(:content_size, value)
+      end
+
+      def content_url
+        read_property(:content_url)
+      end
+
+      def content_url=(value)
+        write_property(:content_url, value)
+      end
+
+      def duration
+        read_property(:duration)
+      end
+
+      def duration=(value)
+        write_property(:duration, value)
+      end
+
+      def embed_url
+        read_property(:embed_url)
+      end
+
+      def embed_url=(value)
+        write_property(:embed_url, value)
+      end
+
+      def encodes_creative_work
+        read_property(:encodes_creative_work)
+      end
+
+      def encodes_creative_work=(value)
+        write_property(:encodes_creative_work, value)
+      end
+
+      def encoding_format
+        read_property(:encoding_format)
+      end
+
+      def encoding_format=(value)
+        write_property(:encoding_format, value)
+      end
+
+      def end_time
+        read_property(:end_time)
+      end
+
+      def end_time=(value)
+        write_property(:end_time, value)
+      end
+
+      def height
+        read_property(:height)
+      end
+
+      def height=(value)
+        write_property(:height, value)
+      end
+
+      def ineligible_region
+        read_property(:ineligible_region)
+      end
+
+      def ineligible_region=(value)
+        write_property(:ineligible_region, value)
+      end
+
+      def player_type
+        read_property(:player_type)
+      end
+
+      def player_type=(value)
+        write_property(:player_type, value)
+      end
+
+      def production_company
+        read_property(:production_company)
+      end
+
+      def production_company=(value)
+        write_property(:production_company, value)
+      end
+
+      def regions_allowed
+        read_property(:regions_allowed)
+      end
+
+      def regions_allowed=(value)
+        write_property(:regions_allowed, value)
+      end
+
+      def requires_subscription
+        read_property(:requires_subscription)
+      end
+
+      def requires_subscription=(value)
+        write_property(:requires_subscription, value)
+      end
+
+      def start_time
+        read_property(:start_time)
+      end
+
+      def start_time=(value)
+        write_property(:start_time, value)
+      end
+
+      def upload_date
+        read_property(:upload_date)
+      end
+
+      def upload_date=(value)
+        write_property(:upload_date, value)
+      end
+
+      def width
+        read_property(:width)
+      end
+
+      def width=(value)
+        write_property(:width, value)
+      end
+
     end
   end
 end

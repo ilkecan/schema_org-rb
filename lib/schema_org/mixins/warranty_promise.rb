@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module WarrantyPromise
-      extend ActiveSupport::Concern
-
       include StructuredValue
 
-      included do
-        option :duration_of_warranty, optional: true # The duration of the warranty promise. Common unitCode values are ANN for year, MON for months, or DAY for days.
-        option :warranty_scope, optional: true # The scope of the warranty promise.
+      def self.schema_property_definitions
+        {
+          :duration_of_warranty => {
+            schema_name: "durationOfWarranty",
+            ranges: ["QuantitativeValue"],
+          }.freeze,
+          :warranty_scope => {
+            schema_name: "warrantyScope",
+            ranges: ["WarrantyScope"],
+          }.freeze,
+        }.freeze
       end
+
+      def duration_of_warranty
+        read_property(:duration_of_warranty)
+      end
+
+      def duration_of_warranty=(value)
+        write_property(:duration_of_warranty, value)
+      end
+
+      def warranty_scope
+        read_property(:warranty_scope)
+      end
+
+      def warranty_scope=(value)
+        write_property(:warranty_scope, value)
+      end
+
     end
   end
 end

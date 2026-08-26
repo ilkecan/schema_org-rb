@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module Airport
-      extend ActiveSupport::Concern
-
       include CivicStructure
 
-      included do
-        option :iata_code, optional: true # IATA identifier for an airline or airport.
-        option :icao_code, optional: true # ICAO identifier for an airport.
+      def self.schema_property_definitions
+        {
+          :iata_code => {
+            schema_name: "iataCode",
+            ranges: ["Text"],
+          }.freeze,
+          :icao_code => {
+            schema_name: "icaoCode",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def iata_code
+        read_property(:iata_code)
+      end
+
+      def iata_code=(value)
+        write_property(:iata_code, value)
+      end
+
+      def icao_code
+        read_property(:icao_code)
+      end
+
+      def icao_code=(value)
+        write_property(:icao_code, value)
+      end
+
     end
   end
 end

@@ -1,24 +1,133 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module WebPage
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :breadcrumb, optional: true # A set of links that can help a user understand and navigate a website hierarchy.
-        option :last_reviewed, optional: true # Date on which the content on this web page was last reviewed for accuracy and/or completeness.
-        option :main_content_of_page, optional: true # Indicates if this web page element is the main subject of the page.
-        option :primary_image_of_page, optional: true # Indicates the main image on the page.
-        option :related_link, optional: true # A link related to this web page, for example to other related web pages.
-        option :reviewed_by, optional: true # People or organizations that have reviewed the content on this web page for accuracy and/or completeness.
-        option :significant_links, optional: true # The most significant URLs on the page. Typically, these are the non-navigation links that are clicked on the most. Superseded by `significant_link`.
-        option :speakable, optional: true # Indicates sections of a Web page that are particularly 'speakable' in the sense of being highlighted as being especially appropriate for text-to-speech conversion. Other sections of a page may also be usefully spoken in particular circumstances; the 'speakable' property serves to indicate the parts most likely to be generally useful for speech.  The *speakable* property can be repeated an arbitrary number of times, with three kinds of possible 'content-locator' values:  1.) *id-value* URL references - uses *id-value* of an element in the page being annotated. The simplest use of *speakable* has (potentially relative) URL values, referencing identified sections of the document concerned.  2.) CSS Selectors - addresses content in the annotated page, e.g. via class attribute. Use the [[cssSelector]] property.  3.)  XPaths - addresses content via XPaths (assuming an XML view of the content). Use the [[xpath]] property.   For more sophisticated markup of speakable sections beyond simple ID references, either CSS selectors or XPath expressions to pick out document section(s) as speakable. For this we define a supporting type, [[SpeakableSpecification]]  which is defined to be a possible value of the *speakable* property.
-        option :specialty, optional: true # One of the domain specialities to which this web page's content applies.
-        option :significant_link, optional: true # One of the more significant URLs on the page. Typically, these are the non-navigation links that are clicked on the most. Supersedes `significant_links`.
+      def self.schema_property_definitions
+        {
+          :breadcrumb => {
+            schema_name: "breadcrumb",
+            ranges: ["BreadcrumbList", "Text"],
+          }.freeze,
+          :last_reviewed => {
+            schema_name: "lastReviewed",
+            ranges: ["Date"],
+          }.freeze,
+          :main_content_of_page => {
+            schema_name: "mainContentOfPage",
+            ranges: ["WebPageElement"],
+          }.freeze,
+          :primary_image_of_page => {
+            schema_name: "primaryImageOfPage",
+            ranges: ["ImageObject"],
+          }.freeze,
+          :related_link => {
+            schema_name: "relatedLink",
+            ranges: ["URL"],
+          }.freeze,
+          :reviewed_by => {
+            schema_name: "reviewedBy",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :significant_link => {
+            schema_name: "significantLink",
+            ranges: ["URL"],
+          }.freeze,
+          :significant_links => {
+            schema_name: "significantLinks",
+            ranges: ["URL"],
+          }.freeze,
+          :speakable => {
+            schema_name: "speakable",
+            ranges: ["SpeakableSpecification", "URL"],
+          }.freeze,
+          :specialty => {
+            schema_name: "specialty",
+            ranges: ["Specialty"],
+          }.freeze,
+        }.freeze
       end
+
+      def breadcrumb
+        read_property(:breadcrumb)
+      end
+
+      def breadcrumb=(value)
+        write_property(:breadcrumb, value)
+      end
+
+      def last_reviewed
+        read_property(:last_reviewed)
+      end
+
+      def last_reviewed=(value)
+        write_property(:last_reviewed, value)
+      end
+
+      def main_content_of_page
+        read_property(:main_content_of_page)
+      end
+
+      def main_content_of_page=(value)
+        write_property(:main_content_of_page, value)
+      end
+
+      def primary_image_of_page
+        read_property(:primary_image_of_page)
+      end
+
+      def primary_image_of_page=(value)
+        write_property(:primary_image_of_page, value)
+      end
+
+      def related_link
+        read_property(:related_link)
+      end
+
+      def related_link=(value)
+        write_property(:related_link, value)
+      end
+
+      def reviewed_by
+        read_property(:reviewed_by)
+      end
+
+      def reviewed_by=(value)
+        write_property(:reviewed_by, value)
+      end
+
+      def significant_link
+        read_property(:significant_link)
+      end
+
+      def significant_link=(value)
+        write_property(:significant_link, value)
+      end
+
+      def significant_links
+        read_property(:significant_links)
+      end
+
+      def significant_links=(value)
+        write_property(:significant_links, value)
+      end
+
+      def speakable
+        read_property(:speakable)
+      end
+
+      def speakable=(value)
+        write_property(:speakable, value)
+      end
+
+      def specialty
+        read_property(:specialty)
+      end
+
+      def specialty=(value)
+        write_property(:specialty, value)
+      end
+
     end
   end
 end

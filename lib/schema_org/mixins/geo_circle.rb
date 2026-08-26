@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module GeoCircle
-      extend ActiveSupport::Concern
-
       include GeoShape
 
-      included do
-        option :geo_midpoint, optional: true # Indicates the GeoCoordinates at the centre of a GeoShape, e.g. GeoCircle.
-        option :geo_radius, optional: true # Indicates the approximate radius of a GeoCircle (metres unless indicated otherwise via Distance notation).
+      def self.schema_property_definitions
+        {
+          :geo_midpoint => {
+            schema_name: "geoMidpoint",
+            ranges: ["GeoCoordinates"],
+          }.freeze,
+          :geo_radius => {
+            schema_name: "geoRadius",
+            ranges: ["Distance", "Number", "Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def geo_midpoint
+        read_property(:geo_midpoint)
+      end
+
+      def geo_midpoint=(value)
+        write_property(:geo_midpoint, value)
+      end
+
+      def geo_radius
+        read_property(:geo_radius)
+      end
+
+      def geo_radius=(value)
+        write_property(:geo_radius, value)
+      end
+
     end
   end
 end

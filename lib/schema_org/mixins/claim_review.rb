@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ClaimReview
-      extend ActiveSupport::Concern
-
       include Review
 
-      included do
-        option :claim_reviewed, optional: true # A short summary of the specific claims reviewed in a ClaimReview.
+      def self.schema_property_definitions
+        {
+          :claim_reviewed => {
+            schema_name: "claimReviewed",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def claim_reviewed
+        read_property(:claim_reviewed)
+      end
+
+      def claim_reviewed=(value)
+        write_property(:claim_reviewed, value)
+      end
+
     end
   end
 end

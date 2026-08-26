@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module EmployeeRole
-      extend ActiveSupport::Concern
-
       include OrganizationRole
 
-      included do
-        option :base_salary, optional: true # The base salary of the job or of an employee in an EmployeeRole.
-        option :salary_currency, optional: true # The currency (coded using [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217)) used for the main salary information in this job posting or for this employee.
+      def self.schema_property_definitions
+        {
+          :base_salary => {
+            schema_name: "baseSalary",
+            ranges: ["MonetaryAmount", "Number", "PriceSpecification"],
+          }.freeze,
+          :salary_currency => {
+            schema_name: "salaryCurrency",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def base_salary
+        read_property(:base_salary)
+      end
+
+      def base_salary=(value)
+        write_property(:base_salary, value)
+      end
+
+      def salary_currency
+        read_property(:salary_currency)
+      end
+
+      def salary_currency=(value)
+        write_property(:salary_currency, value)
+      end
+
     end
   end
 end

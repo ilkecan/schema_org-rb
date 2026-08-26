@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module IndividualProduct
-      extend ActiveSupport::Concern
-
       include Product
 
-      included do
-        option :serial_number, optional: true # The serial number or any alphanumeric identifier of a particular product. When attached to an offer, it is a shortcut for the serial number of the product included in the offer.
+      def self.schema_property_definitions
+        {
+          :serial_number => {
+            schema_name: "serialNumber",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def serial_number
+        read_property(:serial_number)
+      end
+
+      def serial_number=(value)
+        write_property(:serial_number, value)
+      end
+
     end
   end
 end

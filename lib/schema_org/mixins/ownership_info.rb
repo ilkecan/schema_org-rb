@@ -1,18 +1,61 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module OwnershipInfo
-      extend ActiveSupport::Concern
-
       include StructuredValue
 
-      included do
-        option :acquired_from, optional: true # The organization or person from which the product was acquired.
-        option :owned_from, optional: true # The date and time of obtaining the product.
-        option :owned_through, optional: true # The date and time of giving up ownership on the product.
-        option :type_of_good, optional: true # The product that this structured value is referring to.
+      def self.schema_property_definitions
+        {
+          :acquired_from => {
+            schema_name: "acquiredFrom",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :owned_from => {
+            schema_name: "ownedFrom",
+            ranges: ["DateTime"],
+          }.freeze,
+          :owned_through => {
+            schema_name: "ownedThrough",
+            ranges: ["DateTime"],
+          }.freeze,
+          :type_of_good => {
+            schema_name: "typeOfGood",
+            ranges: ["Product", "Service"],
+          }.freeze,
+        }.freeze
       end
+
+      def acquired_from
+        read_property(:acquired_from)
+      end
+
+      def acquired_from=(value)
+        write_property(:acquired_from, value)
+      end
+
+      def owned_from
+        read_property(:owned_from)
+      end
+
+      def owned_from=(value)
+        write_property(:owned_from, value)
+      end
+
+      def owned_through
+        read_property(:owned_through)
+      end
+
+      def owned_through=(value)
+        write_property(:owned_through, value)
+      end
+
+      def type_of_good
+        read_property(:type_of_good)
+      end
+
+      def type_of_good=(value)
+        write_property(:type_of_good, value)
+      end
+
     end
   end
 end

@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module HowToItem
-      extend ActiveSupport::Concern
-
       include ListItem
 
-      included do
-        option :required_quantity, optional: true # The required quantity of the item(s).
+      def self.schema_property_definitions
+        {
+          :required_quantity => {
+            schema_name: "requiredQuantity",
+            ranges: ["Number", "QuantitativeValue", "Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def required_quantity
+        read_property(:required_quantity)
+      end
+
+      def required_quantity=(value)
+        write_property(:required_quantity, value)
+      end
+
     end
   end
 end

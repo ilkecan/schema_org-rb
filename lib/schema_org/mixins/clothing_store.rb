@@ -1,11 +1,13 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module ClothingStore
-      extend ActiveSupport::Concern
-
       include Store
+
+      def self.schema_property_definitions
+        {
+        }.freeze
+      end
+
     end
   end
 end

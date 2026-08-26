@@ -1,18 +1,61 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module PublicationVolume
-      extend ActiveSupport::Concern
-
       include CreativeWork
 
-      included do
-        option :page_end, optional: true # The page on which the work ends; for example "138" or "xvi".
-        option :page_start, optional: true # The page on which the work starts; for example "135" or "xiii".
-        option :pagination, optional: true # Any description of pages that is not separated into pageStart and pageEnd; for example, "1-6, 9, 55" or "10-12, 46-49".
-        option :volume_number, optional: true # Identifies the volume of publication or multi-part work; for example, "iii" or "2".
+      def self.schema_property_definitions
+        {
+          :page_end => {
+            schema_name: "pageEnd",
+            ranges: ["Integer", "Text"],
+          }.freeze,
+          :page_start => {
+            schema_name: "pageStart",
+            ranges: ["Integer", "Text"],
+          }.freeze,
+          :pagination => {
+            schema_name: "pagination",
+            ranges: ["Text"],
+          }.freeze,
+          :volume_number => {
+            schema_name: "volumeNumber",
+            ranges: ["Integer", "Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def page_end
+        read_property(:page_end)
+      end
+
+      def page_end=(value)
+        write_property(:page_end, value)
+      end
+
+      def page_start
+        read_property(:page_start)
+      end
+
+      def page_start=(value)
+        write_property(:page_start, value)
+      end
+
+      def pagination
+        read_property(:pagination)
+      end
+
+      def pagination=(value)
+        write_property(:pagination, value)
+      end
+
+      def volume_number
+        read_property(:volume_number)
+      end
+
+      def volume_number=(value)
+        write_property(:volume_number, value)
+      end
+
     end
   end
 end

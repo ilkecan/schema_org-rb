@@ -1,15 +1,25 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module SearchAction
-      extend ActiveSupport::Concern
-
       include Action
 
-      included do
-        option :query, optional: true # A sub property of instrument. The query used on this action.
+      def self.schema_property_definitions
+        {
+          :query => {
+            schema_name: "query",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def query
+        read_property(:query)
+      end
+
+      def query=(value)
+        write_property(:query, value)
+      end
+
     end
   end
 end

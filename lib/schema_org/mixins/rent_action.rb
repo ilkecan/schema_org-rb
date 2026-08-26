@@ -1,16 +1,37 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module RentAction
-      extend ActiveSupport::Concern
-
       include TradeAction
 
-      included do
-        option :landlord, optional: true # A sub property of participant. The owner of the real estate property.
-        option :real_estate_agent, optional: true # A sub property of participant. The real estate agent involved in the action.
+      def self.schema_property_definitions
+        {
+          :landlord => {
+            schema_name: "landlord",
+            ranges: ["Organization", "Person"],
+          }.freeze,
+          :real_estate_agent => {
+            schema_name: "realEstateAgent",
+            ranges: ["RealEstateAgent"],
+          }.freeze,
+        }.freeze
       end
+
+      def landlord
+        read_property(:landlord)
+      end
+
+      def landlord=(value)
+        write_property(:landlord, value)
+      end
+
+      def real_estate_agent
+        read_property(:real_estate_agent)
+      end
+
+      def real_estate_agent=(value)
+        write_property(:real_estate_agent, value)
+      end
+
     end
   end
 end

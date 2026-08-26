@@ -1,19 +1,73 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module APIReference
-      extend ActiveSupport::Concern
-
       include TechArticle
 
-      included do
-        option :assembly, optional: true # Library file name, e.g., mscorlib.dll, system.web.dll. Superseded by `executable_library_name`.
-        option :assembly_version, optional: true # Associated product/technology version. E.g., .NET Framework 4.5.
-        option :programming_model, optional: true # Indicates whether API is managed or unmanaged.
-        option :target_platform, optional: true # Type of app development: phone, Metro style, desktop, XBox, etc.
-        option :executable_library_name, optional: true # Library file name, e.g., mscorlib.dll, system.web.dll. Supersedes `assembly`.
+      def self.schema_property_definitions
+        {
+          :assembly => {
+            schema_name: "assembly",
+            ranges: ["Text"],
+          }.freeze,
+          :assembly_version => {
+            schema_name: "assemblyVersion",
+            ranges: ["Text"],
+          }.freeze,
+          :executable_library_name => {
+            schema_name: "executableLibraryName",
+            ranges: ["Text"],
+          }.freeze,
+          :programming_model => {
+            schema_name: "programmingModel",
+            ranges: ["Text"],
+          }.freeze,
+          :target_platform => {
+            schema_name: "targetPlatform",
+            ranges: ["Text"],
+          }.freeze,
+        }.freeze
       end
+
+      def assembly
+        read_property(:assembly)
+      end
+
+      def assembly=(value)
+        write_property(:assembly, value)
+      end
+
+      def assembly_version
+        read_property(:assembly_version)
+      end
+
+      def assembly_version=(value)
+        write_property(:assembly_version, value)
+      end
+
+      def executable_library_name
+        read_property(:executable_library_name)
+      end
+
+      def executable_library_name=(value)
+        write_property(:executable_library_name, value)
+      end
+
+      def programming_model
+        read_property(:programming_model)
+      end
+
+      def programming_model=(value)
+        write_property(:programming_model, value)
+      end
+
+      def target_platform
+        read_property(:target_platform)
+      end
+
+      def target_platform=(value)
+        write_property(:target_platform, value)
+      end
+
     end
   end
 end
