@@ -1,16 +1,20 @@
-require 'rdf/turtle'
+require "rdf/turtle"
 
 module SchemaOrg
   module Codegen
     class Parser
-      def initialize(schema_file: './codegen/data/schema.ttl')
+      def initialize(schema_file: "./codegen/data/schema.ttl")
         @schema_file = schema_file
       end
 
       def subjects
         @subjects ||= begin
           factory = Subject::Factory.new(prefixes:)
-          statements.map { |items| factory.build(items) }
+          statements.filter_map do |url, items|
+            next unless schema_subject?(url)
+
+            factory.build(items, url: url.to_s)
+          end
         end
       end
 
@@ -38,7 +42,12 @@ module SchemaOrg
       end
 
       def statements
-        @statements ||= reader.each_statement.group_by(&:subject).values
+        @statements ||= reader.each_statement.group_by(&:subject)
+      end
+
+      def schema_subject?(url)
+        text = url.to_s
+        text.start_with?(Vocabulary::SCHEMA_HTTP, Vocabulary::SCHEMA_HTTPS)
       end
     end
   end

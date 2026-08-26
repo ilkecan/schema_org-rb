@@ -1,0 +1,10 @@
+@prefix schema: <https://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <https://example.test/> .
+
+schema:Thing a schema:Class .
+schema:Text a schema:Class ; rdfs:subClassOf schema:Thing .
+schema:Parent a schema:Class ; rdfs:subClassOf schema:Thing, ex:ExternalParent .
+schema:Child a schema:Class ; rdfs:subClassOf schema:Parent, ex:ExternalParent .
+schema:title a schema:Property ; schema:domainIncludes schema:Child ; schema:rangeIncludes schema:Text .
+ex:Foreign a schema:Class ; rdfs:subClassOf schema:Child .

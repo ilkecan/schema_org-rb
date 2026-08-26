@@ -2,11 +2,12 @@ module SchemaOrg
   module Codegen
     module Models
       class Type
-        attr_reader :comment_lines, :name, :schema_types, :superseded_by, :supersedes, :url, :abstract, :enum_members
+        attr_reader :comment_lines, :name, :schema_name, :schema_types, :superseded_by, :supersedes, :url, :abstract, :enum_members
 
-        def initialize(comment_lines:, name:, schema_types:, superseded_by:, supersedes:, url:, abstract: false, enum_members: [])
+        def initialize(comment_lines:, name:, schema_name:, schema_types:, superseded_by:, supersedes:, url:, abstract: false, enum_members: [])
           @comment_lines = comment_lines.freeze
           @name = name
+          @schema_name = schema_name
           @schema_types = schema_types.freeze
           @superseded_by = superseded_by
           @supersedes = supersedes

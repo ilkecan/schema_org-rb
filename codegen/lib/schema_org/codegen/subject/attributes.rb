@@ -2,6 +2,10 @@ module SchemaOrg
   module Codegen
     class Subject
       class Attributes
+        def initialize(naming: Naming.new)
+          @naming = naming
+        end
+
         def each(&block)
           attributes.each(&block)
         end
@@ -14,7 +18,7 @@ module SchemaOrg
 
         def attributes
           @attributes ||= begin
-            many = Float::INFINITY
+            many = ::Float::INFINITY
             [
               {name: :comment, count: 1..1, default: ""},
               {name: :contributor, count: 0..many},
@@ -29,9 +33,9 @@ module SchemaOrg
               {name: :subClassOf, count: 0..many},
               {name: :subPropertyOf, count: 0..1},
               {name: :supersededBy, count: 0..1},
-              {name: :type, count: 1..many},
+              {name: :type, count: 1..many}
             ].map do |attribute|
-              name = attribute[:name].to_s.underscore.to_sym
+              name = @naming.method_name(attribute[:name]).to_sym
               max = attribute[:count].max
               attribute.merge(name:, min: attribute[:count].min, max:, optional: attribute[:count].min.zero?, array: max > 1)
             end

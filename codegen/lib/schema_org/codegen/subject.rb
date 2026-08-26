@@ -1,11 +1,12 @@
 module SchemaOrg
   module Codegen
     class Subject
-      attr_reader :prefixes, :statements
+      attr_reader :prefixes, :statements, :url
 
-      def initialize(prefixes:, statements:, **attributes)
+      def initialize(prefixes:, statements:, url:, **attributes)
         @prefixes = prefixes.freeze
         @statements = statements.freeze
+        @url = url.freeze
         attributes.each do |name, value|
           instance_variable_set("@#{name}", value)
           define_singleton_method(name) { instance_variable_get("@#{name}") }
@@ -13,7 +14,7 @@ module SchemaOrg
       end
 
       def comment_lines
-        comment.to_s.strip.split("\n")
+        comment.to_s.strip.split("\n").map(&:rstrip)
       end
 
       def name
@@ -30,10 +31,6 @@ module SchemaOrg
 
       def type?(marker)
         type.include?(marker)
-      end
-
-      def url
-        "#{prefixes[nil]}#{label}"
       end
 
       def used_on

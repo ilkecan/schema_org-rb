@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # <%= url %>
 <% unless supersession_lines.empty? -%>
@@ -18,12 +20,18 @@ module SchemaOrg
 <% end -%>
   class <%= name %> < Base
     include Mixins::<%= name %>
+
+    SCHEMA_NAME = <%= schema_name.inspect %>
     SCHEMA_TYPES = [self<% schema_types.drop(1).each do |type| %>, SchemaOrg::<%= type %><% end %>].freeze
 <% if abstract -%>
     ABSTRACT_TYPE = true
 <% end -%>
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -43,7 +51,7 @@ module SchemaOrg
     end
 <% unless enum_members.empty? -%>
 <% enum_members.each do |constant, term, declared| -%>
-    <%= constant %> = EnumerationValue.new(<%= term.inspect %>, self, [<%= declared.map { |type| "SchemaOrg::#{type}" }.join(', ') %>]).freeze
+    <%= constant %> = EnumerationValue.new(<%= term.inspect %>, [<%= declared.map { |type| "SchemaOrg::#{type}" }.join(', ') %>])
 <% end -%>
     VALUES = [<%= enum_members.map { |entry| entry[0] }.join(', ') %>].freeze
 

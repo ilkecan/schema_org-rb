@@ -3,50 +3,52 @@ module SchemaOrg
     class Vocabulary
       SCHEMA_HTTP = "http://schema.org/"
       SCHEMA_HTTPS = "https://schema.org/"
-      LEGACY_EXTERNAL_PARENTS = ["MedicalBusiness"].freeze
+      RESERVED_CONSTANTS = %w[
+        Base EnumerationValue GeneratedVocabulary UnknownPropertyError InvalidPropertyValueError
+        AbstractTypeError CircularReferenceError VERSION SCHEMA_VERSION CONTEXT SCHEMA_TYPES
+        ABSTRACT_TYPE VALUES
+      ].freeze
 
       attr_reader :subjects, :classes, :properties, :enumeration_members
 
-      def initialize(parser:, strict: true)
-        @strict = strict
-        @subjects = parser.subjects
+      def initialize(parser:, validate_references: true, naming: Naming.new)
+        @naming = naming
+        @subjects = parser.subjects.select { |subject| schema_uri?(subject.url) }
         @by_uri = {}
         subjects.each do |subject|
-          uri = subject.url
+          uri = subject.url.to_s
           raise ValidationError, "Duplicate schema URI #{uri}" if @by_uri.key?(uri)
 
           @by_uri[uri] = subject
         end
-        @classes = subjects.select { |s| s.type? :Class }.sort_by { |s| term_name(s.url) }
-        @properties = subjects.select { |s| s.type? :Property }.sort_by { |s| term_name(s.url) }
-        @class_by_name = classes.to_h { |s| [term_name(s.url), s] }
-        @property_by_name = properties.to_h { |s| [term_name(s.url), s] }
-        if strict
-          validate_references!
-        end
+        @classes = subjects.select { |subject| subject.type? :Class }.sort_by { |subject| term_name(subject.url) }
+        @properties = subjects.select { |subject| subject.type? :Property }.sort_by { |subject| term_name(subject.url) }
+        @class_by_name = classes.to_h { |subject| [term_name(subject.url), subject] }
+        @property_by_name = properties.to_h { |subject| [term_name(subject.url), subject] }
+        @enumeration_classes = classes.select { |subject| descendant?(term_name(subject.url), "Enumeration") }
+        @data_type_classes = classes.select { |subject| descendant?(term_name(subject.url), "DataType") }
+        @enumeration_members = subjects.reject { |subject| subject.type? :Class }.select do |subject|
+          subject.type.any? { |type| schema_name(type) && descendant?(schema_name(type), "Enumeration") }
+        end.sort_by { |subject| term_name(subject.url) }
+        validate_references! if validate_references
         validate_graph!
-        @enumeration_classes = classes.select { |s| descendant?(term_name(s.url), "Enumeration") }
-        @data_type_classes = classes.select { |s| descendant?(term_name(s.url), "DataType") }
-        @enumeration_members = subjects.reject { |s| s.type? :Class }.select do |s|
-          s.type.any? { |type| schema_name(type) && descendant?(schema_name(type), "Enumeration") }
-        end.sort_by { |s| term_name(s.url) }
+        validate_names!
       end
 
-      def enumeration_classes
-        @enumeration_classes
-      end
+      attr_reader :enumeration_classes
 
-      def data_type_classes
-        @data_type_classes
-      end
+      attr_reader :data_type_classes
 
       def ordinary_classes
         classes - data_type_classes - enumeration_classes
       end
 
       def direct_parents(subject)
-        parents = subject.parents + subject.type
-        parents.filter_map { |parent| schema_name(parent) }.select { |parent| @class_by_name.key?(parent) }.uniq.sort
+        parent_names(subject).select { |parent| @class_by_name.key?(parent) }.uniq.sort
+      end
+
+      def external_parents(subject)
+        subject.parents.filter_map { |parent| parent.to_s unless schema_name(parent) }.uniq.sort
       end
 
       def ancestry(subject_or_name)
@@ -66,18 +68,25 @@ module SchemaOrg
       end
 
       def direct_properties(type_name)
-        direct = properties.select do |property|
-          property.used_on.any? { |domain| schema_name(domain) == type_name }
-        end
-        direct.sort_by { |property| term_name(property.url) }
+        properties.select do |property|
+          property_domains(property).include?(type_name)
+        end.sort_by { |property| term_name(property.url) }
       end
 
       def property_domains(property)
-        property.used_on.filter_map { |domain| schema_name(domain) }.sort
+        property.used_on.filter_map { |domain| schema_name(domain) }.uniq.sort
+      end
+
+      def property_external_domains(property)
+        property.used_on.filter_map { |domain| domain.to_s unless schema_name(domain) }.uniq.sort
       end
 
       def property_ranges(property)
-        property.range_types.filter_map { |range| schema_name(range) }.sort
+        property.range_types.filter_map { |range| schema_name(range) }.uniq.sort
+      end
+
+      def property_external_ranges(property)
+        property.range_types.filter_map { |range| range.to_s unless schema_name(range) }.uniq.sort
       end
 
       def term_name(uri)
@@ -85,21 +94,43 @@ module SchemaOrg
       end
 
       def schema_name(value)
+        return nil if value == :Class || value == :Property
         return value.to_s if value.is_a?(Symbol)
 
         text = value.to_s
-        return nil unless text.start_with?(SCHEMA_HTTP, SCHEMA_HTTPS)
+        return nil unless schema_uri?(text)
 
-        text.split("/").last
+        text.delete_prefix(SCHEMA_HTTP).delete_prefix(SCHEMA_HTTPS)
+      end
+
+      def schema_uri?(value)
+        text = value.to_s
+        text.start_with?(SCHEMA_HTTP, SCHEMA_HTTPS)
+      end
+
+      def data_type?(name)
+        @data_type_classes.any? { |subject| term_name(subject.url) == name }
+      end
+
+      def enumeration?(name)
+        @enumeration_classes.any? { |subject| term_name(subject.url) == name }
+      end
+
+      def descendant_of?(name, ancestor)
+        descendant?(name, ancestor)
       end
 
       private
 
+      def parent_names(subject)
+        (subject.parents + subject.type).filter_map { |parent| schema_name(parent) }
+      end
+
       def validate_references!
         classes.each do |subject|
-          parents = subject.parents.filter_map { |parent| schema_name(parent) }
-          parents.each do |parent|
-            next if @class_by_name.key?(parent) || LEGACY_EXTERNAL_PARENTS.include?(parent) && !@strict
+          subject.parents.filter_map { |parent| schema_name(parent) }.each do |parent|
+            next if @class_by_name.key?(parent)
+
             raise ValidationError, "Unknown schema.org parent #{parent} for #{term_name(subject.url)}"
           end
         end
@@ -136,42 +167,56 @@ module SchemaOrg
       end
 
       def validate_names!
-        seen_constants = {}
-        classes.each do |subject|
-          name = term_name(subject.url)
-          ruby_name = name.gsub(/[^A-Za-z0-9_]/, "_")
-          if seen_constants.key?(ruby_name)
-            raise ValidationError, "Ruby constant collision #{seen_constants[ruby_name]} and #{name}"
-          end
-          seen_constants[ruby_name] = name
+        validate_name_set(classes.map { |subject| term_name(subject.url) }, :constant) do |name|
+          @naming.constant_name(name)
         end
-        seen_methods = {}
-        properties.each do |property|
-          name = term_name(property.url)
-          ruby_name = name.underscore
-          if seen_methods.key?(ruby_name)
-            raise ValidationError, "Ruby method collision #{seen_methods[ruby_name]} and #{name}"
-          end
-          seen_methods[ruby_name] = name
+        validate_name_set(classes.map { |subject| term_name(subject.url) }, :file) do |name|
+          @naming.file_name(name)
+        end
+        validate_name_set(properties.map { |property| term_name(property.url) }, :method) do |name|
+          @naming.method_name(name)
         end
         enumeration_classes.each do |enum|
-          values = enumeration_members.select { |member| member.type.any? { |type| schema_name(type) == term_name(enum.url) } }
-          seen = {}
-          values.each do |value|
-            constant = term_name(value.url).gsub(/[^A-Za-z0-9_]/, "_").underscore.upcase
-            if seen.key?(constant)
-              raise ValidationError, "Enumeration constant collision #{seen[constant]} and #{term_name(value.url)}"
-            end
-            seen[constant] = term_name(value.url)
+          values = enumeration_members.select do |member|
+            member.type.any? { |type| schema_name(type) == term_name(enum.url) }
+          end
+          validate_name_set(values.map { |value| term_name(value.url) }, :enumeration_constant) do |name|
+            @naming.enumeration_constant_name(name)
           end
         end
       end
 
-      def descendant?(name, ancestor)
-        return true if name == ancestor
-        return false unless @class_by_name.key?(name)
+      def validate_name_set(schema_names, kind)
+        seen = {}
+        reserved = if kind == :constant
+          RESERVED_CONSTANTS
+        else
+          (kind == :method) ? reserved_methods : []
+        end
+        schema_names.each do |schema_name|
+          ruby_name = yield(schema_name).to_s
+          if reserved.include?(ruby_name) || seen.key?(ruby_name)
+            terms = [seen[ruby_name], schema_name].compact.uniq
+            raise ValidationError, "Ruby #{kind} collision for #{terms.join(", ")} (#{ruby_name})"
+          end
+          seen[ruby_name] = schema_name
+        end
+      end
 
-        direct_parents(@class_by_name.fetch(name)).any? { |parent| descendant?(parent, ancestor) }
+      def reserved_methods
+        base_methods = %i[
+          schema_types schema_type_argument! schema_type? property_definitions initialize read_property
+          write_property as_jsonld to_json freeze
+        ]
+        (base_methods + Object.instance_methods).map(&:to_s).uniq
+      end
+
+      def descendant?(name, ancestor, seen = {})
+        return true if name == ancestor
+        return false if seen[name] || !@class_by_name.key?(name)
+
+        seen[name] = true
+        direct_parents(@class_by_name.fetch(name)).any? { |parent| descendant?(parent, ancestor, seen) }
       end
     end
   end

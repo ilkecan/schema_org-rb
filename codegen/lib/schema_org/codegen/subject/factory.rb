@@ -2,23 +2,24 @@ module SchemaOrg
   module Codegen
     class Subject
       class Factory
-        attr_reader :attributes
+        attr_reader :attributes, :naming
 
-        RDF_CLASS = 'http://www.w3.org/2000/01/rdf-schema#Class'
-        RDF_PROPERTY = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Property'
-        RDF_TYPE = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
-        RDFS = 'http://www.w3.org/2000/01/rdf-schema#'
+        RDF_CLASS = "http://www.w3.org/2000/01/rdf-schema#Class"
+        RDF_PROPERTY = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+        RDF_TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+        RDFS = "http://www.w3.org/2000/01/rdf-schema#"
 
-        def initialize(prefixes:, attributes: Subject::Attributes.new)
+        def initialize(prefixes:, attributes: Subject::Attributes.new, naming: Naming.new)
           @attributes = attributes
+          @naming = naming
           @prefixes = prefixes.freeze
         end
 
-        def build(statements)
+        def build(statements, url:)
           args = validate(parse_statements(statements))
           normalize(args)
           attributes.each { |attribute| args[attribute[:name]] ||= attribute[:array] ? [] : attribute[:default] }
-          Subject.new(**args, prefixes: @prefixes, statements: statements)
+          Subject.new(**args, prefixes: @prefixes, statements:, url:)
         end
 
         def contract
@@ -31,7 +32,7 @@ module SchemaOrg
 
         def parse_statements(statements)
           statements.each_with_object(Hash.new { |hash, key| hash[key] = [] }) do |statement, result|
-            key = parse_item(statement.predicate, predicate: true).to_s.underscore.to_sym
+            key = naming.method_name(parse_item(statement.predicate, predicate: true))
             result[key] << parse_item(statement.object, marker: key == :type)
           end
         end
@@ -44,7 +45,7 @@ module SchemaOrg
             uri = value.to_s
             return :Class if marker && uri == RDF_CLASS
             return :Property if marker && uri == RDF_PROPERTY
-            return uri.split("#").last.to_sym if predicate && (uri == RDF_TYPE || uri.start_with?(RDFS))
+            return uri.split(/[\/#]/).last.to_sym if predicate
             return schema_term(uri) if schema_term(uri)
 
             uri
@@ -55,7 +56,7 @@ module SchemaOrg
 
         def validate(args)
           result = contract.call(args)
-          raise ValidationError, "Invalid subject: #{result[:errors].join(', ')}" unless result[:errors].empty?
+          raise ValidationError, "Invalid subject: #{result[:errors].join(", ")}" unless result[:errors].empty?
 
           result[:values]
         end
@@ -69,8 +70,8 @@ module SchemaOrg
         end
 
         def schema_term(uri)
-          return uri.delete_prefix('https://schema.org/').to_sym if uri.start_with?('https://schema.org/')
-          return uri.delete_prefix('http://schema.org/').to_sym if uri.start_with?('http://schema.org/')
+          return uri.delete_prefix("https://schema.org/").to_sym if uri.start_with?("https://schema.org/")
+          return uri.delete_prefix("http://schema.org/").to_sym if uri.start_with?("http://schema.org/")
 
           nil
         end

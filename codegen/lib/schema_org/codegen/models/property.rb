@@ -2,11 +2,12 @@ module SchemaOrg
   module Codegen
     module Models
       class Property
-        attr_reader :comment_lines, :inverse_of, :name, :schema_name, :schema_url,
+        attr_reader :comment_lines, :external_ranges, :inverse_of, :name, :schema_name, :schema_url,
           :superseded_by, :supersedes, :types
 
-        def initialize(comment_lines:, inverse_of:, name:, schema_name:, schema_url:, superseded_by:, supersedes:, types:)
+        def initialize(comment_lines:, inverse_of:, name:, schema_name:, schema_url:, superseded_by:, supersedes:, types:, external_ranges: [])
           @comment_lines = comment_lines.freeze
+          @external_ranges = external_ranges.freeze
           @inverse_of = inverse_of
           @name = name
           @schema_name = schema_name

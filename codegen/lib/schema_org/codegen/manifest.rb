@@ -1,11 +1,14 @@
 module SchemaOrg
   module Codegen
     class Manifest
-      def initialize(writer:, manifest_root: Pathname.new('./codegen'), generated_root: Pathname.new('./lib/schema_org'))
+      LOGICAL_ROOTS = %w[runtime/mixins runtime/types].freeze
+      LOGICAL_FILES = %w[runtime/schema_version.rb runtime/generated_vocabulary.rb signature/schema_org.rbs].freeze
+
+      def initialize(writer:, manifest_root: Pathname.new("./codegen"), runtime_root: Pathname.new("./lib/schema_org"), signature_root: Pathname.new("./sig"), generated_root: nil)
         @writer = writer
-        @file = Pathname.new(manifest_root).join('manifest.json')
-        root = Pathname.new(generated_root)
-        @allowed_roots = [root.join('mixins'), root.join('types'), root.join('schema_version.rb')]
+        @file = Pathname.new(manifest_root).join("manifest.json")
+        @runtime_root = Pathname.new(generated_root || runtime_root)
+        @signature_root = Pathname.new(signature_root)
         @previous = nil
         @current = {}
       end
@@ -15,6 +18,8 @@ module SchemaOrg
       end
 
       def []=(key, value)
+        raise ValidationError, "unknown manifest key #{key}" unless valid_key?(key)
+
         current[key] = value
       end
 
@@ -22,12 +27,12 @@ module SchemaOrg
         previous.keys
       end
 
-      def remove_stale(path)
-        candidate = Pathname.new(path).cleanpath
-        return unless @allowed_roots.any? { |root| candidate == root || candidate.to_s.start_with?("#{root}/") }
-        return unless candidate.file?
+      def remove_stale(key)
+        path = resolve(key)
+        return unless path
+        return unless regular_without_symlink?(path)
 
-        candidate.delete
+        path.delete
       end
 
       def save
@@ -36,7 +41,7 @@ module SchemaOrg
 
       private
 
-      attr_reader :writer, :file, :current
+      attr_reader :writer, :file, :current, :runtime_root, :signature_root
 
       def load
         JSON.parse(file.read)
@@ -44,6 +49,46 @@ module SchemaOrg
 
       def previous
         @previous ||= file.readable? ? load : {}
+      end
+
+      def valid_key?(key)
+        LOGICAL_FILES.include?(key) || LOGICAL_ROOTS.any? { |root| key.start_with?("#{root}/") && safe_relative?(key.delete_prefix("#{root}/")) }
+      end
+
+      def resolve(key)
+        key = normalize_legacy_key(key)
+        return unless valid_key?(key)
+
+        if key.start_with?("runtime/")
+          relative = key.delete_prefix("runtime/")
+          runtime_root.join(relative)
+        else
+          signature_root.join(key.delete_prefix("signature/"))
+        end
+      end
+
+      def normalize_legacy_key(key)
+        return key unless key.start_with?("lib/schema_org/")
+
+        "runtime/#{key.delete_prefix("lib/schema_org/")}"
+      end
+
+      def safe_relative?(relative)
+        path = Pathname.new(relative)
+        !path.absolute? && !path.each_filename.any? { |part| part == ".." || part.empty? }
+      end
+
+      def regular_without_symlink?(path)
+        return false unless path.file?
+
+        components = path.relative_path_from(path.absolute? ? Pathname.new("/") : Pathname.new(".")).each_filename
+        current = Pathname.new(path.absolute? ? "/" : ".")
+        components.all? do |component|
+          current = current.join(component)
+          !current.lstat.symlink?
+        end
+      rescue Errno::ENOENT
+        false
       end
     end
   end
