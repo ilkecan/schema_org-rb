@@ -9,27 +9,53 @@ class TestSignatures < Minitest::Test
   def test_fixture_signature_is_complete_and_valid_rbs
     signature = generate_signature
     source = signature.read
-    child = source[/interface _Child\n.*?(?=\n  (?:interface|class) )/m]
+    child = interface_source(source, "_Child")
+    interface_a = interface_source(source, "_A")
+    interface_b = interface_source(source, "_B")
 
-    assert_includes child, "def ancestor_property:"
-    assert_includes child, "def shared_property:"
-    assert_includes child, "def child_property:"
+    %w[ancestor_property shared_property child_property].each do |property|
+      assert_includes child, "def #{property}:"
+      assert_includes child, "def #{property}=:"
+    end
+    assert_includes interface_a, "def shared_property:"
+    assert_includes interface_b, "def shared_property:"
+    assert_includes source, "?ancestor_property:"
+    assert_includes source, "?shared_property:"
+    assert_includes child, "::Date | ::DateTime | ::Time"
+    assert_equal 2, child.scan("def shared_property").length
+    assert_includes child, "SchemaOrg::EnumerationValue[_ItemAvailability]"
+    assert_includes child, "SchemaOrg::EnumerationValue[_SubItemAvailability]"
+    assert_includes source, "IN_STOCK: SchemaOrg::EnumerationValue[SchemaOrg::_ItemAvailability & SchemaOrg::_SubItemAvailability]"
+    assert_includes source, "def self.new: (**untyped) -> bot"
+    assert_includes source, "VERSION: String"
+    assert_includes source, "SCHEMA_VERSION: String"
+    assert_includes source, "CONTEXT: String"
+    assert_includes source, "type schema_property_definition = {"
+    refute_includes source, "Mixins::"
+    refute_includes source, "GeneratedVocabulary"
 
-    declarations = RBS::Parser.parse_signature(source)
-    assert_operator declarations.length, :>, 0
     loader = RBS::EnvironmentLoader.new
     loader.add(library: "date")
     loader.add(path: signature)
     environment = RBS::Environment.from_loader(loader).resolve_type_names
     builder = RBS::DefinitionBuilder.new(env: environment)
-    assert builder.build_interface(RBS::TypeName.parse("::SchemaOrg::_Child"))
+    assert_operator environment.interface_decls.length, :>, 0
+    environment.interface_decls.each_key { |name| builder.build_interface(name) }
+  end
+
+  def test_reordered_fixture_produces_identical_rbs
+    assert_equal generate_signature("equivalent_default").binread, generate_signature("equivalent_schema_reordered").binread
   end
 
   private
 
-  def generate_signature
+  def interface_source(source, name)
+    source[/interface #{name}\n.*?(?=\n  (?:interface|class) )/m]
+  end
+
+  def generate_signature(name = "diamond")
     root = Pathname.new(Dir.mktmpdir("schema-org-signature"))
-    parser = SchemaOrg::Codegen::Parser.new(schema_file: fixture("diamond"))
+    parser = SchemaOrg::Codegen::Parser.new(schema_file: fixture(name))
     vocabulary = SchemaOrg::Codegen::Vocabulary.new(parser:)
     writer = SchemaOrg::Codegen::Writer.new
     manifest = SchemaOrg::Codegen::Manifest.new(
