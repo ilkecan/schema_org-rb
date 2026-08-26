@@ -26,6 +26,6 @@ in
   # https://devenv.sh/languages/
   languages.ruby = {
     enable = true;
-    version = "3.4.7";
+    version = "4.0.6";
   };
 }
