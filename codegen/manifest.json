@@ -937,7 +937,7 @@
   "runtime/mixins/write_action.rb": "ab5c61806b0e87bd723d5d1a05d2cb9b",
   "runtime/mixins/x_path_type.rb": "576cfc7fff78673fc5ad94ea666257ef",
   "runtime/mixins/zoo.rb": "2fd20c3823025beaa1588f13f6b58d89",
-  "runtime/schema_version.rb": "c90ddf0d3ae6282bc1cd7b3a2aeaf258",
+  "runtime/schema_version.rb": "e9c8fdab1b37464a41935350e89bcecb",
   "runtime/types/about_page.rb": "be6c8d43acaa429486d01dc7988f62be",
   "runtime/types/accept_action.rb": "ab52a7b57a018624b4dd9663c56f4a0c",
   "runtime/types/accommodation.rb": "6993235b9d83b9cc93dc06be49450be0",
