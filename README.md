@@ -20,6 +20,8 @@ The gem supports Ruby 3.2, 3.3, 3.4, and 4.0.
 
 Construct generated types with snake_case properties. Values are checked on construction and mutation.
 
+Schema.org type names generally map directly to Ruby constants. The exception in the current vocabulary is `3DModel`, which is exposed as `SchemaOrg::ThreeDModel` because Ruby constants cannot begin with a digit.
+
 ```ruby
 require "schema_org"
 require "date"
@@ -36,6 +38,20 @@ person.birth_date = nil
 
 person.schema_type?(SchemaOrg::Thing) # true
 person.as_jsonld
+# => {
+#      "@context" => "https://schema.org",
+#      "@type" => "Person",
+#      "address" => {
+#        "@type" => "PostalAddress",
+#        "addressLocality" => "Seattle"
+#      },
+#      "colleague" => [
+#        "https://example.test/alice",
+#        "https://example.test/bob"
+#      ],
+#      "jobTitle" => "Researcher",
+#      "name" => "Jane Doe"
+#    }
 person.to_json
 ```
 
@@ -52,7 +68,7 @@ offer.to_json # includes https://schema.org/InStock
 
 The gem ships generated RBS signatures covering the complete Schema.org v30.0 vocabulary. Type checkers such as RBS and Steep can use these signatures for static checking and editor features.
 
-The generated signature is intentionally complete and is about 28 MB uncompressed. This does not affect normal Ruby runtime loading, but constrained machines may prefer to keep the signature out of their RBS environment:
+If the signature is too large for your type-checking setup, configure RBS Collection to ignore it:
 
 ```yaml
 # rbs_collection.yaml
@@ -60,23 +76,3 @@ gems:
   - name: schema_org-rb
     ignore: true
 ```
-
-`ignore: true` tells RBS Collection not to install or load this gem's RBS. The Ruby gem remains installable and usable at runtime.
-
-`require: false` in a Gemfile has a different primary meaning: Bundler does not auto-require the gem. RBS Collection also treats it as a signal not to install the gem's RBS, but it does not prevent manually requiring the gem.
-
-## Maintainer commands
-
-The pinned all-layer v30.0 Turtle input is `codegen/data/schema.ttl`. It includes exact release and source annotations.
-
-```sh
-bundle exec rake codegen:update_schema[v30.0]
-bundle exec rake codegen
-bundle exec rake codegen:check
-bundle exec rake types:check
-bundle exec rake test
-bundle exec rake standard
-bundle exec rake package:check
-```
-
-`codegen:update_schema[v30.0]` downloads the one canonical all-layers Turtle artifact containing every Schema.org extension and replaces the snapshot atomically only after parsing and validating the complete graph. `codegen` regenerates checked-in runtime files and `sig/schema_org.rbs`. `codegen:check` verifies deterministic file and manifest drift without changing the working tree. The built gem includes runtime Ruby files and the generated RBS signature.
