@@ -16,6 +16,7 @@ group :development do
   gem "minitest", "~> 5.26.2"
   gem "rake", "~> 13.0"
   gem "rdf-turtle", "~> 3.3.1"
+  gem "rbs", "~> 3.9"
   gem "standard", "~> 1.52.0"
   gem "tilt", "~> 2.6.1"
 end

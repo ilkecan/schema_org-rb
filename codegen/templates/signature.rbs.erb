@@ -1,0 +1,70 @@
+# Generated Schema.org consumer signatures.
+
+module SchemaOrg
+  class UnknownPropertyError < ::ArgumentError
+  end
+
+  class InvalidPropertyValueError < ::TypeError
+  end
+
+  class AbstractTypeError < ::TypeError
+  end
+
+  class CircularReferenceError < ::StandardError
+  end
+
+  class Base
+    def self.schema_types: () -> ::Array[::Class]
+    def self.schema_type?: (untyped) -> bool
+    def self.property_definitions: () -> ::Hash[::Symbol, untyped]
+    def initialize: (**untyped) -> void
+    def schema_types: () -> ::Array[::Class]
+    def schema_type?: (untyped) -> bool
+    def read_property: (::Symbol) -> untyped
+    def write_property: (::Symbol, untyped) -> untyped
+    def as_jsonld: (?root: bool) -> ::Hash[String, untyped]
+    def to_json: (*untyped) -> String
+  end
+
+  class EnumerationValue[out E]
+    def initialize: (String, ::Array[::Class]) -> void
+    def term: () -> String
+    def schema_types: () -> ::Array[::Class]
+    def schema_type?: (untyped) -> bool
+    def as_jsonld: (?root: bool) -> String
+    def to_json: (*untyped) -> String
+  end
+
+<% types.each do |type| -%>
+  interface _<%= type[:name] %>
+<% type[:parents].each do |parent| -%>
+    include _<%= parent %>
+<% end -%>
+<% type[:properties].each do |entry| -%>
+    def <%= entry[:property].name %>: () -> <%= property_type(entry) %>
+    def <%= entry[:property].name %>=: (<%= property_type(entry) %>) -> <%= property_type(entry) %>
+<% end -%>
+  end
+
+  class <%= type[:name] %> < Base
+    include _<%= type[:name] %>
+    def self.schema_name: () -> String
+    def self.schema_types: () -> ::Array[::Class]
+    def self.schema_type?: (untyped) -> bool
+<% if type[:abstract] -%>
+    def self.new: (**untyped) -> bot
+<% else -%>
+    def self.new: (<%= constructor_keywords(type[:constructor_properties]) %>) -> <%= type[:name] %>
+<% end -%>
+    def schema_types: () -> ::Array[::Class]
+    def schema_type?: (untyped) -> bool
+<% type[:enum_members].each do |member| -%>
+    <%= member[:constant] %>: <%= enum_type(member[:types]) %>
+<% end -%>
+<% unless type[:enum_members].empty? -%>
+    def self.values: () -> ::Array[SchemaOrg::EnumerationValue[untyped]]
+<% end -%>
+  end
+
+<% end -%>
+end
