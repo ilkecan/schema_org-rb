@@ -45,7 +45,5 @@ jobs:
         run: bundle exec rake codegen:check
       - name: Check deterministic generation
         run: bundle exec rake codegen:check
-      - name: Repeat generated file check
-        run: bundle exec rake codegen:check
       - name: Verify package
         run: bundle exec rake package:check
