@@ -225,19 +225,15 @@ module SchemaOrg
 
     def validate_structural!(value, stack, path)
       return if value.is_a?(String) || value.is_a?(Numeric) || value == true || value == false
-      if value.is_a?(EnumerationValue)
-        return
-      end
+      return if value.is_a?(EnumerationValue)
       if value.is_a?(Base)
         raise InvalidPropertyValueError, "invalid #{path}: expected a generated schema object" unless GeneratedVocabulary.generated_class?(value.class)
 
         return
       end
       if value.is_a?(Array)
-        with_active(stack, value, path) do
-          value.each_with_index { |item, index| validate_structural!(item, stack, "#{path}[#{index}]") }
-        end
-        return
+        raise CircularReferenceError, "circular reference at #{path}" if stack.key?(value.__id__)
+        raise InvalidPropertyValueError, "invalid #{path}: nested arrays are not allowed"
       end
       if value.is_a?(Hash)
         with_active(stack, value, path) do
@@ -269,10 +265,11 @@ module SchemaOrg
       object_id = object.__id__
       raise CircularReferenceError, "circular reference at #{path}" if stack.key?(object_id)
 
-      stack[object_id] = true
+      inserted = !stack.key?(object_id)
+      stack[object_id] = true if inserted
       yield
     ensure
-      stack.delete(object_id)
+      stack.delete(object_id) if inserted
     end
   end
 end

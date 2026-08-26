@@ -34,4 +34,49 @@ class TestRuntimeValues < Minitest::Test
   def test_unknown_properties_are_rejected
     assert_raises(SchemaOrg::UnknownPropertyError) { SchemaOrg::Person.new(no_such_property: true) }
   end
+
+  def test_range_less_values_are_strict_structural_values
+    values = ["text", 1, 1.5, true, false, SchemaOrg::ItemAvailability::IN_STOCK, SchemaOrg::Person.new(name: "Jane"), {"nested" => 1}]
+    values.each { |value| assert_equal value, SchemaOrg::Observation.new(measured_property: value).measured_property }
+  end
+
+  def test_range_less_values_reject_unsupported_and_nested_arrays
+    [Object.new, Date.today, DateTime.now, Time.now, [1, [2]], {1 => "bad"}].each do |value|
+      assert_raises(SchemaOrg::InvalidPropertyValueError) do
+        SchemaOrg::Observation.new(measured_property: value)
+      end
+    end
+  end
+
+  def test_range_less_cycles_report_paths_and_shared_branches_are_allowed
+    hash = {}
+    hash["self"] = hash
+    error = assert_raises(SchemaOrg::CircularReferenceError) do
+      SchemaOrg::Observation.new(measured_property: hash)
+    end
+    assert_includes error.message, "measured_property[\"self\"]"
+
+    array = []
+    array << array
+    error = assert_raises(SchemaOrg::CircularReferenceError) do
+      SchemaOrg::Observation.new(measured_property: array)
+    end
+    assert_includes error.message, "measured_property[0]"
+
+    shared = {"value" => 1}
+    observation = SchemaOrg::Observation.new(measured_property: [shared, shared])
+    assert_equal [{"value" => 1}, {"value" => 1}], observation.measured_property
+  end
+
+  def test_exact_date_and_generated_class_requirements
+    date_subclass = Class.new(Date)
+    assert_raises(SchemaOrg::InvalidPropertyValueError) do
+      SchemaOrg::Person.new(birth_date: date_subclass.jd(2_460_000))
+    end
+
+    consumer_subclass = Class.new(SchemaOrg::Person)
+    assert_raises(SchemaOrg::InvalidPropertyValueError) do
+      SchemaOrg::Observation.new(measured_property: consumer_subclass.new(name: "Jane"))
+    end
+  end
 end
