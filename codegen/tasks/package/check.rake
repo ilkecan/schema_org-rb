@@ -3,6 +3,7 @@
 require "digest"
 require "json"
 require "pathname"
+require "open3"
 require "rubygems/package"
 require "tmpdir"
 
@@ -12,7 +13,12 @@ namespace :package do
     spec = Gem::Specification.load("schema_org.gemspec")
     abort "Unable to load gem specification" unless spec
 
-    allowed = (Dir["lib/**/*.rb"] + Dir["sig/**/*.rbs"] + %w[LICENSE.txt README.md CHANGELOG.md]).sort
+    output, error, status = Open3.capture3(
+      "git", "-C", Dir.pwd, "ls-files", "--cached", "-z", "--",
+      "lib/**/*.rb", "lib/*.rb", "sig/**/*.rbs", "sig/*.rbs", "LICENSE.txt", "README.md", "CHANGELOG.md"
+    )
+    abort "Unable to list tracked package files: #{error}" unless status.success?
+    allowed = output.split("\0").reject(&:empty?).sort
     abort "Gem specification file list differs" unless spec.files.sort == allowed
 
     Rake::Task["build"].invoke
