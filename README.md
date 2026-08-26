@@ -53,6 +53,31 @@ offer.to_json # includes https://schema.org/InStock
 `@context`; nested schema values are serialized recursively. Arrays, native
 `Date`, `DateTime`, and `Time` values are supported.
 
+
+## RBS support
+
+The gem ships generated RBS signatures covering the complete Schema.org
+v30.0 vocabulary. Type checkers such as RBS and Steep can use these
+signatures for static checking and editor features.
+
+The generated signature is intentionally complete and is about 28 MB
+uncompressed. This does not affect normal Ruby runtime loading, but constrained
+machines may prefer to keep the signature out of their RBS environment:
+
+```yaml
+# rbs_collection.yaml
+gems:
+  - name: schema_org-rb
+    ignore: true
+```
+
+`ignore: true` tells RBS Collection not to install or load this gem's RBS. The
+Ruby gem remains installable and usable at runtime.
+
+`require: false` in a Gemfile has a different primary meaning: Bundler does
+not auto-require the gem. RBS Collection also treats it as a signal not to
+install the gem's RBS, but it does not prevent manually requiring the gem.
+
 ## Maintainer commands
 
 The pinned all-layer v30.0 Turtle input is
