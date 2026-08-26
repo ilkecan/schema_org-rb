@@ -31,6 +31,8 @@ module SchemaOrg
           candidate = Models::SchemaVersion.current(schema_file: temporary.path)
           raise ValidationError, "downloaded schema version mismatch" unless candidate.schema_version == version
           parser = Parser.new(schema_file: temporary.path)
+          raise ValidationError, "downloaded schema could not be parsed" if parser.subjects.empty?
+
           Vocabulary.new(parser:)
         end
         replacer.write(target, annotated)

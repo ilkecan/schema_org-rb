@@ -68,9 +68,10 @@ bundle exec rake standard
 bundle exec rake package:check
 ```
 
-`codegen:update_schema` requires an explicit upstream release ref and replaces
-the snapshot atomically only after parsing and validating the complete graph.
-`codegen` regenerates checked-in runtime files and `sig/schema_org.rbs`.
+`codegen:update_schema[v30.0]` downloads the one canonical all-layers Turtle
+artifact containing every Schema.org extension and replaces the snapshot
+atomically only after parsing and validating the complete graph. `codegen`
+regenerates checked-in runtime files and `sig/schema_org.rbs`.
 `codegen:check` verifies deterministic file and manifest drift without changing
 the working tree. The built gem includes runtime Ruby files and the generated
 RBS signature.
