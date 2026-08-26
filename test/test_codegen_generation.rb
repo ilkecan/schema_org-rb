@@ -36,15 +36,17 @@ class TestCodegenGeneration < Minitest::Test
     definitions.each do |definition|
       assert_predicate definition, :frozen?
       definition.each_value do |value|
-        assert_predicate value, :frozen? if value.is_a?(Array) || value.is_a?(String)
+        next unless value.is_a?(Array) || value.is_a?(String)
+
+        assert_predicate value, :frozen?
+        mutation = value.is_a?(Array) ? -> { value << "changed" } : -> { value.replace("changed") }
+        assert_raises(FrozenError, "mutable metadata #{value.inspect}", &mutation)
       end
     end
     assert_equal "archiveHeld", definitions[0][:inverse_of]
     assert_equal "executableLibraryName", definitions[1][:superseded_by]
     assert_equal "assembly", definitions[2][:supersedes]
     assert_equal ["Property"], definitions[3][:external_ranges]
-    assert_raises(FrozenError) { definitions[0][:schema_name].replace("changed") }
-    assert_raises(FrozenError) { definitions[1][:comment_lines] << "changed" }
   end
 
   def test_generated_comments_include_metadata_and_frozen_headers
