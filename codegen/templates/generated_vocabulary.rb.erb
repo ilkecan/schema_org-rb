@@ -1,0 +1,47 @@
+# frozen_string_literal: true
+
+module SchemaOrg
+  class GeneratedVocabulary
+    SCHEMA_TO_RUBY = {
+<% schema_to_ruby.sort.each_with_index do |(schema_name, ruby_name), index| -%>
+      <%= schema_name.inspect %> => <%= ruby_name.inspect %><%= "," unless index == schema_to_ruby.size - 1 %>
+<% end -%>
+    }.freeze
+    RUBY_TO_SCHEMA = {
+<% ruby_to_schema.sort.each_with_index do |(ruby_name, schema_name), index| -%>
+      <%= ruby_name.inspect %> => <%= schema_name.inspect %><%= "," unless index == ruby_to_schema.size - 1 %>
+<% end -%>
+    }.freeze
+    FILE_TO_RUBY = {
+<% file_to_ruby.sort.each_with_index do |(file_name, ruby_name), index| -%>
+      <%= file_name.inspect %> => <%= ruby_name.inspect %><%= "," unless index == file_to_ruby.size - 1 %>
+<% end -%>
+    }.freeze
+    ENUMERATION_NAMES = <%= enumeration_names.sort.inspect %>.freeze
+
+    class << self
+      def ruby_name(schema_name)
+        SCHEMA_TO_RUBY[schema_name.to_s]
+      end
+
+      def schema_name(ruby_name)
+        key = ruby_name.respond_to?(:name) ? ruby_name.name : ruby_name.to_s
+        RUBY_TO_SCHEMA[key.delete_prefix("SchemaOrg::")]
+      end
+
+      def inflections
+        FILE_TO_RUBY
+      end
+
+      def generated_class?(klass)
+        klass.is_a?(::Class) && RUBY_TO_SCHEMA.key?(klass.name&.delete_prefix("SchemaOrg::"))
+      end
+
+      def enumeration?(klass)
+        ENUMERATION_NAMES.include?(klass.name&.delete_prefix("SchemaOrg::"))
+      end
+    end
+
+    private_constant :SCHEMA_TO_RUBY, :RUBY_TO_SCHEMA, :FILE_TO_RUBY, :ENUMERATION_NAMES
+  end
+end

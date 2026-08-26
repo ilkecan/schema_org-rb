@@ -1,9 +1,9 @@
-require 'tilt'
+require "tilt"
 
 module SchemaOrg
   module Codegen
     class TemplateEngine
-      def initialize(templates_root: Pathname.new('./codegen/templates'))
+      def initialize(templates_root: Pathname.new("./codegen/templates"))
         @templates_root = Pathname.new(templates_root)
         @templates = {}
       end
@@ -15,7 +15,10 @@ module SchemaOrg
       private
 
       def template(name)
-        @templates[name] ||= Tilt::ERBTemplate.new(@templates_root.join("#{name}.rb.erb").to_s, trim: '-')
+        @templates[name] ||= begin
+          extension = (name == :signature) ? "rbs" : "rb"
+          Tilt::ERBTemplate.new(@templates_root.join("#{name}.#{extension}.erb").to_s, trim: "-")
+        end
       end
     end
   end
