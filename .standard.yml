@@ -2,6 +2,4 @@
 #   https://github.com/standardrb/standard
 ruby_version: 3.2
 ignore:
-  - "codegen/**/*"
-  - "lib/schema_org/mixins/**/*"
-  - "lib/schema_org/types/**/*"
+  - "codegen/lib/schema_org/codegen/example/**/*"

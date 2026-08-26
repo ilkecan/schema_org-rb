@@ -39,7 +39,11 @@ jobs:
           bundler-cache: true
       - name: Run style
         run: bundle exec rake standard
+      - name: Validate signatures
+        run: bundle exec rake types:check
       - name: Check generated files
         run: bundle exec rake codegen:check
+      - name: Check deterministic generation
+        run: bundle exec rake codegen && bundle exec rake codegen
       - name: Verify package
-        run: bundle exec rake build
+        run: bundle exec rake package:check

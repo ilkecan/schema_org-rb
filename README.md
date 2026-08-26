@@ -55,22 +55,22 @@ offer.to_json # includes https://schema.org/InStock
 
 ## Maintainer commands
 
-The pinned Turtle input is `codegen/data/schema.ttl` and its version is in
-`codegen/data/SCHEMA_VERSION.txt`.
+The pinned all-layer v30.0 Turtle input is
+`codegen/data/schema.ttl`. It includes exact release and source annotations.
 
 ```sh
 bundle exec rake codegen:update_schema[v30.0]
 bundle exec rake codegen
 bundle exec rake codegen:check
+bundle exec rake types:check
 bundle exec rake test
 bundle exec rake standard
-bundle exec rake build
+bundle exec rake package:check
 ```
 
-`codegen:update_schema` requires an explicit upstream release ref. `codegen`
-regenerates checked-in runtime files. `codegen:check` verifies deterministic
-file and manifest drift without changing the working tree.
-
-The gem build contains only `lib/**/*.rb`, this README, `LICENSE.txt`, and
-`CHANGELOG.md`. Release manually with `bundle exec rake release` after setting
-up the repository remote and RubyGems credentials.
+`codegen:update_schema` requires an explicit upstream release ref and replaces
+the snapshot atomically only after parsing and validating the complete graph.
+`codegen` regenerates checked-in runtime files and `sig/schema_org.rbs`.
+`codegen:check` verifies deterministic file and manifest drift without changing
+the working tree. The built gem includes runtime Ruby files and the generated
+RBS signature.
