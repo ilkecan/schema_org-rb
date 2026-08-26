@@ -21,4 +21,35 @@ class TestCodegenGeneration < Minitest::Test
     assert_predicate definition[:ranges], :frozen?
     assert_raises(FrozenError) { definition[:ranges] << "Thing" }
   end
+
+  def test_representative_metadata_is_fully_frozen
+    definitions = [
+      SchemaOrg::ArchiveComponent.property_definitions.fetch(:holding_archive),
+      SchemaOrg::APIReference.property_definitions.fetch(:assembly),
+      SchemaOrg::APIReference.property_definitions.fetch(:executable_library_name),
+      SchemaOrg::Observation.property_definitions.fetch(:measured_property)
+    ]
+    definitions.each do |definition|
+      assert_predicate definition, :frozen?
+      definition.each_value do |value|
+        assert_predicate value, :frozen? if value.is_a?(Array) || value.is_a?(String)
+      end
+    end
+    assert_equal "archiveHeld", definitions[0][:inverse_of]
+    assert_equal "executableLibraryName", definitions[1][:superseded_by]
+    assert_equal "assembly", definitions[2][:supersedes]
+    assert_equal ["Property"], definitions[3][:external_ranges]
+    assert_raises(FrozenError) { definitions[0][:schema_name].replace("changed") }
+    assert_raises(FrozenError) { definitions[1][:comment_lines] << "changed" }
+  end
+
+  def test_generated_comments_include_metadata_and_frozen_headers
+    holding = File.read("lib/schema_org/mixins/archive_component.rb")
+    reference = File.read("lib/schema_org/mixins/api_reference.rb")
+
+    assert_includes holding, "Inverse-property: `archiveHeld`."
+    assert_includes reference, "Superseded by `executableLibraryName`."
+    assert_includes reference, "Supersedes `assembly`."
+    Dir["lib/schema_org/**/*.rb"].each { |file| assert_match(/\A# frozen_string_literal: true\n/, File.read(file)) }
+  end
 end
