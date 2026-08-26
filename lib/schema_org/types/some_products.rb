@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/SomeProducts
   #
   # A placeholder for multiple similar products of the same kind.
   class SomeProducts < Base
     include Mixins::SomeProducts
+
+    SCHEMA_NAME = "SomeProducts"
     SCHEMA_TYPES = [self, SchemaOrg::Product, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

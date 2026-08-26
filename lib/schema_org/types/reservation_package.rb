@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ReservationPackage
   #
   # A group of multiple reservations with common values for all sub-reservations.
   class ReservationPackage < Base
     include Mixins::ReservationPackage
+
+    SCHEMA_NAME = "ReservationPackage"
     SCHEMA_TYPES = [self, SchemaOrg::Reservation, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

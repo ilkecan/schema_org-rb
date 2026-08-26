@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/MedicalOrganization
   #
   # A medical organization (physical or not), such as hospital, institution or clinic.
   class MedicalOrganization < Base
     include Mixins::MedicalOrganization
+
+    SCHEMA_NAME = "MedicalOrganization"
     SCHEMA_TYPES = [self, SchemaOrg::Organization, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

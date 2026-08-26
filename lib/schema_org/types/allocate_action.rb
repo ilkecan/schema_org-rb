@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/AllocateAction
   #
   # The act of organizing tasks/objects/events by associating resources to it.
   class AllocateAction < Base
     include Mixins::AllocateAction
+
+    SCHEMA_NAME = "AllocateAction"
     SCHEMA_TYPES = [self, SchemaOrg::OrganizeAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

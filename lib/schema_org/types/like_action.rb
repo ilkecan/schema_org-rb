@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/LikeAction
   #
   # The act of expressing a positive sentiment about the object. An agent likes an object (a proposition, topic or theme) with participants.
   class LikeAction < Base
     include Mixins::LikeAction
+
+    SCHEMA_NAME = "LikeAction"
     SCHEMA_TYPES = [self, SchemaOrg::ReactAction, SchemaOrg::AssessAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

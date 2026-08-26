@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/MusicRecording
   #
   # A music recording (track), usually a single song.
   class MusicRecording < Base
     include Mixins::MusicRecording
+
+    SCHEMA_NAME = "MusicRecording"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ShareAction
   #
   # The act of distributing content to people for their amusement or edification.
   class ShareAction < Base
     include Mixins::ShareAction
+
+    SCHEMA_NAME = "ShareAction"
     SCHEMA_TYPES = [self, SchemaOrg::CommunicateAction, SchemaOrg::InteractAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

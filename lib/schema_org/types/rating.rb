@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Rating
   #
   # A rating is an evaluation on a numeric scale, such as 1 to 5 stars.
   class Rating < Base
     include Mixins::Rating
+
+    SCHEMA_NAME = "Rating"
     SCHEMA_TYPES = [self, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

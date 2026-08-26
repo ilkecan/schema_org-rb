@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ProfilePage
   #
   # Web page type: Profile page.
   class ProfilePage < Base
     include Mixins::ProfilePage
+
+    SCHEMA_NAME = "ProfilePage"
     SCHEMA_TYPES = [self, SchemaOrg::WebPage, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

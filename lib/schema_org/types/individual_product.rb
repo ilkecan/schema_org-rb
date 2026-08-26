@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/IndividualProduct
   #
   # A single, identifiable product instance (e.g. a laptop with a particular serial number).
   class IndividualProduct < Base
     include Mixins::IndividualProduct
+
+    SCHEMA_NAME = "IndividualProduct"
     SCHEMA_TYPES = [self, SchemaOrg::Product, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

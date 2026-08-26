@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/PerformAction
   #
   # The act of participating in performance arts.
   class PerformAction < Base
     include Mixins::PerformAction
+
+    SCHEMA_NAME = "PerformAction"
     SCHEMA_TYPES = [self, SchemaOrg::PlayAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

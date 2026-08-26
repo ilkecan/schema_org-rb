@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/GeoCoordinates
   #
   # The geographic coordinates of a place or event.
   class GeoCoordinates < Base
     include Mixins::GeoCoordinates
+
+    SCHEMA_NAME = "GeoCoordinates"
     SCHEMA_TYPES = [self, SchemaOrg::StructuredValue, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/TattooParlor
   #
   # A tattoo parlor.
   class TattooParlor < Base
     include Mixins::TattooParlor
+
+    SCHEMA_NAME = "TattooParlor"
     SCHEMA_TYPES = [self, SchemaOrg::HealthAndBeautyBusiness, SchemaOrg::LocalBusiness, SchemaOrg::Organization, SchemaOrg::Place, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

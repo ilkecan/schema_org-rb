@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/OrderAction
   #
   # An agent orders an object/product/service to be delivered/sent.
   class OrderAction < Base
     include Mixins::OrderAction
+
+    SCHEMA_NAME = "OrderAction"
     SCHEMA_TYPES = [self, SchemaOrg::TradeAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

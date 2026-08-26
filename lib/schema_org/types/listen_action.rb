@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ListenAction
   #
   # The act of consuming audio content.
   class ListenAction < Base
     include Mixins::ListenAction
+
+    SCHEMA_NAME = "ListenAction"
     SCHEMA_TYPES = [self, SchemaOrg::ConsumeAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

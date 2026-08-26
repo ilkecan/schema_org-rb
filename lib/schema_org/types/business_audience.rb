@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/BusinessAudience
   #
   # A set of characteristics belonging to businesses, e.g. who compose an item's target audience.
   class BusinessAudience < Base
     include Mixins::BusinessAudience
+
+    SCHEMA_NAME = "BusinessAudience"
     SCHEMA_TYPES = [self, SchemaOrg::Audience, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

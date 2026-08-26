@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/TipAction
   #
   # The act of giving money voluntarily to a beneficiary in recognition of services rendered.
   class TipAction < Base
     include Mixins::TipAction
+
+    SCHEMA_NAME = "TipAction"
     SCHEMA_TYPES = [self, SchemaOrg::TradeAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

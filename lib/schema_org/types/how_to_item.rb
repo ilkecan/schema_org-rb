@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/HowToItem
   #
   # An item used as either a tool or supply when performing the instructions for how to achieve a result.
   class HowToItem < Base
     include Mixins::HowToItem
+
+    SCHEMA_NAME = "HowToItem"
     SCHEMA_TYPES = [self, SchemaOrg::ListItem, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

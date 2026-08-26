@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/BankAccount
   #
   # A product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be paid interest.
   class BankAccount < Base
     include Mixins::BankAccount
+
+    SCHEMA_NAME = "BankAccount"
     SCHEMA_TYPES = [self, SchemaOrg::FinancialProduct, SchemaOrg::Service, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

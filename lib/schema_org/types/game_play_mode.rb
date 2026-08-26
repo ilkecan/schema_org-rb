@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/GamePlayMode
   #
   # Indicates whether this game is multi-player, co-op or single-player.
   class GamePlayMode < Base
     include Mixins::GamePlayMode
+
+    SCHEMA_NAME = "GamePlayMode"
     SCHEMA_TYPES = [self, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -20,9 +28,9 @@ module SchemaOrg
         super
       end
     end
-    CO_OP = EnumerationValue.new("CoOp", self, [SchemaOrg::GamePlayMode]).freeze
-    MULTI_PLAYER = EnumerationValue.new("MultiPlayer", self, [SchemaOrg::GamePlayMode]).freeze
-    SINGLE_PLAYER = EnumerationValue.new("SinglePlayer", self, [SchemaOrg::GamePlayMode]).freeze
+    CO_OP = EnumerationValue.new("CoOp", [SchemaOrg::GamePlayMode])
+    MULTI_PLAYER = EnumerationValue.new("MultiPlayer", [SchemaOrg::GamePlayMode])
+    SINGLE_PLAYER = EnumerationValue.new("SinglePlayer", [SchemaOrg::GamePlayMode])
     VALUES = [CO_OP, MULTI_PLAYER, SINGLE_PLAYER].freeze
 
     def self.values

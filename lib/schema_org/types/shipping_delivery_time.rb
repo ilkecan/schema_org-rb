@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ShippingDeliveryTime
   #
   # ShippingDeliveryTime provides various pieces of information about delivery times for shipping.
   class ShippingDeliveryTime < Base
     include Mixins::ShippingDeliveryTime
+
+    SCHEMA_NAME = "ShippingDeliveryTime"
     SCHEMA_TYPES = [self, SchemaOrg::StructuredValue, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

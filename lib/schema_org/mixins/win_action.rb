@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module WinAction
@@ -5,21 +7,28 @@ module SchemaOrg
 
       def self.schema_property_definitions
         {
-          :loser => {
+          loser: {
             schema_name: "loser",
-            ranges: ["Person"],
-          }.freeze,
+            schema_url: "https://schema.org/loser",
+            comment_lines: ["A sub property of participant. The loser of the action."].freeze,
+            ranges: ["Person"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze
         }.freeze
       end
 
+      # A sub property of participant. The loser of the action.
       def loser
         read_property(:loser)
       end
 
+      # A sub property of participant. The loser of the action.
       def loser=(value)
         write_property(:loser, value)
       end
-
     end
   end
 end

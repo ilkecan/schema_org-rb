@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/EventStatusType
   #
   # EventStatusType is an enumeration type whose instances represent several states that an Event may be in.
   class EventStatusType < Base
     include Mixins::EventStatusType
+
+    SCHEMA_NAME = "EventStatusType"
     SCHEMA_TYPES = [self, SchemaOrg::StatusEnumeration, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -20,11 +28,11 @@ module SchemaOrg
         super
       end
     end
-    EVENT_CANCELLED = EnumerationValue.new("EventCancelled", self, [SchemaOrg::EventStatusType]).freeze
-    EVENT_MOVED_ONLINE = EnumerationValue.new("EventMovedOnline", self, [SchemaOrg::EventStatusType]).freeze
-    EVENT_POSTPONED = EnumerationValue.new("EventPostponed", self, [SchemaOrg::EventStatusType]).freeze
-    EVENT_RESCHEDULED = EnumerationValue.new("EventRescheduled", self, [SchemaOrg::EventStatusType]).freeze
-    EVENT_SCHEDULED = EnumerationValue.new("EventScheduled", self, [SchemaOrg::EventStatusType]).freeze
+    EVENT_CANCELLED = EnumerationValue.new("EventCancelled", [SchemaOrg::EventStatusType])
+    EVENT_MOVED_ONLINE = EnumerationValue.new("EventMovedOnline", [SchemaOrg::EventStatusType])
+    EVENT_POSTPONED = EnumerationValue.new("EventPostponed", [SchemaOrg::EventStatusType])
+    EVENT_RESCHEDULED = EnumerationValue.new("EventRescheduled", [SchemaOrg::EventStatusType])
+    EVENT_SCHEDULED = EnumerationValue.new("EventScheduled", [SchemaOrg::EventStatusType])
     VALUES = [EVENT_CANCELLED, EVENT_MOVED_ONLINE, EVENT_POSTPONED, EVENT_RESCHEDULED, EVENT_SCHEDULED].freeze
 
     def self.values

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/HowToSection
   #
   # A sub-grouping of steps in the instructions for how to achieve a result (e.g. steps for making a pie crust within a pie recipe).
   class HowToSection < Base
     include Mixins::HowToSection
+
+    SCHEMA_NAME = "HowToSection"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWork, SchemaOrg::ItemList, SchemaOrg::ListItem, SchemaOrg::Thing, SchemaOrg::Intangible].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

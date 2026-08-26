@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/IgnoreAction
   #
   # The act of intentionally disregarding the object. An agent ignores an object.
   class IgnoreAction < Base
     include Mixins::IgnoreAction
+
+    SCHEMA_NAME = "IgnoreAction"
     SCHEMA_TYPES = [self, SchemaOrg::AssessAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

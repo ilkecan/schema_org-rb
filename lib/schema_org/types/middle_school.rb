@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/MiddleSchool
   #
   # A middle school (typically for children aged around 11-14, although this varies somewhat).
   class MiddleSchool < Base
     include Mixins::MiddleSchool
+
+    SCHEMA_NAME = "MiddleSchool"
     SCHEMA_TYPES = [self, SchemaOrg::EducationalOrganization, SchemaOrg::CivicStructure, SchemaOrg::Organization, SchemaOrg::Place, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/CreativeWorkSeason
   #
@@ -6,9 +8,15 @@ module SchemaOrg
   # A media season, e.g. TV, radio, video game etc.
   class CreativeWorkSeason < Base
     include Mixins::CreativeWorkSeason
+
+    SCHEMA_NAME = "CreativeWorkSeason"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

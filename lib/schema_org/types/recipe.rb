@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Recipe
   #
   # A recipe. For dietary restrictions covered by the recipe, a few common restrictions are enumerated via [[suitableForDiet]]. The [[keywords]] property can also be used to add more detail.
   class Recipe < Base
     include Mixins::Recipe
+
+    SCHEMA_NAME = "Recipe"
     SCHEMA_TYPES = [self, SchemaOrg::HowTo, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

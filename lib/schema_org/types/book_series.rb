@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/BookSeries
   #
   # A series of books. Included books can be indicated with the hasPart property.
   class BookSeries < Base
     include Mixins::BookSeries
+
+    SCHEMA_NAME = "BookSeries"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWorkSeries, SchemaOrg::CreativeWork, SchemaOrg::Series, SchemaOrg::Thing, SchemaOrg::Intangible].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

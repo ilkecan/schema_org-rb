@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/NoteDigitalDocument
   #
   # A file containing a note, primarily for the author.
   class NoteDigitalDocument < Base
     include Mixins::NoteDigitalDocument
+
+    SCHEMA_NAME = "NoteDigitalDocument"
     SCHEMA_TYPES = [self, SchemaOrg::DigitalDocument, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

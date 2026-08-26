@@ -1,13 +1,21 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Boolean
   #
   # Boolean: True or False.
   class Boolean < Base
     include Mixins::Boolean
+
+    SCHEMA_NAME = "Boolean"
     SCHEMA_TYPES = [self, SchemaOrg::DataType].freeze
     ABSTRACT_TYPE = true
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

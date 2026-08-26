@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/WPHeader
   #
   # The header section of the page.
   class WPHeader < Base
     include Mixins::WPHeader
+
+    SCHEMA_NAME = "WPHeader"
     SCHEMA_TYPES = [self, SchemaOrg::WebPageElement, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/State
   #
   # A state or province of a country.
   class State < Base
     include Mixins::State
+
+    SCHEMA_NAME = "State"
     SCHEMA_TYPES = [self, SchemaOrg::AdministrativeArea, SchemaOrg::Place, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

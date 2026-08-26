@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DigitalDocumentPermissionType
   #
   # A type of permission which can be granted for accessing a digital document.
   class DigitalDocumentPermissionType < Base
     include Mixins::DigitalDocumentPermissionType
+
+    SCHEMA_NAME = "DigitalDocumentPermissionType"
     SCHEMA_TYPES = [self, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -20,9 +28,9 @@ module SchemaOrg
         super
       end
     end
-    COMMENT_PERMISSION = EnumerationValue.new("CommentPermission", self, [SchemaOrg::DigitalDocumentPermissionType]).freeze
-    READ_PERMISSION = EnumerationValue.new("ReadPermission", self, [SchemaOrg::DigitalDocumentPermissionType]).freeze
-    WRITE_PERMISSION = EnumerationValue.new("WritePermission", self, [SchemaOrg::DigitalDocumentPermissionType]).freeze
+    COMMENT_PERMISSION = EnumerationValue.new("CommentPermission", [SchemaOrg::DigitalDocumentPermissionType])
+    READ_PERMISSION = EnumerationValue.new("ReadPermission", [SchemaOrg::DigitalDocumentPermissionType])
+    WRITE_PERMISSION = EnumerationValue.new("WritePermission", [SchemaOrg::DigitalDocumentPermissionType])
     VALUES = [COMMENT_PERMISSION, READ_PERMISSION, WRITE_PERMISSION].freeze
 
     def self.values

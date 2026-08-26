@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ExhibitionEvent
   #
   # Event type: Exhibition event, e.g. at a museum, library, archive, tradeshow, ...
   class ExhibitionEvent < Base
     include Mixins::ExhibitionEvent
+
+    SCHEMA_NAME = "ExhibitionEvent"
     SCHEMA_TYPES = [self, SchemaOrg::Event, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

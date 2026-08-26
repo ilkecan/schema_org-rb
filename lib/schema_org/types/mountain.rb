@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Mountain
   #
   # A mountain, like Mount Whitney or Mount Everest.
   class Mountain < Base
     include Mixins::Mountain
+
+    SCHEMA_NAME = "Mountain"
     SCHEMA_TYPES = [self, SchemaOrg::Landform, SchemaOrg::Place, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/CreativeWork
   #
   # The most generic kind of creative work, including books, movies, photographs, software programs, etc.
   class CreativeWork < Base
     include Mixins::CreativeWork
+
+    SCHEMA_NAME = "CreativeWork"
     SCHEMA_TYPES = [self, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

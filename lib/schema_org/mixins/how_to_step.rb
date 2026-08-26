@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module HowToStep
@@ -6,10 +8,8 @@ module SchemaOrg
       include ListItem
 
       def self.schema_property_definitions
-        {
-        }.freeze
+        {}.freeze
       end
-
     end
   end
 end

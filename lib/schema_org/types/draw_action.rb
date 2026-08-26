@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DrawAction
   #
   # The act of producing a visual/graphical representation of an object, typically with a pen/pencil and paper as instruments.
   class DrawAction < Base
     include Mixins::DrawAction
+
+    SCHEMA_NAME = "DrawAction"
     SCHEMA_TYPES = [self, SchemaOrg::CreateAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

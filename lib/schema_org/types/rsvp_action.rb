@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/RsvpAction
   #
   # The act of notifying an event organizer as to whether you expect to attend the event.
   class RsvpAction < Base
     include Mixins::RsvpAction
+
+    SCHEMA_NAME = "RsvpAction"
     SCHEMA_TYPES = [self, SchemaOrg::InformAction, SchemaOrg::CommunicateAction, SchemaOrg::InteractAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

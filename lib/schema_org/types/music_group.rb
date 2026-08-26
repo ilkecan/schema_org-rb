@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/MusicGroup
   #
   # A musical group, such as a band, an orchestra, or a choir. Can also be a solo musician.
   class MusicGroup < Base
     include Mixins::MusicGroup
+
+    SCHEMA_NAME = "MusicGroup"
     SCHEMA_TYPES = [self, SchemaOrg::PerformingGroup, SchemaOrg::Organization, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/EmployeeRole
   #
   # A subclass of OrganizationRole used to describe employee relationships.
   class EmployeeRole < Base
     include Mixins::EmployeeRole
+
+    SCHEMA_NAME = "EmployeeRole"
     SCHEMA_TYPES = [self, SchemaOrg::OrganizationRole, SchemaOrg::Role, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

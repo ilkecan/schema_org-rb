@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/FilmAction
   #
   # The act of capturing sound and moving images on film, video, or digitally.
   class FilmAction < Base
     include Mixins::FilmAction
+
+    SCHEMA_NAME = "FilmAction"
     SCHEMA_TYPES = [self, SchemaOrg::CreateAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

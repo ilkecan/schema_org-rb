@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ProductModel
   #
   # A datasheet or vendor specification of a product (in the sense of a prototypical description).
   class ProductModel < Base
     include Mixins::ProductModel
+
+    SCHEMA_NAME = "ProductModel"
     SCHEMA_TYPES = [self, SchemaOrg::Product, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

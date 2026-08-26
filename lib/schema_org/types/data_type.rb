@@ -1,13 +1,21 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DataType
   #
   # The basic data types such as Integers, Strings, etc.
   class DataType < Base
     include Mixins::DataType
+
+    SCHEMA_NAME = "DataType"
     SCHEMA_TYPES = [self].freeze
     ABSTRACT_TYPE = true
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

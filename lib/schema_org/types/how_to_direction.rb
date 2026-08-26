@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/HowToDirection
   #
   # A direction indicating a single action to do in the instructions for how to achieve a result.
   class HowToDirection < Base
     include Mixins::HowToDirection
+
+    SCHEMA_NAME = "HowToDirection"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWork, SchemaOrg::ListItem, SchemaOrg::Thing, SchemaOrg::Intangible].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

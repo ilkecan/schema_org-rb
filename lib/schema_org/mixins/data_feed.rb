@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module DataFeed
@@ -5,21 +7,28 @@ module SchemaOrg
 
       def self.schema_property_definitions
         {
-          :data_feed_element => {
+          data_feed_element: {
             schema_name: "dataFeedElement",
-            ranges: ["DataFeedItem", "Text", "Thing"],
-          }.freeze,
+            schema_url: "https://schema.org/dataFeedElement",
+            comment_lines: ["An item within a data feed. Data feeds may have many elements."].freeze,
+            ranges: ["DataFeedItem", "Text", "Thing"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze
         }.freeze
       end
 
+      # An item within a data feed. Data feeds may have many elements.
       def data_feed_element
         read_property(:data_feed_element)
       end
 
+      # An item within a data feed. Data feeds may have many elements.
       def data_feed_element=(value)
         write_property(:data_feed_element, value)
       end
-
     end
   end
 end

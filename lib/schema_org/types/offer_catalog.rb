@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/OfferCatalog
   #
   # An OfferCatalog is an ItemList that contains related Offers and/or further OfferCatalogs that are offeredBy the same provider.
   class OfferCatalog < Base
     include Mixins::OfferCatalog
+
+    SCHEMA_NAME = "OfferCatalog"
     SCHEMA_TYPES = [self, SchemaOrg::ItemList, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

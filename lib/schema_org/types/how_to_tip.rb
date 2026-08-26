@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/HowToTip
   #
   # An explanation in the instructions for how to achieve a result. It provides supplementary information about a technique, supply, author's preference, etc. It can explain what could be done, or what should not be done, but doesn't specify what should be done (see HowToDirection).
   class HowToTip < Base
     include Mixins::HowToTip
+
+    SCHEMA_NAME = "HowToTip"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWork, SchemaOrg::ListItem, SchemaOrg::Thing, SchemaOrg::Intangible].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

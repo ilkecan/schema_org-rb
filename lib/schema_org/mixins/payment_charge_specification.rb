@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module PaymentChargeSpecification
@@ -5,33 +7,48 @@ module SchemaOrg
 
       def self.schema_property_definitions
         {
-          :applies_to_delivery_method => {
+          applies_to_delivery_method: {
             schema_name: "appliesToDeliveryMethod",
-            ranges: ["DeliveryMethod"],
+            schema_url: "https://schema.org/appliesToDeliveryMethod",
+            comment_lines: ["The delivery method(s) to which the delivery charge or payment charge specification applies."].freeze,
+            ranges: ["DeliveryMethod"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :applies_to_payment_method => {
+          applies_to_payment_method: {
             schema_name: "appliesToPaymentMethod",
-            ranges: ["PaymentMethod"],
-          }.freeze,
+            schema_url: "https://schema.org/appliesToPaymentMethod",
+            comment_lines: ["The payment method(s) to which the payment charge specification applies."].freeze,
+            ranges: ["PaymentMethod"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze
         }.freeze
       end
 
+      # The delivery method(s) to which the delivery charge or payment charge specification applies.
       def applies_to_delivery_method
         read_property(:applies_to_delivery_method)
       end
 
+      # The delivery method(s) to which the delivery charge or payment charge specification applies.
       def applies_to_delivery_method=(value)
         write_property(:applies_to_delivery_method, value)
       end
 
+      # The payment method(s) to which the payment charge specification applies.
       def applies_to_payment_method
         read_property(:applies_to_payment_method)
       end
 
+      # The payment method(s) to which the payment charge specification applies.
       def applies_to_payment_method=(value)
         write_property(:applies_to_payment_method, value)
       end
-
     end
   end
 end

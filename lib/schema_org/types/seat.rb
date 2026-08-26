@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Seat
   #
   # Used to describe a seat, such as a reserved seat in an event reservation.
   class Seat < Base
     include Mixins::Seat
+
+    SCHEMA_NAME = "Seat"
     SCHEMA_TYPES = [self, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/TextObject
   #
   # A text file. The text can be unformatted or contain markup, html, etc.
   class TextObject < Base
     include Mixins::TextObject
+
+    SCHEMA_NAME = "TextObject"
     SCHEMA_TYPES = [self, SchemaOrg::MediaObject, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

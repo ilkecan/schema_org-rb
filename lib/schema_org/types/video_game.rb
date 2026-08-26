@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/VideoGame
   #
   # A video game is an electronic game that involves human interaction with a user interface to generate visual feedback on a video device.
   class VideoGame < Base
     include Mixins::VideoGame
+
+    SCHEMA_NAME = "VideoGame"
     SCHEMA_TYPES = [self, SchemaOrg::Game, SchemaOrg::SoftwareApplication, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,0 +1,38 @@
+# frozen_string_literal: true
+
+module SchemaOrg
+  # https://schema.org/EnergyStarEnergyEfficiencyEnumeration
+  #
+  # Used to indicate whether a product is EnergyStar certified.
+  class EnergyStarEnergyEfficiencyEnumeration < Base
+    include Mixins::EnergyStarEnergyEfficiencyEnumeration
+
+    SCHEMA_NAME = "EnergyStarEnergyEfficiencyEnumeration"
+    SCHEMA_TYPES = [self, SchemaOrg::EnergyEfficiencyEnumeration, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
+
+    class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
+      def schema_types
+        SCHEMA_TYPES
+      end
+
+      def schema_type?(other_type)
+        Base.schema_type_argument!(other_type)
+        SCHEMA_TYPES.include?(other_type)
+      end
+
+      def new(**properties)
+        super
+      end
+    end
+    ENERGY_STAR_CERTIFIED = EnumerationValue.new("EnergyStarCertified", [SchemaOrg::EnergyStarEnergyEfficiencyEnumeration])
+    VALUES = [ENERGY_STAR_CERTIFIED].freeze
+
+    def self.values
+      VALUES
+    end
+  end
+end

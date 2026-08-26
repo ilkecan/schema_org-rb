@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/TVClip
   #
   # A short TV program or a segment/part of a TV program.
   class TVClip < Base
     include Mixins::TVClip
+
+    SCHEMA_NAME = "TVClip"
     SCHEMA_TYPES = [self, SchemaOrg::Clip, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

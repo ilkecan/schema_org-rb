@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/PaymentChargeSpecification
   #
   # The costs of settling the payment using a particular payment method.
   class PaymentChargeSpecification < Base
     include Mixins::PaymentChargeSpecification
+
+    SCHEMA_NAME = "PaymentChargeSpecification"
     SCHEMA_TYPES = [self, SchemaOrg::PriceSpecification, SchemaOrg::StructuredValue, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

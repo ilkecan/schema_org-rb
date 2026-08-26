@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ReservationStatusType
   #
   # Enumerated status values for Reservation.
   class ReservationStatusType < Base
     include Mixins::ReservationStatusType
+
+    SCHEMA_NAME = "ReservationStatusType"
     SCHEMA_TYPES = [self, SchemaOrg::StatusEnumeration, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -20,10 +28,10 @@ module SchemaOrg
         super
       end
     end
-    RESERVATION_CANCELLED = EnumerationValue.new("ReservationCancelled", self, [SchemaOrg::ReservationStatusType]).freeze
-    RESERVATION_CONFIRMED = EnumerationValue.new("ReservationConfirmed", self, [SchemaOrg::ReservationStatusType]).freeze
-    RESERVATION_HOLD = EnumerationValue.new("ReservationHold", self, [SchemaOrg::ReservationStatusType]).freeze
-    RESERVATION_PENDING = EnumerationValue.new("ReservationPending", self, [SchemaOrg::ReservationStatusType]).freeze
+    RESERVATION_CANCELLED = EnumerationValue.new("ReservationCancelled", [SchemaOrg::ReservationStatusType])
+    RESERVATION_CONFIRMED = EnumerationValue.new("ReservationConfirmed", [SchemaOrg::ReservationStatusType])
+    RESERVATION_HOLD = EnumerationValue.new("ReservationHold", [SchemaOrg::ReservationStatusType])
+    RESERVATION_PENDING = EnumerationValue.new("ReservationPending", [SchemaOrg::ReservationStatusType])
     VALUES = [RESERVATION_CANCELLED, RESERVATION_CONFIRMED, RESERVATION_HOLD, RESERVATION_PENDING].freeze
 
     def self.values

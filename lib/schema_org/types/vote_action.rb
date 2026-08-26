@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/VoteAction
   #
   # The act of expressing a preference from a fixed/finite/structured set of choices/options.
   class VoteAction < Base
     include Mixins::VoteAction
+
+    SCHEMA_NAME = "VoteAction"
     SCHEMA_TYPES = [self, SchemaOrg::ChooseAction, SchemaOrg::AssessAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

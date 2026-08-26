@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ArriveAction
   #
   # The act of arriving at a place. An agent arrives at a destination from a fromLocation, optionally with participants.
   class ArriveAction < Base
     include Mixins::ArriveAction
+
+    SCHEMA_NAME = "ArriveAction"
     SCHEMA_TYPES = [self, SchemaOrg::MoveAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

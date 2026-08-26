@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Service
   #
   # A service provided by an organization, e.g. delivery service, print services, etc.
   class Service < Base
     include Mixins::Service
+
+    SCHEMA_NAME = "Service"
     SCHEMA_TYPES = [self, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

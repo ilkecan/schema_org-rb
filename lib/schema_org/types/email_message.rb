@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/EmailMessage
   #
   # An email message.
   class EmailMessage < Base
     include Mixins::EmailMessage
+
+    SCHEMA_NAME = "EmailMessage"
     SCHEMA_TYPES = [self, SchemaOrg::Message, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

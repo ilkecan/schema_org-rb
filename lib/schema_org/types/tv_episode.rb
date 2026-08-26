@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/TVEpisode
   #
   # A TV episode which can be part of a series or season.
   class TVEpisode < Base
     include Mixins::TVEpisode
+
+    SCHEMA_NAME = "TVEpisode"
     SCHEMA_TYPES = [self, SchemaOrg::Episode, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

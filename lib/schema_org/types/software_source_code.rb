@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/SoftwareSourceCode
   #
@@ -6,9 +8,15 @@ module SchemaOrg
   # Computer programming source code. Example: Full (compile ready) solutions, code snippet samples, scripts, templates.
   class SoftwareSourceCode < Base
     include Mixins::SoftwareSourceCode
+
+    SCHEMA_NAME = "SoftwareSourceCode"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

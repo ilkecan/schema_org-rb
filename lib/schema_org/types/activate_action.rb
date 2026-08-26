@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ActivateAction
   #
   # The act of starting or activating a device or application (e.g. starting a timer or turning on a flashlight).
   class ActivateAction < Base
     include Mixins::ActivateAction
+
+    SCHEMA_NAME = "ActivateAction"
     SCHEMA_TYPES = [self, SchemaOrg::ControlAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

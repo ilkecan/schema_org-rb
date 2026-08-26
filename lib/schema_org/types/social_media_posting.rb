@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/SocialMediaPosting
   #
   # A post to a social media platform, including blog posts, tweets, Facebook posts, etc.
   class SocialMediaPosting < Base
     include Mixins::SocialMediaPosting
+
+    SCHEMA_NAME = "SocialMediaPosting"
     SCHEMA_TYPES = [self, SchemaOrg::Article, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

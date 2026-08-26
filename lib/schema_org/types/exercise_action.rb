@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ExerciseAction
   #
   # The act of participating in exertive activity for the purposes of improving health and fitness.
   class ExerciseAction < Base
     include Mixins::ExerciseAction
+
+    SCHEMA_NAME = "ExerciseAction"
     SCHEMA_TYPES = [self, SchemaOrg::PlayAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

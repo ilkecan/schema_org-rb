@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/FoodService
   #
   # A food service, like breakfast, lunch, or dinner.
   class FoodService < Base
     include Mixins::FoodService
+
+    SCHEMA_NAME = "FoodService"
     SCHEMA_TYPES = [self, SchemaOrg::Service, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

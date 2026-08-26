@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Place
   #
   # Entities that have a somewhat fixed, physical extension.
   class Place < Base
     include Mixins::Place
+
+    SCHEMA_NAME = "Place"
     SCHEMA_TYPES = [self, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/WebApplication
   #
   # Web applications.
   class WebApplication < Base
     include Mixins::WebApplication
+
+    SCHEMA_NAME = "WebApplication"
     SCHEMA_TYPES = [self, SchemaOrg::SoftwareApplication, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

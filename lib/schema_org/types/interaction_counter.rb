@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/InteractionCounter
   #
@@ -6,9 +8,15 @@ module SchemaOrg
   # A summary of how users have interacted with this CreativeWork. In most cases, authors will use a subtype to specify the specific type of interaction.
   class InteractionCounter < Base
     include Mixins::InteractionCounter
+
+    SCHEMA_NAME = "InteractionCounter"
     SCHEMA_TYPES = [self, SchemaOrg::StructuredValue, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

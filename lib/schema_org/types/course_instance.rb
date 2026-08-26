@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/CourseInstance
   #
   # An instance of a [[Course]] which is distinct from other instances because it is offered at a different time or location or through different media or modes of study or to a specific section of students.
   class CourseInstance < Base
     include Mixins::CourseInstance
+
+    SCHEMA_NAME = "CourseInstance"
     SCHEMA_TYPES = [self, SchemaOrg::Event, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

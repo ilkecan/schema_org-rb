@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Person
   #
   # A person (alive, dead, undead, or fictional).
   class Person < Base
     include Mixins::Person
+
+    SCHEMA_NAME = "Person"
     SCHEMA_TYPES = [self, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

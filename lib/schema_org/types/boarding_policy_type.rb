@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/BoardingPolicyType
   #
   # A type of boarding policy used by an airline.
   class BoardingPolicyType < Base
     include Mixins::BoardingPolicyType
+
+    SCHEMA_NAME = "BoardingPolicyType"
     SCHEMA_TYPES = [self, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -20,8 +28,8 @@ module SchemaOrg
         super
       end
     end
-    GROUP_BOARDING_POLICY = EnumerationValue.new("GroupBoardingPolicy", self, [SchemaOrg::BoardingPolicyType]).freeze
-    ZONE_BOARDING_POLICY = EnumerationValue.new("ZoneBoardingPolicy", self, [SchemaOrg::BoardingPolicyType]).freeze
+    GROUP_BOARDING_POLICY = EnumerationValue.new("GroupBoardingPolicy", [SchemaOrg::BoardingPolicyType])
+    ZONE_BOARDING_POLICY = EnumerationValue.new("ZoneBoardingPolicy", [SchemaOrg::BoardingPolicyType])
     VALUES = [GROUP_BOARDING_POLICY, ZONE_BOARDING_POLICY].freeze
 
     def self.values

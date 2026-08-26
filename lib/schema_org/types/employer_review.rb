@@ -1,0 +1,32 @@
+# frozen_string_literal: true
+
+module SchemaOrg
+  # https://schema.org/EmployerReview
+  #
+  # An [[EmployerReview]] is a review of an [[Organization]] regarding its role as an employer, written by a current or former employee of that organization.
+  class EmployerReview < Base
+    include Mixins::EmployerReview
+
+    SCHEMA_NAME = "EmployerReview"
+    SCHEMA_TYPES = [self, SchemaOrg::Review, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
+
+    class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
+      def schema_types
+        SCHEMA_TYPES
+      end
+
+      def schema_type?(other_type)
+        Base.schema_type_argument!(other_type)
+        SCHEMA_TYPES.include?(other_type)
+      end
+
+      def new(**properties)
+        super
+      end
+    end
+  end
+end

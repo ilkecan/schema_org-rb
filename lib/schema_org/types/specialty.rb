@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Specialty
   #
   # Any branch of a field in which people typically develop specific expertise, usually after significant study, time, and effort.
   class Specialty < Base
     include Mixins::Specialty
+
+    SCHEMA_NAME = "Specialty"
     SCHEMA_TYPES = [self, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module Message
@@ -5,117 +7,188 @@ module SchemaOrg
 
       def self.schema_property_definitions
         {
-          :bcc_recipient => {
+          bcc_recipient: {
             schema_name: "bccRecipient",
-            ranges: ["ContactPoint", "Organization", "Person"],
+            schema_url: "https://schema.org/bccRecipient",
+            comment_lines: ["A sub property of recipient. The recipient blind copied on a message."].freeze,
+            ranges: ["ContactPoint", "Organization", "Person"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :cc_recipient => {
+          cc_recipient: {
             schema_name: "ccRecipient",
-            ranges: ["ContactPoint", "Organization", "Person"],
+            schema_url: "https://schema.org/ccRecipient",
+            comment_lines: ["A sub property of recipient. The recipient copied on a message."].freeze,
+            ranges: ["ContactPoint", "Organization", "Person"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :date_read => {
+          date_read: {
             schema_name: "dateRead",
-            ranges: ["Date", "DateTime"],
+            schema_url: "https://schema.org/dateRead",
+            comment_lines: ["The date/time at which the message has been read by the recipient if a single recipient exists."].freeze,
+            ranges: ["Date", "DateTime"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :date_received => {
+          date_received: {
             schema_name: "dateReceived",
-            ranges: ["DateTime"],
+            schema_url: "https://schema.org/dateReceived",
+            comment_lines: ["The date/time the message was received if a single recipient exists."].freeze,
+            ranges: ["DateTime"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :date_sent => {
+          date_sent: {
             schema_name: "dateSent",
-            ranges: ["DateTime"],
+            schema_url: "https://schema.org/dateSent",
+            comment_lines: ["The date/time at which the message was sent."].freeze,
+            ranges: ["DateTime"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :message_attachment => {
+          message_attachment: {
             schema_name: "messageAttachment",
-            ranges: ["CreativeWork"],
+            schema_url: "https://schema.org/messageAttachment",
+            comment_lines: ["A CreativeWork attached to the message."].freeze,
+            ranges: ["CreativeWork"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :recipient => {
+          recipient: {
             schema_name: "recipient",
-            ranges: ["Audience", "ContactPoint", "Organization", "Person"],
+            schema_url: "https://schema.org/recipient",
+            comment_lines: ["A sub property of participant. The participant who is at the receiving end of the action."].freeze,
+            ranges: ["Audience", "ContactPoint", "Organization", "Person"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :sender => {
+          sender: {
             schema_name: "sender",
-            ranges: ["Audience", "Organization", "Person"],
+            schema_url: "https://schema.org/sender",
+            comment_lines: ["A sub property of participant. The participant who is at the sending end of the action."].freeze,
+            ranges: ["Audience", "Organization", "Person"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :to_recipient => {
+          to_recipient: {
             schema_name: "toRecipient",
-            ranges: ["Audience", "ContactPoint", "Organization", "Person"],
-          }.freeze,
+            schema_url: "https://schema.org/toRecipient",
+            comment_lines: ["A sub property of recipient. The recipient who was directly sent the message."].freeze,
+            ranges: ["Audience", "ContactPoint", "Organization", "Person"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze
         }.freeze
       end
 
+      # A sub property of recipient. The recipient blind copied on a message.
       def bcc_recipient
         read_property(:bcc_recipient)
       end
 
+      # A sub property of recipient. The recipient blind copied on a message.
       def bcc_recipient=(value)
         write_property(:bcc_recipient, value)
       end
 
+      # A sub property of recipient. The recipient copied on a message.
       def cc_recipient
         read_property(:cc_recipient)
       end
 
+      # A sub property of recipient. The recipient copied on a message.
       def cc_recipient=(value)
         write_property(:cc_recipient, value)
       end
 
+      # The date/time at which the message has been read by the recipient if a single recipient exists.
       def date_read
         read_property(:date_read)
       end
 
+      # The date/time at which the message has been read by the recipient if a single recipient exists.
       def date_read=(value)
         write_property(:date_read, value)
       end
 
+      # The date/time the message was received if a single recipient exists.
       def date_received
         read_property(:date_received)
       end
 
+      # The date/time the message was received if a single recipient exists.
       def date_received=(value)
         write_property(:date_received, value)
       end
 
+      # The date/time at which the message was sent.
       def date_sent
         read_property(:date_sent)
       end
 
+      # The date/time at which the message was sent.
       def date_sent=(value)
         write_property(:date_sent, value)
       end
 
+      # A CreativeWork attached to the message.
       def message_attachment
         read_property(:message_attachment)
       end
 
+      # A CreativeWork attached to the message.
       def message_attachment=(value)
         write_property(:message_attachment, value)
       end
 
+      # A sub property of participant. The participant who is at the receiving end of the action.
       def recipient
         read_property(:recipient)
       end
 
+      # A sub property of participant. The participant who is at the receiving end of the action.
       def recipient=(value)
         write_property(:recipient, value)
       end
 
+      # A sub property of participant. The participant who is at the sending end of the action.
       def sender
         read_property(:sender)
       end
 
+      # A sub property of participant. The participant who is at the sending end of the action.
       def sender=(value)
         write_property(:sender, value)
       end
 
+      # A sub property of recipient. The recipient who was directly sent the message.
       def to_recipient
         read_property(:to_recipient)
       end
 
+      # A sub property of recipient. The recipient who was directly sent the message.
       def to_recipient=(value)
         write_property(:to_recipient, value)
       end
-
     end
   end
 end

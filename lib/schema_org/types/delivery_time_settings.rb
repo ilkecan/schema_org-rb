@@ -1,12 +1,22 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DeliveryTimeSettings
+  #
+  # NOTE: Superseded by `ShippingConditions`.
   #
   # A DeliveryTimeSettings represents re-usable pieces of shipping information, relating to timing. It is designed for publication on an URL that may be referenced via the [[shippingSettingsLink]] property of an [[OfferShippingDetails]]. Several occurrences can be published, distinguished (and identified/referenced) by their different values for [[transitTimeLabel]].
   class DeliveryTimeSettings < Base
     include Mixins::DeliveryTimeSettings
+
+    SCHEMA_NAME = "DeliveryTimeSettings"
     SCHEMA_TYPES = [self, SchemaOrg::StructuredValue, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

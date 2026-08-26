@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/CommunicateAction
   #
   # The act of conveying information to another person via a communication medium (instrument) such as speech, email, or telephone conversation.
   class CommunicateAction < Base
     include Mixins::CommunicateAction
+
+    SCHEMA_NAME = "CommunicateAction"
     SCHEMA_TYPES = [self, SchemaOrg::InteractAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

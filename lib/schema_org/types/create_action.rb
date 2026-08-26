@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/CreateAction
   #
   # The act of deliberately creating/producing/generating/building a result out of the agent.
   class CreateAction < Base
     include Mixins::CreateAction
+
+    SCHEMA_NAME = "CreateAction"
     SCHEMA_TYPES = [self, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/AchieveAction
   #
   # The act of accomplishing something via previous efforts. It is an instantaneous action rather than an ongoing process.
   class AchieveAction < Base
     include Mixins::AchieveAction
+
+    SCHEMA_NAME = "AchieveAction"
     SCHEMA_TYPES = [self, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

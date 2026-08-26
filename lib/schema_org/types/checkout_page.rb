@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/CheckoutPage
   #
   # Web page type: Checkout page.
   class CheckoutPage < Base
     include Mixins::CheckoutPage
+
+    SCHEMA_NAME = "CheckoutPage"
     SCHEMA_TYPES = [self, SchemaOrg::WebPage, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

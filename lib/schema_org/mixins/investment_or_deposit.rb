@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module InvestmentOrDeposit
@@ -5,21 +7,28 @@ module SchemaOrg
 
       def self.schema_property_definitions
         {
-          :amount => {
+          amount: {
             schema_name: "amount",
-            ranges: ["MonetaryAmount", "Number"],
-          }.freeze,
+            schema_url: "https://schema.org/amount",
+            comment_lines: ["The amount of money."].freeze,
+            ranges: ["MonetaryAmount", "Number"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze
         }.freeze
       end
 
+      # The amount of money.
       def amount
         read_property(:amount)
       end
 
+      # The amount of money.
       def amount=(value)
         write_property(:amount, value)
       end
-
     end
   end
 end

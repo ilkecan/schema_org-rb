@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/SiteNavigationElement
   #
   # A navigation element of the page.
   class SiteNavigationElement < Base
     include Mixins::SiteNavigationElement
+
+    SCHEMA_NAME = "SiteNavigationElement"
     SCHEMA_TYPES = [self, SchemaOrg::WebPageElement, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

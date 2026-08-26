@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Invoice
   #
   # A statement of the money due for goods or services; a bill.
   class Invoice < Base
     include Mixins::Invoice
+
+    SCHEMA_NAME = "Invoice"
     SCHEMA_TYPES = [self, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

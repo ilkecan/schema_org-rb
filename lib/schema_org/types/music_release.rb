@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/MusicRelease
   #
   # A MusicRelease is a specific release of a music album.
   class MusicRelease < Base
     include Mixins::MusicRelease
+
+    SCHEMA_NAME = "MusicRelease"
     SCHEMA_TYPES = [self, SchemaOrg::MusicPlaylist, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

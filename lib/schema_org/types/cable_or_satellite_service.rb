@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/CableOrSatelliteService
   #
   # A service which provides access to media programming like TV or radio. Access may be via cable or satellite.
   class CableOrSatelliteService < Base
     include Mixins::CableOrSatelliteService
+
+    SCHEMA_NAME = "CableOrSatelliteService"
     SCHEMA_TYPES = [self, SchemaOrg::Service, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/CivicStructure
   #
   # A public structure, such as a town hall or concert hall.
   class CivicStructure < Base
     include Mixins::CivicStructure
+
+    SCHEMA_NAME = "CivicStructure"
     SCHEMA_TYPES = [self, SchemaOrg::Place, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

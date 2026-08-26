@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/CurrencyConversionService
   #
   # A service to convert funds from one currency to another currency.
   class CurrencyConversionService < Base
     include Mixins::CurrencyConversionService
+
+    SCHEMA_NAME = "CurrencyConversionService"
     SCHEMA_TYPES = [self, SchemaOrg::FinancialProduct, SchemaOrg::Service, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

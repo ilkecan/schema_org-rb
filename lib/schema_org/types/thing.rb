@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Thing
   #
   # The most generic type of item.
   class Thing < Base
     include Mixins::Thing
+
+    SCHEMA_NAME = "Thing"
     SCHEMA_TYPES = [self].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

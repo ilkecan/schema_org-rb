@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/OfferShippingDetails
   #
@@ -15,9 +17,15 @@ module SchemaOrg
   # or Fast and expensive: $15 in 1-2 days.
   class OfferShippingDetails < Base
     include Mixins::OfferShippingDetails
+
+    SCHEMA_NAME = "OfferShippingDetails"
     SCHEMA_TYPES = [self, SchemaOrg::StructuredValue, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

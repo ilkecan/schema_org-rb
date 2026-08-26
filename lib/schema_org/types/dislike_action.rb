@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DislikeAction
   #
   # The act of expressing a negative sentiment about the object. An agent dislikes an object (a proposition, topic or theme) with participants.
   class DislikeAction < Base
     include Mixins::DislikeAction
+
+    SCHEMA_NAME = "DislikeAction"
     SCHEMA_TYPES = [self, SchemaOrg::ReactAction, SchemaOrg::AssessAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

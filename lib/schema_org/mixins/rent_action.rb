@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module RentAction
@@ -5,33 +7,48 @@ module SchemaOrg
 
       def self.schema_property_definitions
         {
-          :landlord => {
+          landlord: {
             schema_name: "landlord",
-            ranges: ["Organization", "Person"],
+            schema_url: "https://schema.org/landlord",
+            comment_lines: ["A sub property of participant. The owner of the real estate property."].freeze,
+            ranges: ["Organization", "Person"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :real_estate_agent => {
+          real_estate_agent: {
             schema_name: "realEstateAgent",
-            ranges: ["RealEstateAgent"],
-          }.freeze,
+            schema_url: "https://schema.org/realEstateAgent",
+            comment_lines: ["A sub property of participant. The real estate agent involved in the action."].freeze,
+            ranges: ["RealEstateAgent"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze
         }.freeze
       end
 
+      # A sub property of participant. The owner of the real estate property.
       def landlord
         read_property(:landlord)
       end
 
+      # A sub property of participant. The owner of the real estate property.
       def landlord=(value)
         write_property(:landlord, value)
       end
 
+      # A sub property of participant. The real estate agent involved in the action.
       def real_estate_agent
         read_property(:real_estate_agent)
       end
 
+      # A sub property of participant. The real estate agent involved in the action.
       def real_estate_agent=(value)
         write_property(:real_estate_agent, value)
       end
-
     end
   end
 end

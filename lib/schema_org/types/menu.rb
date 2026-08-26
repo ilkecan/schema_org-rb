@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Menu
   #
   # A structured representation of food or drink items available from a FoodEstablishment.
   class Menu < Base
     include Mixins::Menu
+
+    SCHEMA_NAME = "Menu"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

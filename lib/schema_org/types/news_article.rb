@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/NewsArticle
   #
@@ -6,9 +8,15 @@ module SchemaOrg
   # A more detailed overview of [schema.org News markup](/docs/news.html) is also available.
   class NewsArticle < Base
     include Mixins::NewsArticle
+
+    SCHEMA_NAME = "NewsArticle"
     SCHEMA_TYPES = [self, SchemaOrg::Article, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/AssessAction
   #
   # The act of forming one's opinion, reaction or sentiment.
   class AssessAction < Base
     include Mixins::AssessAction
+
+    SCHEMA_NAME = "AssessAction"
     SCHEMA_TYPES = [self, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

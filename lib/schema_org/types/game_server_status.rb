@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/GameServerStatus
   #
   # Status of a game server.
   class GameServerStatus < Base
     include Mixins::GameServerStatus
+
+    SCHEMA_NAME = "GameServerStatus"
     SCHEMA_TYPES = [self, SchemaOrg::StatusEnumeration, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -20,10 +28,10 @@ module SchemaOrg
         super
       end
     end
-    OFFLINE_PERMANENTLY = EnumerationValue.new("OfflinePermanently", self, [SchemaOrg::GameServerStatus]).freeze
-    OFFLINE_TEMPORARILY = EnumerationValue.new("OfflineTemporarily", self, [SchemaOrg::GameServerStatus]).freeze
-    ONLINE = EnumerationValue.new("Online", self, [SchemaOrg::GameServerStatus]).freeze
-    ONLINE_FULL = EnumerationValue.new("OnlineFull", self, [SchemaOrg::GameServerStatus]).freeze
+    OFFLINE_PERMANENTLY = EnumerationValue.new("OfflinePermanently", [SchemaOrg::GameServerStatus])
+    OFFLINE_TEMPORARILY = EnumerationValue.new("OfflineTemporarily", [SchemaOrg::GameServerStatus])
+    ONLINE = EnumerationValue.new("Online", [SchemaOrg::GameServerStatus])
+    ONLINE_FULL = EnumerationValue.new("OnlineFull", [SchemaOrg::GameServerStatus])
     VALUES = [OFFLINE_PERMANENTLY, OFFLINE_TEMPORARILY, ONLINE, ONLINE_FULL].freeze
 
     def self.values

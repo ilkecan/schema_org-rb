@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/WPAdBlock
   #
   # An advertising section of the page.
   class WPAdBlock < Base
     include Mixins::WPAdBlock
+
+    SCHEMA_NAME = "WPAdBlock"
     SCHEMA_TYPES = [self, SchemaOrg::WebPageElement, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

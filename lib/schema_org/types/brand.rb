@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Brand
   #
   # A brand is a name used by an organization or business person for labeling a product, product group, or similar.
   class Brand < Base
     include Mixins::Brand
+
+    SCHEMA_NAME = "Brand"
     SCHEMA_TYPES = [self, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

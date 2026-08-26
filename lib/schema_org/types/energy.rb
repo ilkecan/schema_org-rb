@@ -1,13 +1,21 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Energy
   #
   # Properties that take Energy as values are of the form '&lt;Number&gt; &lt;Energy unit of measure&gt;'.
   class Energy < Base
     include Mixins::Energy
+
+    SCHEMA_NAME = "Energy"
     SCHEMA_TYPES = [self, SchemaOrg::Quantity, SchemaOrg::DataType].freeze
     ABSTRACT_TYPE = true
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

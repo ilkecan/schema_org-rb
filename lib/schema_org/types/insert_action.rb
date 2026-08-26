@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/InsertAction
   #
   # The act of adding at a specific location in an ordered collection.
   class InsertAction < Base
     include Mixins::InsertAction
+
+    SCHEMA_NAME = "InsertAction"
     SCHEMA_TYPES = [self, SchemaOrg::AddAction, SchemaOrg::UpdateAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

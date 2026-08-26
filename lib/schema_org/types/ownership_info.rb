@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/OwnershipInfo
   #
   # A structured value providing information about when a certain organization or person owned a certain product.
   class OwnershipInfo < Base
     include Mixins::OwnershipInfo
+
+    SCHEMA_NAME = "OwnershipInfo"
     SCHEMA_TYPES = [self, SchemaOrg::StructuredValue, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

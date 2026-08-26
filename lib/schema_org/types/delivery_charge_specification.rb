@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DeliveryChargeSpecification
   #
   # The price for the delivery of an offer using a particular delivery method.
   class DeliveryChargeSpecification < Base
     include Mixins::DeliveryChargeSpecification
+
+    SCHEMA_NAME = "DeliveryChargeSpecification"
     SCHEMA_TYPES = [self, SchemaOrg::PriceSpecification, SchemaOrg::StructuredValue, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

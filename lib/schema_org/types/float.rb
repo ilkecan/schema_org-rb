@@ -1,13 +1,21 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Float
   #
   # Data type: Floating number.
   class Float < Base
     include Mixins::Float
+
+    SCHEMA_NAME = "Float"
     SCHEMA_TYPES = [self, SchemaOrg::Number, SchemaOrg::DataType].freeze
     ABSTRACT_TYPE = true
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

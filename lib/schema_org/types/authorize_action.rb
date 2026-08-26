@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/AuthorizeAction
   #
   # The act of granting permission to an object.
   class AuthorizeAction < Base
     include Mixins::AuthorizeAction
+
+    SCHEMA_NAME = "AuthorizeAction"
     SCHEMA_TYPES = [self, SchemaOrg::AllocateAction, SchemaOrg::OrganizeAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

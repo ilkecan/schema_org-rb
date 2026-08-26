@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/QuoteAction
   #
   # An agent quotes/estimates/appraises an object/product/service with a price at a location/store.
   class QuoteAction < Base
     include Mixins::QuoteAction
+
+    SCHEMA_NAME = "QuoteAction"
     SCHEMA_TYPES = [self, SchemaOrg::TradeAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

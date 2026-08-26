@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/TechArticle
   #
   # A technical article - Example: How-to (task) topics, step-by-step, procedural troubleshooting, specifications, etc.
   class TechArticle < Base
     include Mixins::TechArticle
+
+    SCHEMA_NAME = "TechArticle"
     SCHEMA_TYPES = [self, SchemaOrg::Article, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

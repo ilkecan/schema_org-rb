@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/VideoGameClip
   #
   # A short segment/part of a video game.
   class VideoGameClip < Base
     include Mixins::VideoGameClip
+
+    SCHEMA_NAME = "VideoGameClip"
     SCHEMA_TYPES = [self, SchemaOrg::Clip, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

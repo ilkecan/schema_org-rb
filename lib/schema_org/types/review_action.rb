@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ReviewAction
   #
   # The act of producing a balanced opinion about the object for an audience. An agent reviews an object with participants resulting in a review.
   class ReviewAction < Base
     include Mixins::ReviewAction
+
+    SCHEMA_NAME = "ReviewAction"
     SCHEMA_TYPES = [self, SchemaOrg::AssessAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

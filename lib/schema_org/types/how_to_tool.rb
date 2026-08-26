@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/HowToTool
   #
   # A tool used (but not consumed) when performing instructions for how to achieve a result.
   class HowToTool < Base
     include Mixins::HowToTool
+
+    SCHEMA_NAME = "HowToTool"
     SCHEMA_TYPES = [self, SchemaOrg::HowToItem, SchemaOrg::ListItem, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

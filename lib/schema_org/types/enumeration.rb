@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Enumeration
   #
   # Lists or enumerations—for example, a list of cuisines or music genres, etc.
   class Enumeration < Base
     include Mixins::Enumeration
+
+    SCHEMA_NAME = "Enumeration"
     SCHEMA_TYPES = [self, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DeleteAction
   #
   # The act of editing a recipient by removing one of its objects.
   class DeleteAction < Base
     include Mixins::DeleteAction
+
+    SCHEMA_NAME = "DeleteAction"
     SCHEMA_TYPES = [self, SchemaOrg::UpdateAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

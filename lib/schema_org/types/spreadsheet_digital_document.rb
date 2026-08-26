@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/SpreadsheetDigitalDocument
   #
   # A spreadsheet file.
   class SpreadsheetDigitalDocument < Base
     include Mixins::SpreadsheetDigitalDocument
+
+    SCHEMA_NAME = "SpreadsheetDigitalDocument"
     SCHEMA_TYPES = [self, SchemaOrg::DigitalDocument, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

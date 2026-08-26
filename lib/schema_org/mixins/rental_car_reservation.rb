@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module RentalCarReservation
@@ -5,57 +7,88 @@ module SchemaOrg
 
       def self.schema_property_definitions
         {
-          :dropoff_location => {
+          dropoff_location: {
             schema_name: "dropoffLocation",
-            ranges: ["Place"],
+            schema_url: "https://schema.org/dropoffLocation",
+            comment_lines: ["Where a rental car can be dropped off."].freeze,
+            ranges: ["Place"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :dropoff_time => {
+          dropoff_time: {
             schema_name: "dropoffTime",
-            ranges: ["DateTime"],
+            schema_url: "https://schema.org/dropoffTime",
+            comment_lines: ["When a rental car can be dropped off."].freeze,
+            ranges: ["DateTime"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :pickup_location => {
+          pickup_location: {
             schema_name: "pickupLocation",
-            ranges: ["Place"],
+            schema_url: "https://schema.org/pickupLocation",
+            comment_lines: ["Where a taxi will pick up a passenger or a rental car can be picked up."].freeze,
+            ranges: ["Place"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :pickup_time => {
+          pickup_time: {
             schema_name: "pickupTime",
-            ranges: ["DateTime"],
-          }.freeze,
+            schema_url: "https://schema.org/pickupTime",
+            comment_lines: ["When a taxi will pick up a passenger or a rental car can be picked up."].freeze,
+            ranges: ["DateTime"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze
         }.freeze
       end
 
+      # Where a rental car can be dropped off.
       def dropoff_location
         read_property(:dropoff_location)
       end
 
+      # Where a rental car can be dropped off.
       def dropoff_location=(value)
         write_property(:dropoff_location, value)
       end
 
+      # When a rental car can be dropped off.
       def dropoff_time
         read_property(:dropoff_time)
       end
 
+      # When a rental car can be dropped off.
       def dropoff_time=(value)
         write_property(:dropoff_time, value)
       end
 
+      # Where a taxi will pick up a passenger or a rental car can be picked up.
       def pickup_location
         read_property(:pickup_location)
       end
 
+      # Where a taxi will pick up a passenger or a rental car can be picked up.
       def pickup_location=(value)
         write_property(:pickup_location, value)
       end
 
+      # When a taxi will pick up a passenger or a rental car can be picked up.
       def pickup_time
         read_property(:pickup_time)
       end
 
+      # When a taxi will pick up a passenger or a rental car can be picked up.
       def pickup_time=(value)
         write_property(:pickup_time, value)
       end
-
     end
   end
 end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/InformAction
   #
   # The act of notifying someone of information pertinent to them, with no expectation of a response.
   class InformAction < Base
     include Mixins::InformAction
+
+    SCHEMA_NAME = "InformAction"
     SCHEMA_TYPES = [self, SchemaOrg::CommunicateAction, SchemaOrg::InteractAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

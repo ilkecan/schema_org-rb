@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/WebPageElement
   #
   # A web page element, like a table or an image.
   class WebPageElement < Base
     include Mixins::WebPageElement
+
+    SCHEMA_NAME = "WebPageElement"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

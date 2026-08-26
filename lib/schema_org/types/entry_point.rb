@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/EntryPoint
   #
   # An entry point, within some Web-based protocol.
   class EntryPoint < Base
     include Mixins::EntryPoint
+
+    SCHEMA_NAME = "EntryPoint"
     SCHEMA_TYPES = [self, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

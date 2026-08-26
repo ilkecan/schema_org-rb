@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ActionAccessSpecification
   #
   # A set of requirements that must be fulfilled in order to perform an Action.
   class ActionAccessSpecification < Base
     include Mixins::ActionAccessSpecification
+
+    SCHEMA_NAME = "ActionAccessSpecification"
     SCHEMA_TYPES = [self, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,0 +1,32 @@
+# frozen_string_literal: true
+
+module SchemaOrg
+  # https://schema.org/Diet
+  #
+  # A strategy of regulating the intake of food to achieve or maintain a specific health-related goal.
+  class Diet < Base
+    include Mixins::Diet
+
+    SCHEMA_NAME = "Diet"
+    SCHEMA_TYPES = [self, SchemaOrg::CreativeWork, SchemaOrg::LifestyleModification, SchemaOrg::Thing, SchemaOrg::MedicalEntity].freeze
+
+    class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
+      def schema_types
+        SCHEMA_TYPES
+      end
+
+      def schema_type?(other_type)
+        Base.schema_type_argument!(other_type)
+        SCHEMA_TYPES.include?(other_type)
+      end
+
+      def new(**properties)
+        super
+      end
+    end
+  end
+end

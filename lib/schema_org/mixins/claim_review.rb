@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module ClaimReview
@@ -5,21 +7,28 @@ module SchemaOrg
 
       def self.schema_property_definitions
         {
-          :claim_reviewed => {
+          claim_reviewed: {
             schema_name: "claimReviewed",
-            ranges: ["Text"],
-          }.freeze,
+            schema_url: "https://schema.org/claimReviewed",
+            comment_lines: ["A short summary of the specific claims reviewed in a ClaimReview."].freeze,
+            ranges: ["Text"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze
         }.freeze
       end
 
+      # A short summary of the specific claims reviewed in a ClaimReview.
       def claim_reviewed
         read_property(:claim_reviewed)
       end
 
+      # A short summary of the specific claims reviewed in a ClaimReview.
       def claim_reviewed=(value)
         write_property(:claim_reviewed, value)
       end
-
     end
   end
 end

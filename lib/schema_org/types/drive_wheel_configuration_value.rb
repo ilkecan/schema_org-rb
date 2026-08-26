@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DriveWheelConfigurationValue
   #
   # A value indicating which roadwheels will receive torque.
   class DriveWheelConfigurationValue < Base
     include Mixins::DriveWheelConfigurationValue
+
+    SCHEMA_NAME = "DriveWheelConfigurationValue"
     SCHEMA_TYPES = [self, SchemaOrg::QualitativeValue, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -20,10 +28,10 @@ module SchemaOrg
         super
       end
     end
-    ALL_WHEEL_DRIVE_CONFIGURATION = EnumerationValue.new("AllWheelDriveConfiguration", self, [SchemaOrg::DriveWheelConfigurationValue]).freeze
-    FOUR_WHEEL_DRIVE_CONFIGURATION = EnumerationValue.new("FourWheelDriveConfiguration", self, [SchemaOrg::DriveWheelConfigurationValue]).freeze
-    FRONT_WHEEL_DRIVE_CONFIGURATION = EnumerationValue.new("FrontWheelDriveConfiguration", self, [SchemaOrg::DriveWheelConfigurationValue]).freeze
-    REAR_WHEEL_DRIVE_CONFIGURATION = EnumerationValue.new("RearWheelDriveConfiguration", self, [SchemaOrg::DriveWheelConfigurationValue]).freeze
+    ALL_WHEEL_DRIVE_CONFIGURATION = EnumerationValue.new("AllWheelDriveConfiguration", [SchemaOrg::DriveWheelConfigurationValue])
+    FOUR_WHEEL_DRIVE_CONFIGURATION = EnumerationValue.new("FourWheelDriveConfiguration", [SchemaOrg::DriveWheelConfigurationValue])
+    FRONT_WHEEL_DRIVE_CONFIGURATION = EnumerationValue.new("FrontWheelDriveConfiguration", [SchemaOrg::DriveWheelConfigurationValue])
+    REAR_WHEEL_DRIVE_CONFIGURATION = EnumerationValue.new("RearWheelDriveConfiguration", [SchemaOrg::DriveWheelConfigurationValue])
     VALUES = [ALL_WHEEL_DRIVE_CONFIGURATION, FOUR_WHEEL_DRIVE_CONFIGURATION, FRONT_WHEEL_DRIVE_CONFIGURATION, REAR_WHEEL_DRIVE_CONFIGURATION].freeze
 
     def self.values

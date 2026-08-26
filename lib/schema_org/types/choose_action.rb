@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ChooseAction
   #
   # The act of expressing a preference from a set of options or a large or unbounded set of choices/options.
   class ChooseAction < Base
     include Mixins::ChooseAction
+
+    SCHEMA_NAME = "ChooseAction"
     SCHEMA_TYPES = [self, SchemaOrg::AssessAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

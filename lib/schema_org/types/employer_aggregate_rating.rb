@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/EmployerAggregateRating
   #
   # An aggregate rating of an Organization related to its role as an employer.
   class EmployerAggregateRating < Base
     include Mixins::EmployerAggregateRating
+
+    SCHEMA_NAME = "EmployerAggregateRating"
     SCHEMA_TYPES = [self, SchemaOrg::AggregateRating, SchemaOrg::Rating, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

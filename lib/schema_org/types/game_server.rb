@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/GameServer
   #
   # Server that provides game interaction in a multiplayer game.
   class GameServer < Base
     include Mixins::GameServer
+
+    SCHEMA_NAME = "GameServer"
     SCHEMA_TYPES = [self, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

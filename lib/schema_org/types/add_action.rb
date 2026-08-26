@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/AddAction
   #
   # The act of editing by adding an object to a collection.
   class AddAction < Base
     include Mixins::AddAction
+
+    SCHEMA_NAME = "AddAction"
     SCHEMA_TYPES = [self, SchemaOrg::UpdateAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

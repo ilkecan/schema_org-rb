@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ReturnAction
   #
   # The act of returning to the origin that which was previously received (concrete objects) or taken (ownership).
   class ReturnAction < Base
     include Mixins::ReturnAction
+
+    SCHEMA_NAME = "ReturnAction"
     SCHEMA_TYPES = [self, SchemaOrg::TransferAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

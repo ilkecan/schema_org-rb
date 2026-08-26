@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module ReturnAction
@@ -5,21 +7,28 @@ module SchemaOrg
 
       def self.schema_property_definitions
         {
-          :recipient => {
+          recipient: {
             schema_name: "recipient",
-            ranges: ["Audience", "ContactPoint", "Organization", "Person"],
-          }.freeze,
+            schema_url: "https://schema.org/recipient",
+            comment_lines: ["A sub property of participant. The participant who is at the receiving end of the action."].freeze,
+            ranges: ["Audience", "ContactPoint", "Organization", "Person"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze
         }.freeze
       end
 
+      # A sub property of participant. The participant who is at the receiving end of the action.
       def recipient
         read_property(:recipient)
       end
 
+      # A sub property of participant. The participant who is at the receiving end of the action.
       def recipient=(value)
         write_property(:recipient, value)
       end
-
     end
   end
 end

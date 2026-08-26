@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ScholarlyArticle
   #
   # A scholarly article.
   class ScholarlyArticle < Base
     include Mixins::ScholarlyArticle
+
+    SCHEMA_NAME = "ScholarlyArticle"
     SCHEMA_TYPES = [self, SchemaOrg::Article, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

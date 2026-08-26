@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/LocationFeatureSpecification
   #
   # Specifies a location feature by providing a structured value representing a feature of an accommodation as a property-value pair of varying degrees of formality.
   class LocationFeatureSpecification < Base
     include Mixins::LocationFeatureSpecification
+
+    SCHEMA_NAME = "LocationFeatureSpecification"
     SCHEMA_TYPES = [self, SchemaOrg::PropertyValue, SchemaOrg::StructuredValue, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/RadioSeason
   #
   # Season dedicated to radio broadcast and associated online delivery.
   class RadioSeason < Base
     include Mixins::RadioSeason
+
+    SCHEMA_NAME = "RadioSeason"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWorkSeason, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

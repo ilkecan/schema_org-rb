@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DanceGroup
   #
   # A dance group&#x2014;for example, the Alvin Ailey Dance Theater or Riverdance.
   class DanceGroup < Base
     include Mixins::DanceGroup
+
+    SCHEMA_NAME = "DanceGroup"
     SCHEMA_TYPES = [self, SchemaOrg::PerformingGroup, SchemaOrg::Organization, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

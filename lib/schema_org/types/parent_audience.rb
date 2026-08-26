@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ParentAudience
   #
   # A set of characteristics describing parents, who can be interested in viewing some content.
   class ParentAudience < Base
     include Mixins::ParentAudience
+
+    SCHEMA_NAME = "ParentAudience"
     SCHEMA_TYPES = [self, SchemaOrg::PeopleAudience, SchemaOrg::Audience, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

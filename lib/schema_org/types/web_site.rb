@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/WebSite
   #
   # A WebSite is a set of related web pages and other items typically served from a single web domain and accessible via URLs.
   class WebSite < Base
     include Mixins::WebSite
+
+    SCHEMA_NAME = "WebSite"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

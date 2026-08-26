@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Question
   #
   # A specific question - e.g. from a user seeking answers online, or collected in a Frequently Asked Questions (FAQ) document.
   class Question < Base
     include Mixins::Question
+
+    SCHEMA_NAME = "Question"
     SCHEMA_TYPES = [self, SchemaOrg::Comment, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

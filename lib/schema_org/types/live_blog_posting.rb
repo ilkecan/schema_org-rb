@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/LiveBlogPosting
   #
   # A [[LiveBlogPosting]] is a [[BlogPosting]] intended to provide a rolling textual coverage of an ongoing event through continuous updates.
   class LiveBlogPosting < Base
     include Mixins::LiveBlogPosting
+
+    SCHEMA_NAME = "LiveBlogPosting"
     SCHEMA_TYPES = [self, SchemaOrg::BlogPosting, SchemaOrg::SocialMediaPosting, SchemaOrg::Article, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

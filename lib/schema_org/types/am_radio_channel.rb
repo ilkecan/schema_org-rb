@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/AMRadioChannel
   #
   # A radio channel that uses AM.
   class AMRadioChannel < Base
     include Mixins::AMRadioChannel
+
+    SCHEMA_NAME = "AMRadioChannel"
     SCHEMA_TYPES = [self, SchemaOrg::RadioChannel, SchemaOrg::BroadcastChannel, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

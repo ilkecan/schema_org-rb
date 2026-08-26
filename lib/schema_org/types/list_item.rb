@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ListItem
   #
   # An list item, e.g. a step in a checklist or how-to description.
   class ListItem < Base
     include Mixins::ListItem
+
+    SCHEMA_NAME = "ListItem"
     SCHEMA_TYPES = [self, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

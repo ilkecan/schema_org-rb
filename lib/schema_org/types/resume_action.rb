@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ResumeAction
   #
   # The act of resuming a device or application which was formerly paused (e.g. resume music playback or resume a timer).
   class ResumeAction < Base
     include Mixins::ResumeAction
+
+    SCHEMA_NAME = "ResumeAction"
     SCHEMA_TYPES = [self, SchemaOrg::ControlAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

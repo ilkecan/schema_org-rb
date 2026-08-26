@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/BroadcastFrequencySpecification
   #
   # The frequency in MHz and the modulation used for a particular BroadcastService.
   class BroadcastFrequencySpecification < Base
     include Mixins::BroadcastFrequencySpecification
+
+    SCHEMA_NAME = "BroadcastFrequencySpecification"
     SCHEMA_TYPES = [self, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

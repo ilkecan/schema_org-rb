@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/TelevisionChannel
   #
   # A unique instance of a television BroadcastService on a CableOrSatelliteService lineup.
   class TelevisionChannel < Base
     include Mixins::TelevisionChannel
+
+    SCHEMA_NAME = "TelevisionChannel"
     SCHEMA_TYPES = [self, SchemaOrg::BroadcastChannel, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

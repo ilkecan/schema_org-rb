@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module WebApplication
@@ -5,21 +7,28 @@ module SchemaOrg
 
       def self.schema_property_definitions
         {
-          :browser_requirements => {
+          browser_requirements: {
             schema_name: "browserRequirements",
-            ranges: ["Text"],
-          }.freeze,
+            schema_url: "https://schema.org/browserRequirements",
+            comment_lines: ["Specifies browser requirements in human-readable text. For example, 'requires HTML5 support'."].freeze,
+            ranges: ["Text"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze
         }.freeze
       end
 
+      # Specifies browser requirements in human-readable text. For example, 'requires HTML5 support'.
       def browser_requirements
         read_property(:browser_requirements)
       end
 
+      # Specifies browser requirements in human-readable text. For example, 'requires HTML5 support'.
       def browser_requirements=(value)
         write_property(:browser_requirements, value)
       end
-
     end
   end
 end

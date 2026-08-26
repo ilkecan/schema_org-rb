@@ -1,13 +1,21 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DateTime
   #
   # A combination of date and time of day in the form [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm] (see Chapter 5.4 of ISO 8601).
   class DateTime < Base
     include Mixins::DateTime
+
+    SCHEMA_NAME = "DateTime"
     SCHEMA_TYPES = [self, SchemaOrg::DataType].freeze
     ABSTRACT_TYPE = true
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

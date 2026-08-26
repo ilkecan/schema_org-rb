@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/PaymentCard
   #
   # A payment method using a credit, debit, store or other card to associate the payment with an account.
   class PaymentCard < Base
     include Mixins::PaymentCard
+
+    SCHEMA_NAME = "PaymentCard"
     SCHEMA_TYPES = [self, SchemaOrg::FinancialProduct, SchemaOrg::PaymentMethod, SchemaOrg::Service, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

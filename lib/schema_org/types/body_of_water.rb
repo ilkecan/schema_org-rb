@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/BodyOfWater
   #
   # A body of water, such as a sea, ocean, or lake.
   class BodyOfWater < Base
     include Mixins::BodyOfWater
+
+    SCHEMA_NAME = "BodyOfWater"
     SCHEMA_TYPES = [self, SchemaOrg::Landform, SchemaOrg::Place, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

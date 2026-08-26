@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/MobileApplication
   #
   # A software application designed specifically to work well on a mobile device such as a telephone.
   class MobileApplication < Base
     include Mixins::MobileApplication
+
+    SCHEMA_NAME = "MobileApplication"
     SCHEMA_TYPES = [self, SchemaOrg::SoftwareApplication, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

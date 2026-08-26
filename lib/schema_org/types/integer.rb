@@ -1,13 +1,21 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Integer
   #
   # Data type: Integer.
   class Integer < Base
     include Mixins::Integer
+
+    SCHEMA_NAME = "Integer"
     SCHEMA_TYPES = [self, SchemaOrg::Number, SchemaOrg::DataType].freeze
     ABSTRACT_TYPE = true
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

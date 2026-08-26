@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/GeoCircle
   #
@@ -6,9 +8,15 @@ module SchemaOrg
   #           The center of the circle can be indicated via the 'geoMidpoint' property, or more approximately using 'address', 'postalCode'.
   class GeoCircle < Base
     include Mixins::GeoCircle
+
+    SCHEMA_NAME = "GeoCircle"
     SCHEMA_TYPES = [self, SchemaOrg::GeoShape, SchemaOrg::StructuredValue, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

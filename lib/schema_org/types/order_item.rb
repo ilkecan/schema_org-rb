@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/OrderItem
   #
   # An order item is a line of an order. It includes the quantity and shipping details of a bought offer.
   class OrderItem < Base
     include Mixins::OrderItem
+
+    SCHEMA_NAME = "OrderItem"
     SCHEMA_TYPES = [self, SchemaOrg::StructuredValue, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

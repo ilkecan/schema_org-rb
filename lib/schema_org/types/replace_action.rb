@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ReplaceAction
   #
   # The act of editing a recipient by replacing an old object with a new object.
   class ReplaceAction < Base
     include Mixins::ReplaceAction
+
+    SCHEMA_NAME = "ReplaceAction"
     SCHEMA_TYPES = [self, SchemaOrg::UpdateAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

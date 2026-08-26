@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/BookmarkAction
   #
   # An agent bookmarks/flags/labels/tags/marks an object.
   class BookmarkAction < Base
     include Mixins::BookmarkAction
+
+    SCHEMA_NAME = "BookmarkAction"
     SCHEMA_TYPES = [self, SchemaOrg::OrganizeAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

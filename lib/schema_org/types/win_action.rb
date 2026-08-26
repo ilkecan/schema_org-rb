@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/WinAction
   #
   # The act of achieving victory in a competitive activity.
   class WinAction < Base
     include Mixins::WinAction
+
+    SCHEMA_NAME = "WinAction"
     SCHEMA_TYPES = [self, SchemaOrg::AchieveAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/AdministrativeArea
   #
   # A geographical region, typically under the jurisdiction of a particular government.
   class AdministrativeArea < Base
     include Mixins::AdministrativeArea
+
+    SCHEMA_NAME = "AdministrativeArea"
     SCHEMA_TYPES = [self, SchemaOrg::Place, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

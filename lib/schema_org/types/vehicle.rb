@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Vehicle
   #
   # A vehicle is a device that is designed or used to transport people or cargo over land, water, air, or through space.
   class Vehicle < Base
     include Mixins::Vehicle
+
+    SCHEMA_NAME = "Vehicle"
     SCHEMA_TYPES = [self, SchemaOrg::Product, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

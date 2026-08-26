@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/JobPosting
   #
   # A listing that describes a job opening in a certain organization.
   class JobPosting < Base
     include Mixins::JobPosting
+
+    SCHEMA_NAME = "JobPosting"
     SCHEMA_TYPES = [self, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

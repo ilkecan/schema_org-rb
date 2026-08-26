@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ItemListOrderType
   #
   # Enumerated for values for itemListOrder for indicating how an ordered ItemList is organized.
   class ItemListOrderType < Base
     include Mixins::ItemListOrderType
+
+    SCHEMA_NAME = "ItemListOrderType"
     SCHEMA_TYPES = [self, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -20,9 +28,9 @@ module SchemaOrg
         super
       end
     end
-    ITEM_LIST_ORDER_ASCENDING = EnumerationValue.new("ItemListOrderAscending", self, [SchemaOrg::ItemListOrderType]).freeze
-    ITEM_LIST_ORDER_DESCENDING = EnumerationValue.new("ItemListOrderDescending", self, [SchemaOrg::ItemListOrderType]).freeze
-    ITEM_LIST_UNORDERED = EnumerationValue.new("ItemListUnordered", self, [SchemaOrg::ItemListOrderType]).freeze
+    ITEM_LIST_ORDER_ASCENDING = EnumerationValue.new("ItemListOrderAscending", [SchemaOrg::ItemListOrderType])
+    ITEM_LIST_ORDER_DESCENDING = EnumerationValue.new("ItemListOrderDescending", [SchemaOrg::ItemListOrderType])
+    ITEM_LIST_UNORDERED = EnumerationValue.new("ItemListUnordered", [SchemaOrg::ItemListOrderType])
     VALUES = [ITEM_LIST_ORDER_ASCENDING, ITEM_LIST_ORDER_DESCENDING, ITEM_LIST_UNORDERED].freeze
 
     def self.values

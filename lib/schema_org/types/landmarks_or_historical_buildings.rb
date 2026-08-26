@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/LandmarksOrHistoricalBuildings
   #
   # An historical landmark or building.
   class LandmarksOrHistoricalBuildings < Base
     include Mixins::LandmarksOrHistoricalBuildings
+
+    SCHEMA_NAME = "LandmarksOrHistoricalBuildings"
     SCHEMA_TYPES = [self, SchemaOrg::Place, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

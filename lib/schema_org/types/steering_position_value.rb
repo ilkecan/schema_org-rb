@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/SteeringPositionValue
   #
   # A value indicating a steering position.
   class SteeringPositionValue < Base
     include Mixins::SteeringPositionValue
+
+    SCHEMA_NAME = "SteeringPositionValue"
     SCHEMA_TYPES = [self, SchemaOrg::QualitativeValue, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -20,8 +28,8 @@ module SchemaOrg
         super
       end
     end
-    LEFT_HAND_DRIVING = EnumerationValue.new("LeftHandDriving", self, [SchemaOrg::SteeringPositionValue]).freeze
-    RIGHT_HAND_DRIVING = EnumerationValue.new("RightHandDriving", self, [SchemaOrg::SteeringPositionValue]).freeze
+    LEFT_HAND_DRIVING = EnumerationValue.new("LeftHandDriving", [SchemaOrg::SteeringPositionValue])
+    RIGHT_HAND_DRIVING = EnumerationValue.new("RightHandDriving", [SchemaOrg::SteeringPositionValue])
     VALUES = [LEFT_HAND_DRIVING, RIGHT_HAND_DRIVING].freeze
 
     def self.values

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/MovieSeries
   #
   # A series of movies. Included movies can be indicated with the hasPart property.
   class MovieSeries < Base
     include Mixins::MovieSeries
+
+    SCHEMA_NAME = "MovieSeries"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWorkSeries, SchemaOrg::CreativeWork, SchemaOrg::Series, SchemaOrg::Thing, SchemaOrg::Intangible].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

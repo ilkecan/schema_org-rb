@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DayOfWeek
   #
@@ -6,9 +8,15 @@ module SchemaOrg
   # Originally, URLs from [GoodRelations](http://purl.org/goodrelations/v1) were used (for [[Monday]], [[Tuesday]], [[Wednesday]], [[Thursday]], [[Friday]], [[Saturday]], [[Sunday]] plus a special entry for [[PublicHolidays]]); these have now been integrated directly into schema.org.
   class DayOfWeek < Base
     include Mixins::DayOfWeek
+
+    SCHEMA_NAME = "DayOfWeek"
     SCHEMA_TYPES = [self, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -22,14 +30,14 @@ module SchemaOrg
         super
       end
     end
-    FRIDAY = EnumerationValue.new("Friday", self, [SchemaOrg::DayOfWeek]).freeze
-    MONDAY = EnumerationValue.new("Monday", self, [SchemaOrg::DayOfWeek]).freeze
-    PUBLIC_HOLIDAYS = EnumerationValue.new("PublicHolidays", self, [SchemaOrg::DayOfWeek]).freeze
-    SATURDAY = EnumerationValue.new("Saturday", self, [SchemaOrg::DayOfWeek]).freeze
-    SUNDAY = EnumerationValue.new("Sunday", self, [SchemaOrg::DayOfWeek]).freeze
-    THURSDAY = EnumerationValue.new("Thursday", self, [SchemaOrg::DayOfWeek]).freeze
-    TUESDAY = EnumerationValue.new("Tuesday", self, [SchemaOrg::DayOfWeek]).freeze
-    WEDNESDAY = EnumerationValue.new("Wednesday", self, [SchemaOrg::DayOfWeek]).freeze
+    FRIDAY = EnumerationValue.new("Friday", [SchemaOrg::DayOfWeek])
+    MONDAY = EnumerationValue.new("Monday", [SchemaOrg::DayOfWeek])
+    PUBLIC_HOLIDAYS = EnumerationValue.new("PublicHolidays", [SchemaOrg::DayOfWeek])
+    SATURDAY = EnumerationValue.new("Saturday", [SchemaOrg::DayOfWeek])
+    SUNDAY = EnumerationValue.new("Sunday", [SchemaOrg::DayOfWeek])
+    THURSDAY = EnumerationValue.new("Thursday", [SchemaOrg::DayOfWeek])
+    TUESDAY = EnumerationValue.new("Tuesday", [SchemaOrg::DayOfWeek])
+    WEDNESDAY = EnumerationValue.new("Wednesday", [SchemaOrg::DayOfWeek])
     VALUES = [FRIDAY, MONDAY, PUBLIC_HOLIDAYS, SATURDAY, SUNDAY, THURSDAY, TUESDAY, WEDNESDAY].freeze
 
     def self.values

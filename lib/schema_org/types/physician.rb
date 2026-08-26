@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Physician
   #
   # An individual physician or a physician's office considered as a [[MedicalOrganization]].
   class Physician < Base
     include Mixins::Physician
-    SCHEMA_TYPES = [self, SchemaOrg::MedicalOrganization, SchemaOrg::Organization, SchemaOrg::Thing].freeze
+
+    SCHEMA_NAME = "Physician"
+    SCHEMA_TYPES = [self, SchemaOrg::MedicalBusiness, SchemaOrg::MedicalOrganization, SchemaOrg::LocalBusiness, SchemaOrg::Organization, SchemaOrg::Place, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

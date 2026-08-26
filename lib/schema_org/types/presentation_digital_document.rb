@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/PresentationDigitalDocument
   #
   # A file containing slides or used for a presentation.
   class PresentationDigitalDocument < Base
     include Mixins::PresentationDigitalDocument
+
+    SCHEMA_NAME = "PresentationDigitalDocument"
     SCHEMA_TYPES = [self, SchemaOrg::DigitalDocument, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

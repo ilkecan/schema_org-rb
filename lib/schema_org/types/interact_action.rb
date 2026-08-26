@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/InteractAction
   #
   # The act of interacting with another person or organization.
   class InteractAction < Base
     include Mixins::InteractAction
+
+    SCHEMA_NAME = "InteractAction"
     SCHEMA_TYPES = [self, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

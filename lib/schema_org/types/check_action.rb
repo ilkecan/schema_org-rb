@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/CheckAction
   #
   # An agent inspects, determines, investigates, inquires, or examines an object's accuracy, quality, condition, or state.
   class CheckAction < Base
     include Mixins::CheckAction
+
+    SCHEMA_NAME = "CheckAction"
     SCHEMA_TYPES = [self, SchemaOrg::FindAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

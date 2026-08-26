@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module House
@@ -5,21 +7,30 @@ module SchemaOrg
 
       def self.schema_property_definitions
         {
-          :number_of_rooms => {
+          number_of_rooms: {
             schema_name: "numberOfRooms",
-            ranges: ["Number", "QuantitativeValue"],
-          }.freeze,
+            schema_url: "https://schema.org/numberOfRooms",
+            comment_lines: ["The number of rooms (excluding bathrooms and closets) of the accommodation or lodging business.", "Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue."].freeze,
+            ranges: ["Number", "QuantitativeValue"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze
         }.freeze
       end
 
+      # The number of rooms (excluding bathrooms and closets) of the accommodation or lodging business.
+      # Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.
       def number_of_rooms
         read_property(:number_of_rooms)
       end
 
+      # The number of rooms (excluding bathrooms and closets) of the accommodation or lodging business.
+      # Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.
       def number_of_rooms=(value)
         write_property(:number_of_rooms, value)
       end
-
     end
   end
 end

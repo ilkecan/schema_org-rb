@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/APIReference
   #
   # Reference documentation for application programming interfaces (APIs).
   class APIReference < Base
     include Mixins::APIReference
+
+    SCHEMA_NAME = "APIReference"
     SCHEMA_TYPES = [self, SchemaOrg::TechArticle, SchemaOrg::Article, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

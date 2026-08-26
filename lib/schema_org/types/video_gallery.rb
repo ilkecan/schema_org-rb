@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/VideoGallery
   #
   # Web page type: Video gallery page.
   class VideoGallery < Base
     include Mixins::VideoGallery
+
+    SCHEMA_NAME = "VideoGallery"
     SCHEMA_TYPES = [self, SchemaOrg::MediaGallery, SchemaOrg::CollectionPage, SchemaOrg::WebPage, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

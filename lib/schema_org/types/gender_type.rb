@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/GenderType
   #
   # An enumeration of genders.
   class GenderType < Base
     include Mixins::GenderType
+
+    SCHEMA_NAME = "GenderType"
     SCHEMA_TYPES = [self, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -20,8 +28,8 @@ module SchemaOrg
         super
       end
     end
-    FEMALE = EnumerationValue.new("Female", self, [SchemaOrg::GenderType]).freeze
-    MALE = EnumerationValue.new("Male", self, [SchemaOrg::GenderType]).freeze
+    FEMALE = EnumerationValue.new("Female", [SchemaOrg::GenderType])
+    MALE = EnumerationValue.new("Male", [SchemaOrg::GenderType])
     VALUES = [FEMALE, MALE].freeze
 
     def self.values

@@ -1,0 +1,32 @@
+# frozen_string_literal: true
+
+module SchemaOrg
+  # https://schema.org/AdvertiserContentArticle
+  #
+  # An [[Article]] that an external entity has paid to place or to produce to its specifications. Includes [advertorials](https://en.wikipedia.org/wiki/Advertorial), sponsored content, native advertising and other paid content.
+  class AdvertiserContentArticle < Base
+    include Mixins::AdvertiserContentArticle
+
+    SCHEMA_NAME = "AdvertiserContentArticle"
+    SCHEMA_TYPES = [self, SchemaOrg::Article, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
+
+    class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
+      def schema_types
+        SCHEMA_TYPES
+      end
+
+      def schema_type?(other_type)
+        Base.schema_type_argument!(other_type)
+        SCHEMA_TYPES.include?(other_type)
+      end
+
+      def new(**properties)
+        super
+      end
+    end
+  end
+end

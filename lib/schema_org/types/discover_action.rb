@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DiscoverAction
   #
   # The act of discovering/finding an object.
   class DiscoverAction < Base
     include Mixins::DiscoverAction
+
+    SCHEMA_NAME = "DiscoverAction"
     SCHEMA_TYPES = [self, SchemaOrg::FindAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

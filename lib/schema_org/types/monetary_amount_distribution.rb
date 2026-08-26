@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/MonetaryAmountDistribution
   #
   # A statistical distribution of monetary amounts.
   class MonetaryAmountDistribution < Base
     include Mixins::MonetaryAmountDistribution
+
+    SCHEMA_NAME = "MonetaryAmountDistribution"
     SCHEMA_TYPES = [self, SchemaOrg::QuantitativeValueDistribution, SchemaOrg::StructuredValue, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

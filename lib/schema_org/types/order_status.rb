@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/OrderStatus
   #
   # Enumerated status values for Order.
   class OrderStatus < Base
     include Mixins::OrderStatus
+
+    SCHEMA_NAME = "OrderStatus"
     SCHEMA_TYPES = [self, SchemaOrg::StatusEnumeration, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -20,14 +28,14 @@ module SchemaOrg
         super
       end
     end
-    ORDER_CANCELLED = EnumerationValue.new("OrderCancelled", self, [SchemaOrg::OrderStatus]).freeze
-    ORDER_DELIVERED = EnumerationValue.new("OrderDelivered", self, [SchemaOrg::OrderStatus]).freeze
-    ORDER_IN_TRANSIT = EnumerationValue.new("OrderInTransit", self, [SchemaOrg::OrderStatus]).freeze
-    ORDER_PAYMENT_DUE = EnumerationValue.new("OrderPaymentDue", self, [SchemaOrg::OrderStatus]).freeze
-    ORDER_PICKUP_AVAILABLE = EnumerationValue.new("OrderPickupAvailable", self, [SchemaOrg::OrderStatus]).freeze
-    ORDER_PROBLEM = EnumerationValue.new("OrderProblem", self, [SchemaOrg::OrderStatus]).freeze
-    ORDER_PROCESSING = EnumerationValue.new("OrderProcessing", self, [SchemaOrg::OrderStatus]).freeze
-    ORDER_RETURNED = EnumerationValue.new("OrderReturned", self, [SchemaOrg::OrderStatus]).freeze
+    ORDER_CANCELLED = EnumerationValue.new("OrderCancelled", [SchemaOrg::OrderStatus])
+    ORDER_DELIVERED = EnumerationValue.new("OrderDelivered", [SchemaOrg::OrderStatus])
+    ORDER_IN_TRANSIT = EnumerationValue.new("OrderInTransit", [SchemaOrg::OrderStatus])
+    ORDER_PAYMENT_DUE = EnumerationValue.new("OrderPaymentDue", [SchemaOrg::OrderStatus])
+    ORDER_PICKUP_AVAILABLE = EnumerationValue.new("OrderPickupAvailable", [SchemaOrg::OrderStatus])
+    ORDER_PROBLEM = EnumerationValue.new("OrderProblem", [SchemaOrg::OrderStatus])
+    ORDER_PROCESSING = EnumerationValue.new("OrderProcessing", [SchemaOrg::OrderStatus])
+    ORDER_RETURNED = EnumerationValue.new("OrderReturned", [SchemaOrg::OrderStatus])
     VALUES = [ORDER_CANCELLED, ORDER_DELIVERED, ORDER_IN_TRANSIT, ORDER_PAYMENT_DUE, ORDER_PICKUP_AVAILABLE, ORDER_PROBLEM, ORDER_PROCESSING, ORDER_RETURNED].freeze
 
     def self.values

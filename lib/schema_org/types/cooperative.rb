@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Cooperative
   #
   # An organization that is a joint project of multiple organizations or persons.
   class Cooperative < Base
     include Mixins::Cooperative
+
+    SCHEMA_NAME = "Cooperative"
     SCHEMA_TYPES = [self, SchemaOrg::Organization, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/PrependAction
   #
   # The act of inserting at the beginning if an ordered collection.
   class PrependAction < Base
     include Mixins::PrependAction
+
+    SCHEMA_NAME = "PrependAction"
     SCHEMA_TYPES = [self, SchemaOrg::InsertAction, SchemaOrg::AddAction, SchemaOrg::UpdateAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

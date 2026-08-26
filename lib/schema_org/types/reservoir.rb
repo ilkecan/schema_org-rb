@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Reservoir
   #
   # A reservoir of water, typically an artificially created lake, like the Lake Kariba reservoir.
   class Reservoir < Base
     include Mixins::Reservoir
+
+    SCHEMA_NAME = "Reservoir"
     SCHEMA_TYPES = [self, SchemaOrg::BodyOfWater, SchemaOrg::Landform, SchemaOrg::Place, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

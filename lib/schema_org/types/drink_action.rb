@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DrinkAction
   #
   # The act of swallowing liquids.
   class DrinkAction < Base
     include Mixins::DrinkAction
+
+    SCHEMA_NAME = "DrinkAction"
     SCHEMA_TYPES = [self, SchemaOrg::ConsumeAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

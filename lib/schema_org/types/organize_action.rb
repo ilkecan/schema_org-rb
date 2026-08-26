@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/OrganizeAction
   #
   # The act of manipulating/administering/supervising/controlling one or more objects.
   class OrganizeAction < Base
     include Mixins::OrganizeAction
+
+    SCHEMA_NAME = "OrganizeAction"
     SCHEMA_TYPES = [self, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

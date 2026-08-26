@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DataDownload
   #
   # All or part of a [[Dataset]] in downloadable form.
   class DataDownload < Base
     include Mixins::DataDownload
+
+    SCHEMA_NAME = "DataDownload"
     SCHEMA_TYPES = [self, SchemaOrg::MediaObject, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

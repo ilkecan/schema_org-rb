@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DeactivateAction
   #
   # The act of stopping or deactivating a device or application (e.g. stopping a timer or turning off a flashlight).
   class DeactivateAction < Base
     include Mixins::DeactivateAction
+
+    SCHEMA_NAME = "DeactivateAction"
     SCHEMA_TYPES = [self, SchemaOrg::ControlAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

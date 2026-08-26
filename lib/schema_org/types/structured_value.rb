@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/StructuredValue
   #
   # Structured values are used when the value of a property has a more complex structure than simply being a textual value or a reference to another thing.
   class StructuredValue < Base
     include Mixins::StructuredValue
+
+    SCHEMA_NAME = "StructuredValue"
     SCHEMA_TYPES = [self, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

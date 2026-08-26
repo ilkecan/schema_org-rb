@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Dataset
   #
   # A body of structured information describing some topic(s) of interest.
   class Dataset < Base
     include Mixins::Dataset
+
+    SCHEMA_NAME = "Dataset"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

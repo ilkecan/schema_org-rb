@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module ReceiveAction
@@ -5,33 +7,48 @@ module SchemaOrg
 
       def self.schema_property_definitions
         {
-          :delivery_method => {
+          delivery_method: {
             schema_name: "deliveryMethod",
-            ranges: ["DeliveryMethod"],
+            schema_url: "https://schema.org/deliveryMethod",
+            comment_lines: ["A sub property of instrument. The method of delivery."].freeze,
+            ranges: ["DeliveryMethod"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
           }.freeze,
-          :sender => {
+          sender: {
             schema_name: "sender",
-            ranges: ["Audience", "Organization", "Person"],
-          }.freeze,
+            schema_url: "https://schema.org/sender",
+            comment_lines: ["A sub property of participant. The participant who is at the sending end of the action."].freeze,
+            ranges: ["Audience", "Organization", "Person"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze
         }.freeze
       end
 
+      # A sub property of instrument. The method of delivery.
       def delivery_method
         read_property(:delivery_method)
       end
 
+      # A sub property of instrument. The method of delivery.
       def delivery_method=(value)
         write_property(:delivery_method, value)
       end
 
+      # A sub property of participant. The participant who is at the sending end of the action.
       def sender
         read_property(:sender)
       end
 
+      # A sub property of participant. The participant who is at the sending end of the action.
       def sender=(value)
         write_property(:sender, value)
       end
-
     end
   end
 end

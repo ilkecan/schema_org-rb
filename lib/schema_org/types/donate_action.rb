@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DonateAction
   #
   # The act of providing goods, services, or money without compensation, often for philanthropic reasons.
   class DonateAction < Base
     include Mixins::DonateAction
+
+    SCHEMA_NAME = "DonateAction"
     SCHEMA_TYPES = [self, SchemaOrg::TransferAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

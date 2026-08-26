@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/ActionStatusType
   #
   # The status of an Action.
   class ActionStatusType < Base
     include Mixins::ActionStatusType
+
+    SCHEMA_NAME = "ActionStatusType"
     SCHEMA_TYPES = [self, SchemaOrg::StatusEnumeration, SchemaOrg::Enumeration, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end
@@ -20,10 +28,10 @@ module SchemaOrg
         super
       end
     end
-    ACTIVE_ACTION_STATUS = EnumerationValue.new("ActiveActionStatus", self, [SchemaOrg::ActionStatusType]).freeze
-    COMPLETED_ACTION_STATUS = EnumerationValue.new("CompletedActionStatus", self, [SchemaOrg::ActionStatusType]).freeze
-    FAILED_ACTION_STATUS = EnumerationValue.new("FailedActionStatus", self, [SchemaOrg::ActionStatusType]).freeze
-    POTENTIAL_ACTION_STATUS = EnumerationValue.new("PotentialActionStatus", self, [SchemaOrg::ActionStatusType]).freeze
+    ACTIVE_ACTION_STATUS = EnumerationValue.new("ActiveActionStatus", [SchemaOrg::ActionStatusType])
+    COMPLETED_ACTION_STATUS = EnumerationValue.new("CompletedActionStatus", [SchemaOrg::ActionStatusType])
+    FAILED_ACTION_STATUS = EnumerationValue.new("FailedActionStatus", [SchemaOrg::ActionStatusType])
+    POTENTIAL_ACTION_STATUS = EnumerationValue.new("PotentialActionStatus", [SchemaOrg::ActionStatusType])
     VALUES = [ACTIVE_ACTION_STATUS, COMPLETED_ACTION_STATUS, FAILED_ACTION_STATUS, POTENTIAL_ACTION_STATUS].freeze
 
     def self.values

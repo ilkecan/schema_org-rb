@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DigitalDocument
   #
   # An electronic file or document.
   class DigitalDocument < Base
     include Mixins::DigitalDocument
+
+    SCHEMA_NAME = "DigitalDocument"
     SCHEMA_TYPES = [self, SchemaOrg::CreativeWork, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/DepartAction
   #
   # The act of  departing from a place. An agent departs from a fromLocation for a destination, optionally with participants.
   class DepartAction < Base
     include Mixins::DepartAction
+
+    SCHEMA_NAME = "DepartAction"
     SCHEMA_TYPES = [self, SchemaOrg::MoveAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

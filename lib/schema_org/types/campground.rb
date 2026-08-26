@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/Campground
   #
@@ -7,9 +9,15 @@ module SchemaOrg
   # See also the dedicated [document on the use of schema.org for marking up hotels and other forms of accommodations](/docs/hotels.html).
   class Campground < Base
     include Mixins::Campground
+
+    SCHEMA_NAME = "Campground"
     SCHEMA_TYPES = [self, SchemaOrg::CivicStructure, SchemaOrg::LodgingBusiness, SchemaOrg::Place, SchemaOrg::LocalBusiness, SchemaOrg::Thing, SchemaOrg::Organization].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/TravelAction
   #
   # The act of traveling from a fromLocation to a destination by a specified mode of transport, optionally with participants.
   class TravelAction < Base
     include Mixins::TravelAction
+
+    SCHEMA_NAME = "TravelAction"
     SCHEMA_TYPES = [self, SchemaOrg::MoveAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

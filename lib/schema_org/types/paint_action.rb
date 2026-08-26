@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/PaintAction
   #
   # The act of producing a painting, typically with paint and canvas as instruments.
   class PaintAction < Base
     include Mixins::PaintAction
+
+    SCHEMA_NAME = "PaintAction"
     SCHEMA_TYPES = [self, SchemaOrg::CreateAction, SchemaOrg::Action, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/AggregateRating
   #
   # The average rating based on multiple ratings or reviews.
   class AggregateRating < Base
     include Mixins::AggregateRating
+
+    SCHEMA_NAME = "AggregateRating"
     SCHEMA_TYPES = [self, SchemaOrg::Rating, SchemaOrg::Intangible, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

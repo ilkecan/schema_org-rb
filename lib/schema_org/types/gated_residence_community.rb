@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   # https://schema.org/GatedResidenceCommunity
   #
   # Residence type: Gated community.
   class GatedResidenceCommunity < Base
     include Mixins::GatedResidenceCommunity
+
+    SCHEMA_NAME = "GatedResidenceCommunity"
     SCHEMA_TYPES = [self, SchemaOrg::Residence, SchemaOrg::Place, SchemaOrg::Thing].freeze
 
     class << self
+      def schema_name
+        SCHEMA_NAME
+      end
+
       def schema_types
         SCHEMA_TYPES
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchemaOrg
   module Mixins
     module InsertAction
@@ -5,21 +7,28 @@ module SchemaOrg
 
       def self.schema_property_definitions
         {
-          :to_location => {
+          to_location: {
             schema_name: "toLocation",
-            ranges: ["Place"],
-          }.freeze,
+            schema_url: "https://schema.org/toLocation",
+            comment_lines: ["A sub property of location. The final location of the object or the agent after the action."].freeze,
+            ranges: ["Place"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze
         }.freeze
       end
 
+      # A sub property of location. The final location of the object or the agent after the action.
       def to_location
         read_property(:to_location)
       end
 
+      # A sub property of location. The final location of the object or the agent after the action.
       def to_location=(value)
         write_property(:to_location, value)
       end
-
     end
   end
 end
