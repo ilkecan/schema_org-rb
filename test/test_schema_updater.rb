@@ -25,7 +25,10 @@ class TestSchemaUpdater < Minitest::Test
       file.write("original")
       file.flush
       updater = SchemaOrg::Codegen::SchemaUpdater.new(
-        downloader: ->(url) { calls << [:download, url]; Response.new(200, FIXTURE) },
+        downloader: lambda do |url|
+          calls << [:download, url]
+          Response.new(200, FIXTURE)
+        end,
         replacer:,
         target: file.path
       )

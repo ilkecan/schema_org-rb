@@ -92,7 +92,7 @@ class TestCodegenVocabulary < Minitest::Test
     subjects = [class_subject("Foo"), class_subject("Bar")]
     naming = Class.new do
       def constant_name(name)
-        name == "Foo" || name == "Bar" ? "Same" : name
+        (name == "Foo" || name == "Bar") ? "Same" : name
       end
 
       def file_name(name)

@@ -32,31 +32,21 @@ module SchemaOrg
       end
 
       def build_signature(properties)
-        property_owners = properties.each_with_object({}) do |(schema_name, entries), owners|
-          entries.each do |property|
-            owner = owners[property.schema_name]
-            owners[property.schema_name] = [owner, schema_name].compact.min
-          end
-        end
         Models::Signature.new(
           types: vocabulary.classes.map do |subject|
             schema_name = vocabulary.term_name(subject.url)
             names = [schema_name] + vocabulary.ancestry(schema_name)
-            all_properties = names.reverse_each.each_with_object({}) do |name, result|
+            all_properties = names.each_with_object({}) do |name, result|
               (properties[name] || []).each { |property| result[property.schema_name] = property }
             end
-            inherited_property_names = names.drop(1).flat_map { |name| (properties[name] || []).map(&:schema_name) }
-            direct_properties = (properties[schema_name] || []).reject do |property|
-              inherited_property_names.include?(property.schema_name) ||
-                property_owners[property.schema_name] != schema_name
+            entries = all_properties.values.sort_by(&:schema_name).map do |property|
+              {property:, type: signature_type(property)}
             end
             {
               name: naming.constant_name(schema_name),
-              parents: signature_parents(subject).map { |parent| naming.constant_name(parent) },
-              properties: direct_properties.map { |property| {property:, type: signature_type(property)} },
-              constructor_properties: all_properties.values.sort_by(&:schema_name).map do |property|
-                {property:, type: signature_type(property)}
-              end,
+              parents: [],
+              properties: entries,
+              constructor_properties: entries,
               abstract: vocabulary.data_type?(schema_name),
               enum_members: enum_members(subject, schema_name)
             }
@@ -65,37 +55,33 @@ module SchemaOrg
       end
 
       def signature_type(property)
-        types = property.types.filter_map do |range|
+        types = property.types.flat_map do |range|
           if vocabulary.descendant_of?(range, "Integer")
-            "Integer"
+            ["Integer"]
           elsif vocabulary.descendant_of?(range, "Float")
-            "Float"
+            ["Float"]
           elsif vocabulary.descendant_of?(range, "Number")
-            "Numeric"
+            ["Numeric"]
           elsif vocabulary.descendant_of?(range, "Boolean")
-            "bool"
+            ["bool"]
           elsif vocabulary.descendant_of?(range, "Date")
-            "::Date"
+            ["::Date"]
           elsif vocabulary.descendant_of?(range, "DateTime")
-            "::DateTime | ::Time"
+            ["::DateTime", "::Time"]
           elsif vocabulary.descendant_of?(range, "Time")
-            "::Time"
+            ["::Time"]
           elsif vocabulary.descendant_of?(range, "Text")
-            "String"
+            ["String"]
           elsif vocabulary.enumeration?(range)
-            "SchemaOrg::EnumerationValue[untyped]"
+            vocabulary.enumeration_classes.filter_map do |subject|
+              descendant = vocabulary.term_name(subject.url)
+              "SchemaOrg::EnumerationValue[_#{naming.constant_name(descendant)}]" if vocabulary.descendant_of?(descendant, range)
+            end
           else
-            "SchemaOrg::_#{naming.constant_name(range)}"
+            ["SchemaOrg::_#{naming.constant_name(range)}"]
           end
         end.uniq
         types.empty? ? "untyped" : types.join(" | ")
-      end
-
-      def signature_parents(subject)
-        parents = vocabulary.direct_parents(subject)
-        parents.reject do |parent|
-          parents.any? { |other| other != parent && vocabulary.descendant_of?(other, parent) }
-        end
       end
 
       def enum_members(_subject, schema_name)
@@ -106,7 +92,7 @@ module SchemaOrg
           declared = member.type.filter_map { |type| vocabulary.schema_name(type) }
           {
             constant: naming.enumeration_constant_name(member_name),
-            types: declared.map { |type| naming.constant_name(type) }
+            types: declared.map { |type| naming.constant_name(type) }.sort.uniq
           }
         end.sort_by { |member| member[:constant] }
       end

@@ -1,6 +1,21 @@
 # Generated Schema.org consumer signatures.
 
+type schema_property_definition = {
+  schema_name: String,
+  schema_url: String,
+  comment_lines: Array[String],
+  ranges: Array[String],
+  external_ranges: Array[String],
+  inverse_of: String?,
+  superseded_by: String?,
+  supersedes: String?
+}
+
 module SchemaOrg
+  VERSION: String
+  SCHEMA_VERSION: String
+  CONTEXT: String
+
   class UnknownPropertyError < ::ArgumentError
   end
 
@@ -16,7 +31,7 @@ module SchemaOrg
   class Base
     def self.schema_types: () -> ::Array[::Class]
     def self.schema_type?: (untyped) -> bool
-    def self.property_definitions: () -> ::Hash[::Symbol, untyped]
+    def self.property_definitions: () -> ::Hash[::Symbol, schema_property_definition]
     def initialize: (**untyped) -> void
     def schema_types: () -> ::Array[::Class]
     def schema_type?: (untyped) -> bool
@@ -37,9 +52,6 @@ module SchemaOrg
 
 <% types.each do |type| -%>
   interface _<%= type[:name] %>
-<% type[:parents].each do |parent| -%>
-    include _<%= parent %>
-<% end -%>
 <% type[:properties].each do |entry| -%>
     def <%= entry[:property].name %>: () -> <%= property_type(entry) %>
     def <%= entry[:property].name %>=: (<%= property_type(entry) %>) -> <%= property_type(entry) %>
@@ -62,7 +74,7 @@ module SchemaOrg
     <%= member[:constant] %>: <%= enum_type(member[:types]) %>
 <% end -%>
 <% unless type[:enum_members].empty? -%>
-    def self.values: () -> ::Array[SchemaOrg::EnumerationValue[untyped]]
+    def self.values: () -> ::Array[<%= enum_values_type(type[:enum_members]) %>]
 <% end -%>
   end
 

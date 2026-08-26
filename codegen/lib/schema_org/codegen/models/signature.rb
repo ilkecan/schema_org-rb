@@ -22,6 +22,10 @@ module SchemaOrg
           generic = declared.empty? ? "untyped" : declared.join(" & ")
           "SchemaOrg::EnumerationValue[#{generic}]"
         end
+
+        def enum_values_type(members)
+          members.map { |member| enum_type(member[:types]) }.uniq.join(" | ")
+        end
       end
     end
   end

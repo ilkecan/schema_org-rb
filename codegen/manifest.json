@@ -1875,5 +1875,5 @@
   "runtime/types/write_action.rb": "25d8450a3acbd334e039c79025bc6e7d",
   "runtime/types/x_path_type.rb": "48e09b3aecabf3280f378f3aa9d9944e",
   "runtime/types/zoo.rb": "a1354cc196f52f22827dd41b37aa298e",
-  "signature/schema_org.rbs": "23014e504573f0ee9f67aae090af9a24"
+  "signature/schema_org.rbs": "53ba5d281271ae5059ef8df4a73144e4"
 }

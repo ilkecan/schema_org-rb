@@ -169,7 +169,6 @@ module SchemaOrg
         end
       end
 
-
       def validate_names!
         validate_name_set(classes.map { |subject| term_name(subject.url) }, :constant) do |name|
           @naming.constant_name(name)
