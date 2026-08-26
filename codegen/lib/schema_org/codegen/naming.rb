@@ -33,7 +33,9 @@ module SchemaOrg
       end
 
       def enumeration_constant_name(schema_name)
-        method_name(schema_name).to_s.upcase
+        name = method_name(schema_name).to_s.upcase
+        validate_constant!(name, schema_name)
+        name
       end
 
       private

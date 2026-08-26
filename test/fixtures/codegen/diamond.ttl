@@ -1,0 +1,20 @@
+@prefix schema: <https://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+schema:Thing a schema:Class .
+schema:DataType a schema:Class ; rdfs:subClassOf schema:Thing .
+schema:DateTime a schema:Class ; rdfs:subClassOf schema:DataType .
+schema:Date a schema:Class ; rdfs:subClassOf schema:DataType .
+schema:Enumeration a schema:Class ; rdfs:subClassOf schema:Thing .
+schema:ItemAvailability a schema:Class ; rdfs:subClassOf schema:Enumeration .
+schema:SubItemAvailability a schema:Class ; rdfs:subClassOf schema:ItemAvailability .
+schema:OtherAvailability a schema:Class ; rdfs:subClassOf schema:Enumeration .
+schema:IN_STOCK a schema:ItemAvailability, schema:SubItemAvailability .
+schema:ONLINE a schema:SubItemAvailability .
+schema:A a schema:Class ; rdfs:subClassOf schema:Thing .
+schema:B a schema:Class ; rdfs:subClassOf schema:Thing .
+schema:Child a schema:Class ; rdfs:subClassOf schema:A, schema:B .
+schema:ancestorProperty a schema:Property ; schema:domainIncludes schema:Thing ; schema:rangeIncludes schema:Text .
+schema:sharedProperty a schema:Property ; schema:domainIncludes schema:A, schema:B ; schema:rangeIncludes schema:Date, schema:DateTime .
+schema:childProperty a schema:Property ; schema:domainIncludes schema:Child ; schema:rangeIncludes schema:ItemAvailability .
+schema:Text a schema:Class ; rdfs:subClassOf schema:Thing .

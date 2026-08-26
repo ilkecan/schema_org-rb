@@ -3,15 +3,15 @@ module SchemaOrg
     class Vocabulary
       SCHEMA_HTTP = "http://schema.org/"
       SCHEMA_HTTPS = "https://schema.org/"
-      RESERVED_CONSTANTS = %w[
+      TOP_LEVEL_RESERVED_CONSTANTS = %w[
         Base EnumerationValue GeneratedVocabulary UnknownPropertyError InvalidPropertyValueError
-        AbstractTypeError CircularReferenceError VERSION SCHEMA_VERSION CONTEXT SCHEMA_TYPES
-        ABSTRACT_TYPE VALUES
+        AbstractTypeError CircularReferenceError VERSION SCHEMA_VERSION CONTEXT
       ].freeze
+      ENUMERATION_RESERVED_CONSTANTS = %w[SCHEMA_NAME SCHEMA_TYPES ABSTRACT_TYPE VALUES].freeze
 
       attr_reader :subjects, :classes, :properties, :enumeration_members
 
-      def initialize(parser:, validate_references: true, naming: Naming.new)
+      def initialize(parser:, naming: Naming.new)
         @naming = naming
         @subjects = parser.subjects.select { |subject| schema_uri?(subject.url) }
         @by_uri = {}
@@ -30,7 +30,7 @@ module SchemaOrg
         @enumeration_members = subjects.reject { |subject| subject.type? :Class }.select do |subject|
           subject.type.any? { |type| schema_name(type) && descendant?(schema_name(type), "Enumeration") }
         end.sort_by { |subject| term_name(subject.url) }
-        validate_references! if validate_references
+        validate_references!
         validate_graph!
         validate_names!
       end
@@ -127,44 +127,48 @@ module SchemaOrg
       end
 
       def validate_references!
+        errors = []
         classes.each do |subject|
           subject.parents.filter_map { |parent| schema_name(parent) }.each do |parent|
             next if @class_by_name.key?(parent)
 
-            raise ValidationError, "Unknown schema.org parent #{parent} for #{term_name(subject.url)}"
+            errors << "Unknown schema.org parent #{parent} for #{term_name(subject.url)}"
           end
         end
         properties.each do |property|
           property_domains(property).each do |domain|
             next if @class_by_name.key?(domain)
 
-            raise ValidationError, "Unknown schema.org domain #{domain} for #{term_name(property.url)}"
+            errors << "Unknown schema.org domain #{domain} for #{term_name(property.url)}"
           end
           property_ranges(property).each do |range|
             next if @class_by_name.key?(range)
 
-            raise ValidationError, "Unknown schema.org range #{range} for #{term_name(property.url)}"
+            errors << "Unknown schema.org range #{range} for #{term_name(property.url)}"
           end
         end
+        raise ValidationError, errors.join("; ") unless errors.empty?
       end
 
       def validate_graph!
         colors = {}
         classes.each do |subject|
-          visit = lambda do |name|
+          visit = lambda do |name, path = []|
             case colors[name]
             when :gray
-              raise ValidationError, "Inheritance cycle involving #{name}"
+              cycle = (path + [name]).drop_while { |item| item != name }.uniq
+              raise ValidationError, "Inheritance cycle involving #{cycle.join(", ")}"
             when :black
               next
             end
             colors[name] = :gray
-            direct_parents(@class_by_name.fetch(name)).each { |parent| visit.call(parent) }
+            direct_parents(@class_by_name.fetch(name)).each { |parent| visit.call(parent, path + [name]) }
             colors[name] = :black
           end
           visit.call(term_name(subject.url))
         end
       end
+
 
       def validate_names!
         validate_name_set(classes.map { |subject| term_name(subject.url) }, :constant) do |name|
@@ -187,20 +191,25 @@ module SchemaOrg
       end
 
       def validate_name_set(schema_names, kind)
-        seen = {}
-        reserved = if kind == :constant
-          RESERVED_CONSTANTS
+        reserved = case kind
+        when :constant
+          TOP_LEVEL_RESERVED_CONSTANTS
+        when :enumeration_constant
+          ENUMERATION_RESERVED_CONSTANTS
+        when :method
+          reserved_methods
         else
-          (kind == :method) ? reserved_methods : []
+          []
         end
-        schema_names.each do |schema_name|
-          ruby_name = yield(schema_name).to_s
-          if reserved.include?(ruby_name) || seen.key?(ruby_name)
-            terms = [seen[ruby_name], schema_name].compact.uniq
-            raise ValidationError, "Ruby #{kind} collision for #{terms.join(", ")} (#{ruby_name})"
-          end
-          seen[ruby_name] = schema_name
+        groups = schema_names.group_by { |schema_name| yield(schema_name).to_s }
+        collisions = groups.filter_map do |ruby_name, terms|
+          next unless reserved.include?(ruby_name) || terms.length > 1
+
+          "#{terms.uniq.join(", ")} (#{ruby_name})"
         end
+        return if collisions.empty?
+
+        raise ValidationError, "Ruby #{kind} collision for #{collisions.join("; ")}"
       end
 
       def reserved_methods
