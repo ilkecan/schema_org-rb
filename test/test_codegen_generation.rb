@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 require_relative "test_helper"
+require_relative "codegen_test_helper"
+require "json"
+require "pathname"
+require "tmpdir"
 
 class TestCodegenGeneration < Minitest::Test
   def test_all_layer_registry_and_metadata_are_complete
@@ -51,5 +55,61 @@ class TestCodegenGeneration < Minitest::Test
     assert_includes reference, "Superseded by `executableLibraryName`."
     assert_includes reference, "Supersedes `assembly`."
     Dir["lib/schema_org/**/*.rb"].each { |file| assert_match(/\A# frozen_string_literal: true\n/, File.read(file)) }
+  end
+
+  def test_equivalent_fixtures_generate_identical_trees_and_logical_manifest
+    first = generate_tree("equivalent_default")
+    second = generate_tree("equivalent_schema_reordered")
+
+    assert_equal first[:files], second[:files]
+    expected_keys = [
+      "runtime/generated_vocabulary.rb",
+      "runtime/mixins/child.rb",
+      "runtime/mixins/text.rb",
+      "runtime/mixins/thing.rb",
+      "runtime/schema_version.rb",
+      "runtime/types/child.rb",
+      "runtime/types/text.rb",
+      "runtime/types/thing.rb",
+      "signature/schema_org.rbs"
+    ]
+    assert_equal expected_keys, first[:manifest].keys.sort
+    refute first[:manifest].keys.any? { |key| key.start_with?("lib/") }
+  end
+
+  private
+
+  def generate_tree(name)
+    Dir.mktmpdir("schema-org-generation") do |directory|
+      root = Pathname.new(directory)
+      parser = SchemaOrg::Codegen::Parser.new(schema_file: fixture(name))
+      vocabulary = SchemaOrg::Codegen::Vocabulary.new(parser:)
+      writer = SchemaOrg::Codegen::Writer.new
+      manifest = SchemaOrg::Codegen::Manifest.new(
+        writer:,
+        manifest_root: root.join("codegen"),
+        runtime_root: root.join("lib/schema_org"),
+        signature_root: root.join("sig")
+      )
+      generator = SchemaOrg::Codegen::Generator.new(
+        manifest:,
+        template_engine: SchemaOrg::Codegen::TemplateEngine.new(templates_root: Pathname.new(__dir__).parent.join("codegen/templates")),
+        writer:,
+        lib_root: root.join("lib/schema_org"),
+        signature_root: root.join("sig")
+      )
+      orchestrator = SchemaOrg::Codegen::Orchestrator.new(
+        generator:,
+        manifest:,
+        vocabulary:,
+        schema_version: SchemaOrg::Codegen::Models::SchemaVersion.new(schema_version: "fixture")
+      )
+      Dir.chdir(root) { orchestrator.orchestrate }
+      files = Dir[root.join("lib/**/*.rb").to_s] + Dir[root.join("sig/**/*.rbs").to_s] + [root.join("codegen/manifest.json").to_s]
+      {
+        files: files.sort.to_h { |path| [Pathname.new(path).relative_path_from(root).to_s, File.binread(path)] },
+        manifest: JSON.parse(root.join("codegen/manifest.json").read)
+      }
+    end
   end
 end
