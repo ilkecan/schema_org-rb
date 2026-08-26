@@ -71,7 +71,13 @@ class TestSchemaUpdater < Minitest::Test
           target: file.path
         )
 
-        assert_raises(SchemaOrg::Codegen::ValidationError, "failure #{index}") { updater.update("v30.0") }
+        assertion = -> { assert_raises(SchemaOrg::Codegen::ValidationError, "failure #{index}") { updater.update("v30.0") } }
+        if index == 2
+          _stdout, stderr = capture_io(&assertion)
+          assert_match(/Lexer error/, stderr)
+        else
+          assertion.call
+        end
         assert_equal before, File.binread(file.path)
         assert_equal digest, Digest::SHA256.file(file.path).hexdigest
       end
