@@ -18,5 +18,8 @@ outdated:
 sync:
   bundle install
 
+test:
+  rake test SEED=42
+
 update:
   bundle update
