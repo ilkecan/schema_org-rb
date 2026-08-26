@@ -14,6 +14,10 @@ gem "schema_org-rb", "0.1.0"
 gem install schema_org-rb -v 0.1.0
 ```
 
+## Supported Ruby versions
+
+The gem supports Ruby 3.2, 3.3, 3.4, and 4.0.
+
 ## Usage
 
 Construct generated types with snake_case properties. Values are checked on
