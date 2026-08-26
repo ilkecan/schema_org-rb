@@ -1,3 +1,1 @@
-require_relative "container"
-
-Import = App.injector
+Import = Module.new

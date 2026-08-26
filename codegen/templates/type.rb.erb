@@ -2,21 +2,54 @@ module SchemaOrg
   # <%= url %>
 <% unless supersession_lines.empty? -%>
   #
-<% supersession_lines.each do -%>
-  # NOTE: <%= it %>
+<% supersession_lines.each do |line| -%>
+  # NOTE: <%= line %>
 <% end -%>
 <% end -%>
 <% unless comment_lines.empty? -%>
   #
-<% comment_lines.each do -%>
-<% if it.empty? -%>
+<% comment_lines.each do |line| -%>
+<% if line.empty? -%>
   #
 <% else -%>
-  # <%= it %>
+  # <%= line %>
 <% end -%>
 <% end -%>
 <% end -%>
   class <%= name %> < Base
     include Mixins::<%= name %>
+    SCHEMA_TYPES = [self<% schema_types.drop(1).each do |type| %>, SchemaOrg::<%= type %><% end %>].freeze
+<% if abstract -%>
+    ABSTRACT_TYPE = true
+<% end -%>
+
+    class << self
+      def schema_types
+        SCHEMA_TYPES
+      end
+
+      def schema_type?(other_type)
+        Base.schema_type_argument!(other_type)
+        SCHEMA_TYPES.include?(other_type)
+      end
+
+      def new(**properties)
+<% if abstract -%>
+        raise AbstractTypeError, "<%= name %> is an abstract schema type"
+<% else -%>
+        super
+<% end -%>
+      end
+    end
+<% unless enum_members.empty? -%>
+<% enum_members.each do |constant, term, declared| -%>
+    <%= constant %> = EnumerationValue.new(<%= term.inspect %>, self, [<%= declared.map { |type| "SchemaOrg::#{type}" }.join(', ') %>]).freeze
+<% end -%>
+    VALUES = [<%= enum_members.map { |entry| entry[0] }.join(', ') %>].freeze
+
+    def self.values
+      VALUES
+    end
+<% end -%>
   end
 end

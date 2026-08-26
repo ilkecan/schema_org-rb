@@ -1,22 +1,30 @@
-require "active_support/concern"
-
 module SchemaOrg
   module Mixins
     module <%= name %>
-      extend ActiveSupport::Concern
-
 <% parents.each do -%>
       include <%= it %>
 <% end -%>
-<% unless parents.empty? || properties.empty? -%>
 
+      def self.schema_property_definitions
+        {
+<% properties.each do |property| -%>
+          <%= property.name.inspect %> => {
+            schema_name: <%= property.schema_name.inspect %>,
+            ranges: <%= property.types.map(&:to_s).inspect %>,
+          }.freeze,
 <% end -%>
-<% unless properties.empty? -%>
-      included do
-<% properties.each do -%>
-        option :<%= it.name %>, optional: true # <%= it.lines.join ' ' %>
-<% end -%>
+        }.freeze
       end
+
+<% properties.each do |property| -%>
+      def <%= property.name %>
+        read_property(:<%= property.name %>)
+      end
+
+      def <%= property.name %>=(value)
+        write_property(:<%= property.name %>, value)
+      end
+
 <% end -%>
     end
   end

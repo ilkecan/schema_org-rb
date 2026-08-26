@@ -1,7 +1,14 @@
 module SchemaOrg
   module Codegen
     class Manifest
-      include Import[:writer]
+      def initialize(writer:, manifest_root: Pathname.new('./codegen'), generated_root: Pathname.new('./lib/schema_org'))
+        @writer = writer
+        @file = Pathname.new(manifest_root).join('manifest.json')
+        root = Pathname.new(generated_root)
+        @allowed_roots = [root.join('mixins'), root.join('types'), root.join('schema_version.rb')]
+        @previous = nil
+        @current = {}
+      end
 
       def [](key)
         previous.delete(key)
@@ -15,22 +22,24 @@ module SchemaOrg
         previous.keys
       end
 
+      def remove_stale(path)
+        candidate = Pathname.new(path).cleanpath
+        return unless @allowed_roots.any? { |root| candidate == root || candidate.to_s.start_with?("#{root}/") }
+        return unless candidate.file?
+
+        candidate.delete
+      end
+
       def save
-        writer.write file, JSON.pretty_generate(current)
+        writer.write(file, JSON.pretty_generate(current.sort.to_h) + "\n")
       end
 
       private
 
-      def current
-        @current ||= {}
-      end
-
-      def file
-        @file ||= Pathname('./codegen/manifest.json')
-      end
+      attr_reader :writer, :file, :current
 
       def load
-        @previous = JSON.parse(file.read)
+        JSON.parse(file.read)
       end
 
       def previous

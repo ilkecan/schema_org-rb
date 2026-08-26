@@ -1,29 +1,26 @@
 module SchemaOrg
   module Codegen
     module Models
-      class Type < Base
-        attribute :comment_lines, Types::Array.of(Types::Coercible::String)
-        attribute :name, Types::Coercible::Symbol
-        attribute :superseded_by, Types::Coercible::Symbol.optional
-        attribute :supersedes, Types::Coercible::Symbol.optional
-        attribute :url, Types::Coercible::String
+      class Type
+        attr_reader :comment_lines, :name, :schema_types, :superseded_by, :supersedes, :url, :abstract, :enum_members
 
-        def self.from_subject(subject, supersedes:)
-          new(
-            comment_lines: subject.comment_lines,
-            name: subject.name,
-            superseded_by: subject.superseded_by,
-            supersedes:,
-            url: subject.url,
-          )
+        def initialize(comment_lines:, name:, schema_types:, superseded_by:, supersedes:, url:, abstract: false, enum_members: [])
+          @comment_lines = comment_lines.freeze
+          @name = name
+          @schema_types = schema_types.freeze
+          @superseded_by = superseded_by
+          @supersedes = supersedes
+          @url = url
+          @abstract = abstract
+          @enum_members = enum_members.freeze
         end
 
         def supersession_lines
-          @supression_lines ||= begin
-            xs = []
-            xs << "Supersedes `#{supersedes}`." if supersedes.present?
-            xs << "Superseded by `#{superseded_by}`." if superseded_by.present?
-            xs
+          @supersession_lines ||= begin
+            result = []
+            result << "Supersedes `#{supersedes}`." if supersedes
+            result << "Superseded by `#{superseded_by}`." if superseded_by
+            result.freeze
           end
         end
       end

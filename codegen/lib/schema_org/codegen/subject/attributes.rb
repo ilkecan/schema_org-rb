@@ -7,54 +7,39 @@ module SchemaOrg
         end
 
         def [](name)
-          store[name]
+          store.fetch(name)
         end
 
         private
 
         def attributes
           @attributes ||= begin
-            many = ::Float::INFINITY
-            unwrap = proc(&:first)
-            # NOTE: examples to many "objects":
-            # contributor: CreditCard
-            # domainIncludes: acceptedPaymentMethod
-            # equivalentClass: Dataset
-            # rangeIncludes: acceptedAnswer
-            # source: skills
-            # subClassOf: AutoPartsStore
+            many = Float::INFINITY
             [
-              { name: :comment, count: 1..1, type: Types::Coercible::String },
-              { name: :contributor, count: 0..many, type: Types::Coercible::Symbol },
-              { name: :domainIncludes, count: 0..many, type: Types::Coercible::Symbol },
-              { name: :equivalentClass, count: 0..many, type: Types::Coercible::Symbol },   # owl:equivalentClass
-              { name: :equivalentProperty, count: 0..1, type: Types::Coercible::Symbol },  # owl:equivalentProperty
-              { name: :inverseOf, count: 0..1, type: Types::Coercible::Symbol },
-              { name: :label, count: 1..1, type: Types::Coercible::Symbol },
-              { name: :rangeIncludes, count: 0..many, type: Types::Coercible::Symbol },
-              { name: :sameAs, count: 0..1, type: Types::Coercible::Symbol },
-              { name: :source, count: 0..many, type: Types::Coercible::Symbol },
-              { name: :subClassOf, count: 0..many, type: Types::Coercible::Symbol },
-              { name: :subPropertyOf, count: 0..1, type: Types::Coercible::Symbol },
-              { name: :supersededBy, count: 0..1, type: Types::Coercible::Symbol },
-              { name: :type, count: 1..2, array: false, normalizer: proc(&:last), type: Types::Coercible::Symbol },
-            ].map do
-              it.merge!(
-                max: it[:count].max,
-                min: it[:count].min,
-                name: it[:name].to_s.underscore.to_sym,
-                optional: it[:count].include?(0),
-              )
-              it[:array] = it[:max] > 1 unless it.key?(:array)
-              it[:type] = Types::Array.of it[:type] if it[:array]
-              it[:normalizer] ||= unwrap unless it[:max] > 1
-              it
+              {name: :comment, count: 1..1, default: ""},
+              {name: :contributor, count: 0..many},
+              {name: :domainIncludes, count: 0..many},
+              {name: :equivalentClass, count: 0..many},
+              {name: :equivalentProperty, count: 0..1},
+              {name: :inverseOf, count: 0..1},
+              {name: :label, count: 1..1},
+              {name: :rangeIncludes, count: 0..many},
+              {name: :sameAs, count: 0..1},
+              {name: :source, count: 0..many},
+              {name: :subClassOf, count: 0..many},
+              {name: :subPropertyOf, count: 0..1},
+              {name: :supersededBy, count: 0..1},
+              {name: :type, count: 1..many},
+            ].map do |attribute|
+              name = attribute[:name].to_s.underscore.to_sym
+              max = attribute[:count].max
+              attribute.merge(name:, min: attribute[:count].min, max:, optional: attribute[:count].min.zero?, array: max > 1)
             end
           end
         end
 
         def store
-          @store ||= attributes.map { [it[:name], it] }.to_h
+          @store ||= attributes.to_h { |attribute| [attribute[:name], attribute] }
         end
       end
     end

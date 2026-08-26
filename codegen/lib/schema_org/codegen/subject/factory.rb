@@ -1,65 +1,78 @@
-require 'dry-initializer'
-
 module SchemaOrg
   module Codegen
     class Subject
       class Factory
-        extend Dry::Initializer
+        attr_reader :attributes
 
-        include Import['subject.attributes']
+        RDF_CLASS = 'http://www.w3.org/2000/01/rdf-schema#Class'
+        RDF_PROPERTY = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Property'
+        RDF_TYPE = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
+        RDFS = 'http://www.w3.org/2000/01/rdf-schema#'
 
-        option :prefixes, proc(&:freeze)
+        def initialize(prefixes:, attributes: Subject::Attributes.new)
+          @attributes = attributes
+          @prefixes = prefixes.freeze
+        end
 
         def build(statements)
-          args = parse_statements statements
-          args = validate args
-          normalize args
-          Subject.new(**args, prefixes:, statements:)
+          args = validate(parse_statements(statements))
+          normalize(args)
+          attributes.each { |attribute| args[attribute[:name]] ||= attribute[:array] ? [] : attribute[:default] }
+          Subject.new(**args, prefixes: @prefixes, statements: statements)
         end
 
         def contract
-          @contract ||= Contract.new
+          @contract ||= Contract.new(attributes:)
         end
 
         def normalize(args)
-          args.each do |k, v|
-            fn = attributes[k][:normalizer]
-            next if fn.nil?
+          args.each { |key, value| args[key] = normalize_value(key, value) }
+        end
 
-            args[k] = fn.call v
+        def parse_statements(statements)
+          statements.each_with_object(Hash.new { |hash, key| hash[key] = [] }) do |statement, result|
+            key = parse_item(statement.predicate, predicate: true).to_s.underscore.to_sym
+            result[key] << parse_item(statement.object, marker: key == :type)
           end
         end
 
-        def parse_statements(xs)
-          xs.each_with_object(Hash.new { |h, k| h[k] = [] }) do |x, xs|
-            key = parse_item(x.predicate).to_s.underscore.to_sym
-            qualified = %i[equivalent_class].include? key
-            xs[key] << parse_item(x.object, qualified:)
-          end
-        end
-
-        def parse_item(x, qualified: false)
-          case x
+        def parse_item(value, marker: false, predicate: false)
+          case value
           when RDF::Literal
-            x.value
+            value.value
           when RDF::URI
-            qname = x.qname(prefixes:)
-            return x.to_s if qname.nil?
-            return x.to_s if qname[0].nil? and qname[1].start_with? 'docs/'
-            qualified ? qname.join(':') : qname[1]
+            uri = value.to_s
+            return :Class if marker && uri == RDF_CLASS
+            return :Property if marker && uri == RDF_PROPERTY
+            return uri.split("#").last.to_sym if predicate && (uri == RDF_TYPE || uri.start_with?(RDFS))
+            return schema_term(uri) if schema_term(uri)
+
+            uri
           when RDF::Vocabulary::Term
-            x.label.value
+            value.label.value
           end
         end
 
         def validate(args)
           result = contract.call(args)
+          raise ValidationError, "Invalid subject: #{result[:errors].join(', ')}" unless result[:errors].empty?
 
-          if result.failure?
-            raise SchemaOrg::Codegen::ValidationError.from_result result, message: 'Invalid subject'
-          end
+          result[:values]
+        end
 
-          result.to_h
+        private
+
+        def normalize_value(key, value)
+          return value.first unless attributes[key][:array]
+
+          value
+        end
+
+        def schema_term(uri)
+          return uri.delete_prefix('https://schema.org/').to_sym if uri.start_with?('https://schema.org/')
+          return uri.delete_prefix('http://schema.org/').to_sym if uri.start_with?('http://schema.org/')
+
+          nil
         end
       end
     end

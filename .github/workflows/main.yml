@@ -4,18 +4,15 @@ on:
   push:
     branches:
       - main
-
   pull_request:
 
 jobs:
-  build:
+  runtime:
     runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
-        ruby:
-          - '3.4.7'
-
+        ruby: ['3.2', '3.3', '3.4', '4.0']
     steps:
       - uses: actions/checkout@v4
         with:
@@ -25,5 +22,24 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - name: Run the default task
-        run: bundle exec rake
+      - name: Run runtime tests
+        run: bundle exec rake test
+
+  maintainer:
+    runs-on: ubuntu-latest
+    name: Maintainer checks
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+      - name: Run style
+        run: bundle exec rake standard
+      - name: Check generated files
+        run: bundle exec rake codegen:check
+      - name: Verify package
+        run: bundle exec rake build

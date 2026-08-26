@@ -1,26 +1,30 @@
-require 'dry-initializer'
 require 'rdf/turtle'
 
 module SchemaOrg
   module Codegen
     class Parser
-      extend Dry::Initializer
-
-      option :schema_file, default: proc { './codegen/data/schema.ttl' }
-
-      def classes
-        subjects[:Class]
+      def initialize(schema_file: './codegen/data/schema.ttl')
+        @schema_file = schema_file
       end
 
-      def data_types
-        subjects[:DataType]
+      def subjects
+        @subjects ||= begin
+          factory = Subject::Factory.new(prefixes:)
+          statements.map { |items| factory.build(items) }
+        end
+      end
+
+      def classes
+        subjects.select { |subject| subject.type? :Class }
       end
 
       def properties
-        subjects[:Property]
+        subjects.select { |subject| subject.type? :Property }
       end
 
       private
+
+      attr_reader :schema_file
 
       def reader
         @reader ||= RDF::Turtle::Reader.open(schema_file)
@@ -28,20 +32,13 @@ module SchemaOrg
 
       def prefixes
         @prefixes ||= begin
-          statements # force enumeration to populate `reader.prefixes`
+          statements
           reader.prefixes
         end
       end
 
       def statements
         @statements ||= reader.each_statement.group_by(&:subject).values
-      end
-
-      def subjects
-        @subjects ||= begin
-          factory = Subject::Factory.new(prefixes:)
-          statements.map { factory.build it }.group_by(&:type)
-        end
       end
     end
   end

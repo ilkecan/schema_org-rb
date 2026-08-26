@@ -1,19 +1,19 @@
-require 'dry-struct'
-
 module SchemaOrg
   module Codegen
-    class Subject < Dry::Struct
-      schema schema.strict
+    class Subject
+      attr_reader :prefixes, :statements
 
-      attribute :prefixes, Types::Strict::Hash
-      attribute :statements, Types::Coercible::Array
-
-      App['subject.attributes'].each do
-        send(it[:optional] ? :attribute? : :attribute, it[:name], it[:type])
+      def initialize(prefixes:, statements:, **attributes)
+        @prefixes = prefixes.freeze
+        @statements = statements.freeze
+        attributes.each do |name, value|
+          instance_variable_set("@#{name}", value)
+          define_singleton_method(name) { instance_variable_get("@#{name}") }
+        end
       end
 
       def comment_lines
-        comment.strip.split "\n"
+        comment.to_s.strip.split("\n")
       end
 
       def name
@@ -24,8 +24,12 @@ module SchemaOrg
         sub_class_of.to_a
       end
 
-      def types
+      def range_types
         range_includes.to_a
+      end
+
+      def type?(marker)
+        type.include?(marker)
       end
 
       def url

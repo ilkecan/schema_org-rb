@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Dir.glob("codegen/tasks/**/*.rake").each { load it }
+Dir.glob("codegen/tasks/**/*.rake").each { |file| load file }
 
 require "bundler/gem_tasks"
 require "minitest/test_task"

@@ -1,17 +1,15 @@
-require "bootsnap"
-Bootsnap.setup(
-  cache_dir:            'tmp/cache',          # Path to your cache
-  ignore_directories:   ['node_modules'],     # Directory names to skip.
-  development_mode:     true,                 # Current working environment, e.g. RACK_ENV, RAILS_ENV, etc
-  load_path_cache:      true,                 # Optimize the LOAD_PATH with a cache
-  compile_cache_iseq:   true,                 # Compile Ruby code into ISeq cache, breaks coverage reporting.
-  compile_cache_yaml:   true,                 # Compile YAML into a cache
-  readonly:             true,                 # Use the caches but don't update them on miss or stale entries.
-)
+require "pathname"
+require "json"
+require "rdf/turtle"
+require "tilt"
 
-require "active_support"
-require "active_support/core_ext"
+class String
+  def underscore
+    gsub(/::/, "/").gsub(/([A-Z]+)([A-Z][a-z])/, '\\1_\\2').gsub(/([a-z\\d])([A-Z])/, '\\1_\\2').tr("-", "_").downcase
+  end
+end
 
 require_relative "container"
 require_relative "import"
+Dir[File.expand_path("../lib/schema_org/codegen/**/*.rb", __dir__)].sort.each { |file| require file }
 App.finalize!

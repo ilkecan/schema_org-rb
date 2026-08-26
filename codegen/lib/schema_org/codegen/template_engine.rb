@@ -3,19 +3,19 @@ require 'tilt'
 module SchemaOrg
   module Codegen
     class TemplateEngine
-      def initialize
+      def initialize(templates_root: Pathname.new('./codegen/templates'))
+        @templates_root = Pathname.new(templates_root)
         @templates = {}
       end
 
       def render(template_name, context)
-        t = template template_name
-        t.render context
+        template(template_name).render(context)
       end
 
       private
 
       def template(name)
-        @templates[name] ||= Tilt::ERBTemplate.new("./codegen/templates/#{name}.rb.erb", trim: '-')
+        @templates[name] ||= Tilt::ERBTemplate.new(@templates_root.join("#{name}.rb.erb").to_s, trim: '-')
       end
     end
   end
