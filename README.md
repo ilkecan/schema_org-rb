@@ -1,6 +1,6 @@
 # schema_org-rb
 
-`schema_org-rb` provides generated Ruby descriptors for schema.org v30.0. The gem version is `0.1.0`; the checked-in vocabulary version is exposed as `SchemaOrg::SCHEMA_VERSION`.
+`schema_org-rb` provides generated Ruby descriptors for the Schema.org vocabulary. The gem version is `0.1.0`; the checked-in vocabulary version is exposed as `SchemaOrg::SCHEMA_VERSION`.
 
 ## Installation
 
@@ -66,7 +66,7 @@ offer.to_json # includes https://schema.org/InStock
 
 ## RBS support
 
-The gem ships generated RBS signatures covering the complete Schema.org v30.0 vocabulary. Type checkers such as RBS and Steep can use these signatures for static checking and editor features.
+The gem ships generated RBS signatures covering the complete checked-in Schema.org vocabulary. Type checkers such as RBS and Steep can use these signatures for static checking and editor features.
 
 If the signature is too large for your type-checking setup, configure RBS Collection to ignore it:
 
@@ -82,3 +82,14 @@ gems:
 Project-authored material and generator-emitted Ruby/RBS structure are offered under MIT. The complete `codegen/data/schema.ttl` snapshot and Schema.org descriptions copied from it into generated type/property comments and `comment_lines` metadata remain CC BY-SA 3.0. See [`LICENSE.txt`](LICENSE.txt) and [`LICENSE-SCHEMA-ORG.txt`](LICENSE-SCHEMA-ORG.txt), and the [Schema.org terms](https://schema.org/docs/terms.html).
 
 The CC BY-SA Turtle snapshot is maintainer input tracked in this repository and is not included in the gem. The source release is the one exposed by `SchemaOrg::SCHEMA_VERSION` at `https://schema.org/version/<version without leading v>/schemaorg-all-https.ttl`.
+
+## Updating Schema.org
+
+Schema.org updates are manual dispatches of the `Update Schema.org` workflow from `main` with `version` in exact `v<major>.<minor>` form. The workflow downloads the release, regenerates the artifacts, and opens a pull request containing only the schema snapshot and generated outputs; the pull request then runs the `PR gate`.
+
+Run the same update locally with:
+
+```sh
+bundle exec rake "codegen:update_schema[v31.0]"
+bundle exec rake codegen
+```

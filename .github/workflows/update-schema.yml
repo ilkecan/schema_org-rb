@@ -1,0 +1,101 @@
+name: Update Schema.org
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Schema.org version in v<major>.<minor> form
+        required: true
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: schema-org-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    name: Update Schema.org
+    steps:
+      - name: Validate dispatch
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          [[ "${GITHUB_REF}" == "refs/heads/main" ]] || { echo "Schema updates must run from main" >&2; exit 1; }
+          [[ "${VERSION}" =~ ^v[0-9]+\.[0-9]+$ ]] || { echo "expected schema version v<major>.<minor>" >&2; exit 1; }
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ vars.SCHEMA_UPDATE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.SCHEMA_UPDATE_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          permission-contents: write
+          permission-pull-requests: write
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: false
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '4.0'
+          bundler-cache: true
+      - name: Generate schema artifacts
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          bundle exec rake "codegen:update_schema[${VERSION}]"
+          bundle exec rake codegen
+      - name: Check generated scope
+        id: scope
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          allowed() {
+            case "$1" in
+              codegen/data/schema.ttl|codegen/manifest.json|lib/schema_org/generated_vocabulary.rb|lib/schema_org/schema_version.rb|lib/schema_org/mixins/*|lib/schema_org/types/*|sig/schema_org.rbs) return 0 ;;
+              *) return 1 ;;
+            esac
+          }
+          changed=0
+          while IFS= read -r line; do
+            [[ -n "$line" ]] || continue
+            path="${line:3}"
+            if [[ "$path" == *" -> "* ]]; then
+              path="${path##* -> }"
+            fi
+            allowed "$path" || { echo "Disallowed change: $path" >&2; exit 1; }
+            changed=1
+          done < <(git status --porcelain=v1)
+          echo "changed=${changed}" >> "$GITHUB_OUTPUT"
+          if [[ "$changed" == 0 ]]; then
+            echo "No schema changes for ${VERSION}" >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Create update pull request
+        if: steps.scope.outputs.changed == '1'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          branch="automation/schema-org-${VERSION}"
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            echo "Remote branch already exists: $branch" >&2
+            exit 1
+          fi
+          git config user.name "schema-org-update[bot]"
+          git config user.email "schema-org-update[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add -- codegen/data/schema.ttl codegen/manifest.json lib/schema_org/generated_vocabulary.rb lib/schema_org/schema_version.rb lib/schema_org/mixins lib/schema_org/types sig/schema_org.rbs
+          git commit -m "schema: update to ${VERSION}"
+          gh auth setup-git
+          git push --no-force origin "$branch"
+          gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" --title "schema: update to ${VERSION}" --body "Generated Schema.org snapshot and artifacts await PR gate."
