@@ -85,4 +85,4 @@ The CC BY-SA Turtle snapshot is maintainer input tracked in this repository and 
 
 ## Contributing
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) for Schema.org update and release procedures.
+See the repository's [`CONTRIBUTING.md`](https://github.com/ilkecan/schema_org-rb/blob/main/CONTRIBUTING.md) for Schema.org update and release procedures.
