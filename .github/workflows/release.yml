@@ -1,0 +1,130 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Gem version without a leading v
+        required: true
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: release-${{ inputs.version }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Ruby ${{ matrix.ruby }}
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['3.2', '3.3', '3.4', '4.0']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Run tests
+        run: bundle exec rake test
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    name: Publish release
+    environment: release
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '4.0'
+          bundler-cache: true
+      - name: Validate release source
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          [[ "${GITHUB_REF}" == "refs/heads/main" ]] || { echo "Releases must run from main" >&2; exit 1; }
+          [[ "${VERSION}" =~ ^[0-9]+\.[0-9]+$ ]] || { echo "expected gem version <major>.<minor>" >&2; exit 1; }
+          git fetch origin main --tags
+          main_sha="$(git rev-parse refs/remotes/origin/main)"
+          [[ "${GITHUB_SHA}" == "${main_sha}" ]] || { echo "workflow commit is not current origin/main" >&2; exit 1; }
+          gem_version="$(bundle exec ruby -Ilib -e 'require "schema_org"; print SchemaOrg::VERSION')"
+          [[ "${VERSION}" == "${gem_version}" ]] || { echo "release version does not match SchemaOrg::VERSION" >&2; exit 1; }
+          VERSION="${VERSION}" bundle exec ruby -e 'version = ENV.fetch("VERSION"); abort "missing changelog entry" unless File.read("CHANGELOG.md").include?("## [#{version}]")'
+      - name: Verify package
+        env:
+          VERSION: ${{ inputs.version }}
+        run: bundle exec rake package:check
+      - name: Inspect prior publication
+        id: prior
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          gem_exists="$(VERSION="${VERSION}" bundle exec ruby -rjson -rnet/http -ruri -e '
+            version = ENV.fetch("VERSION")
+            response = Net::HTTP.get_response(URI("https://rubygems.org/api/v1/versions/schema_org-rb.json"))
+            abort "RubyGems versions API failed: #{response.code}" unless response.is_a?(Net::HTTPSuccess) || response.code == "404"
+            versions = response.code == "404" ? [] : JSON.parse(response.body)
+            puts versions.any? { |entry| entry["number"] == version }
+          ')"
+          tag_sha="$(git ls-remote origin "refs/tags/v${VERSION}" | cut -f1)"
+          tag_exists=false
+          if [[ -n "${tag_sha}" ]]; then
+            git fetch origin "refs/tags/v${VERSION}:refs/tags/v${VERSION}"
+            resolved_tag="$(git rev-parse "v${VERSION}^{commit}")"
+            [[ "${resolved_tag}" == "${GITHUB_SHA}" ]] || { echo "existing tag resolves to the wrong commit" >&2; exit 1; }
+            tag_exists=true
+          fi
+          if [[ "${gem_exists}" == true && "${tag_exists}" == false ]]; then
+            echo "RubyGems version exists without matching release tag" >&2
+            exit 1
+          fi
+          echo "gem-exists=${gem_exists}" >> "$GITHUB_OUTPUT"
+          echo "tag-exists=${tag_exists}" >> "$GITHUB_OUTPUT"
+      - name: Create release tag
+        if: steps.prior.outputs.gem-exists == 'false' && steps.prior.outputs.tag-exists == 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "v${VERSION}" -m "Release ${VERSION}" "${GITHUB_SHA}"
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --no-force origin "v${VERSION}"
+      - name: Publish to RubyGems
+        if: steps.prior.outputs.gem-exists == 'false'
+        uses: rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a
+      - name: Push verified gem
+        if: steps.prior.outputs.gem-exists == 'false'
+        env:
+          VERSION: ${{ inputs.version }}
+        run: gem push "pkg/schema_org-rb-${VERSION}.gem"
+      - name: Create or repair GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          tag="v${VERSION}"
+          asset="pkg/schema_org-rb-${VERSION}.gem"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" "$asset" --clobber
+          else
+            gh release create "$tag" "$asset" --generate-notes --title "$tag"
+          fi
