@@ -38,11 +38,13 @@ The gem version is defined by `SchemaOrg::VERSION` in `lib/schema_org/version.rb
 Before releasing, configure:
 
 - GitHub environment: `release`
+- Required reviewers and a `main` deployment branch restriction on that environment
 - RubyGems trusted publisher for `schema_org-rb`
 - Repository: `ilkecan/schema_org-rb`
 - Workflow: `release.yml`
-- Environment: `release`
 
-After the version and changelog changes pass the `PR gate` and reach `main`, dispatch the `Release` workflow from `main` with the gem version without a leading `v`, for example `version=0.1.0`. The workflow tests Ruby 3.2, 3.3, 3.4, and 4.0, verifies the current `main` commit, checks the package, publishes the verified gem with trusted publishing, and creates the matching GitHub release.
+Environment protection rules are configured in repository settings. The workflow attaches the release job to the `release` environment, but required reviewers cannot be declared in workflow YAML.
+
+After the version and changelog changes pass the `PR gate` and reach `main`, dispatch the `Release` workflow from `main`. It derives the gem version from `SchemaOrg::VERSION`, tests Ruby 3.2, 3.3, 3.4, and 4.0, verifies the current `main` commit, checks the package, publishes the verified gem with trusted publishing, and creates the matching GitHub release.
 
 The package contains generated Ruby and RBS files, `LICENSE.txt`, `LICENSE-SCHEMA-ORG.txt`, `README.md`, and `CHANGELOG.md`. It does not contain the maintainer input `codegen/data/schema.ttl`. No long-lived RubyGems API key is used.

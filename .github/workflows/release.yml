@@ -2,16 +2,11 @@ name: Release
 
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: Gem version without a leading v
-        required: true
-        type: string
 
 permissions: {}
 
 concurrency:
-  group: release-${{ inputs.version }}
+  group: release-${{ github.ref_name }}
   cancel-in-progress: false
 
 jobs:
@@ -52,26 +47,21 @@ jobs:
           ruby-version: '4.0'
           bundler-cache: true
       - name: Validate release source
-        env:
-          VERSION: ${{ inputs.version }}
         run: |
           set -euo pipefail
           [[ "${GITHUB_REF}" == "refs/heads/main" ]] || { echo "Releases must run from main" >&2; exit 1; }
-          [[ "${VERSION}" =~ ^[0-9]+\.[0-9]+$ ]] || { echo "expected gem version <major>.<minor>" >&2; exit 1; }
           git fetch origin main --tags
           main_sha="$(git rev-parse refs/remotes/origin/main)"
           [[ "${GITHUB_SHA}" == "${main_sha}" ]] || { echo "workflow commit is not current origin/main" >&2; exit 1; }
-          gem_version="$(bundle exec ruby -Ilib -e 'require "schema_org"; print SchemaOrg::VERSION')"
-          [[ "${VERSION}" == "${gem_version}" ]] || { echo "release version does not match SchemaOrg::VERSION" >&2; exit 1; }
-          VERSION="${VERSION}" bundle exec ruby -e 'version = ENV.fetch("VERSION"); abort "missing changelog entry" unless File.read("CHANGELOG.md").include?("## [#{version}]")'
+          version="$(bundle exec ruby -Ilib -e 'require "schema_org"; print SchemaOrg::VERSION')"
+          [[ "${version}" != v* ]] || { echo "SchemaOrg::VERSION must not start with v" >&2; exit 1; }
+          VERSION="${version}" bundle exec ruby -e 'require "rubygems"; Gem::Version.new(ENV.fetch("VERSION"))'
+          printf 'VERSION=%s\n' "${version}" >> "${GITHUB_ENV}"
+          VERSION="${version}" bundle exec ruby -e 'version = ENV.fetch("VERSION"); abort "missing changelog entry" unless File.read("CHANGELOG.md").include?("## [#{version}]")'
       - name: Verify package
-        env:
-          VERSION: ${{ inputs.version }}
         run: bundle exec rake package:check
       - name: Inspect prior publication
         id: prior
-        env:
-          VERSION: ${{ inputs.version }}
         run: |
           set -euo pipefail
           gem_exists="$(VERSION="${VERSION}" bundle exec ruby -rjson -rnet/http -ruri -e '
@@ -99,7 +89,6 @@ jobs:
         if: steps.prior.outputs.gem-exists == 'false' && steps.prior.outputs.tag-exists == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ inputs.version }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -112,13 +101,10 @@ jobs:
         uses: rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a
       - name: Push verified gem
         if: steps.prior.outputs.gem-exists == 'false'
-        env:
-          VERSION: ${{ inputs.version }}
         run: gem push "pkg/schema_org-rb-${VERSION}.gem"
       - name: Create or repair GitHub release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ inputs.version }}
         run: |
           set -euo pipefail
           tag="v${VERSION}"
