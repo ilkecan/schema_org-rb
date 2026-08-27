@@ -5,7 +5,7 @@ require_relative "lib/schema_org/version"
 Gem::Specification.new do |spec|
   spec.name = "schema_org-rb"
   spec.version = SchemaOrg::VERSION
-  spec.authors = ["ilkecan"]
+  spec.authors = ["İlkecan Bozdoğan"]
   spec.email = ["ilkecan@protonmail.com"]
   spec.summary = "Ruby objects for schema.org"
   spec.description = "Generated schema.org type descriptors with checked properties and JSON-LD serialization."
