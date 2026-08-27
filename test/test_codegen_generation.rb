@@ -8,7 +8,7 @@ require "tmpdir"
 
 class TestCodegenGeneration < Minitest::Test
   def test_all_layer_registry_and_metadata_are_complete
-    assert_equal "v30.0", SchemaOrg::SCHEMA_VERSION
+    assert_equal SchemaOrg::SCHEMA_VERSION, SchemaOrg::Codegen::Models::SchemaVersion.current(schema_file: Pathname.new("codegen/data/schema.ttl")).schema_version
     assert_equal "FAQPage", SchemaOrg::GeneratedVocabulary.ruby_name("FAQPage")
     assert_equal "FAQPage", SchemaOrg::GeneratedVocabulary.schema_name(SchemaOrg::FAQPage)
     assert_equal "FAQPage", SchemaOrg::GeneratedVocabulary.inflections.fetch("faq_page")
@@ -52,10 +52,18 @@ class TestCodegenGeneration < Minitest::Test
   def test_generated_comments_include_metadata_and_frozen_headers
     holding = File.read("lib/schema_org/mixins/archive_component.rb")
     reference = File.read("lib/schema_org/mixins/api_reference.rb")
+    person = File.read("lib/schema_org/types/person.rb")
+    scope_notice = <<~HEADER
+      # Generated Ruby code is licensed under MIT.
+      # Schema.org descriptions in comments and metadata are licensed under CC BY-SA 3.0.
+      # See LICENSE-SCHEMA-ORG.txt.
+    HEADER
 
     assert_includes holding, "Inverse-property: `archiveHeld`."
     assert_includes reference, "Superseded by `executableLibraryName`."
     assert_includes reference, "Supersedes `assembly`."
+    assert_match(/\A# frozen_string_literal: true\n#{Regexp.escape(scope_notice)}/, holding)
+    assert_match(/\A# frozen_string_literal: true\n#{Regexp.escape(scope_notice)}/, person)
     Dir["lib/schema_org/**/*.rb"].each { |file| assert_match(/\A# frozen_string_literal: true\n/, File.read(file)) }
   end
 

@@ -15,7 +15,7 @@ namespace :package do
 
     output, error, status = Open3.capture3(
       "git", "-C", Dir.pwd, "ls-files", "--cached", "-z", "--",
-      "lib/**/*.rb", "lib/*.rb", "sig/**/*.rbs", "sig/*.rbs", "LICENSE.txt", "README.md", "CHANGELOG.md"
+      "lib/**/*.rb", "lib/*.rb", "sig/**/*.rbs", "sig/*.rbs", "LICENSE.txt", "LICENSE-SCHEMA-ORG.txt", "README.md", "CHANGELOG.md"
     )
     abort "Unable to list tracked package files: #{error}" unless status.success?
     allowed = output.split("\0").reject(&:empty?).sort

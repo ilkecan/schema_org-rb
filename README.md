@@ -76,3 +76,9 @@ gems:
   - name: schema_org-rb
     ignore: true
 ```
+
+## Licensing and attribution
+
+Project-authored material and generator-emitted Ruby/RBS structure are offered under MIT. The complete `codegen/data/schema.ttl` snapshot and Schema.org descriptions copied from it into generated type/property comments and `comment_lines` metadata remain CC BY-SA 3.0. See [`LICENSE.txt`](LICENSE.txt) and [`LICENSE-SCHEMA-ORG.txt`](LICENSE-SCHEMA-ORG.txt), and the [Schema.org terms](https://schema.org/docs/terms.html).
+
+The CC BY-SA Turtle snapshot is maintainer input tracked in this repository and is not included in the gem. The source release is the one exposed by `SchemaOrg::SCHEMA_VERSION` at `https://schema.org/version/<version without leading v>/schemaorg-all-https.ttl`.
