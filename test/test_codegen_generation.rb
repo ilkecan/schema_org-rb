@@ -62,8 +62,8 @@ class TestCodegenGeneration < Minitest::Test
     assert_includes holding, "Inverse-property: `archiveHeld`."
     assert_includes reference, "Superseded by `executableLibraryName`."
     assert_includes reference, "Supersedes `assembly`."
-    assert_match(/\A# frozen_string_literal: true\n#{Regexp.escape(scope_notice)}/, holding)
-    assert_match(/\A# frozen_string_literal: true\n#{Regexp.escape(scope_notice)}/, person)
+    assert_match(/\A# frozen_string_literal: true\n\n#{Regexp.escape(scope_notice)}/, holding)
+    assert_match(/\A# frozen_string_literal: true\n\n#{Regexp.escape(scope_notice)}/, person)
     Dir["lib/schema_org/**/*.rb"].each { |file| assert_match(/\A# frozen_string_literal: true\n/, File.read(file)) }
   end
 
