@@ -103,7 +103,7 @@ jobs:
           git push --no-force origin "v${VERSION}"
       - name: Publish to RubyGems
         if: steps.prior.outputs.gem-exists == 'false'
-        uses: rubygems/configure-rubygems-credentials@v2
+        uses: rubygems/configure-rubygems-credentials@v2.1.0
       - name: Push verified gem
         if: steps.prior.outputs.gem-exists == 'false'
         run: gem push "pkg/schema_org-rb-${VERSION}.gem"
