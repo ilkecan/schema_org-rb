@@ -4,11 +4,9 @@
 
 Schema.org updates are generated through the `Update Schema.org` workflow. Dispatch it manually from `main` with a `version` input in exact `v<major>.<minor>` form. The workflow downloads the release, regenerates the artifacts, and opens a pull request containing only the schema snapshot and generated outputs. The pull request runs the `PR gate`.
 
-The workflow requires the following repository configuration:
+The workflow uses the repository's `GITHUB_TOKEN`. Enable **Allow GitHub Actions to create and approve pull requests** under **Settings -> Actions -> General -> Workflow permissions**. No GitHub App or long-lived token is required.
 
-- Variable: `SCHEMA_UPDATE_APP_CLIENT_ID`
-- Secret: `SCHEMA_UPDATE_APP_PRIVATE_KEY`
-- A GitHub App installed only on this repository with Contents and Pull requests write permissions
+Pull request workflows triggered by a pull request created with `GITHUB_TOKEN` start in an approval-required state. A maintainer with write access must approve the workflow run before `PR gate` starts. The pull request remains blocked until the gate passes.
 
 Run the same update locally with:
 
