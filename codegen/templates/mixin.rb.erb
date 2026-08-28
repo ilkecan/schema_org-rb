@@ -6,8 +6,8 @@
 module SchemaOrg
   module Mixins
     module <%= name %>
-<% parents.each do -%>
-      include <%= it %>
+<% parents.each do |parent| -%>
+      include <%= parent %>
 <% end -%>
 <% unless parents.empty? -%>
 
