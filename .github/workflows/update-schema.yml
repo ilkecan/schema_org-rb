@@ -38,7 +38,7 @@ jobs:
           permission-pull-requests: write
       - uses: actions/checkout@v7
         with:
-          ref: main
+          ref: ${{ github.sha }}
           token: ${{ steps.app-token.outputs.token }}
           persist-credentials: false
       - name: Set up Ruby
