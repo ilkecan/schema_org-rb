@@ -20,6 +20,10 @@ jobs:
       matrix:
         ruby: ['3.2', '3.3', '3.4', '4.0']
     steps:
+      - name: Validate release branch
+        run: |
+          set -euo pipefail
+          [[ "${GITHUB_REF}" == "refs/heads/main" ]] || { echo "Releases must run from main" >&2; exit 1; }
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
@@ -51,7 +55,6 @@ jobs:
       - name: Validate release source
         run: |
           set -euo pipefail
-          [[ "${GITHUB_REF}" == "refs/heads/main" ]] || { echo "Releases must run from main" >&2; exit 1; }
           git fetch origin main --tags
           main_sha="$(git rev-parse refs/remotes/origin/main)"
           [[ "${GITHUB_SHA}" == "${main_sha}" ]] || { echo "workflow commit is not current origin/main" >&2; exit 1; }
