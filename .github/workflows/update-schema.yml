@@ -87,15 +87,22 @@ jobs:
         run: |
           set -euo pipefail
           branch="automation/schema-org-${VERSION}"
-          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
-            echo "Remote branch already exists: $branch" >&2
-            exit 1
-          fi
           git config user.name "schema-org-update[bot]"
           git config user.email "schema-org-update[bot]@users.noreply.github.com"
-          git checkout -b "$branch"
-          git add -- codegen/data/schema.ttl codegen/manifest.json lib/schema_org/generated_vocabulary.rb lib/schema_org/schema_version.rb lib/schema_org/mixins lib/schema_org/types sig/schema_org.rbs
-          git commit -m "schema: update to ${VERSION}"
           gh auth setup-git
-          git push --no-force origin "$branch"
-          gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" --title "schema: update to ${VERSION}" --body "Generated Schema.org snapshot and artifacts await PR gate."
+          git add -- codegen/data/schema.ttl codegen/manifest.json lib/schema_org/generated_vocabulary.rb lib/schema_org/schema_version.rb lib/schema_org/mixins lib/schema_org/types sig/schema_org.rbs
+          desired_tree="$(git write-tree)"
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            git fetch origin "refs/heads/${branch}:refs/remotes/origin/${branch}"
+            remote_tree="$(git rev-parse "refs/remotes/origin/${branch}^{tree}")"
+            [[ "${desired_tree}" == "${remote_tree}" ]] || { echo "Remote branch contains different schema artifacts: $branch" >&2; exit 1; }
+          else
+            git checkout -b "$branch"
+            git commit -m "schema: update to ${VERSION}"
+            git push --no-force origin "$branch"
+          fi
+          pr_url="$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --head "$branch" --state open --json url --jq '.[0].url // empty')"
+          if [[ -z "${pr_url}" ]]; then
+            pr_url="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" --title "schema: update to ${VERSION}" --body "Generated Schema.org snapshot and artifacts await PR gate.")"
+          fi
+          echo "Schema update PR: ${pr_url}" >> "$GITHUB_STEP_SUMMARY"
