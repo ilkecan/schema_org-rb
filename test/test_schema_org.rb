@@ -6,7 +6,7 @@ require "json"
 
 class TestSchemaOrg < Minitest::Test
   def test_version_and_json_ld
-    assert_equal "0.1.0", SchemaOrg::VERSION
+    assert_equal "0.1.1", SchemaOrg::VERSION
     assert_equal "v30.0", SchemaOrg::SCHEMA_VERSION
 
     person = SchemaOrg::Person.new(
