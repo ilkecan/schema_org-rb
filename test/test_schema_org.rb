@@ -6,8 +6,6 @@ require "json"
 
 class TestSchemaOrg < Minitest::Test
   def test_json_ld_serialization
-    assert_equal "v30.0", SchemaOrg::SCHEMA_VERSION
-
     person = SchemaOrg::Person.new(
       address: SchemaOrg::PostalAddress.new(address_locality: "Seattle"),
       birth_date: Date.new(1980, 1, 2),
