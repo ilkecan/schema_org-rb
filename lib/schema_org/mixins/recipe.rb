@@ -78,7 +78,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "ingredients"
+            supersedes: ["ingredients"].freeze
           }.freeze,
           recipe_instructions: {
             schema_name: "recipeInstructions",

@@ -38,7 +38,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "namedPosition"
+            supersedes: ["namedPosition"].freeze
           }.freeze,
           start_date: {
             schema_name: "startDate",

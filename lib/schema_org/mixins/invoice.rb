@@ -38,7 +38,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "bookingAgent"
+            supersedes: ["bookingAgent"].freeze
           }.freeze,
           category: {
             schema_name: "category",
@@ -98,7 +98,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "paymentDue"
+            supersedes: ["paymentDue"].freeze
           }.freeze,
           payment_method: {
             schema_name: "paymentMethod",
@@ -138,7 +138,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "carrier"
+            supersedes: ["carrier"].freeze
           }.freeze,
           references_order: {
             schema_name: "referencesOrder",

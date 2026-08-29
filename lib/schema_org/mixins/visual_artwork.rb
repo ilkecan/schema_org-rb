@@ -58,7 +58,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "surface"
+            supersedes: ["surface"].freeze
           }.freeze,
           colorist: {
             schema_name: "colorist",

@@ -18,7 +18,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "blogPosts"
+            supersedes: ["blogPosts"].freeze
           }.freeze,
           blog_posts: {
             schema_name: "blogPosts",

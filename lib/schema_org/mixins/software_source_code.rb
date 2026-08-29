@@ -28,7 +28,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "sampleType"
+            supersedes: ["sampleType"].freeze
           }.freeze,
           programming_language: {
             schema_name: "programmingLanguage",
@@ -58,7 +58,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "runtime"
+            supersedes: ["runtime"].freeze
           }.freeze,
           sample_type: {
             schema_name: "sampleType",

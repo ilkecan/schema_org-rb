@@ -58,7 +58,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: "dataset",
             superseded_by: nil,
-            supersedes: "includedDataCatalog"
+            supersedes: ["catalog", "includedDataCatalog"].freeze
           }.freeze,
           issn: {
             schema_name: "issn",
@@ -160,6 +160,7 @@ module SchemaOrg
       end
 
       # A data catalog which contains this dataset.
+      # Supersedes `catalog`.
       # Supersedes `includedDataCatalog`.
       # Inverse-property: `dataset`.
       def included_in_data_catalog
@@ -167,6 +168,7 @@ module SchemaOrg
       end
 
       # A data catalog which contains this dataset.
+      # Supersedes `catalog`.
       # Supersedes `includedDataCatalog`.
       # Inverse-property: `dataset`.
       def included_in_data_catalog=(value)

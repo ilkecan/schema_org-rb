@@ -88,7 +88,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "fileFormat"
+            supersedes: ["fileFormat"].freeze
           }.freeze,
           end_time: {
             schema_name: "endTime",

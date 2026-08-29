@@ -28,7 +28,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: "memberOf",
             superseded_by: nil,
-            supersedes: "musicGroupMember"
+            supersedes: ["members", "musicGroupMember"].freeze
           }.freeze,
           members: {
             schema_name: "members",
@@ -94,6 +94,7 @@ module SchemaOrg
       end
 
       # A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals.
+      # Supersedes `members`.
       # Supersedes `musicGroupMember`.
       # Inverse-property: `memberOf`.
       def member
@@ -101,6 +102,7 @@ module SchemaOrg
       end
 
       # A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals.
+      # Supersedes `members`.
       # Supersedes `musicGroupMember`.
       # Inverse-property: `memberOf`.
       def member=(value)

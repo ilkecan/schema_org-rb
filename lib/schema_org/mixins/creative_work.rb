@@ -178,7 +178,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "serviceAudience"
+            supersedes: ["serviceAudience"].freeze
           }.freeze,
           audio: {
             schema_name: "audio",
@@ -208,7 +208,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "awards"
+            supersedes: ["awards"].freeze
           }.freeze,
           awards: {
             schema_name: "awards",
@@ -508,7 +508,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: "encodesCreativeWork",
             superseded_by: nil,
-            supersedes: "encodings"
+            supersedes: ["encodings"].freeze
           }.freeze,
           encoding_format: {
             schema_name: "encodingFormat",
@@ -518,7 +518,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "fileFormat"
+            supersedes: ["fileFormat"].freeze
           }.freeze,
           encodings: {
             schema_name: "encodings",
@@ -618,7 +618,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "language"
+            supersedes: ["language"].freeze
           }.freeze,
           interaction_statistic: {
             schema_name: "interactionStatistic",
@@ -628,7 +628,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "interactionCount"
+            supersedes: ["interactionCount"].freeze
           }.freeze,
           interactivity_type: {
             schema_name: "interactivityType",
@@ -658,7 +658,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "free"
+            supersedes: ["free"].freeze
           }.freeze,
           is_based_on: {
             schema_name: "isBasedOn",
@@ -668,7 +668,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "isBasedOnUrl"
+            supersedes: ["isBasedOnUrl"].freeze
           }.freeze,
           is_based_on_url: {
             schema_name: "isBasedOnUrl",
@@ -838,7 +838,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "carrier"
+            supersedes: ["carrier"].freeze
           }.freeze,
           publication: {
             schema_name: "publication",
@@ -908,7 +908,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "reviews"
+            supersedes: ["reviews"].freeze
           }.freeze,
           reviews: {
             schema_name: "reviews",
@@ -1038,7 +1038,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "datasetTimeInterval"
+            supersedes: ["datasetTimeInterval"].freeze
           }.freeze,
           text: {
             schema_name: "text",

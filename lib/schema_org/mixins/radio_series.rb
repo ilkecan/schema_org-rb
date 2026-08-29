@@ -18,7 +18,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "actors"
+            supersedes: ["actors"].freeze
           }.freeze,
           actors: {
             schema_name: "actors",
@@ -38,7 +38,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "season"
+            supersedes: ["season"].freeze
           }.freeze,
           director: {
             schema_name: "director",
@@ -48,7 +48,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "directors"
+            supersedes: ["directors"].freeze
           }.freeze,
           directors: {
             schema_name: "directors",
@@ -68,7 +68,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "episodes"
+            supersedes: ["episodes"].freeze
           }.freeze,
           episodes: {
             schema_name: "episodes",
@@ -128,7 +128,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: "containsSeason",
-            supersedes: "seasons"
+            supersedes: ["seasons"].freeze
           }.freeze,
           seasons: {
             schema_name: "seasons",

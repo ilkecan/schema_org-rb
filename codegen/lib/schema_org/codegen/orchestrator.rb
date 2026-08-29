@@ -115,11 +115,7 @@ module SchemaOrg
       end
 
       def build_properties
-        supersedes = vocabulary.properties.each_with_object({}) do |property, result|
-          next unless property.superseded_by
-
-          result[vocabulary.term_name(property.superseded_by)] = vocabulary.term_name(property.url)
-        end
+        supersedes = build_supersedes(vocabulary.properties)
         properties = Hash.new { |hash, key| hash[key] = {} }
         vocabulary.properties.each do |subject|
           schema_name = vocabulary.term_name(subject.url)
@@ -151,7 +147,7 @@ module SchemaOrg
       def generate_type(subject, _properties)
         schema_name = vocabulary.term_name(subject.url)
         superseded_by = subject.superseded_by && vocabulary.term_name(subject.superseded_by)
-        supersedes = vocabulary.classes.find { |candidate| candidate.superseded_by == schema_name.to_sym }&.label
+        supersedes = class_supersedes[schema_name]
         members = vocabulary.enumeration_members.select do |member|
           member.type.any? { |type| vocabulary.schema_name(type) == schema_name }
         end.sort_by { |member| vocabulary.term_name(member.url) }
@@ -170,6 +166,19 @@ module SchemaOrg
             [naming.enumeration_constant_name(member_name), member_name, declared.map { |type| naming.constant_name(type) }]
           end
         )
+      end
+
+      def class_supersedes
+        @class_supersedes ||= build_supersedes(vocabulary.classes)
+      end
+
+      def build_supersedes(subjects)
+        subjects.each_with_object({}) do |candidate, result|
+          next unless candidate.superseded_by
+
+          target = vocabulary.term_name(candidate.superseded_by)
+          (result[target] ||= []) << vocabulary.term_name(candidate.url)
+        end.transform_values { |names| names.uniq.sort.freeze }.freeze
       end
     end
   end

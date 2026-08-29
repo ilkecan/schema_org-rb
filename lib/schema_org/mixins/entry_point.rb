@@ -18,7 +18,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "application"
+            supersedes: ["application"].freeze
           }.freeze,
           action_platform: {
             schema_name: "actionPlatform",

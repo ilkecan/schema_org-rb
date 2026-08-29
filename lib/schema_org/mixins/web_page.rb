@@ -38,7 +38,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "aspect"
+            supersedes: ["aspect"].freeze
           }.freeze,
           primary_image_of_page: {
             schema_name: "primaryImageOfPage",
@@ -78,7 +78,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "significantLinks"
+            supersedes: ["significantLinks"].freeze
           }.freeze,
           significant_links: {
             schema_name: "significantLinks",

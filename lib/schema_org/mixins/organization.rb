@@ -78,7 +78,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "serviceArea"
+            supersedes: ["serviceArea"].freeze
           }.freeze,
           award: {
             schema_name: "award",
@@ -88,7 +88,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "awards"
+            supersedes: ["awards"].freeze
           }.freeze,
           awards: {
             schema_name: "awards",
@@ -128,7 +128,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "contactPoints"
+            supersedes: ["contactPoints"].freeze
           }.freeze,
           contact_points: {
             schema_name: "contactPoints",
@@ -218,7 +218,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "employees"
+            supersedes: ["employees"].freeze
           }.freeze,
           employees: {
             schema_name: "employees",
@@ -248,7 +248,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "events"
+            supersedes: ["events"].freeze
           }.freeze,
           events: {
             schema_name: "events",
@@ -278,7 +278,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "founders"
+            supersedes: ["founders"].freeze
           }.freeze,
           founders: {
             schema_name: "founders",
@@ -388,7 +388,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "hasProductReturnPolicy"
+            supersedes: ["hasProductReturnPolicy"].freeze
           }.freeze,
           has_offer_catalog: {
             schema_name: "hasOfferCatalog",
@@ -438,7 +438,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "interactionCount"
+            supersedes: ["interactionCount"].freeze
           }.freeze,
           isic_v4: {
             schema_name: "isicV4",
@@ -568,7 +568,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: "memberOf",
             superseded_by: nil,
-            supersedes: "musicGroupMember"
+            supersedes: ["members", "musicGroupMember"].freeze
           }.freeze,
           member_of: {
             schema_name: "memberOf",
@@ -648,7 +648,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: "subOrganization",
             superseded_by: nil,
-            supersedes: "branchOf"
+            supersedes: ["branchOf"].freeze
           }.freeze,
           publishing_principles: {
             schema_name: "publishingPrinciples",
@@ -668,7 +668,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "reviews"
+            supersedes: ["reviews"].freeze
           }.freeze,
           reviews: {
             schema_name: "reviews",
@@ -698,7 +698,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: "areaServed",
-            supersedes: "area"
+            supersedes: ["area"].freeze
           }.freeze,
           skills: {
             schema_name: "skills",
@@ -1368,6 +1368,7 @@ module SchemaOrg
       end
 
       # A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals.
+      # Supersedes `members`.
       # Supersedes `musicGroupMember`.
       # Inverse-property: `memberOf`.
       def member
@@ -1375,6 +1376,7 @@ module SchemaOrg
       end
 
       # A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals.
+      # Supersedes `members`.
       # Supersedes `musicGroupMember`.
       # Inverse-property: `memberOf`.
       def member=(value)

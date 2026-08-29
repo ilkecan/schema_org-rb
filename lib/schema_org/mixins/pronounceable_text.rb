@@ -18,7 +18,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "language"
+            supersedes: ["language"].freeze
           }.freeze,
           phonetic_text: {
             schema_name: "phoneticText",

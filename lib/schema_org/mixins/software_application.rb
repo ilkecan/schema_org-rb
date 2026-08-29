@@ -48,7 +48,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "device"
+            supersedes: ["device"].freeze
           }.freeze,
           countries_not_supported: {
             schema_name: "countriesNotSupported",
@@ -188,7 +188,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "runtime"
+            supersedes: ["runtime"].freeze
           }.freeze,
           screenshot: {
             schema_name: "screenshot",
@@ -228,7 +228,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "requirements"
+            supersedes: ["requirements"].freeze
           }.freeze,
           software_version: {
             schema_name: "softwareVersion",

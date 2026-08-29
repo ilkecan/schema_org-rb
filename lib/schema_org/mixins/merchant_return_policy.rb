@@ -118,7 +118,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "productReturnDays"
+            supersedes: ["productReturnDays"].freeze
           }.freeze,
           merchant_return_link: {
             schema_name: "merchantReturnLink",
@@ -128,7 +128,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "productReturnLink"
+            supersedes: ["productReturnLink"].freeze
           }.freeze,
           refund_type: {
             schema_name: "refundType",

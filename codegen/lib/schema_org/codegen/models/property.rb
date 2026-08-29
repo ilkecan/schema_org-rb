@@ -13,14 +13,14 @@ module SchemaOrg
           @schema_name = schema_name
           @schema_url = schema_url
           @superseded_by = superseded_by
-          @supersedes = supersedes
+          @supersedes = supersedes&.freeze
           @types = types.freeze
         end
 
         def lines
           @lines ||= begin
             result = comment_lines.dup
-            result << "Supersedes `#{supersedes}`." if supersedes
+            supersedes&.each { |name| result << "Supersedes `#{name}`." }
             result << "Superseded by `#{superseded_by}`." if superseded_by
             result << "Inverse-property: `#{inverse_of}`." if inverse_of
             result.freeze

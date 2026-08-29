@@ -28,7 +28,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "actors"
+            supersedes: ["actors"].freeze
           }.freeze,
           aggregate_rating: {
             schema_name: "aggregateRating",
@@ -48,7 +48,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "attendees"
+            supersedes: ["attendees"].freeze
           }.freeze,
           attendees: {
             schema_name: "attendees",
@@ -68,7 +68,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "serviceAudience"
+            supersedes: ["serviceAudience"].freeze
           }.freeze,
           composer: {
             schema_name: "composer",
@@ -98,7 +98,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "directors"
+            supersedes: ["directors"].freeze
           }.freeze,
           door_time: {
             schema_name: "doorTime",
@@ -208,7 +208,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "language"
+            supersedes: ["language"].freeze
           }.freeze,
           is_accessible_for_free: {
             schema_name: "isAccessibleForFree",
@@ -218,7 +218,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "free"
+            supersedes: ["free"].freeze
           }.freeze,
           keywords: {
             schema_name: "keywords",
@@ -298,7 +298,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "performers"
+            supersedes: ["performers"].freeze
           }.freeze,
           performers: {
             schema_name: "performers",
@@ -348,7 +348,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "reviews"
+            supersedes: ["reviews"].freeze
           }.freeze,
           sponsor: {
             schema_name: "sponsor",
@@ -378,7 +378,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: "superEvent",
             superseded_by: nil,
-            supersedes: "subEvents"
+            supersedes: ["subEvents"].freeze
           }.freeze,
           sub_events: {
             schema_name: "subEvents",

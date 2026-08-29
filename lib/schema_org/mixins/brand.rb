@@ -38,7 +38,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "reviews"
+            supersedes: ["reviews"].freeze
           }.freeze,
           slogan: {
             schema_name: "slogan",

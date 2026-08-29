@@ -28,7 +28,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "contactPoints"
+            supersedes: ["contactPoints"].freeze
           }.freeze,
           health_plan_drug_option: {
             schema_name: "healthPlanDrugOption",

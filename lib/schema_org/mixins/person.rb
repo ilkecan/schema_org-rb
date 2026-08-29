@@ -68,7 +68,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "awards"
+            supersedes: ["awards"].freeze
           }.freeze,
           awards: {
             schema_name: "awards",
@@ -138,7 +138,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "colleagues"
+            supersedes: ["colleagues"].freeze
           }.freeze,
           colleagues: {
             schema_name: "colleagues",
@@ -158,7 +158,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "contactPoints"
+            supersedes: ["contactPoints"].freeze
           }.freeze,
           contact_points: {
             schema_name: "contactPoints",
@@ -388,7 +388,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "interactionCount"
+            supersedes: ["interactionCount"].freeze
           }.freeze,
           isic_v4: {
             schema_name: "isicV4",
@@ -518,7 +518,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "parents"
+            supersedes: ["parents"].freeze
           }.freeze,
           parents: {
             schema_name: "parents",
@@ -588,7 +588,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "siblings"
+            supersedes: ["siblings"].freeze
           }.freeze,
           siblings: {
             schema_name: "siblings",

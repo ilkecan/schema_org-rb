@@ -18,7 +18,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "branch"
+            supersedes: ["branch"].freeze
           }.freeze,
           supply_to: {
             schema_name: "supplyTo",

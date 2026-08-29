@@ -28,7 +28,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "serviceArea"
+            supersedes: ["serviceArea"].freeze
           }.freeze,
           audience: {
             schema_name: "audience",
@@ -38,7 +38,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "serviceAudience"
+            supersedes: ["serviceAudience"].freeze
           }.freeze,
           available_channel: {
             schema_name: "availableChannel",
@@ -58,7 +58,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "awards"
+            supersedes: ["awards"].freeze
           }.freeze,
           brand: {
             schema_name: "brand",
@@ -78,7 +78,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "bookingAgent"
+            supersedes: ["bookingAgent"].freeze
           }.freeze,
           category: {
             schema_name: "category",
@@ -178,7 +178,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "carrier"
+            supersedes: ["carrier"].freeze
           }.freeze,
           provider_mobility: {
             schema_name: "providerMobility",
@@ -198,7 +198,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "reviews"
+            supersedes: ["reviews"].freeze
           }.freeze,
           service_area: {
             schema_name: "serviceArea",
@@ -208,7 +208,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: "areaServed",
-            supersedes: "area"
+            supersedes: ["area"].freeze
           }.freeze,
           service_audience: {
             schema_name: "serviceAudience",
@@ -228,7 +228,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "produces"
+            supersedes: ["produces"].freeze
           }.freeze,
           service_type: {
             schema_name: "serviceType",

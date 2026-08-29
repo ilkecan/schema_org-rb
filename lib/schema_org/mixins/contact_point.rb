@@ -18,7 +18,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "serviceArea"
+            supersedes: ["serviceArea"].freeze
           }.freeze,
           available_language: {
             schema_name: "availableLanguage",
@@ -98,7 +98,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: "areaServed",
-            supersedes: "area"
+            supersedes: ["area"].freeze
           }.freeze,
           telephone: {
             schema_name: "telephone",

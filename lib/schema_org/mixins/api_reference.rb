@@ -38,7 +38,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "assembly"
+            supersedes: ["assembly"].freeze
           }.freeze,
           programming_model: {
             schema_name: "programmingModel",
