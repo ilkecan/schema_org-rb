@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    schema_org-rb (0.1.0)
+    schema_org-rb (0.1.1)
       zeitwerk (~> 2.7)
 
 GEM
