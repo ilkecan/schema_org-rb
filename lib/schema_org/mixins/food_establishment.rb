@@ -28,7 +28,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "menu"
+            supersedes: ["menu"].freeze
           }.freeze,
           menu: {
             schema_name: "menu",

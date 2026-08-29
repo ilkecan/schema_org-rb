@@ -18,7 +18,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "actors"
+            supersedes: ["actors"].freeze
           }.freeze,
           web_feed: {
             schema_name: "webFeed",

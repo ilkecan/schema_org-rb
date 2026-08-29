@@ -18,7 +18,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "events"
+            supersedes: ["events"].freeze
           }.freeze
         }.freeze
       end

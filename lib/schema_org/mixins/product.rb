@@ -48,7 +48,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "serviceAudience"
+            supersedes: ["serviceAudience"].freeze
           }.freeze,
           award: {
             schema_name: "award",
@@ -58,7 +58,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "awards"
+            supersedes: ["awards"].freeze
           }.freeze,
           awards: {
             schema_name: "awards",
@@ -278,7 +278,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "hasProductReturnPolicy"
+            supersedes: ["hasProductReturnPolicy"].freeze
           }.freeze,
           has_product_return_policy: {
             schema_name: "hasProductReturnPolicy",
@@ -548,7 +548,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "reviews"
+            supersedes: ["reviews"].freeze
           }.freeze,
           reviews: {
             schema_name: "reviews",

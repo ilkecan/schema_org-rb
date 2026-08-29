@@ -10,7 +10,7 @@ module SchemaOrg
           @schema_name = schema_name
           @schema_types = schema_types.freeze
           @superseded_by = superseded_by
-          @supersedes = supersedes
+          @supersedes = supersedes&.freeze
           @url = url
           @abstract = abstract
           @enum_members = enum_members.freeze
@@ -19,7 +19,7 @@ module SchemaOrg
         def supersession_lines
           @supersession_lines ||= begin
             result = []
-            result << "Supersedes `#{supersedes}`." if supersedes
+            supersedes&.each { |name| result << "Supersedes `#{name}`." }
             result << "Superseded by `#{superseded_by}`." if superseded_by
             result.freeze
           end

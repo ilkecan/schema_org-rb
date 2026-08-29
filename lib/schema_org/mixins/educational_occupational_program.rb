@@ -168,7 +168,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "carrier"
+            supersedes: ["carrier"].freeze
           }.freeze,
           salary_upon_completion: {
             schema_name: "salaryUponCompletion",

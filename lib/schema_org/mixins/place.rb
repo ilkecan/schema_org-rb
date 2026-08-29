@@ -78,7 +78,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: "containsPlace",
             superseded_by: nil,
-            supersedes: "containedIn"
+            supersedes: ["containedIn"].freeze
           }.freeze,
           contains_place: {
             schema_name: "containsPlace",
@@ -98,7 +98,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "events"
+            supersedes: ["events"].freeze
           }.freeze,
           events: {
             schema_name: "events",
@@ -278,7 +278,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "maps"
+            supersedes: ["map", "maps"].freeze
           }.freeze,
           is_accessible_for_free: {
             schema_name: "isAccessibleForFree",
@@ -288,7 +288,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "free"
+            supersedes: ["free"].freeze
           }.freeze,
           isic_v4: {
             schema_name: "isicV4",
@@ -388,7 +388,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "photos"
+            supersedes: ["photos"].freeze
           }.freeze,
           photos: {
             schema_name: "photos",
@@ -418,7 +418,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "reviews"
+            supersedes: ["reviews"].freeze
           }.freeze,
           reviews: {
             schema_name: "reviews",
@@ -756,12 +756,14 @@ module SchemaOrg
       end
 
       # A URL to a map of the place.
+      # Supersedes `map`.
       # Supersedes `maps`.
       def has_map
         read_property(:has_map)
       end
 
       # A URL to a map of the place.
+      # Supersedes `map`.
       # Supersedes `maps`.
       def has_map=(value)
         write_property(:has_map, value)

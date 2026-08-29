@@ -28,7 +28,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "serviceArea"
+            supersedes: ["serviceArea"].freeze
           }.freeze,
           eligible_region: {
             schema_name: "eligibleRegion",

@@ -7,6 +7,15 @@ module SchemaOrg
   # https://schema.org/InteractionCounter
   #
   # NOTE: Supersedes `UserBlocks`.
+  # NOTE: Supersedes `UserCheckins`.
+  # NOTE: Supersedes `UserComments`.
+  # NOTE: Supersedes `UserDownloads`.
+  # NOTE: Supersedes `UserInteraction`.
+  # NOTE: Supersedes `UserLikes`.
+  # NOTE: Supersedes `UserPageVisits`.
+  # NOTE: Supersedes `UserPlays`.
+  # NOTE: Supersedes `UserPlusOnes`.
+  # NOTE: Supersedes `UserTweets`.
   #
   # A summary of how users have interacted with this CreativeWork. In most cases, authors will use a subtype to specify the specific type of interaction.
   class InteractionCounter < Base

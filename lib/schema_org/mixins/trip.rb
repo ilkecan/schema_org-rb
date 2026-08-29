@@ -68,7 +68,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "carrier"
+            supersedes: ["carrier"].freeze
           }.freeze,
           sub_trip: {
             schema_name: "subTrip",

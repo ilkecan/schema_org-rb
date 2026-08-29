@@ -98,7 +98,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "language"
+            supersedes: ["language"].freeze
           }.freeze,
           parent_service: {
             schema_name: "parentService",

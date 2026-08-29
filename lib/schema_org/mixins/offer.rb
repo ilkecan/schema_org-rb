@@ -68,7 +68,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "serviceArea"
+            supersedes: ["serviceArea"].freeze
           }.freeze,
           asin: {
             schema_name: "asin",
@@ -308,7 +308,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "hasProductReturnPolicy"
+            supersedes: ["hasProductReturnPolicy"].freeze
           }.freeze,
           includes_object: {
             schema_name: "includesObject",
@@ -458,7 +458,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "reviews"
+            supersedes: ["reviews"].freeze
           }.freeze,
           reviews: {
             schema_name: "reviews",
@@ -478,7 +478,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "vendor"
+            supersedes: ["merchant", "vendor"].freeze
           }.freeze,
           serial_number: {
             schema_name: "serialNumber",
@@ -548,7 +548,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "warrantyPromise"
+            supersedes: ["warrantyPromise"].freeze
           }.freeze
         }.freeze
       end
@@ -1050,12 +1050,14 @@ module SchemaOrg
       end
 
       # An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.
+      # Supersedes `merchant`.
       # Supersedes `vendor`.
       def seller
         read_property(:seller)
       end
 
       # An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.
+      # Supersedes `merchant`.
       # Supersedes `vendor`.
       def seller=(value)
         write_property(:seller, value)

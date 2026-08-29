@@ -45,8 +45,32 @@ class TestCodegenGeneration < Minitest::Test
     end
     assert_equal "archiveHeld", definitions[0][:inverse_of]
     assert_equal "executableLibraryName", definitions[1][:superseded_by]
-    assert_equal "assembly", definitions[2][:supersedes]
+    assert_equal ["assembly"], definitions[2][:supersedes]
     assert_equal ["Property"], definitions[3][:external_ranges]
+  end
+
+  def test_reverse_supersession_metadata_contains_all_predecessors
+    assert_equal ["catalog", "includedDataCatalog"], SchemaOrg::Dataset.property_definitions.fetch(:included_in_data_catalog)[:supersedes]
+    assert_equal ["map", "maps"], SchemaOrg::Place.property_definitions.fetch(:has_map)[:supersedes]
+    assert_equal ["members", "musicGroupMember"], SchemaOrg::Organization.property_definitions.fetch(:member)[:supersedes]
+    assert_equal ["merchant", "vendor"], SchemaOrg::BuyAction.property_definitions.fetch(:seller)[:supersedes]
+  end
+
+  def test_generated_comments_include_all_reverse_supersession_notices
+    interaction_counter = File.read("lib/schema_org/types/interaction_counter.rb")
+
+    %w[
+      UserBlocks
+      UserCheckins
+      UserComments
+      UserDownloads
+      UserInteraction
+      UserLikes
+      UserPageVisits
+      UserPlays
+      UserPlusOnes
+      UserTweets
+    ].each { |name| assert_includes interaction_counter, "# NOTE: Supersedes `#{name}`." }
   end
 
   def test_generated_comments_include_metadata_and_frozen_headers

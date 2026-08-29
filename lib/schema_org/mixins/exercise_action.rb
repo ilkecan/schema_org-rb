@@ -48,7 +48,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "course"
+            supersedes: ["course"].freeze
           }.freeze,
           exercise_plan: {
             schema_name: "exercisePlan",

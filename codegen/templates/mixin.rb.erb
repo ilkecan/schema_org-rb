@@ -26,7 +26,7 @@ module SchemaOrg
             external_ranges: [<%= property.external_ranges.map(&:inspect).join(", ") %>].freeze,
             inverse_of: <%= property.inverse_of.inspect %>,
             superseded_by: <%= property.superseded_by.inspect %>,
-            supersedes: <%= property.supersedes.inspect %>
+            supersedes: <%= property.supersedes ? "#{property.supersedes.inspect}.freeze" : "nil" %>
           }.freeze<%= "," unless property == properties.last %>
 <% end -%>
         }.freeze

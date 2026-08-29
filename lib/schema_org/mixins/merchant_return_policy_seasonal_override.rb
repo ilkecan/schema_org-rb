@@ -28,7 +28,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "productReturnDays"
+            supersedes: ["productReturnDays"].freeze
           }.freeze,
           refund_type: {
             schema_name: "refundType",

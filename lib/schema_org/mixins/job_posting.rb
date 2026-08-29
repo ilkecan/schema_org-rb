@@ -168,7 +168,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "incentives"
+            supersedes: ["incentives"].freeze
           }.freeze,
           incentives: {
             schema_name: "incentives",
@@ -198,7 +198,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "benefits"
+            supersedes: ["benefits"].freeze
           }.freeze,
           job_duration: {
             schema_name: "jobDuration",

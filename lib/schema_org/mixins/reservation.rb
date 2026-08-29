@@ -38,7 +38,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "bookingAgent"
+            supersedes: ["bookingAgent"].freeze
           }.freeze,
           modified_time: {
             schema_name: "modifiedTime",
@@ -78,7 +78,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "carrier"
+            supersedes: ["carrier"].freeze
           }.freeze,
           reservation_for: {
             schema_name: "reservationFor",

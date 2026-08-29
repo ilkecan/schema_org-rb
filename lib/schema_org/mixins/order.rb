@@ -38,7 +38,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "bookingAgent"
+            supersedes: ["bookingAgent"].freeze
           }.freeze,
           confirmation_number: {
             schema_name: "confirmationNumber",
@@ -188,7 +188,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "paymentDue"
+            supersedes: ["paymentDue"].freeze
           }.freeze,
           payment_method: {
             schema_name: "paymentMethod",
@@ -228,7 +228,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "vendor"
+            supersedes: ["merchant", "vendor"].freeze
           }.freeze
         }.freeze
       end
@@ -452,12 +452,14 @@ module SchemaOrg
       end
 
       # An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.
+      # Supersedes `merchant`.
       # Supersedes `vendor`.
       def seller
         read_property(:seller)
       end
 
       # An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.
+      # Supersedes `merchant`.
       # Supersedes `vendor`.
       def seller=(value)
         write_property(:seller, value)

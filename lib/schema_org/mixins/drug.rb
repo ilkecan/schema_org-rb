@@ -79,7 +79,7 @@ module SchemaOrg
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
-            supersedes: "clincalPharmacology"
+            supersedes: ["clincalPharmacology"].freeze
           }.freeze,
           dosage_form: {
             schema_name: "dosageForm",

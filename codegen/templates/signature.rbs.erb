@@ -8,7 +8,7 @@ type schema_property_definition = {
   external_ranges: Array[String],
   inverse_of: String?,
   superseded_by: String?,
-  supersedes: String?
+  supersedes: ::Array[String]?
 }
 
 module SchemaOrg
