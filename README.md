@@ -1,15 +1,18 @@
 # schema_org-rb
 
-`schema_org-rb` provides generated Ruby descriptors for the Schema.org vocabulary. The gem version is `0.1.0`; the checked-in vocabulary version is exposed as `SchemaOrg::SCHEMA_VERSION`.
+[![Gem Version](https://badge.fury.io/rb/schema_org-rb.svg)](https://badge.fury.io/rb/schema_org-rb)
+[![Release](https://github.com/ilkecan/schema_org-rb/actions/workflows/release.yml/badge.svg)](https://github.com/ilkecan/schema_org-rb/actions/workflows/release.yml)
+
+`schema_org-rb` provides generated Ruby descriptors for the Schema.org vocabulary. The gem version is `0.1.1`; the checked-in vocabulary version is exposed as `SchemaOrg::SCHEMA_VERSION`.
 
 ## Installation
 
 ```ruby
-gem "schema_org-rb", "0.1.0"
+gem "schema_org-rb", "0.1.1"
 ```
 
 ```sh
-gem install schema_org-rb -v 0.1.0
+gem install schema_org-rb -v 0.1.1
 ```
 
 ## Supported Ruby versions
