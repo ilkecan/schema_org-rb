@@ -40,6 +40,16 @@ module SchemaOrg
             superseded_by: nil,
             supersedes: nil
           }.freeze,
+          minimum_order_value: {
+            schema_name: "minimumOrderValue",
+            schema_url: "https://schema.org/minimumOrderValue",
+            comment_lines: ["The minimum order value required for this shipping rate to apply."].freeze,
+            ranges: ["MonetaryAmount", "Number", "PriceSpecification"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze,
           order_percentage: {
             schema_name: "orderPercentage",
             schema_url: "https://schema.org/orderPercentage",
@@ -121,6 +131,16 @@ module SchemaOrg
       # This can be marked 'true' to indicate that some published [[DeliveryTimeSettings]] or [[ShippingRateSettings]] are intended to apply to all [[OfferShippingDetails]] published by the same merchant, when referenced by a [[shippingSettingsLink]] in those settings. It is not meaningful to use a 'true' value for this property alongside a transitTimeLabel (for [[DeliveryTimeSettings]]) or shippingLabel (for [[ShippingRateSettings]]), since this property is for use with unlabelled settings.
       def is_unlabelled_fallback=(value)
         write_property(:is_unlabelled_fallback, value)
+      end
+
+      # The minimum order value required for this shipping rate to apply.
+      def minimum_order_value
+        read_property(:minimum_order_value)
+      end
+
+      # The minimum order value required for this shipping rate to apply.
+      def minimum_order_value=(value)
+        write_property(:minimum_order_value, value)
       end
 
       # Value representing the fraction of the value of the order that is charged as shipping cost. Example: 0.10 would mean shipping rate is 10% of the total order value.

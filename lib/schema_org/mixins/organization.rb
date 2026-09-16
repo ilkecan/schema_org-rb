@@ -80,6 +80,16 @@ module SchemaOrg
             superseded_by: nil,
             supersedes: ["serviceArea"].freeze
           }.freeze,
+          authorized_representative: {
+            schema_name: "authorizedRepresentative",
+            schema_url: "https://schema.org/authorizedRepresentative",
+            comment_lines: ["An organization or person officially appointed to act on behalf of the manufacturer in a specific region or context."].freeze,
+            ranges: ["Organization", "Person"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze,
           award: {
             schema_name: "award",
             schema_url: "https://schema.org/award",
@@ -855,6 +865,16 @@ module SchemaOrg
       # Supersedes `serviceArea`.
       def area_served=(value)
         write_property(:area_served, value)
+      end
+
+      # An organization or person officially appointed to act on behalf of the manufacturer in a specific region or context.
+      def authorized_representative
+        read_property(:authorized_representative)
+      end
+
+      # An organization or person officially appointed to act on behalf of the manufacturer in a specific region or context.
+      def authorized_representative=(value)
+        write_property(:authorized_representative, value)
       end
 
       # An award won by or for this item.

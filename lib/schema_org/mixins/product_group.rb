@@ -33,8 +33,8 @@ module SchemaOrg
           varies_by: {
             schema_name: "variesBy",
             schema_url: "https://schema.org/variesBy",
-            comment_lines: ["Indicates the property or properties by which the variants in a [[ProductGroup]] vary, e.g. their size, color etc. Schema.org properties can be referenced by their short name e.g. \"color\"; terms defined elsewhere can be referenced with their URIs."].freeze,
-            ranges: ["DefinedTerm", "Text"].freeze,
+            comment_lines: ["Indicates the property or properties by which the variants in a [[ProductGroup]] vary, e.g. their size, color etc. Schema.org properties can be referenced by their short name e.g. \"color\"; terms defined elsewhere can be referenced with their URIs. Variant properties can be provided using [[PropertyValue]] instead of plain [[Text]], to allow specification of the values available for a variant property."].freeze,
+            ranges: ["DefinedTerm", "PropertyValue", "Text"].freeze,
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
@@ -65,12 +65,12 @@ module SchemaOrg
         write_property(:product_group_id, value)
       end
 
-      # Indicates the property or properties by which the variants in a [[ProductGroup]] vary, e.g. their size, color etc. Schema.org properties can be referenced by their short name e.g. "color"; terms defined elsewhere can be referenced with their URIs.
+      # Indicates the property or properties by which the variants in a [[ProductGroup]] vary, e.g. their size, color etc. Schema.org properties can be referenced by their short name e.g. "color"; terms defined elsewhere can be referenced with their URIs. Variant properties can be provided using [[PropertyValue]] instead of plain [[Text]], to allow specification of the values available for a variant property.
       def varies_by
         read_property(:varies_by)
       end
 
-      # Indicates the property or properties by which the variants in a [[ProductGroup]] vary, e.g. their size, color etc. Schema.org properties can be referenced by their short name e.g. "color"; terms defined elsewhere can be referenced with their URIs.
+      # Indicates the property or properties by which the variants in a [[ProductGroup]] vary, e.g. their size, color etc. Schema.org properties can be referenced by their short name e.g. "color"; terms defined elsewhere can be referenced with their URIs. Variant properties can be provided using [[PropertyValue]] instead of plain [[Text]], to allow specification of the values available for a variant property.
       def varies_by=(value)
         write_property(:varies_by, value)
       end

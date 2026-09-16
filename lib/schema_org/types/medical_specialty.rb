@@ -32,6 +32,7 @@ module SchemaOrg
       end
     end
     ANESTHESIA = EnumerationValue.new("Anesthesia", [SchemaOrg::MedicalSpecialty])
+    AUDIOLOGY = EnumerationValue.new("Audiology", [SchemaOrg::MedicalSpecialty])
     CARDIOVASCULAR = EnumerationValue.new("Cardiovascular", [SchemaOrg::MedicalSpecialty])
     COMMUNITY_HEALTH = EnumerationValue.new("CommunityHealth", [SchemaOrg::MedicalSpecialty])
     DENTISTRY = EnumerationValue.new("Dentistry", [SchemaOrg::MedicalSpecialty])
@@ -53,6 +54,7 @@ module SchemaOrg
     NURSING = EnumerationValue.new("Nursing", [SchemaOrg::MedicalSpecialty])
     OBSTETRIC = EnumerationValue.new("Obstetric", [SchemaOrg::MedicalSpecialty])
     ONCOLOGIC = EnumerationValue.new("Oncologic", [SchemaOrg::MedicalSpecialty])
+    OPHTHALMOLOGY = EnumerationValue.new("Ophthalmology", [SchemaOrg::MedicalSpecialty])
     OPTOMETRIC = EnumerationValue.new("Optometric", [SchemaOrg::MedicalSpecialty])
     OTOLARYNGOLOGIC = EnumerationValue.new("Otolaryngologic", [SchemaOrg::MedicalSpecialty])
     PATHOLOGY = EnumerationValue.new("Pathology", [SchemaOrg::MedicalSpecialty])
@@ -73,7 +75,7 @@ module SchemaOrg
     SURGICAL = EnumerationValue.new("Surgical", [SchemaOrg::MedicalSpecialty])
     TOXICOLOGIC = EnumerationValue.new("Toxicologic", [SchemaOrg::MedicalSpecialty])
     UROLOGIC = EnumerationValue.new("Urologic", [SchemaOrg::MedicalSpecialty])
-    VALUES = [ANESTHESIA, CARDIOVASCULAR, COMMUNITY_HEALTH, DENTISTRY, DERMATOLOGIC, DERMATOLOGY, DIET_NUTRITION, EMERGENCY, ENDOCRINE, GASTROENTEROLOGIC, GENETIC, GERIATRIC, GYNECOLOGIC, HEMATOLOGIC, INFECTIOUS, LABORATORY_SCIENCE, MIDWIFERY, MUSCULOSKELETAL, NEUROLOGIC, NURSING, OBSTETRIC, ONCOLOGIC, OPTOMETRIC, OTOLARYNGOLOGIC, PATHOLOGY, PEDIATRIC, PHARMACY_SPECIALTY, PHYSIOTHERAPY, PLASTIC_SURGERY, PODIATRIC, PRIMARY_CARE, PSYCHIATRIC, PUBLIC_HEALTH, PULMONARY, RADIOGRAPHY, RENAL, RESPIRATORY_THERAPY, RHEUMATOLOGIC, SPEECH_PATHOLOGY, SURGICAL, TOXICOLOGIC, UROLOGIC].freeze
+    VALUES = [ANESTHESIA, AUDIOLOGY, CARDIOVASCULAR, COMMUNITY_HEALTH, DENTISTRY, DERMATOLOGIC, DERMATOLOGY, DIET_NUTRITION, EMERGENCY, ENDOCRINE, GASTROENTEROLOGIC, GENETIC, GERIATRIC, GYNECOLOGIC, HEMATOLOGIC, INFECTIOUS, LABORATORY_SCIENCE, MIDWIFERY, MUSCULOSKELETAL, NEUROLOGIC, NURSING, OBSTETRIC, ONCOLOGIC, OPHTHALMOLOGY, OPTOMETRIC, OTOLARYNGOLOGIC, PATHOLOGY, PEDIATRIC, PHARMACY_SPECIALTY, PHYSIOTHERAPY, PLASTIC_SURGERY, PODIATRIC, PRIMARY_CARE, PSYCHIATRIC, PUBLIC_HEALTH, PULMONARY, RADIOGRAPHY, RENAL, RESPIRATORY_THERAPY, RHEUMATOLOGIC, SPEECH_PATHOLOGY, SURGICAL, TOXICOLOGIC, UROLOGIC].freeze
 
     def self.values
       VALUES

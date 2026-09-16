@@ -34,12 +34,13 @@ module SchemaOrg
     INVOICE_PRICE = EnumerationValue.new("InvoicePrice", [SchemaOrg::PriceTypeEnumeration])
     LIST_PRICE = EnumerationValue.new("ListPrice", [SchemaOrg::PriceTypeEnumeration])
     MSRP = EnumerationValue.new("MSRP", [SchemaOrg::PriceTypeEnumeration])
+    MAXIMUM_RETAIL_PRICE = EnumerationValue.new("MaximumRetailPrice", [SchemaOrg::PriceTypeEnumeration])
     MINIMUM_ADVERTISED_PRICE = EnumerationValue.new("MinimumAdvertisedPrice", [SchemaOrg::PriceTypeEnumeration])
     REGULAR_PRICE = EnumerationValue.new("RegularPrice", [SchemaOrg::PriceTypeEnumeration])
     SRP = EnumerationValue.new("SRP", [SchemaOrg::PriceTypeEnumeration])
     SALE_PRICE = EnumerationValue.new("SalePrice", [SchemaOrg::PriceTypeEnumeration])
     STRIKETHROUGH_PRICE = EnumerationValue.new("StrikethroughPrice", [SchemaOrg::PriceTypeEnumeration])
-    VALUES = [INVOICE_PRICE, LIST_PRICE, MSRP, MINIMUM_ADVERTISED_PRICE, REGULAR_PRICE, SRP, SALE_PRICE, STRIKETHROUGH_PRICE].freeze
+    VALUES = [INVOICE_PRICE, LIST_PRICE, MSRP, MAXIMUM_RETAIL_PRICE, MINIMUM_ADVERTISED_PRICE, REGULAR_PRICE, SRP, SALE_PRICE, STRIKETHROUGH_PRICE].freeze
 
     def self.values
       VALUES

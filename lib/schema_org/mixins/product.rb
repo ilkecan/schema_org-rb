@@ -50,6 +50,16 @@ module SchemaOrg
             superseded_by: nil,
             supersedes: ["serviceAudience"].freeze
           }.freeze,
+          authorized_representative: {
+            schema_name: "authorizedRepresentative",
+            schema_url: "https://schema.org/authorizedRepresentative",
+            comment_lines: ["An organization or person officially appointed to act on behalf of the manufacturer in a specific region or context."].freeze,
+            ranges: ["Organization", "Person"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze,
           award: {
             schema_name: "award",
             schema_url: "https://schema.org/award",
@@ -105,6 +115,16 @@ module SchemaOrg
             schema_url: "https://schema.org/colorSwatch",
             comment_lines: ["A color swatch image, visualizing the color of a [[Product]]. Should match the textual description specified in the [[color]] property. This can be a URL or a fully described ImageObject."].freeze,
             ranges: ["ImageObject", "URL"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze,
+          consumer_notice: {
+            schema_name: "consumerNotice",
+            schema_url: "https://schema.org/consumerNotice",
+            comment_lines: ["A consumer notice, such as a safety warning or mandatory information, related to the product."].freeze,
+            ranges: ["Text", "TextObject", "URL", "WebContent"].freeze,
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
@@ -240,6 +260,16 @@ module SchemaOrg
             superseded_by: nil,
             supersedes: nil
           }.freeze,
+          has_digital_product_passport: {
+            schema_name: "hasDigitalProductPassport",
+            schema_url: "https://schema.org/hasDigitalProductPassport",
+            comment_lines: ["A link to a Digital Product Passport (DPP) or a digital record detailing the lifecycle, sustainability, and compliance data for this product or offer. This may be a direct URL, a GS1 Digital Link URI, or a nested DigitalProductPassport object. Note: This property is aligned with the IANA 'dpp' link relation and the GS1 Web Vocabulary 'dpp' link type."].freeze,
+            ranges: ["DigitalProductPassport", "URL"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze,
           has_energy_consumption_details: {
             schema_name: "hasEnergyConsumptionDetails",
             schema_url: "https://schema.org/hasEnergyConsumptionDetails",
@@ -300,6 +330,16 @@ module SchemaOrg
             superseded_by: nil,
             supersedes: nil
           }.freeze,
+          importer: {
+            schema_name: "importer",
+            schema_url: "https://schema.org/importer",
+            comment_lines: ["An organization or person who imports the product into a specific market or region."].freeze,
+            ranges: ["Organization", "Person"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze,
           in_product_group_with_id: {
             schema_name: "inProductGroupWithID",
             schema_url: "https://schema.org/inProductGroupWithID",
@@ -335,6 +375,16 @@ module SchemaOrg
             schema_url: "https://schema.org/isFamilyFriendly",
             comment_lines: ["Indicates whether this content is family friendly."].freeze,
             ranges: ["Boolean"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze,
+          is_often_bought_with: {
+            schema_name: "isOftenBoughtWith",
+            schema_url: "https://schema.org/isOftenBoughtWith",
+            comment_lines: ["Indicates a product that is often bought with the described product."].freeze,
+            ranges: ["Product"].freeze,
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
@@ -530,6 +580,16 @@ module SchemaOrg
             superseded_by: nil,
             supersedes: nil
           }.freeze,
+          recycled_content_percentage: {
+            schema_name: "recycledContentPercentage",
+            schema_url: "https://schema.org/recycledContentPercentage",
+            comment_lines: ["The percentage of recycled material in the product."].freeze,
+            ranges: ["Number"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze,
           release_date: {
             schema_name: "releaseDate",
             schema_url: "https://schema.org/releaseDate",
@@ -585,6 +645,26 @@ module SchemaOrg
             schema_url: "https://schema.org/slogan",
             comment_lines: ["A slogan or motto associated with the item."].freeze,
             ranges: ["Text"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze,
+          specification: {
+            schema_name: "specification",
+            schema_url: "https://schema.org/specification",
+            comment_lines: ["A specification of the product, often grouped by a section header/name. This is a cleaner alternative to additionalProperty for strict retail product specifications."].freeze,
+            ranges: ["PropertyValue"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze,
+          substance_of_concern: {
+            schema_name: "substanceOfConcern",
+            schema_url: "https://schema.org/substanceOfConcern",
+            comment_lines: ["A substance of concern (SoC) contained within the product, typically based on regulatory lists like REACH or RoHS."].freeze,
+            ranges: ["ChemicalSubstance", "DefinedTerm", "Text", "URL"].freeze,
             external_ranges: [].freeze,
             inverse_of: nil,
             superseded_by: nil,
@@ -661,6 +741,16 @@ module SchemaOrg
         write_property(:audience, value)
       end
 
+      # An organization or person officially appointed to act on behalf of the manufacturer in a specific region or context.
+      def authorized_representative
+        read_property(:authorized_representative)
+      end
+
+      # An organization or person officially appointed to act on behalf of the manufacturer in a specific region or context.
+      def authorized_representative=(value)
+        write_property(:authorized_representative, value)
+      end
+
       # An award won by or for this item.
       # Supersedes `awards`.
       def award
@@ -723,6 +813,16 @@ module SchemaOrg
       # A color swatch image, visualizing the color of a [[Product]]. Should match the textual description specified in the [[color]] property. This can be a URL or a fully described ImageObject.
       def color_swatch=(value)
         write_property(:color_swatch, value)
+      end
+
+      # A consumer notice, such as a safety warning or mandatory information, related to the product.
+      def consumer_notice
+        read_property(:consumer_notice)
+      end
+
+      # A consumer notice, such as a safety warning or mandatory information, related to the product.
+      def consumer_notice=(value)
+        write_property(:consumer_notice, value)
       end
 
       # The place where the product was assembled.
@@ -879,6 +979,16 @@ module SchemaOrg
         write_property(:has_certification, value)
       end
 
+      # A link to a Digital Product Passport (DPP) or a digital record detailing the lifecycle, sustainability, and compliance data for this product or offer. This may be a direct URL, a GS1 Digital Link URI, or a nested DigitalProductPassport object. Note: This property is aligned with the IANA 'dpp' link relation and the GS1 Web Vocabulary 'dpp' link type.
+      def has_digital_product_passport
+        read_property(:has_digital_product_passport)
+      end
+
+      # A link to a Digital Product Passport (DPP) or a digital record detailing the lifecycle, sustainability, and compliance data for this product or offer. This may be a direct URL, a GS1 Digital Link URI, or a nested DigitalProductPassport object. Note: This property is aligned with the IANA 'dpp' link relation and the GS1 Web Vocabulary 'dpp' link type.
+      def has_digital_product_passport=(value)
+        write_property(:has_digital_product_passport, value)
+      end
+
       # Defines the energy efficiency Category (also known as "class" or "rating") for a product according to an international energy efficiency standard.
       def has_energy_consumption_details
         read_property(:has_energy_consumption_details)
@@ -943,6 +1053,16 @@ module SchemaOrg
         write_property(:height, value)
       end
 
+      # An organization or person who imports the product into a specific market or region.
+      def importer
+        read_property(:importer)
+      end
+
+      # An organization or person who imports the product into a specific market or region.
+      def importer=(value)
+        write_property(:importer, value)
+      end
+
       # Indicates the [[productGroupID]] for a [[ProductGroup]] that this product [[isVariantOf]].
       def in_product_group_with_id
         read_property(:in_product_group_with_id)
@@ -981,6 +1101,16 @@ module SchemaOrg
       # Indicates whether this content is family friendly.
       def is_family_friendly=(value)
         write_property(:is_family_friendly, value)
+      end
+
+      # Indicates a product that is often bought with the described product.
+      def is_often_bought_with
+        read_property(:is_often_bought_with)
+      end
+
+      # Indicates a product that is often bought with the described product.
+      def is_often_bought_with=(value)
+        write_property(:is_often_bought_with, value)
       end
 
       # A pointer to another, somehow related product (or multiple products).
@@ -1199,6 +1329,16 @@ module SchemaOrg
         write_property(:purchase_date, value)
       end
 
+      # The percentage of recycled material in the product.
+      def recycled_content_percentage
+        read_property(:recycled_content_percentage)
+      end
+
+      # The percentage of recycled material in the product.
+      def recycled_content_percentage=(value)
+        write_property(:recycled_content_percentage, value)
+      end
+
       # The release date of a product or product model. This can be used to distinguish the exact variant of a product.
       def release_date
         read_property(:release_date)
@@ -1261,6 +1401,26 @@ module SchemaOrg
       # A slogan or motto associated with the item.
       def slogan=(value)
         write_property(:slogan, value)
+      end
+
+      # A specification of the product, often grouped by a section header/name. This is a cleaner alternative to additionalProperty for strict retail product specifications.
+      def specification
+        read_property(:specification)
+      end
+
+      # A specification of the product, often grouped by a section header/name. This is a cleaner alternative to additionalProperty for strict retail product specifications.
+      def specification=(value)
+        write_property(:specification, value)
+      end
+
+      # A substance of concern (SoC) contained within the product, typically based on regulatory lists like REACH or RoHS.
+      def substance_of_concern
+        read_property(:substance_of_concern)
+      end
+
+      # A substance of concern (SoC) contained within the product, typically based on regulatory lists like REACH or RoHS.
+      def substance_of_concern=(value)
+        write_property(:substance_of_concern, value)
       end
 
       # The weight of the product or person.
