@@ -60,6 +60,16 @@ module SchemaOrg
             superseded_by: nil,
             supersedes: nil
           }.freeze,
+          provider: {
+            schema_name: "provider",
+            schema_url: "https://schema.org/provider",
+            comment_lines: ["The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller."].freeze,
+            ranges: ["Organization", "Person"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: ["carrier"].freeze
+          }.freeze,
           shipping_destination: {
             schema_name: "shippingDestination",
             schema_url: "https://schema.org/shippingDestination",
@@ -201,6 +211,18 @@ module SchemaOrg
       # The height of the item.
       def height=(value)
         write_property(:height, value)
+      end
+
+      # The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.
+      # Supersedes `carrier`.
+      def provider
+        read_property(:provider)
+      end
+
+      # The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.
+      # Supersedes `carrier`.
+      def provider=(value)
+        write_property(:provider, value)
       end
 
       # indicates (possibly multiple) shipping destinations. These can be defined in several ways, e.g. postalCode ranges.

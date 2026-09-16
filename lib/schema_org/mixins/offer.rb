@@ -280,6 +280,16 @@ module SchemaOrg
             superseded_by: nil,
             supersedes: nil
           }.freeze,
+          has_digital_product_passport: {
+            schema_name: "hasDigitalProductPassport",
+            schema_url: "https://schema.org/hasDigitalProductPassport",
+            comment_lines: ["A link to a Digital Product Passport (DPP) or a digital record detailing the lifecycle, sustainability, and compliance data for this product or offer. This may be a direct URL, a GS1 Digital Link URI, or a nested DigitalProductPassport object. Note: This property is aligned with the IANA 'dpp' link relation and the GS1 Web Vocabulary 'dpp' link type."].freeze,
+            ranges: ["DigitalProductPassport", "URL"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze,
           has_gs1_digital_link: {
             schema_name: "hasGS1DigitalLink",
             schema_url: "https://schema.org/hasGS1DigitalLink",
@@ -367,6 +377,16 @@ module SchemaOrg
             ranges: ["AggregateOffer", "CreativeWork", "Event", "MenuItem", "Product", "Service", "Trip"].freeze,
             external_ranges: [].freeze,
             inverse_of: "offers",
+            superseded_by: nil,
+            supersedes: nil
+          }.freeze,
+          item_popularity: {
+            schema_name: "itemPopularity",
+            schema_url: "https://schema.org/itemPopularity",
+            comment_lines: ["A measure of the relative popularity or sales rank of the offer within a marketplace, catalog, or platform (e.g. a platform-specific bestseller ranking or sales rank). This property is intended for platform-level or catalog-wide comparative rankings rather than self-asserted promotional claims."].freeze,
+            ranges: ["Number", "QuantitativeValue"].freeze,
+            external_ranges: [].freeze,
+            inverse_of: nil,
             superseded_by: nil,
             supersedes: nil
           }.freeze,
@@ -845,6 +865,16 @@ module SchemaOrg
         write_property(:has_adult_consideration, value)
       end
 
+      # A link to a Digital Product Passport (DPP) or a digital record detailing the lifecycle, sustainability, and compliance data for this product or offer. This may be a direct URL, a GS1 Digital Link URI, or a nested DigitalProductPassport object. Note: This property is aligned with the IANA 'dpp' link relation and the GS1 Web Vocabulary 'dpp' link type.
+      def has_digital_product_passport
+        read_property(:has_digital_product_passport)
+      end
+
+      # A link to a Digital Product Passport (DPP) or a digital record detailing the lifecycle, sustainability, and compliance data for this product or offer. This may be a direct URL, a GS1 Digital Link URI, or a nested DigitalProductPassport object. Note: This property is aligned with the IANA 'dpp' link relation and the GS1 Web Vocabulary 'dpp' link type.
+      def has_digital_product_passport=(value)
+        write_property(:has_digital_product_passport, value)
+      end
+
       # The <a href="https://www.gs1.org/standards/gs1-digital-link">GS1 digital link</a> associated with the object. This URL should conform to the particular requirements of digital links. The link should only contain the Application Identifiers (AIs) that are relevant for the entity being annotated, for instance a [[Product]] or an [[Organization]], and for the correct granularity. In particular, for products:<ul><li>A Digital Link that contains a serial number (AI <code>21</code>) should only be present on instances of [[IndividualProduct]]</li><li>A Digital Link that contains a lot number (AI <code>10</code>) should be annotated as [[SomeProducts]] if only products from that lot are sold, or [[IndividualProduct]] if there is only a specific product.</li><li>A Digital Link that contains a global model number (AI <code>8013</code>) should be attached to a [[Product]] or a [[ProductModel]].</li></ul> Other item types should be adapted similarly.
       def has_gs1_digital_link
         read_property(:has_gs1_digital_link)
@@ -937,6 +967,16 @@ module SchemaOrg
       # Inverse-property: `offers`.
       def item_offered=(value)
         write_property(:item_offered, value)
+      end
+
+      # A measure of the relative popularity or sales rank of the offer within a marketplace, catalog, or platform (e.g. a platform-specific bestseller ranking or sales rank). This property is intended for platform-level or catalog-wide comparative rankings rather than self-asserted promotional claims.
+      def item_popularity
+        read_property(:item_popularity)
+      end
+
+      # A measure of the relative popularity or sales rank of the offer within a marketplace, catalog, or platform (e.g. a platform-specific bestseller ranking or sales rank). This property is intended for platform-level or catalog-wide comparative rankings rather than self-asserted promotional claims.
+      def item_popularity=(value)
+        write_property(:item_popularity, value)
       end
 
       # Length of the lease for some [[Accommodation]], either particular to some [[Offer]] or in some cases intrinsic to the property.
